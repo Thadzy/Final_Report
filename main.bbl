@@ -1,0 +1,76 @@
+\begin{thebibliography}{}
+
+\bibitem[iso, 2010]{iso2812010}
+ (2010).
+\newblock {\em ISO 281: Rolling bearings -- Dynamic load ratings and rating
+  life}.
+\newblock International Organization for Standardization.
+
+\bibitem[cyt, 2015]{cytron2015md10c}
+ (2015).
+\newblock {\em MD10C 10A DC Motor Driver User Manual}.
+\newblock Cytron Technologies.
+
+\bibitem[st2, 2019]{st2019stm32g4}
+ (2019).
+\newblock {\em STM32G4 Series Reference Manual (RM0440)}.
+\newblock STMicroelectronics.
+
+\bibitem[hab, 2021]{habasit2021belt}
+ (2021).
+\newblock {\em Habasit Timing Belts Engineering Guide}.
+\newblock Habasit AG.
+
+\bibitem[mea, 2022]{meanwell2022psu}
+ (2022).
+\newblock {\em Switching Power Supply User Manual}.
+\newblock Mean Well Enterprises.
+
+\bibitem[mat, 2023]{matlab2023}
+ (2023).
+\newblock {\em Simulink Parameter Estimator User Guide}.
+\newblock The MathWorks, Inc., Natick, MA, USA.
+
+\bibitem[skf, 2023]{skf2023bearing}
+ (2023).
+\newblock {\em SKF Rolling Bearings Catalogue and Engineering Guide}.
+\newblock SKF Group.
+
+\bibitem[sol, 2023]{solidworks2023simulation}
+ (2023).
+\newblock {\em SOLIDWORKS Simulation User Guide}.
+\newblock Dassault Systèmes.
+
+\bibitem[Bolton, 2020]{Bolton2020}
+Bolton, W. (2020).
+\newblock {\em Mechatronics: Electronic Control Systems in Mechanical and
+  Electrical Engineering}.
+\newblock Pearson, 7th edition.
+
+\bibitem[Budynas and Nisbett, 2015]{shigley2015mechanical}
+Budynas, R.~G. and Nisbett, J.~K. (2015).
+\newblock {\em Shigley's Mechanical Engineering Design}.
+\newblock McGraw-Hill, 10th edition.
+
+\bibitem[Hughes and Drury, 2019]{hughes2019electric}
+Hughes, A. and Drury, B. (2019).
+\newblock {\em Electric Motors and Drives: Fundamentals, Types and
+  Applications}.
+\newblock Newnes, 5th edition.
+
+\bibitem[Norton, 2011]{norton2011machine}
+Norton, R.~L. (2011).
+\newblock {\em Machine Design: An Integrated Approach}.
+\newblock Prentice Hall, 4th edition.
+
+\bibitem[Ogata, 2010]{ogata2010modern}
+Ogata, K. (2010).
+\newblock {\em Modern Control Engineering}.
+\newblock Prentice Hall, 5th edition.
+
+\bibitem[Rao, 2017]{rao2017fem}
+Rao, S.~S. (2017).
+\newblock {\em The Finite Element Method in Engineering}.
+\newblock Butterworth-Heinemann, 6th edition.
+
+\end{thebibliography}

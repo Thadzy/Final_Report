@@ -1,0 +1,303 @@
+% ============================================================================
+%  บทที่ 1: บทนำ
+% ============================================================================
+
+\chapter{บทนำ}
+\label{ch:introduction}
+
+% ----------------------------------------------------------------------------
+\section{ที่มาและความสำคัญของโครงงาน}
+\label{sec:background}
+
+บริษัท FIBO จำกัด มีความต้องการจัดสร้างเครื่องจักรสำหรับกระบวนการผลิตในอุตสาหกรรม
+เพื่อใช้ในการหยิบจับชิ้นงาน (Connection Rod) โดยมีข้อจำกัดด้านพื้นที่และการทำงานที่ชัดเจน
+คณะผู้จัดทำจึงขอนำเสนอโครงการออกแบบและสร้างระบบหุ่นยนต์แขนกลหยิบจับชิ้นงานแบบหมุน
+
+โครงการนี้มีวัตถุประสงค์เพื่อพัฒนาระบบแขนกลที่สามารถทำงานร่วมกับชุดหัวจับ
+(End Effector) ที่ลูกค้ากำหนด โดยออกแบบให้สามารถรับภาระโหลดรวมได้สูงสุดถึง 2 กิโลกรัม
+และสามารถเคลื่อนที่หยิบวางชิ้นงานได้อย่างแม่นยำด้วยความเร็วสูง
+เพื่อให้ได้เวลาต่อรอบการทำงาน (Cycle Time) ต่ำกว่า 35 วินาที
+ภายใต้โครงสร้างทางกลที่มีความแข็งแรง และระบบควบคุมความปลอดภัยทางไฟฟ้าที่ได้มาตรฐาน
+ตามข้อกำหนดของลูกค้า
+
+% ----------------------------------------------------------------------------
+\section{วัตถุประสงค์ของโครงงาน}
+\label{sec:objectives}
+
+โครงการนี้มีวัตถุประสงค์หลัก 4 ประการ ดังนี้
+
+\begin{enumerate}
+  \item เพื่อออกแบบและสร้างหุ่นยนต์แขนกล 1 แกนแบบหมุน
+        สำหรับงานหยิบจับชิ้นงาน (Connection Rod) ร่วมกับชุดหัวจับที่ลูกค้ากำหนด
+        ให้มีความแข็งแรงเพียงพอรับโหลด 2 กิโลกรัม
+        และมีอายุการใช้งานตามข้อกำหนดทางวิศวกรรม
+
+  \item เพื่อพัฒนาระบบควบคุมตำแหน่งที่มีความแม่นยำสูง
+        สามารถลำเลียงชิ้นงานครบ 4 ชิ้นได้ภายใน Cycle Time ไม่เกิน 35 วินาที
+        โดยมี Overshoot ไม่เกิน 1\% และ Settling Time ของความเร็วไม่เกิน 0.5 วินาที
+
+  \item เพื่อสร้างตู้ควบคุมไฟฟ้าที่ได้มาตรฐานความปลอดภัยทางอุตสาหกรรม
+        รองรับแหล่งจ่ายไฟ 220\,V AC พร้อมระบบป้องกันและวงจรหยุดฉุกเฉิน
+        ที่ไม่ตัดการทำงานของ Controller หลักเมื่อกด E-Stop
+
+  \item เพื่อเชื่อมต่อระบบหุ่นยนต์เข้ากับ Base System ของลูกค้า
+        สำหรับรับคำสั่งและรายงานสถานะการทำงาน
+        พร้อมรองรับการควบคุมด้วยตนเองผ่าน Joystick แบบ Wireless
+\end{enumerate}
+
+% ----------------------------------------------------------------------------
+\section{ขอบเขตและข้อจำกัดของโครงงาน}
+\label{sec:scope}
+
+\subsection{ขอบเขตของโครงงาน}
+\label{subsec:project_scope}
+
+โครงการนี้มุ่งเน้นการสร้างระบบหุ่นยนต์หยิบจับชิ้นงานแบบหมุน
+โดยมีขอบเขตการดำเนินงานหลัก ดังนี้
+
+\begin{itemize}
+  \item \textbf{ด้านกลไกและโครงสร้าง:}
+        สร้างหุ่นยนต์รัศมีการทำงาน 500 มิลลิเมตร บนพื้นที่ฐาน $200 \times 200$ มิลลิเมตร
+        ที่สามารถรองรับน้ำหนักที่ปลายแขน 2 กิโลกรัม
+        โดยโครงสร้างส่วนรับแรงต้องใช้วัสดุทางวิศวกรรมมาตรฐาน
+        และมีจุดเชื่อมต่อสำหรับระบบตรวจสอบของลูกค้า
+
+  \item \textbf{ด้านไฟฟ้าและการควบคุม:}
+        พัฒนาตู้ควบคุมมาตรฐานอุตสาหกรรมพร้อมระบบความปลอดภัย
+        และวงจรหยุดฉุกเฉิน (E-Stop) ที่ไม่ตัดไฟระบบหลัก
+        โดยใช้ไมโครคอนโทรลเลอร์เป็นศูนย์กลางสั่งการชุดขับเคลื่อนมอเตอร์
+
+  \item \textbf{ด้านสมรรถนะการทำงาน:}
+        ระบบต้องสามารถประมวลผลและเคลื่อนที่เพื่อหยิบวางชิ้นงาน 4 ชิ้น
+        ให้สำเร็จภายใน 35 วินาที ภายใต้ข้อกำหนดด้าน Overshoot ไม่เกิน 1\%
+
+  \item \textbf{ด้านการเชื่อมต่อและการสื่อสาร:}
+        พัฒนาระบบให้รองรับการสั่งงานผ่านอุปกรณ์ Joystick
+        และเชื่อมต่อกับ Base System ด้วยโปรโตคอล Modbus RTU
+        ครอบคลุมการทำงานทั้งโหมด Manual และ Auto
+\end{itemize}
+
+\subsection{ข้อจำกัดของโครงงาน}
+\label{subsec:limitations}
+
+โครงงานนี้ไม่ครอบคลุมส่วนประกอบที่อยู่ภายใต้ความรับผิดชอบของลูกค้า ดังนี้
+
+\begin{itemize}
+  \item \textbf{Base System ของลูกค้า:}
+        ซอฟต์แวร์และฮาร์ดแวร์ของระบบควบคุมหลักที่ส่งคำสั่งผ่าน Modbus
+        ไม่ได้อยู่ในขอบเขตการออกแบบและทดสอบของโครงงานนี้
+        โครงงานรับประกันเฉพาะ Interface ของ Modbus RTU ฝั่ง Slave เท่านั้น
+
+  \item \textbf{End Effector (Gripper):}
+        ชุดหัวจับที่ลูกค้ากำหนดไม่ได้อยู่ในขอบเขตการออกแบบ
+        โครงงานนี้รับผิดชอบเฉพาะ End Effector Housing
+        และสัญญาณควบคุม Digital I/O สำหรับ Gripper เท่านั้น
+
+  \item \textbf{การควบคุมแกนแนวดิ่ง (Z-axis):}
+        ระบบนี้เป็นหุ่นยนต์ 1 แกน (Rotary)
+        การเคลื่อนที่แนวดิ่งของ Gripper ดำเนินการโดย Pneumatic Actuator
+        ของลูกค้าโดยตรง ไม่ใช่โดย Controller ของโครงงานนี้
+\end{itemize}
+
+% ----------------------------------------------------------------------------
+\section{ข้อกำหนดความต้องการของระบบ}
+\label{sec:requirements}
+
+เพื่อให้สอดคล้องกับขอบเขตโครงการ คณะผู้จัดทำได้กำหนดข้อกำหนดความต้องการ
+ทางเทคนิคสำหรับใช้อ้างอิงในการออกแบบและทดสอบระบบ โดยแบ่งออกเป็น 5 หมวดหมู่ ได้แก่
+\textbf{M (Mechanical)} โครงสร้างและกลไก,
+\textbf{P (Performance)} สมรรถนะการทำงาน,
+\textbf{A (Accuracy \& Control)} ความแม่นยำและการควบคุม,
+\textbf{E (Electrical \& Interface)} ระบบไฟฟ้าและการเชื่อมต่อ
+และ \textbf{J (Joystick)} การควบคุมผ่านจอยสติ๊ก
+
+\begin{table}[H]
+  \centering
+  \caption{ข้อกำหนดความต้องการของระบบทั้ง 32 ข้อ}
+  \label{tab:req_summary}
+  \small
+  \begin{tabular}{clp{9.5cm}}
+    \toprule
+    \textbf{Req ID} & \textbf{หมวด} & \textbf{คำอธิบาย} \\
+    \midrule
+    M1  & Mechanical & ขนาดฐานไม่เกิน $200 \times 200$ mm \\
+    M2  & Mechanical & Actuator และ Sensor สามารถยื่นออกนอกขนาดฐานได้ \\
+    M3  & Mechanical & End Effector รวมชิ้นงาน รับน้ำหนักได้สูงสุด 2 kg \\
+    M4  & Mechanical & ใช้ Brushed DC Motor พร้อม Incremental Encoder \\
+    M5  & Mechanical & อายุใช้งานทนทาน $\geq 3$ รอบการทดสอบ (รอบละ 1 ชั่วโมง) \\
+    M6  & Mechanical & ชิ้นส่วนรับแรงห้ามใช้ 3D Print เด็ดขาด \\
+    M7  & Mechanical & ยึดฐานสแตนเลส AISI304 ของลูกค้าด้วยสกรู M8 เหล็กกรมดำ \\
+    M8  & Mechanical & เพลาต่อ Encoder ลูกค้า $\varnothing$8 mm (สูง 400 mm, ยื่น $\geq$ 20 mm) \\
+    M9  & Mechanical & หมุนต่อเนื่องได้ $\geq 540^{\circ}$ โดยสายไฟไม่พันกัน \\
+    M10 & Mechanical & จุดต่ำสุดของกริปเปอร์ต้องไม่ชนกับ Connection Rod \\
+    \midrule
+    P1  & Performance & ทำงานครบ 1 รอบ (หยิบวาง 4 ชิ้น + กลับ Homing) ใน $\leq$ 35 วินาที \\
+    P2  & Performance & Gripper ใช้เวลาหยิบ $\sim$2 วินาที และวาง $\sim$2 วินาที \\
+    P3  & Performance & ความเร็วเชิงมุม $\geq 2.9$ rad/s และ $\leq 5.84$ rad/s \\
+    P4  & Performance & ความเร่งเชิงมุม $\geq 2.0$ rad/s$^2$ และ $\leq 22.0$ rad/s$^2$ \\
+    P5  & Performance & Settling Time $\leq 0.5$ วินาที \\
+    P6  & Performance & Overshoot $\leq 1\%$ \\
+    P7  & Performance & รองรับการทดสอบทั้งแบบมีโหลด (2 kg) และไม่มีโหลด \\
+    \midrule
+    A1  & Accuracy & ต้องสวมเพลา $\varnothing$12 mm ลงในรู $\varnothing$14 mm ได้ถูกต้อง \\
+    A2  & Accuracy & ความแม่นยำซ้ำ 100 รอบ คลาดเคลื่อน $\leq \pm 0.1^{\circ}$ \\
+    A3  & Accuracy & ผู้ใช้สามารถ Set จุด Homing เองได้หลังตั้งกับฐาน \\
+    A4  & Accuracy & สั่งงานได้ 2 แบบ: (1) ระบุองศา (2) ระบุลำดับตำแหน่งจาก Homing \\
+    A5  & Accuracy & หากสั่งงานนอกระยะ ระบบต้องแจ้ง Error หรือป้องกันไว้ \\
+    \midrule
+    E1  & Electrical & สื่อสารผ่าน Modbus RTU \\
+    E2  & Electrical & ใช้ STM32 เป็น Controller หลัก \\
+    E3  & Electrical & สายต่อตู้ไฟ: ท่อลม $\varnothing$4 mm (4 เส้น), สาย GX (1 เส้น), สาย Motor (1 เส้น) \\
+    E4  & Electrical & ตู้ไฟมาตรฐานอุตสาหกรรม: จัดสายสวยงาม, ติด Label, มี Schematic \\
+    E5  & Electrical & หน้าตู้ไฟมีไฟแสดงสถานะ Power On/Off และ Emergency \\
+    E6  & Electrical & E-Stop: ตัดการเคลื่อนที่แต่ Controller หลักยังมีไฟเลี้ยง (Reset ได้) \\
+    E7  & Electrical & มีวงจรป้องกัน: ไฟกระชาก, กระแสเกิน, แรงดันตก \\
+    E8  & Electrical & สลับโหมดการทำงาน Manual / Auto ได้ \\
+    E9  & Electrical & สัญญาณ Feedback กริปเปอร์: ขึ้นสุด, ลงสุด, หนีบสำเร็จ, ปล่อยสำเร็จ \\
+    \midrule
+    J1  & Joystick & จอยสติ๊กมีปุ่ม: กลับ Homing, Start, E-Stop \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent\small{$^*$ ขอบบนของ P3 ($\leq 5.84$ rad/s) และ P4 ($\leq 22.0$ rad/s²)
+คำนวณจาก Torque Budget และข้อจำกัดทางกลของระบบส่งกำลัง}
+
+% ----------------------------------------------------------------------------
+\section{ภาพรวมระบบ}
+\label{sec:system_overview}
+
+ระบบ Circular Pick and Place Robot ออกแบบโดยแบ่งสถาปัตยกรรมออกเป็น 2 ระดับ ได้แก่
+Physical Architecture ซึ่งอธิบายฮาร์ดแวร์จริงของระบบ
+และ Cyber Architecture ซึ่งอธิบายโครงสร้างซอฟต์แวร์ภายใน STM32G474RE
+ดังแสดงใน\cref{fig:sys_arch}
+
+% -----------------------------------------------------------------------
+% รูปที่ 1: System Architecture ภาพรวม
+% ชื่อไฟล์แนะนำ: fig_system_architecture.png
+% เนื้อหา: Mermaid diagram แสดง Physical + Cyber Architecture
+%          แบ่งเป็น 4 โดเมน: Power, STM32 Control, Mechanical Drivetrain, Peripherals
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{fig_system_architecture}
+    \caption{System Architecture ของระบบ Circular Pick and Place Robot
+             แสดง Physical Architecture และ Cyber Architecture}
+    \label{fig:sys_arch}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{\color[HTML]{38BDF8} เส้นสีฟ้า (Data / Signal Line):} หมายถึง เส้นทางเดินของข้อมูลและสัญญาณควบคุมลอจิกแรงดันต่ำ (Low-voltage Logic) ประกอบด้วยโปรโตคอลการสื่อสารความเร็วสูง เช่น Modbus RTU (230.4 kbps) ผ่าน LPUART1, สัญญาณ Bluetooth จาก Joystick เข้า USART3 รวมถึงสัญญาณพัลส์จาก Quadrature Encoder (TIM3 QEI), สัญญาณอนาล็อกเชิงวินิจฉัยจาก Current Sensor (ADC1 DMA) และสัญญาณทริกเกอร์ลอจิกผ่าน Optocoupler
+    
+    \item \textbf{\color[HTML]{F87171} เส้นสีแดง (Power \& Safety Interlock Line):} หมายถึง เส้นทางเดินระบบไฟฟ้ากำลังและการกระจายพลังงาน (Power Distribution) รวมถึงวงจรตัดการทำงานฉุกเฉินระดับฮาร์ดแวร์ (Hardware Safety Loop) ได้แก่ สายไฟฟ้ากระแสสลับ 220VAC Grid Input, ระบบบัสแรงดันไฟตรง 24VDC สำหรับขับมอเตอร์และโซลินอยด์วาล์ว, ระบบบัส 5VDC สำหรับเลี้ยงวงจรลอจิก และสายสัญญาณ NC Contact ของ E-Stop ที่เชื่อมต่อไปยัง Magnetic Contactor เพื่อทำ Hardware Interlock
+    
+    \item \textbf{\color[HTML]{4ADE80} เส้นสีเขียว (Mechanical \& Force Transmission Line):} หมายถึง เส้นทางการส่งถ่ายกำลังเชิงกล แรงบิด และพลังงานไหลเวียน (Kinetic \& Pneumatic Energy Flow) ประกอบด้วยแรงบิดรอบสูงจากเพลามอเตอร์เข้าสู่ Planetary Gearbox (24:1), การส่งกำลังผ่านสายพาน HTD5M Belt Drive (2.917:1) เพื่อขับแขนกลหมุน (Rotating Arm) ด้วยอัตราทดรวม 70:1 รวมถึงแรงดันลม (Pneumatic Pressure) จาก Solenoid Valves ที่ส่งตรงไปขับเคลื่อนกลไกการหยิบจับของตัว Pneumatic Gripper ทั้งในส่วนของกระบอกสูบแนวตั้งและปากจับ
+\end{itemize}
+
+ระบบแบ่งออกเป็น 4 Subsystem หลักที่ทำงานร่วมกัน ดังนี้
+
+\paragraph{Rotating Mechanism}
+เป็นส่วนที่แปลงพลังงานไฟฟ้าจาก DC Motor ให้กลายเป็นการเคลื่อนที่เชิงมุมของแขนกล
+กำลังถูกส่งผ่าน Planetary Gearbox อัตราทด $N_g = 24$
+ต่อด้วย Belt Drive HTD5M อัตราทด $N_b = 2.9$
+รวมอัตราทดทั้งหมด $N = 70$ ก่อนถึงแขนกลรัศมี 500 mm
+ตำแหน่งเชิงมุมวัดโดย Encoder AMT-103 ที่ติดตั้งโดยตรงที่ Output Shaft
+เพื่อหลีกเลี่ยง Backlash Error จากระบบส่งกำลัง
+
+\paragraph{Power Management System}
+จ่ายพลังงานแก่ทุก Subsystem โดยแบ่งเป็น 2 Bus
+High Power Bus (24\,V/10\,A) จ่ายให้มอเตอร์ผ่าน Magnetic Contactor
+ที่ถูกควบคุมโดย E-Stop
+และ Logic Bus (5\,V) จ่ายให้ STM32, ESP32 และ Sensor
+โดยต่อก่อน Contactor ทำให้ Controller ยังมีไฟเลี้ยงแม้กด E-Stop
+ตามข้อกำหนด E6
+
+\paragraph{Main Controller}
+STM32G474RE ทำหน้าที่เป็นศูนย์กลางประมวลผลทั้งหมด
+รัน Cascade PID Control Loop โดยมี Velocity Inner Loop ที่ความถี่ 1\,kHz
+และ Position Outer Loop ที่ความถี่ 100\,Hz
+พร้อม Kalman Filter 4 สถานะสำหรับประมาณค่าตำแหน่ง ความเร็ว กระแส
+และแรงบิดรบกวน
+และ ZVD Input Shaper ($f_n = 12.13$\,Hz, $\zeta = 0.041$)
+สำหรับลด Residual Vibration ของชิ้นงาน
+รับส่งข้อมูลกับ Base System ผ่าน Modbus RTU บน LPUART1
+(230400 bps, 8N1, Slave Address~21)
+
+\paragraph{Application FSM}
+ระบบมี State Machine หลัก 5 สถานะ ได้แก่
+\texttt{INIT} $\rightarrow$ \texttt{HOMING} $\rightarrow$
+\texttt{IDLE} $\rightarrow$ \texttt{RUNNING} และ \texttt{FAULT}
+โดยทุกสถานะสามารถเข้าสู่ \texttt{FAULT} ได้จาก E-Stop หรือ Safety Fault
+และกลับสู่ \texttt{IDLE} ได้เมื่อ Release E-Stop และกด Reset
+
+\paragraph{External Interface}
+รองรับการสั่งงาน 2 โหมด ได้แก่
+Manual Mode ผ่าน Wireless Joystick ที่รับสัญญาณ Bluetooth ด้วย ESP32
+และส่งต่อผ่าน USART3 มายัง STM32
+และ Auto Mode ผ่าน Base System ของลูกค้าโดยรับคำสั่งผ่าน Modbus RTU
+การควบคุม Gripper ใช้สัญญาณ Digital I/O โดยตรง
+
+\begin{table}[H]
+  \centering
+  \caption{สรุป Subsystem หลักของระบบ}
+  \label{tab:subsystem_summary}
+  \begin{tabular}{lp{5cm}p{3.5cm}}
+    \toprule
+    \textbf{Subsystem} & \textbf{องค์ประกอบหลัก} & \textbf{รายละเอียดใน} \\
+    \midrule
+    Rotating Mechanism
+      & DC Motor RS-775, Planetary Gearbox ($N_g{=}24$),
+        Belt HTD5M ($N_b{=}2.9$), Encoder AMT-103
+      & \cref{subsec:mech_arch} \\[0.4em]
+    Power Management
+      & PSU 24\,V/10\,A, PSU 5\,V,
+        Magnetic Contactor, E-Stop,
+        Circuit Breaker, Fuse
+      & \cref{subsec:elec_arch} \\[0.4em]
+    Main Controller
+      & STM32G474RE, Cascade PID (1\,kHz / 100\,Hz),
+        Kalman Filter (4 states),
+        ZVD Input Shaper,
+        Modbus RTU Slave (Addr~21)
+      & \cref{subsec:sysid}, \cref{subsec:pid_design} \\[0.4em]
+    External Interface
+      & Joystick + ESP32 (Bluetooth/USART3),
+        Base System (Modbus RTU),
+        Gripper (Digital I/O)
+      & \cref{subsec:joystick_integration}, \cref{subsec:modbus_integration} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ----------------------------------------------------------------------------
+\section{โครงสร้างของรายงาน}
+\label{sec:report_structure}
+
+รายงานฉบับนี้จัดแบ่งเนื้อหาออกเป็น 6 บทหลัก ดังนี้
+
+\begin{enumerate}
+  \item \textbf{บทที่ 1 บทนำ:}
+        อธิบายที่มาและความสำคัญ วัตถุประสงค์ ขอบเขต
+        ข้อกำหนดของระบบทั้ง 32 ข้อ และภาพรวมสถาปัตยกรรมระบบ
+
+  \item \textbf{บทที่ 2 ทฤษฎีและเทคโนโลยีที่เกี่ยวข้อง:}
+        นำเสนอทฤษฎีพื้นฐานที่ใช้ในการออกแบบ ได้แก่
+        DC Motor State-Space, Cascade PID, ZV Input Shaping,
+        Kalman Filter, มาตรฐาน ASME/ISO และ S-Curve Trajectory
+
+  \item \textbf{บทที่ 3 สถาปัตยกรรมและการออกแบบระบบ:}
+        นำเสนอรายละเอียดการออกแบบเชิงกล ไฟฟ้า และระบบควบคุม
+        รวมถึงการระบุระบบ (System Identification) และการออกแบบตัวควบคุม
+
+  \item \textbf{บทที่ 4 การสร้างและบูรณาการระบบ:}
+        บันทึกขั้นตอนการประกอบจริงและการพัฒนา Firmware
+        รวมถึงการเชื่อมต่อระบบย่อยทั้งหมดเข้าด้วยกัน
+
+  \item \textbf{บทที่ 5 ผลการทดสอบและการทวนสอบ:}
+        รายงานผลการทดสอบเชิงประจักษ์และการทวนสอบข้อกำหนด 32 ข้อ
+        พร้อมตาราง Requirements Traceability
+
+  \item \textbf{บทที่ 6 สรุปผลและข้อเสนอแนะ:}
+        สรุปภาพรวมความสำเร็จ ปัญหาที่พบ บทเรียนที่ได้
+        และแนวทางการพัฒนาต่อยอด
+\end{enumerate}

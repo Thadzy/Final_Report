@@ -1,0 +1,524 @@
+% ============================================================================
+%  บทที่ 4: การสร้างและบูรณาการระบบ
+% ============================================================================
+
+\chapter{การสร้างและบูรณาการระบบ}
+\label{ch:implementation}
+
+% ============================================================================
+\section{การประกอบโครงสร้างทางกล}
+\label{sec:mech_assembly}
+% ============================================================================
+
+\subsection{ภาพรวมการประกอบ}
+\label{subsec:mech_overview}
+
+การประกอบระบบเชิงกลแบ่งออกเป็น 3 Sub-assembly หลัก
+ได้แก่ ส่วนฐาน (Base), ส่วนแขนกลและข้อต่อ (Arm Links \& Joints)
+และชุดเอ็นโค้ดเดอร์ (Encoder Sub-assembly)
+ก่อนประกอบรวมเป็นหุ่นยนต์เต็มรูปแบบ
+
+% -----------------------------------------------------------------------
+% รูปที่: Exploded View (Isometric)
+% ชื่อไฟล์แนะนำ: fig_exploded_iso.png
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.88\textwidth]{fig_exploded_iso}
+%     \caption{ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุม Isometric}
+%     \label{fig:exploded_iso}
+% \end{figure}
+
+% -----------------------------------------------------------------------
+% รูปที่: Exploded View (Side)
+% ชื่อไฟล์แนะนำ: fig_exploded_side.png
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.88\textwidth]{fig_exploded_side}
+%     \caption{ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุม Side View}
+%     \label{fig:exploded_side}
+% \end{figure}
+
+\subsection{การประกอบ Sub-assembly}
+\label{subsec:sub_assembly}
+
+\subsubsection{ส่วนฐาน (Base Sub-assembly)}
+
+\begin{table}[H]
+\centering
+\caption{รายการชิ้นส่วนสำหรับประกอบส่วนฐาน}
+\label{tab:base_parts}
+\begin{tabular}{llc}
+\toprule
+ชิ้นส่วน & รายละเอียด & จำนวน \\
+\midrule
+อลูมิเนียมโปรไฟล์ 20$\times$40 & ยาว 100\,mm & 4 \\
+แผ่นฐานหุ่น (Base Plate)    & AISI 316 & 1 \\
+แผ่นรอง Pulley              & AISI 316 & 1 \\
+Pulley                       & 70 ฟัน, ID 19\,mm & 1 \\
+Bearing Mounting             & เหล็ก & 1 \\
+Tapered Roller Bearing       & ID 17\,mm, OD 40\,mm & 1 \\
+ชิ้นส่วน Set Home            & เหล็ก & 1 \\
+Ball Bearing                 & ID 12\,mm, OD 19\,mm & 1 \\
+Socket Head Cap Screw M5     & ยาว 12\,mm & 16 \\
+Socket Head Cap Screw M4     & ยาว 40\,mm & 4 \\
+Nut M4                       & -- & 4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ขั้นตอนการประกอบส่วนฐาน:
+\begin{enumerate}
+    \item ประกอบอลูมิเนียมโปรไฟล์ 4 ชิ้นเข้ากับ Base Plate
+          ด้วยสกรู M5 ยาว 12\,mm จำนวน 8 ตัว
+    \item ประกอบแผ่นรอง Pulley ปิดทับด้านบน
+          ด้วยสกรู M5 ยาว 12\,mm จำนวน 8 ตัว
+    \item วาง Pulley 70 ฟัน ลงในตำแหน่งแกนกลาง
+    \item ยึด Bearing Mounting ด้วยสกรู M4 ยาว 40\,mm
+          จำนวน 3 ตัว พร้อม Nut
+    \item ใส่ Tapered Roller Bearing (ด้านบน)
+          และ Ball Bearing (ด้านล่าง)
+    \item ติดตั้งชิ้นส่วน Set Home
+          ด้วยสกรู M4 ยาว 40\,mm พร้อม Lock Nut
+\end{enumerate}
+
+\subsubsection{ส่วนแขนกลและข้อต่อ (Arm Sub-assembly)}
+
+\begin{table}[H]
+\centering
+\caption{รายการชิ้นส่วนสำหรับประกอบส่วนแขนกล}
+\label{tab:arm_parts}
+\begin{tabular}{llc}
+\toprule
+ชิ้นส่วน & รายละเอียด & จำนวน \\
+\midrule
+Motor                        & RS-775 DC Motor & 1 \\
+แผ่นแขนกล (บน)              & Aluminum Alloy 6061 & 1 \\
+แผ่นแขนกล (ล่าง)            & Aluminum Alloy 6061 & 1 \\
+เหล็กกล่อง Galvanized       & 25$\times$25\,mm & 1 \\
+Stepped Shaft                & Stainless Steel & 1 \\
+Pulley                       & 24 ฟัน, ID 12\,mm & 1 \\
+Idler                        & ID 10\,mm, Width 15\,mm & 1 \\
+Shaft Support                & Aluminum Alloy 10\,mm & 3 \\
+Key (ลิ่ม)                  & 5$\times$5$\times$8\,mm & 1 \\
+Proximity Sensor             & $\varnothing$12\,mm & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ขั้นตอนการประกอบส่วนแขนกล:
+\begin{enumerate}
+    \item ประกบแผ่นแขนกลบน-ล่างเข้ากับเหล็กกล่อง Galvanized
+          พร้อมบูชรองรักษาระยะ
+    \item ติดตั้งมอเตอร์และสวม Pulley 24 ฟัน เข้ากับเพลามอเตอร์
+    \item สอด Stepped Shaft พร้อม Key ที่จุดหมุนหลัก
+          และติดตั้ง Shaft Support
+    \item ติดตั้ง Idler และ Proximity Sensor
+    \item ขันน็อตทุกจุดและตรวจสอบการเคลื่อนที่
+\end{enumerate}
+
+\subsubsection{ชุดเอ็นโค้ดเดอร์ (Encoder Sub-assembly)}
+
+\begin{table}[H]
+\centering
+\caption{รายการชิ้นส่วนสำหรับประกอบชุดเอ็นโค้ดเดอร์}
+\label{tab:encoder_parts}
+\begin{tabular}{llc}
+\toprule
+ชิ้นส่วน & รายละเอียด & จำนวน \\
+\midrule
+AMT Mounting          & AISI 316 & 1 \\
+Encoder AMT-103       & 2048 PPR & 1 \\
+ชิ้นส่วนประกบ (บน/ล่าง) & 3D Print & อย่างละ 1 \\
+บูชรอง M3             & OD 5.5$\times$20\,mm & 4 \\
+สกรู M2/M3/M5         & ตามกำหนด & 16 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{การประกอบรวมขั้นสุดท้าย}
+\label{subsec:final_assembly}
+
+\begin{enumerate}
+    \item ติดตั้งชุดเอ็นโค้ดเดอร์เข้ากับฐาน
+    \item คล้องสายพาน HTD5M เตรียมไว้
+    \item สอดเพลาแขนกลลงในรูร้อยแกนกลางของฐาน
+    \item ตั้งค่า Bearing Preload โดยขันน็อตเพลา
+          เพื่อกดทับ Tapered Roller Bearing (ลดระยะคลอน)
+    \item ต่อเพลาเชื่อมต่อ Field Encoder ด้วย Shaft Coupling
+    \item ติดตั้ง Gripper ที่ปลายแขน ยึดด้วย Lock Nut 3 ตัว
+\end{enumerate}
+
+\subsection{ปัญหาที่พบระหว่างการประกอบ}
+\label{subsec:assembly_issues}
+
+\begin{itemize}
+  \item \textbf{รู Proximity Sensor ขนาดไม่ตรง:}
+        รูออกแบบ $\varnothing$8\,mm แต่ Sensor จริง $\varnothing$12\,mm
+        แก้ไขโดยเจาะขยายรูเพิ่มใน Lab
+
+  \item \textbf{รู Driver Pulley และ Arm เบี้ยว:}
+        ชิ้นส่วนที่ส่งผลิตภายนอกมีรูไม่ตรงแนวศูนย์
+        เนื่องจาก Setup งานไม่ตรงกับแบบ
+        แก้ไขโดยนำกลับไปปรับแต่งเพิ่มเติม
+
+  \item \textbf{แผ่นรอง Pulley ไม่ได้ปาดผิว:}
+        ผู้ผลิตไม่ได้ปาดผิวและร่อง Aluminium Profile
+        ตามแบบที่กำหนด ดำเนินการแก้ไขเองใน Lab
+\end{itemize}
+
+% -----------------------------------------------------------------------
+% รูปที่: CAD Assembly
+% ชื่อไฟล์แนะนำ: fig_cad_assembly.png
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.85\textwidth]{fig_cad_assembly}
+%     \caption{CAD Assembly ของระบบเชิงกลแสดงชิ้นส่วนหลักทั้งหมด}
+%     \label{fig:cad_assembly}
+% \end{figure}
+
+% ============================================================================
+\section{การประกอบตู้ควบคุมและการเดินสายไฟ}
+\label{sec:elec_assembly}
+% ============================================================================
+
+\subsection{Bill of Materials ของตู้ควบคุม}
+\label{subsec:bom}
+
+\begin{table}[H]
+  \centering
+  \caption{Bill of Materials (BOM) ของตู้ควบคุม}
+  \label{tab:bom}
+  \begin{tabular}{llcc}
+    \toprule
+    Reference & อุปกรณ์ & จำนวน & หมายเหตุ \\
+    \midrule
+    U1A  & STM32G474RE Nucleo Board  & 1 & Main Controller \\
+    U2   & ESP32-DEVKIT-V1            & 1 & Joystick Receiver \\
+    --   & Cytron MD10C Motor Driver  & 1 & 24V/10A \\
+    CB1  & Circuit Breaker 10A        & 1 & AC Input \\
+    CB2  & Circuit Breaker 5A         & 1 & 24V Bus \\
+    CB3  & Circuit Breaker 3A         & 1 & 5V Bus \\
+    --   & PSU 24V/10A                & 1 & Motor Power \\
+    --   & PSU 5V/5A                  & 1 & Logic Power \\
+    --   & Magnetic Contactor         & 1 & E-Stop Interlock \\
+    --   & Optocoupler Module 8-ch    & 1 & Signal Isolation \\
+    --   & Relay Module 4-ch          & 1 & Output Control \\
+    --   & Emergency Stop Button      & 1 & NC Contact \\
+    --   & Pilot Lamp Blue (Power)    & 1 & Power Status \\
+    --   & Pilot Lamp Red (Emergency) & 1 & Fault Status \\
+    --   & Pilot Lamp Green (Ready)   & 1 & Ready Status \\
+    --   & Reset Button               & 1 & NC Contact \\
+    --   & Mode Selector Switch       & 1 & Manual/Auto \\
+    --   & Fuse (Motor Circuit)       & 1 & Short Circuit \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{แนวทางการเดินสายไฟ}
+\label{subsec:cable_management}
+
+การเดินสายแบ่งออกเป็น 2 วงจรหลักที่แยก Physical กันอย่างชัดเจน
+สัญญาณดิจิทัลทุกเส้นระหว่าง High Voltage Side และ Logic Side
+ผ่าน Optocoupler Module เพื่อแยก Ground และป้องกัน Noise
+
+\begin{itemize}
+  \item \textbf{Service Loop:} บริเวณจุดหมุนของแขนกล
+        เผื่อความยาวสายเพื่อให้โค้งงอได้อิสระ
+        ป้องกันสายดึงรั้งหรือขาดเมื่อหมุนถึงมุมสูงสุด
+
+  \item \textbf{Bending Radius:} ติดตั้งชิ้นส่วน 3D Print
+        ที่มุมของหุ่นยนต์เพื่อบังคับให้สายโค้งงอในรัศมีที่เพียงพอ
+        ป้องกันการหักมุมแคบที่ทำลายสายสัญญาณภายใน
+\end{itemize}
+
+% -----------------------------------------------------------------------
+% รูปที่: ผลการเดินสายภายในตู้ควบคุม
+% ชื่อไฟล์แนะนำ: fig_cabinet_assembled.png
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.78\textwidth]{fig_cabinet_assembled}
+%     \caption{ผลการเดินสายภายในตู้ควบคุมไฟฟ้า}
+%     \label{fig:cabinet_assembled}
+% \end{figure}
+
+% ============================================================================
+\section{การพัฒนา Firmware}
+\label{sec:firmware}
+% ============================================================================
+
+\subsection{โครงสร้างโมดูลและ Task Timing}
+\label{subsec:firmware_modules}
+
+Firmware พัฒนาบน STM32CubeIDE ใช้ HAL Library
+แบ่งเป็น 4 โมดูลหลัก ดังแสดงใน\cref{tab:firmware_modules}
+
+\begin{table}[H]
+  \centering
+  \caption{โมดูลหลักใน STM32 Firmware}
+  \label{tab:firmware_modules}
+  \begin{tabular}{lp{6.5cm}l}
+    \toprule
+    โมดูล & หน้าที่ & ไฟล์ \\
+    \midrule
+    \texttt{motor\_controller} &
+      Encoder อ่านตำแหน่ง/ความเร็ว,
+      Cascade PID (Position + Velocity),
+      S-Curve Trajectory Generator,
+      Kalman Filter (Steady-State),
+      ZVD Input Shaper (3-Impulse, Circular Buffer),
+      Joystick Command Parser,
+      Safety Monitor (Stall, E-Stop) &
+      \texttt{motor\_controller.c} \\
+    \addlinespace
+    \texttt{modbus\_bridge} &
+      Modbus Register Mapping (128 registers),
+      Command Dispatch จาก Master,
+      Status Update ไปยัง Register Frame &
+      \texttt{modbus\_bridge.c} \\
+    \addlinespace
+    \texttt{modbus\_rtu} &
+      Modbus RTU Protocol Engine,
+      CRC16 Verification,
+      Frame Parser (FC03/FC06),
+      FSM (IDLE/RECEPTION/PROCESSING/EMISSION) &
+      \texttt{modbus\_rtu.c} \\
+    \addlinespace
+    \texttt{main} &
+      Peripheral Init, Callback Registration,
+      Main Loop (Modbus Process,
+      Register Update, MATLAB Data Send) &
+      \texttt{main.c} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Execution Model และ Task Timing}
+\label{subsubsec:execution_model}
+
+TIM6 ตั้งค่าที่ \textbf{1\,kHz} (Prescaler = 169, Period = 169,
+ที่ System Clock 170\,MHz ได้ Period จริง $(169+1)(169+1)/170\,\text{MHz} = 1$\,ms)
+การแบ่ง Loop สองความถี่ทำผ่าน Software Counter ภายใน ISR เดียว:
+
+\begin{itemize}
+  \item \textbf{ทุก Tick (1\,kHz):}
+        \texttt{MotorCtrl\_Tick1kHz()} รัน
+        อ่าน TIM3 Encoder $\rightarrow$ Kalman Predict+Update $\rightarrow$
+        Velocity Inner PID $\rightarrow$ \texttt{Motor\_SetPWM()}
+  \item \textbf{ทุก 10th Tick (100\,Hz):}
+        \texttt{HwIo\_Poll100Hz()} debounce สัญญาณ I/O\\
+        \texttt{MotorCtrl\_Tick100Hz()} รัน
+        S-Curve Integrator $\rightarrow$ ZVD Shaper $\rightarrow$
+        Position Outer PID $\rightarrow$ Velocity Setpoint สำหรับ Inner Loop
+\end{itemize}
+
+สถาปัตยกรรมนี้ทำให้ Velocity Loop สามารถรัน 10 ครั้งต่อ 1 Position Loop cycle
+ซึ่งรับประกัน Bandwidth Separation ที่เพียงพอโดยไม่ต้องใช้ Timer แยก
+
+\begin{table}[H]
+  \centering
+  \caption{ISR และ Task Timing ของ Firmware}
+  \label{tab:isr_timing}
+  \small
+  \begin{tabular}{llll}
+    \toprule
+    Timer/Peripheral & Period & หน้าที่ & Callback \\
+    \midrule
+    TIM6  & \textbf{1\,ms (1\,kHz)} &
+      Control Loop Base Rate &
+      \texttt{Timer\_PeriodElapsedCallback} \\
+    & \quad \textit{ทุก tick} & Velocity Inner PID + Kalman & \textit{(ใน TIM6 ISR)} \\
+    & \quad \textit{ทุก 10th tick} & Position Outer PID + ZVD & \textit{(ใน TIM6 ISR)} \\
+    TIM16 & 3\,ms &
+      Modbus T3.5 Timeout &
+      \texttt{Timer\_PeriodElapsedCallback} \\
+    TIM3  & -- (QEI) &
+      Quadrature Encoder Count &
+      Polling ใน TIM6 ISR \\
+    TIM1  & $f_{PWM} \approx 19.6$\,kHz &
+      Motor PWM Output (ARR=50) &
+      -- \\
+    LPUART1 & -- (UART RX IT) &
+      Modbus RTU (230400, 8N1) &
+      \texttt{Modbus\_RxCallback} \\
+    USART3  & -- (UART RX IT) &
+      Joystick Command (115200, 8N1) &
+      \texttt{Joystick\_RxCallback} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{PID Gains ที่ใช้ใน Firmware จริง}
+\label{subsubsec:pid_gains_firmware}
+
+ค่า PID Gain ที่ระบุในตารางต่อไปนี้คือค่าที่วัดจาก Hardware โดยตรง
+(\texttt{params.h}) ซึ่งต่างจากค่าที่ได้จาก Root Locus Design (บทที่~3)
+เนื่องจาก Reduced-Order Model มีความแตกต่างจาก Plant จริง
+และต้องผ่านกระบวนการ Hardware Commissioning
+
+\begin{table}[H]
+  \centering
+  \caption{PID Gains ที่ใช้ใน Firmware จริง (Hardware-Identified)}
+  \label{tab:pid_gains_hw}
+  \begin{tabular}{llccc}
+    \toprule
+    Loop & Gain & สัญลักษณ์ & ค่า (Hardware) & หน่วย \\
+    \midrule
+    \multirow{3}{*}{Velocity Inner}
+      & Proportional & $K_{p,vel}$ & 1.58  & PWM/(rad/s) \\
+      & Integral     & $K_{i,vel}$ & 0.50  & PWM/rad \\
+      & Derivative   & $K_{d,vel}$ & 0.00  & -- \\
+    \midrule
+    \multirow{3}{*}{Position Outer}
+      & Proportional & $K_{p,pos}$ & 3.00  & (rad/s)/rad \\
+      & Integral     & $K_{i,pos}$ & 0.02  & -- \\
+      & Derivative   & $K_{d,pos}$ & 0.15  & -- \\
+    \midrule
+    \multirow{2}{*}{Feedforward}
+      & Velocity FF  & $K_{vff}$   & 3.03  & PWM/(rad/s) \\
+      & Accel FF     & $K_{aff}$   & 0.10  & PWM/(rad/s²) \\
+    \bottomrule
+    \multicolumn{5}{l}{\small หมายเหตุ: ค่าเหล่านี้วัดจาก Hardware โดยตรง} \\
+    \multicolumn{5}{l}{\small ห้ามเปลี่ยนโดยไม่ผ่านกระบวนการ System Identification ใหม่} \\
+  \end{tabular}
+\end{table}
+
+\subsection{การทำงานร่วมกันของโมดูล}
+\label{subsec:module_interaction}
+
+การทำงานแบ่งออกเป็น 2 Context ดังนี้
+
+\noindent\textbf{Interrupt Context} (Priority สูง):
+\texttt{Modbus\_RxCallback} รับ Byte ทีละตัวจาก LPUART1,
+\texttt{Joystick\_RxCallback} รับ Command จาก USART3
+และเรียก \texttt{Motor\_ProcessCommand} ทันที
+และ TIM6 เรียก \texttt{Motor\_ControlLoop} ทุก 10\,ms
+
+\medskip
+\noindent\textbf{Main Loop Context} (Priority ต่ำ):
+\texttt{ModbusBridge\_UpdateRegisters} ซิงค์ตำแหน่งและความเร็วลง Register Frame,
+\texttt{ModbusBridge\_Process} รัน Protocol Engine
+และ \texttt{Motor\_SendDataToMatlab} ส่งข้อมูลออก USART3
+ทุก 20\,ms สำหรับ Live Monitoring
+
+\subsection{การ Implement ZV Input Shaper (Circular Buffer)}
+\label{subsec:zv_impl}
+
+ZV Input Shaper ถูก Implement บน STM32 ด้วย Circular Buffer
+โดย Setpoint $r(t)$ ถูก Delay เป็นเวลา $t_2 = 0.259$\,s
+(= 26 Control Cycles ที่ 100\,Hz) แล้วรวมกับ
+
+\begin{equation}
+  r_{shaped}(t) = A_1 \cdot r(t) + A_2 \cdot r(t - t_2)
+  \label{eq:zv_impl}
+\end{equation}
+
+Buffer มีขนาด $\lceil t_2 / T_p \rceil + 1 = 27$ Elements
+ทำงานที่ Position Outer Loop (100\,Hz) ใน \texttt{Motor\_ControlLoop}
+
+\subsection{การ Implement Kalman Filter (Steady-State)}
+\label{subsec:kf_impl}
+
+Kalman Filter 4 สถานะ $\mathbf{x} = [\theta, \omega, i_a, \tau_d]^\top$
+ใช้ Steady-State Gain $\mathbf{K}_\infty$ ที่คำนวณล่วงหน้าด้วย DARE บน MATLAB
+แล้ว Hardcode ใน Firmware เพื่อลด Computational Load
+
+ทุก Control Cycle (10\,ms) ทำงาน 2 ขั้นตอน:
+
+\begin{enumerate}
+  \item \textbf{Predict:}
+        $\hat{\mathbf{x}}_{k|k-1} = \mathbf{A}_d\,\hat{\mathbf{x}}_{k-1} + \mathbf{B}_d\,u_{k-1}$
+  \item \textbf{Update:}
+        $\hat{\mathbf{x}}_{k|k} = \hat{\mathbf{x}}_{k|k-1} + \mathbf{K}_\infty(y_k - \mathbf{C}\hat{\mathbf{x}}_{k|k-1})$
+\end{enumerate}
+
+Output $\hat{\theta}$ และ $\hat{\omega}$ ใช้ใน Control Loop
+ส่วน $\hat{\tau}_d$ ใช้สำหรับ Monitoring
+
+\subsection{การ Implement Cascade PID (Discrete)}
+\label{subsec:pid_impl}
+
+PID Discretize ด้วยวิธี Tustin (Bilinear) ตาม\cref{eq:tustin}
+
+Velocity Inner Loop (1\,kHz) ใช้ PI + Anti-windup Back-calculation
+
+\begin{equation}
+  u_v[k] = K_{p,v}\,e_v[k] + \text{integ}[k] + K_{d,v}\frac{e_v[k]-e_v[k-1]}{T_v}
+  \label{eq:pid_discrete_v}
+\end{equation}
+
+\begin{equation}
+  \text{integ}[k] = \text{integ}[k-1] + K_{i,v}\,e_v[k]\,T_v
+                  + K_{t,aw}(u_{sat}[k] - u_{pre}[k])\,T_v
+  \label{eq:anti_windup_discrete}
+\end{equation}
+
+% ============================================================================
+\section{การบูรณาการระดับระบบ}
+\label{sec:integration}
+% ============================================================================
+
+\subsection{การเชื่อมต่อ Motor, Encoder และ Motor Driver}
+\label{subsec:motor_integration}
+
+Encoder AMT-103 (2048 PPR $\times$ 4 = 8192 counts/rev)
+ต่อเข้า STM32 TIM3 ผ่านโหมด Quadrature Encoder Interface (QEI)
+บน Pin PB4 (CH A) และ PB5 (CH B)
+
+Motor Driver Cytron MD10C รับสัญญาณ PWM จาก TIM8 CH2 (PA8)
+และสัญญาณ DIR จาก PA9 ผ่าน Optocoupler เพื่อแยก Ground
+
+\subsection{การเชื่อมต่อ Joystick ผ่าน ESP32}
+\label{subsec:joystick_integration}
+
+ESP32-DEVKIT-V1 รับสัญญาณ Bluetooth จาก Joystick
+แล้วส่ง Command Character ผ่าน USART3 (115200 bps, 8N1)
+ไปยัง STM32 ที่ Pin PC10 (TX) และ PC11 (RX)
+
+\begin{table}[H]
+  \centering
+  \caption{การ Map Command Character กับคำสั่งระบบ}
+  \label{tab:joystick_map_fw}
+  \begin{tabular}{llll}
+    \toprule
+    Character & คำสั่ง & โหมดที่ใช้ได้ & หมายเหตุ \\
+    \midrule
+    \texttt{L} & หมุนซ้าย (Step/Jog)  & Manual & Coarse/Fine \\
+    \texttt{R} & หมุนขวา (Step/Jog)   & Manual & Coarse/Fine \\
+    \texttt{O} & Release / Stop Jog   & Manual & -- \\
+    \texttt{A} & Home (Hold 3\,s)     & ทุกโหมด & Hold $<$3\,s = Reset Encoder \\
+    \texttt{P} & E-Stop / Reset       & ทุกโหมด & Toggle E-Stop \\
+    \texttt{M} & สลับ Coarse/Fine     & Manual & Toggle Jog Mode \\
+    \texttt{U} & Gripper Up           & Manual & -- \\
+    \texttt{D} & Gripper Down         & Manual & -- \\
+    \texttt{F} & Gripper Toggle       & Manual & Open/Close \\
+    \texttt{S} & Gripper Pick         & Manual & -- \\
+    \texttt{G} & Gripper Place        & Manual & -- \\
+    \texttt{J} & Hold Position        & Manual & Lock ตำแหน่งปัจจุบัน \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+การสลับโหมดระหว่าง Joystick และ Base System ทำผ่าน B-Button Hold 1\,s
+ซึ่งตั้งค่า \texttt{control\_system\_mode}
+เมื่ออยู่ใน \texttt{CONTROL\_MODE\_BASE\_SYSTEM}
+คำสั่งจาก Joystick ทุกตัวถูก Block ยกเว้น
+\texttt{P} (E-Stop), \texttt{A} (Home) และ \texttt{M} (Mode Toggle)
+
+\subsection{การเชื่อมต่อ Modbus RTU และ Base System}
+\label{subsec:modbus_integration}
+
+ระบบสื่อสารกับ Base System ผ่าน Modbus RTU
+บน LPUART1 (19200 bps, 8E1, RS-485, Slave Address~21)
+
+Base System ใช้ Python asyncio WebSocket Backend
+(แทน \texttt{main.exe} เดิม เนื่องจากปัญหา Abnormal Heartbeat ใน Demo~1)
+โดย Backend รับ WebSocket Command จาก Frontend
+แล้วแปลงเป็น Modbus RTU Frame ส่งผ่าน Serial Port
+
+Modbus Register Map แบ่งเป็น 128 Registers ประกอบด้วย
+Status Registers (ตำแหน่ง, ความเร็ว, สถานะ FSM)
+และ Command Registers (Target Position, Mode, Gripper Command)

@@ -1,0 +1,1148 @@
+% ============================================================================
+%  บทที่ 2: ทฤษฎีและเทคโนโลยีที่เกี่ยวข้อง
+% ============================================================================
+
+\chapter{ทฤษฎีและเทคโนโลยีที่เกี่ยวข้อง}
+\label{ch:theory}
+
+% ============================================================================
+\section{พลศาสตร์ของมอเตอร์กระแสตรง}
+\label{sec:dc_motor_model}
+% ============================================================================
+
+มอเตอร์กระแสตรง (DC Motor) สามารถจำลองพฤติกรรมได้จากสมการสองโดเมน
+ได้แก่ โดเมนวงจรไฟฟ้าและโดเมนพลศาสตร์เชิงกล
+โดยทั้งสองโดเมนเชื่อมโยงกันผ่านค่าคงที่ของมอเตอร์
+ก่อนการสร้างแบบจำลองทางคณิตศาสตร์ ได้กำหนดสมมติฐานเพื่อลดความซับซ้อนของระบบให้สามารถวิเคราะห์แบบระบบเชิงเส้นไม่แปรผันตามเวลา (Linear Time-Invariant: LTI) ได้ดังนี้
+
+\begin{itemize}
+    \item วงจรแม่เหล็กทำงานในช่วงเชิงเส้น (Linear Magnetic Circuit) และไม่เกิดการอิ่มตัวของแกนเหล็ก
+    \item ค่าความต้านทาน $R_a$ และตัวเหนี่ยวนำ $L_a$ ของอาร์เมเจอร์มีค่าคงที่ ไม่เปลี่ยนแปลงตามอุณหภูมิที่เพิ่มขึ้น
+    \item ละทิ้งผลของแรงดันตกคร่อมที่แปรงถ่าน (Brush Voltage Drop) และแรงเสียดทานสถิต (Coulomb Friction)
+\end{itemize}
+
+% ----------------------------------------------------------------------------
+\subsection{สมการโดเมนไฟฟ้า}
+\label{subsec:electrical_eq}
+
+วงจรอาร์เมเจอร์ประกอบด้วยความต้านทาน $R_a$ และตัวเหนี่ยวนำ $L_a$
+ต่อในอนุกรมกับแรงเคลื่อนไฟฟ้าย้อนกลับ (Back-EMF) $e_b$
+ตามกฎแรงดันของ Kirchhoff ได้สมการ
+
+% -----------------------------------------------------------------------
+% รูปที่ 1: แผนภาพ Electro-mechanical ของ DC Motor
+% ชื่อไฟล์แนะนำ: fig_dc_motor_model.pdf
+% เนื้อหา: แสดงวงจรไฟฟ้า (Va, Ra, La, eb) เชื่อมต่อกับเพลาทางกล (J, B, tm, td)
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig_dc_motor_model}
+    \caption{แผนภาพ Electro-mechanical ของมอเตอร์กระแสตรง แสดงความสัมพันธ์ระหว่างโดเมนไฟฟ้าและโดเมนเชิงกล}
+    \label{fig:dc_motor_model}
+\end{figure}
+
+\begin{equation}
+    V_a(t) = R_a\, i_a(t) + L_a\, \frac{di_a(t)}{dt} + e_b(t)
+    \label{eq:armature_voltage}
+\end{equation}
+
+\noindent โดยที่ $e_b = K_b\,\omega_m$ และ $K_b$ คือค่าคงที่ Back-EMF (\si{\volt\second\per\radian})
+กำหนดให้ $\omega_m$ คือความเร็วเชิงมุมที่เพลามอเตอร์ ซึ่งมีความสัมพันธ์กับความเร็วเชิงมุมที่เพลา Output $\omega$ (หลัง Gearbox อัตราทด $N$) ตามความสัมพันธ์ทางจลนศาสตร์ $\omega_m = N\omega$
+ดังนั้นเมื่อแทนค่ากลับลงใน\cref{eq:armature_voltage} จะได้สมการเชิงอนุพันธ์ของโดเมนไฟฟ้าที่สอดคล้องกับความเร็วเพลา Output ดังนี้
+
+\begin{equation}
+    L_a\, \frac{di_a}{dt} = V_a - R_a\, i_a - K_b\,N\,\omega
+    \label{eq:electrical_ode}
+\end{equation}
+
+% ----------------------------------------------------------------------------
+\subsection{สมการโดเมนเชิงกล}
+\label{subsec:mechanical_eq}
+
+แรงบิดแม่เหล็กไฟฟ้า $\tau_m$ ที่มอเตอร์ผลิตได้เป็นสัดส่วนกับกระแสอาร์เมเจอร์ $i_a$
+
+\begin{equation}
+    \tau_m = K_t\, i_a
+    \label{eq:motor_torque}
+\end{equation}
+
+\noindent โดยที่ $K_t$ คือค่าคงที่แรงบิด (\si{\newton\metre\per\ampere})
+ทั้งนี้ ตามหลักการอนุรักษ์พลังงานในอุดมคติของระบบหน่วย SI กำลังงานเชิงกลที่สร้างได้จะเท่ากับกำลังงานไฟฟ้าที่ป้อนเข้า (Mechanical Power = Electrical Power) ส่งผลให้ค่าคงที่แรงบิดและค่าคงที่ Back-EMF มีค่าเท่ากันในเชิงตัวเลข ($K_t = K_b$)
+
+กฎที่สองของนิวตันสำหรับการหมุนที่ประยุกต์ใช้กับเพลา Output (พิจารณาผ่าน Gearbox อัตราทด $N$ และประสิทธิภาพ $\eta$) จะได้
+
+\begin{equation}
+    J\, \frac{d\omega}{dt} = \eta\, N\, K_t\, i_a - B\,\omega - \tau_d
+    \label{eq:mechanical_ode}
+\end{equation}
+
+\noindent โดยที่ $J$ คือโมเมนต์ความเฉื่อยรวมทั้งหมดที่ Reflect กลับมายังเพลา Output (\si{\kilogram\metre\squared}),
+$B$ คือค่าสัมประสิทธิ์แรงหน่วงหนืด (\si{\newton\metre\second\per\radian}),
+และ $\tau_d$ คือแรงบิดรบกวนจากภายนอก
+
+% ----------------------------------------------------------------------------
+\subsection{State-Space Representation}
+\label{subsec:state_space}
+
+นิยาม State Vector $\mathbf{x} = [\theta,\; \omega,\; i_a,\; \tau_d]^\top$
+โดยที่ $\theta$ คือมุมตำแหน่ง (rad), $\omega$ คือความเร็วเชิงมุม (rad/s),
+$i_a$ คือกระแสอาร์เมเจอร์ (A) และ $\tau_d$ คือแรงบิดรบกวนที่ Augment เพิ่มเข้ามา
+ระบบ 4 สถานะในรูปแบบ Continuous-Time State-Space เขียนได้เป็น
+
+\begin{equation}
+    \dot{\mathbf{x}} = \mathbf{A}\mathbf{x} + \mathbf{B}u, \qquad
+    y = \mathbf{C}\mathbf{x}
+    \label{eq:state_space_ct}
+\end{equation}
+
+\noindent โดยที่
+
+\begin{equation}
+    \mathbf{A} = \begin{bmatrix}
+        0 & 1 & 0 & 0 \\
+        0 & -\tfrac{B}{J} & \tfrac{\eta N K_t}{J} & -\tfrac{1}{J} \\
+        0 & -\tfrac{K_b N}{L_a} & -\tfrac{R_a}{L_a} & 0 \\
+        0 & 0 & 0 & 0
+    \end{bmatrix}, \quad
+    \mathbf{B} = \begin{bmatrix} 0 \\ 0 \\ \tfrac{1}{L_a} \\ 0 \end{bmatrix}, \quad
+    \mathbf{C} = \begin{bmatrix} 1 & 0 & 0 & 0 \end{bmatrix}
+    \label{eq:ABCD_matrices}
+\end{equation}
+
+\noindent input $u = V_a$ คือแรงดันที่จ่ายให้อาร์เมเจอร์ และ output $y = \theta$ 
+(เนื่องจากเซนเซอร์สามารถวัดได้เพียงตำแหน่งเชิงมุม)
+สถานะ $\tau_d$ เป็น Augmented State ที่ถือว่าเปลี่ยนแปลงช้า ($\dot{\tau}_d \approx 0$)
+ใช้สำหรับเป็น State Estimator ใน Kalman Filter เพื่อประมาณค่าความเร็วและแรงบิดรบกวนแบบ Real-time
+ตามที่อธิบายใน\cref{subsec:kalman_filter}
+
+% ============================================================================
+\section{ทฤษฎีการควบคุมและการกรองสัญญาณ}
+\label{sec:control_theory}
+% ============================================================================
+
+% ----------------------------------------------------------------------------
+\subsection{Cascade PID Control}
+\label{subsec:cascade_pid}
+
+โครงสร้าง Cascade PID ประกอบด้วยวงรอบควบคุมสองชั้นที่ซ้อนกัน
+โดยวงรอบใน (Inner Loop) ควบคุมความเร็วเชิงมุม $\omega$
+และวงรอบนอก (Outer Loop) ควบคุมตำแหน่งเชิงมุม $\theta$
+
+% -----------------------------------------------------------------------
+% รูปที่ 2: Block Diagram ของ Cascade PID
+% ชื่อไฟล์แนะนำ: fig_cascade_pid_block.pdf
+% เนื้อหา: Block diagram แสดง Position Outer Loop และ Velocity Inner Loop
+%          พร้อม ZVD Shaper ที่ input และ Anti-windup ในวง velocity
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{fig_cascade_pid_block}
+    \caption{Block Diagram ของระบบควบคุม Cascade PID
+             แสดงวงรอบความเร็วและวงรอบตำแหน่ง}
+    \label{fig:cascade_pid_block}
+\end{figure}
+
+\subsubsection{Velocity Inner Loop}
+
+ตัวควบคุม PID สำหรับวงรอบความเร็วมี Transfer Function ในรูป
+
+\begin{equation}
+    C_v(s) = K_{p,v} + \frac{K_{i,v}}{s} + K_{d,v}\,s
+    \label{eq:pid_velocity}
+\end{equation}
+
+\noindent ความถี่ Sampling ของวงรอบความเร็วกำหนดที่ $f_v = 1$\,kHz ($T_v = 1$\,ms)
+การ Discretize ตัวควบคุมเข้าสู่ Digital Domain ใช้วิธี Tustin (Bilinear Transformation) 
+สาเหตุที่เลือกใช้วิธีนี้แทนวิธี Forward Euler เพื่อป้องกันปัญหาความไม่เสถียร เนื่องจากวิธี Tustin 
+จะทำการ Map โพล (Pole) ฝั่งซ้ายของระนาบ $s$ ให้อยู่ภายใน Unit Circle ของระนาบ $z$ อย่างสมบูรณ์ 
+(Preserve Stability) โดยเฉพาะเมื่อระบบมีอัตราส่วน $K_{i,v} / f_v$ ที่มีขนาดใหญ่
+
+\begin{equation}
+    s \;\longrightarrow\; \frac{2}{T_v}\cdot\frac{z-1}{z+1}
+    \label{eq:tustin}
+\end{equation}
+
+ค่า Gain ที่ใช้ในระบบจริงได้จาก Hardware Commissioning
+และแสดงรายละเอียดไว้ใน\cref{subsec:pid_design} และ\cref{tab:pid_gains_hw}
+นอกจากนี้ยังมีการเพิ่มระบบ Anti-windup แบบ Back-Calculation เพื่อป้องกันปัญหา Integral Windup 
+เมื่อแรงดัน Output อิ่มตัวที่ $\pm$24\,V โดยค่า Integrator State ($I_k$) จะถูกอัปเดตในแต่ละ Time Step ตามสมการ
+
+\begin{equation}
+    I_k = I_{k-1} + K_{i,v}\, T_v\, e_k + K_{bc} \left(u_{sat,k} - u_{unsat,k}\right)
+    \label{eq:anti_windup}
+\end{equation}
+
+\noindent โดยที่ $K_{bc}$ คือ Anti-windup Tracking Gain, $u_{sat,k}$ คือแรงดันควบคุมที่ถูกจำกัดแล้ว 
+และ $u_{unsat,k}$ คือแรงดันควบคุมที่คำนวณได้ก่อนเข้า Saturation Block
+
+\subsubsection{Position Outer Loop}
+
+ตัวควบคุม PID สำหรับวงรอบตำแหน่งมีโครงสร้างเดียวกับ\cref{eq:pid_velocity}
+โดย Output ของ Outer Loop คือ Velocity Setpoint ที่ส่งเข้าสู่ Inner Loop
+ความถี่ Sampling กำหนดที่ $f_p = 100$\,Hz ($T_p = 10$\,ms)
+
+\subsubsection{หลักการออกแบบ Cascade}
+
+การออกแบบวงรอบทั้งสองต้องปฏิบัติตามกฎ Bandwidth Separation
+โดย Bandwidth ของ Inner Loop ต้องสูงกว่า Outer Loop อย่างน้อย 5 เท่า
+เพื่อให้ Inner Loop ตอบสนองเร็วพอที่จะถูกมองเป็น Unity Gain จาก Outer Loop
+การออกแบบในโครงงานนี้ใช้ Root Locus โดยออกแบบ Inner Loop ก่อน
+แล้วจึงใช้ Transfer Function ของ Closed-Loop Inner Loop
+เป็น Plant ที่แท้จริงสำหรับการออกแบบ Outer Loop
+
+% ----------------------------------------------------------------------------
+\subsection{ZVD Input Shaping}
+\label{subsec:zv_shaping}
+
+Input Shaping เป็นเทคนิคการปรับ Command Signal ก่อนส่งเข้าระบบ
+โดยการ Convolve คำสั่งเดิมกับ Impulse Sequence ที่ออกแบบมาเพื่อยกเลิก
+การแกว่งของระบบที่ความถี่ธรรมชาติ $\omega_n$
+
+% -----------------------------------------------------------------------
+% รูปที่ 3: กราฟการทำงานของ ZVD Shaper
+% ชื่อไฟล์แนะนำ: fig_zvd_response.pdf
+% เนื้อหา: กราฟ 2 รูปย่อย (บน: Impulse Sequence 3 ค่า, ล่าง: การตอบสนองของระบบก่อนและหลังทำ Shaping)
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{fig_zvd_response}
+    \caption{ลักษณะของสัญญาณ ZVD Impulse Sequence (บน) และเปรียบเทียบการตอบสนองของระบบเพื่อลดการแกว่ง (ล่าง)}
+    \label{fig:zvd_response}
+\end{figure}
+
+\subsubsection{โครงสร้างของ ZVD Shaper}
+
+ZVD Shaper ใช้ Impulse สามอัน $(A_1, t_1)$, $(A_2, t_2)$, $(A_3, t_3)$
+โดยกำหนด $t_1 = 0$ และ Delay ที่เหลือคำนวณจากคาบ Damped Oscillation
+
+\begin{equation}
+    t_2 = T_d = \frac{\pi}{\omega_n\sqrt{1-\zeta^2}}, \qquad t_3 = 2T_d
+    \label{eq:zv_t2}
+\end{equation}
+
+\noindent แอมพลิจูดของ Impulse คำนวณจากเงื่อนไข Zero Residual Vibration,
+Zero Derivative ของ Residual Vibration และผลรวมขนาดยอดเท่ากับ 1
+
+\begin{equation}
+    K = e^{-\zeta\pi/\sqrt{1-\zeta^2}}, \qquad
+    A_1 = \frac{1}{(1+K)^2}, \quad
+    A_2 = \frac{2K}{(1+K)^2}, \quad
+    A_3 = \frac{K^2}{(1+K)^2}
+    \label{eq:zv_amplitudes}
+\end{equation}
+
+\noindent ZVD มีความทนทานต่อความคลาดเคลื่อนของ $\omega_n$ สูงกว่า ZV (2-Impulse)
+โดยแลกกับ Delay เพิ่มขึ้น $T_d$
+ค่า $\omega_n$ และ $\zeta$ ของ Connection Rod วัดจาก Hardware
+และพารามิเตอร์ ZVD ที่ได้แสดงใน\cref{tab:zvd_params}
+
+\subsubsection{การ Implementation บน Embedded System (Discrete-Time)}
+
+สำหรับการทำงานจริงบนไมโครคอนโทรลเลอร์ (STM32G474RE) ระบบทำงานในรูปแบบ Discrete-time ตามความถี่ของ Position Loop ($T_p = 10$\,ms) 
+ดังนั้นเวลาหน่วง $t_2$ และ $t_3$ ที่คำนวณได้ จะต้องถูกปัดเศษให้เป็นจำนวนเต็มของ Sample ($N_d$) เพื่อใช้งานใน Circular Buffer
+
+\begin{equation}
+    N_2 = \text{round}\left(\frac{t_2}{T_p}\right), \qquad N_3 = \text{round}\left(\frac{t_3}{T_p}\right)
+    \label{eq:zvd_discrete_delay}
+\end{equation}
+
+\noindent ส่งผลให้ Transfer Function ของ ZVD Shaper ในโดเมน $z$ สามารถเขียนได้เป็น
+
+\begin{equation}
+    F(z) = A_1 + A_2\, z^{-N_2} + A_3\, z^{-N_3}
+    \label{eq:zvd_transfer_function}
+\end{equation}
+
+\noindent โดย Command Signal $r(t)$ จะถูกประมวลผลผ่านสมการ\cref{eq:zvd_transfer_function} 
+ซึ่งให้ผลเทียบเท่าการ Convolve ใน Discrete-time ก่อนส่งเข้า Position Outer Loop
+
+\subsubsection{ความสำคัญต่อ Cycle Time}
+
+หากไม่ใช้ Input Shaper ชิ้นงาน Connection Rod จะแกว่งหลังจากแขนกลหยุด
+โดย Settling Time ของการแกว่งดังกล่าวอยู่ที่ประมาณ 6--7 วินาทีต่อการเคลื่อนที่หนึ่งครั้ง
+ซึ่งทำให้ Cycle Time ทั้งหมดเกิน 35 วินาทีอย่างแน่นอน
+ZVD Shaper แก้ปัญหานี้โดยเพิ่มเวลาหน่วงรวมเพียง $t_3 \approx 80$\,ms ต่อการเคลื่อนที่
+% ----------------------------------------------------------------------------
+% ----------------------------------------------------------------------------
+\subsection{Kalman Filter}
+\label{subsec:kalman_filter}
+
+Kalman Filter เป็นตัวประมาณค่าสถานะ (State Estimator) ที่หาค่าเหมาะสมที่สุด (Optimal) ภายใต้สมมติฐานว่า สัญญาณรบกวนกระบวนการ (Process Noise) และสัญญาณรบกวนการวัด (Measurement Noise) มีการกระจายตัวแบบ Gaussian White Noise โดยมี Computational Complexity เป็น $\mathcal{O}(n^2)$ ต่อ Time Step
+
+% -----------------------------------------------------------------------
+% รูปที่ 4: Flowchart การทำงานของ Kalman Filter
+% ชื่อไฟล์แนะนำ: fig_kalman_flowchart.pdf
+% เนื้อหา: Flowchart แบบลูปปิด แสดงขั้นตอน Predict (Time Update) และ Update (Measurement Update)
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_kalman_flowchart}
+    \caption{ขั้นตอนการทำงานของ Discrete-Time Kalman Filter ในแต่ละ Time Step}
+    \label{fig:kalman_flowchart}
+\end{figure}
+
+\subsubsection{Discrete-Time State-Space Model และ Random Walk}
+
+หนึ่งในความท้าทายหลักของการควบคุมมอเตอร์คือ เซนเซอร์มักจะวัดได้เพียงตำแหน่งเชิงมุม ($\theta$) การหาความเร็วเชิงมุมด้วยการหาอนุพันธ์โดยประมาณ (Approximate Derivative, $\Delta\theta/\Delta t$) จะทำให้เกิด Noise Amplification อย่างรุนแรง นอกจากนี้ ระบบยังเผชิญกับแรงบิดรบกวน ($\tau_d$) ที่ไม่ทราบค่า 
+
+เพื่อแก้ปัญหานี้ แรงบิดรบกวนจึงถูกนำมาต่อขยายในตัวแปรสถานะ (Augmented State) โดยใช้สมมติฐานว่าการเปลี่ยนแปลงของ $\tau_d$ เกิดจากสัญญาณรบกวนแบบสุ่ม (Random Walk) หรือ $\dot{\tau}_d = w_\tau$ 
+สำหรับการนำไปใช้งานบน Embedded System ระบบ Continuous-Time ใน\cref{eq:state_space_ct} จะถูกแปลงเป็นเวลาไม่ต่อเนื่อง (Discretization) ด้วยวิธี Zero-Order Hold (ZOH) ที่ Sample Time $T_s$
+
+\begin{equation}
+    \mathbf{x}_{k+1} = \mathbf{A}_d\,\mathbf{x}_k + \mathbf{B}_d\,u_k + \mathbf{w}_k, \qquad
+    y_k = \mathbf{C}\,\mathbf{x}_k + v_k
+    \label{eq:state_space_dt}
+\end{equation}
+
+\noindent โดยที่ $\mathbf{w}_k \sim \mathcal{N}(\mathbf{0}, \mathbf{Q})$ คือ Process Noise ของแต่ละสถานะ และ $v_k \sim \mathcal{N}(0, R)$ คือ Measurement Noise
+
+\subsubsection{การกำหนดพารามิเตอร์ Noise ($Q$ และ $R$)}
+
+การกำหนดเมทริกซ์ความแปรปรวนเกี่ยวพัน (Covariance Matrices) มีผลโดยตรงต่อความแม่นยำของตัวกรอง:
+\begin{itemize}
+    \item \textbf{Measurement Noise ($R$):} สามารถประเมินได้จากความละเอียด (Resolution) ของเซนเซอร์ เช่น หากใช้อุปกรณ์เข้ารหัสสัมบูรณ์ (Absolute Encoder) ขนาด 12-bit จะมีตำแหน่งแยกย่อย 4096 ค่าต่อรอบ (ความละเอียด $\Delta \approx 0.088^\circ$) ความแปรปรวนของ Quantization Noise นี้สามารถจำลองด้วย Uniform Distribution ซึ่งมีค่าความแปรปรวน $R = \Delta^2 / 12$
+    \item \textbf{Process Noise ($\mathbf{Q}$):} เป็นเมทริกซ์ที่ปรับจูนเพื่อสร้างสมดุลระหว่างความเชื่อมั่นในแบบจำลองทางคณิตศาสตร์กับความเชื่อมั่นในเซนเซอร์ โดยสมาชิกที่ตรงกับสถานะ $\tau_d$ จะเป็นตัวกำหนดความไว (Bandwidth) ในการประมาณค่าแรงบิดรบกวน
+\end{itemize}
+
+\subsubsection{Kalman Filter Equations}
+
+กระบวนการทำงานของ Kalman Filter แบ่งเป็นสองขั้นตอนย่อยที่ทำสลับกันทุก Time Step ได้แก่
+
+\noindent\textbf{1. Predict (Time Update):} เป็นการทำนายสถานะล่วงหน้าจากแบบจำลองทางคณิตศาสตร์
+\begin{equation}
+    \hat{\mathbf{x}}_{k|k-1} = \mathbf{A}_d\,\hat{\mathbf{x}}_{k-1|k-1} + \mathbf{B}_d\,u_{k-1}
+    \label{eq:kf_predict_x}
+\end{equation}
+\begin{equation}
+    \mathbf{P}_{k|k-1} = \mathbf{A}_d\,\mathbf{P}_{k-1|k-1}\,\mathbf{A}_d^\top + \mathbf{Q}
+    \label{eq:kf_predict_P}
+\end{equation}
+
+\noindent\textbf{2. Update (Measurement Update):} เป็นการแก้ไขค่าที่ทำนายด้วยข้อมูลที่วัดได้จริงจากเซนเซอร์
+\begin{equation}
+    \mathbf{K}_k = \mathbf{P}_{k|k-1}\,\mathbf{C}^\top
+                   \left(\mathbf{C}\,\mathbf{P}_{k|k-1}\,\mathbf{C}^\top + R\right)^{-1}
+    \label{eq:kf_gain}
+\end{equation}
+\begin{equation}
+    \hat{\mathbf{x}}_{k|k} = \hat{\mathbf{x}}_{k|k-1} + \mathbf{K}_k
+                              \left(y_k - \mathbf{C}\,\hat{\mathbf{x}}_{k|k-1}\right)
+    \label{eq:kf_update_x}
+\end{equation}
+\begin{equation}
+    \mathbf{P}_{k|k} = \left(\mathbf{I} - \mathbf{K}_k\,\mathbf{C}\right)\mathbf{P}_{k|k-1}
+    \label{eq:kf_update_P}
+\end{equation}
+
+% -----------------------------------------------------------------------
+% รูปที่ 5: กราฟเปรียบเทียบการประมาณค่าความเร็วของ Kalman Filter กับการหาอนุพันธ์
+% ชื่อไฟล์แนะนำ: fig_kf_rmse_velocity.pdf
+% เนื้อหา: กราฟแสดงความเร็วที่ได้จาก KF ที่เรียบเนียน เทียบกับความเร็วจากการหาอนุพันธ์ที่มี Noise (หรือกราฟ RMSE)
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{fig_kf_rmse_velocity}
+    \caption{การเปรียบเทียบประสิทธิภาพการประมาณค่าความเร็วเชิงมุมระหว่าง Kalman Filter กับการหาอนุพันธ์โดยประมาณ (Approximate Derivative)}
+    \label{fig:kf_rmse_velocity}
+\end{figure}
+
+\subsubsection{Steady-State Kalman Gain}
+
+เนื่องจากระบบเชิงเส้นและ Time-Invariant Covariance Matrix $\mathbf{P}$
+จะ Converge ไปยังค่า Steady-State $\mathbf{P}_\infty$
+ซึ่งสามารถคำนวณล่วงหน้าได้จาก Discrete Algebraic Riccati Equation (DARE)
+
+\begin{equation}
+    \mathbf{P}_\infty = \mathbf{A}_d\,\mathbf{P}_\infty\,\mathbf{A}_d^\top - 
+    \mathbf{A}_d\,\mathbf{P}_\infty\,\mathbf{C}^\top
+    \left(\mathbf{C}\,\mathbf{P}_\infty\,\mathbf{C}^\top + R\right)^{-1}
+    \mathbf{C}\,\mathbf{P}_\infty\,\mathbf{A}_d^\top + \mathbf{Q}
+    \label{eq:dare}
+\end{equation}
+
+\noindent Steady-State Kalman Gain $\mathbf{K}_\infty$ คำนวณครั้งเดียวบน MATLAB
+แล้ว Hardcode ลงใน Firmware ทำให้ลด Computational Load บนหน่วยประมวลผลได้อย่างมาก โดยยังคงประสิทธิภาพการประเมินสถานะในระดับที่ใกล้เคียงกับ Optimal Gain
+
+% ============================================================================
+\section{มาตรฐานการออกแบบเชิงกล}
+\label{sec:mech_standards}
+% ============================================================================
+
+% ----------------------------------------------------------------------------
+\subsection{การออกแบบเพลา (ASME Shaft Design)}
+\label{subsec:shaft_design}
+
+การออกแบบเพลาในโครงงานนี้อ้างอิงมาตรฐาน ASME โดยใช้ทฤษฎีพลังงานความผิดเพี้ยน (Distortion Energy Theory หรือ Von Mises Criterion) สำหรับกรณีที่เพลาต้องรับภาระทั้งโมเมนต์ดัด (Bending Moment) และแรงบิด (Torque) ไปพร้อมกัน 
+
+% -----------------------------------------------------------------------
+% รูปที่ 6: Free Body Diagram ของเพลา
+% ชื่อไฟล์แนะนำ: fig_shaft_fbd.pdf
+% เนื้อหา: FBD แสดงจุดรองรับ (Bearings) และจุดที่เกิดแรงกระทำ เพื่อหา Bending Moment และ Torque
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=1.0\textwidth]{fig_shaft_fbd}
+%     \caption{Free Body Diagram (FBD) ของเพลาแสดงจุดรองรับและภาระที่กระทำในสภาวะการทำงาน}
+%     \label{fig:shaft_fbd}
+% \end{figure}
+
+\subsubsection{การวิเคราะห์ความล้า (Fatigue Analysis)}
+
+ในการทำงานของระบบขับเคลื่อน เพลาจะรับภาระแบบเปลี่ยนแปลงตามเวลา (Fluctuating Loads) ขนาดเส้นผ่านศูนย์กลางเพลาขั้นต่ำสำหรับการป้องกันความเสียหายจากความล้าคำนวณได้จากสมการ
+
+\begin{equation}
+    d \geq \left[\frac{16}{\pi}\cdot\frac{N_s}{S_e}
+    \sqrt{\left(K_f M_a\right)^2 + \frac{3}{4}\left(K_{fs} T_a\right)^2}
+    \;\right]^{1/3}
+    \label{eq:shaft_diameter_fatigue}
+\end{equation}
+
+\noindent โดยที่ $N_s$ คือค่าความปลอดภัย (Safety Factor), $K_f$ และ $K_{fs}$ คือตัวคูณความเค้นหนาแน่นสำหรับความล้า (Fatigue Stress Concentration Factor) ของโมเมนต์ดัดและแรงบิดตามลำดับ, $M_a$ คือแอมพลิจูดของโมเมนต์ดัด (\si{\newton\metre}) และ $T_a$ คือแอมพลิจูดของแรงบิด (\si{\newton\metre})
+
+ค่า $S_e$ คือขีดจำกัดความทนทาน (Modified Endurance Limit) (\si{\pascal}) ซึ่งได้จากการปรับลดทอนค่าขีดจำกัดความทนทานในอุดมคติ ($S_e'$) ด้วยปัจจัยอิทธิพลต่างๆ ตามสมการของ Marin (Marin Equation) ดังนี้
+
+\begin{equation}
+    S_e = k_a\, k_b\, k_c\, k_d\, k_e\, S_e'
+    \label{eq:marin_factors}
+\end{equation}
+
+\noindent โดยที่ตัวแปร $k$ ต่างๆ คือปัจจัยปรับแก้ด้านสภาพผิว (Surface), ขนาด (Size), ภาระ (Load), อุณหภูมิ (Temperature) และความน่าเชื่อถือ (Reliability) ตามลำดับ
+
+\subsubsection{การตรวจสอบการครากสถิต (Static Yielding Check)}
+
+นอกจากการวิเคราะห์ความล้าแล้ว เพลาในระบบหุ่นยนต์ที่ต้องทนต่อแรงกระชาก (Jerk) หรือแรงบิดสูงสุดชั่วขณะ (Peak Torque) จากมอเตอร์ จำเป็นต้องได้รับการตรวจสอบไม่ให้เกิดการคราก (Yielding) ในรอบแรกของการทำงาน โดยความเค้นเทียบเท่า (Von Mises Equivalent Stress) สูงสุดจะต้องไม่เกินจุดคราก ($S_y$)
+
+\begin{equation}
+    \sigma_{\max}' = \frac{16}{\pi d^3} \sqrt{\left(M_m + M_a\right)^2 + \frac{3}{4}\left(T_m + T_a\right)^2} \leq \frac{S_y}{N_y}
+    \label{eq:shaft_yielding}
+\end{equation}
+
+\noindent โดยที่ $M_m$ และ $T_m$ คือค่าเฉลี่ย (Mean) ของโมเมนต์ดัดและแรงบิด และ $N_y$ คือค่าความปลอดภัยต่อการคราก
+
+% ----------------------------------------------------------------------------
+\subsection{การคำนวณอายุการใช้งานตลับลูกปืน (ISO 281)}
+\label{subsec:bearing_life}
+
+เนื่องจากเพลาถูกรองรับด้วยตลับลูกปืน (Rolling Element Bearing) อายุการใช้งาน Nominal ของตลับลูกปืน (ความน่าเชื่อถือ 90\%) จึงถูกคำนวณตามมาตรฐาน ISO 281 ในหน่วยล้านรอบการหมุน (Million Revolutions)
+
+\begin{equation}
+    L_{10} = \left(\frac{C}{P}\right)^p
+    \label{eq:bearing_life_revs}
+\end{equation}
+
+\noindent โดยที่ $C$ คือพิกัดน้ำหนักบรรทุกพลวัตพื้นฐาน (Basic Dynamic Load Rating) (\si{\newton}) ซึ่งได้จากสเปกของตลับลูกปืน, $p$ คือค่าคงที่อายุการใช้งาน ($p = 3$ สำหรับ Ball Bearing และ $p = 10/3$ สำหรับ Roller Bearing) และ $P$ คือแรงลัพธ์พลวัตเทียบเท่า (Equivalent Dynamic Load) (\si{\newton}) 
+
+\subsubsection{แรงลัพธ์พลวัตเทียบเท่า (Equivalent Dynamic Load)}
+
+ในการใช้งานจริง ตลับลูกปืนอาจต้องรับทั้งแรงในแนวรัศมี (Radial Load, $F_r$) จากน้ำหนักของชิ้นงานและแรงดึงสายพาน และแรงในแนวแกน (Axial Load, $F_a$) แรงทั้งสองจะถูกแปลงให้เป็นแรงเทียบเท่า $P$ เดียวผ่านสมการ
+
+\begin{equation}
+    P = X F_r + Y F_a
+    \label{eq:equivalent_load}
+\end{equation}
+
+\noindent โดยที่ $X$ คือตัวประกอบแรงแนวรัศมี (Radial Load Factor) และ $Y$ คือตัวประกอบแรงแนวแกน (Axial Load Factor) ซึ่งพิจารณาจากอัตราส่วน $F_a / F_r$ เทียบกับค่าพารามิเตอร์ $e$ ของแคตตาล็อกตลับลูกปืน
+
+เมื่อได้ค่า $L_{10}$ ในหน่วยล้านรอบแล้ว สามารถแปลงกลับเป็นชั่วโมงการทำงานจริง ($L_{10h}$) ตามความเร็วรอบการหมุนเฉลี่ย $n$ (\si{rpm}) ของข้อต่อหุ่นยนต์ได้ดังสมการ
+
+\begin{equation}
+    L_{10h} = \frac{10^6}{60\,n}\,L_{10}
+    \label{eq:bearing_life_hours}
+\end{equation}
+
+% ----------------------------------------------------------------------------
+\subsection{พลศาสตร์ของชิ้นงาน Connection Rod (Simple Pendulum Model)}
+\label{subsec:rod_dynamics}
+ 
+Connection Rod ที่ห้อยอยู่ที่ปลายแขนกลสามารถจำลองเป็น Simple Pendulum
+โดยมีมวล $m_{rod}$ กระจุกอยู่ที่ระยะ $L_{rod}$ จากจุดหมุน
+เมื่อแขนกลมีความเร่งเชิงมุม $\alpha_{arm}$ จะเกิดแรงเฉื่อยกระตุ้นให้ Rod แกว่ง
+ 
+% -----------------------------------------------------------------------
+% รูปที่ X: Free Body Diagram ของ Connection Rod
+% ชื่อไฟล์แนะนำ: fig_rod_pendulum_fbd.pdf
+% เนื้อหา: แสดง FBD ของ Rod ในระบบอ้างอิงที่หมุนตามแขนกล
+%          พร้อม annotation มุม phi, แรง mg, แรงเฉื่อย m*alpha_arm*L
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{fig_rod_pendulum_fbd}
+    \caption{Free Body Diagram ของ Connection Rod จำลองเป็น Simple Pendulum
+             ที่ถูกกระตุ้นด้วยความเร่งเชิงมุมของแขนกล}
+    \label{fig:rod_pendulum_fbd}
+\end{figure}
+ 
+\subsubsection{สมการการเคลื่อนที่}
+ 
+กำหนดให้ $\phi$ คือมุมเบี่ยงเบนของ Rod จากแนวดิ่ง (rad)
+ในกรณี Small-Angle Approximation ($\sin\phi \approx \phi$)
+สมการการเคลื่อนที่ของ Rod ในระบบอ้างอิงที่หมุนตามแขนกลได้จาก
+ 
+\begin{equation}
+    \ddot{\phi} + 2\zeta_{rod}\,\omega_{n,rod}\,\dot{\phi}
+    + \omega_{n,rod}^2\,\phi = \Gamma\,\alpha_{arm}
+    \label{eq:rod_eom}
+\end{equation}
+ 
+\noindent โดยที่ $\Gamma$ คือ Coupling Factor ระหว่างความเร่งแขนกลและการกระตุ้น Rod
+และ $\alpha_{arm} = \ddot{\theta}_{arm}$ คือความเร่งเชิงมุมของแขนกล (rad/s²)
+ 
+\subsubsection{การ Derive ความถี่ธรรมชาติ}
+ 
+สำหรับ Rod ที่มีการกระจายมวลสม่ำเสมอตลอดความยาว $L_{rod}$
+โมเมนต์ความเฉื่อยรอบจุดหมุนปลายคือ $I = \tfrac{1}{3}m_{rod}L_{rod}^2$
+และ Restoring Torque คือ $\tau = -m_{rod}g\tfrac{L_{rod}}{2}\sin\phi$
+จากสมการ $I\ddot{\phi} = \tau$ และ Small-Angle Approximation ได้
+ 
+\begin{equation}
+    \omega_{n,rod} = \sqrt{\frac{m_{rod}g\tfrac{L_{rod}}{2}}{\tfrac{1}{3}m_{rod}L_{rod}^2}}
+                  = \sqrt{\frac{3g}{2L_{rod}}}
+    \label{eq:rod_natural_freq}
+\end{equation}
+ 
+\noindent สำหรับ Connection Rod ในโครงงานนี้ที่มีความยาว $L_{rod} = 100$\,mm
+ 
+\begin{equation}
+    \omega_{n,rod} = \sqrt{\frac{3 \times 9.81}{2 \times 0.10}}
+                  = \sqrt{147.15}
+                  \approx 12.13\,\text{rad/s}
+                  \quad (f_n \approx 1.93\,\text{Hz})
+    \label{eq:rod_wn_num}
+\end{equation}
+ 
+\subsubsection{ความสำคัญต่อการออกแบบระบบควบคุม}
+ 
+\cref{eq:rod_wn_num} แสดงว่า Rod มีความถี่ธรรมชาติต่ำมาก ($\approx 2$\,Hz)
+เมื่อเทียบกับ Bandwidth ของ Position Loop (100\,Hz)
+ดังนั้น Position PID ไม่สามารถ Damp การแกว่งของ Rod ได้
+เพราะ Rod ไม่ได้อยู่ใน Feedback Loop ของ Controller
+การแก้ปัญหาจึงต้องใช้ ZVD Input Shaper ที่ออกแบบให้ยกเลิกพลังงานที่ความถี่
+$\omega_{n,rod}$ โดยตรงตามที่อธิบายใน\cref{subsec:zv_shaping}
+\label{sec:trajectory}
+
+% ============================================================================
+\section{อัลกอริทึมสร้างโปรไฟล์การเคลื่อนที่}
+\label{sec:trajectory}
+% ============================================================================
+
+\subsection{S-Curve Trajectory (Jerk-Limited)}
+\label{subsec:scurve}
+
+S-Curve Trajectory หรือ Jerk-Limited Trajectory เป็นโปรไฟล์การเคลื่อนที่ที่จำกัดอัตราการเปลี่ยนแปลงของความเร่ง (Jerk, $j = d^3\theta/dt^3$) ให้ไม่เกินค่าสูงสุด $j_{\max}$ ซึ่งช่วยลดแรงกระชากทางกล (Mechanical Shock) และจำกัดการกระตุ้นความถี่ธรรมชาติของระบบ เมื่อเทียบกับ Trapezoidal Profile ที่มีค่า Jerk เป็นอนันต์ ณ จุดที่เปลี่ยนความเร่ง
+
+% -----------------------------------------------------------------------
+% รูปที่ 6: กราฟ S-Curve Trajectory
+% ชื่อไฟล์แนะนำ: fig_scurve_profile.pdf
+% เนื้อหา: กราฟ 4 แกนซ้อนกันแนวตั้ง (Position, Velocity, Acceleration, Jerk) พร้อมเส้นประแบ่ง 7 เฟส
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{fig_scurve_profile}
+    \caption{โปรไฟล์การเคลื่อนที่แบบ S-Curve (Jerk-Limited) แสดงความสัมพันธ์เชิงจลนศาสตร์ทั้ง 7 เฟส}
+    \label{fig:scurve_profile}
+\end{figure}
+
+\subsubsection{โครงสร้างเชิงเวลา (Time Intervals) ของ 7 เฟส}
+
+การสร้าง S-Curve แบบสมมาตร (Symmetric Profile) สำหรับระยะทางเป้าหมาย $\Delta\theta$ จะประกอบด้วย 7 เฟส โดยมีสมการคำนวณระยะเวลาในแต่ละช่วง ($T_j, T_a, T_v$) เบื้องต้นดังนี้
+
+\begin{align}
+    T_j &= \frac{a_{\max}}{j_{\max}} \label{eq:scurve_tj} \\
+    T_a &= \frac{v_{\max}}{a_{\max}} - T_j \label{eq:scurve_ta} \\
+    T_v &= \frac{\Delta\theta}{v_{\max}} - (T_a + 2T_j) \label{eq:scurve_tv}
+\end{align}
+
+\noindent โดยที่:
+\begin{itemize}
+    \item \textbf{เฟส 1, 3, 5, 7 (Jerk Phases, $T_j$):} ช่วงที่ Jerk มีค่า $\pm j_{\max}$ เพื่อไต่ระดับหรือลดระดับความเร่ง
+    \item \textbf{เฟส 2, 6 (Acceleration Phases, $T_a$):} ช่วงที่ความเร่งคงที่ $\pm a_{\max}$
+    \item \textbf{เฟส 4 (Velocity Phase, $T_v$):} ช่วงที่ความเร็วคงที่ $v_{\max}$
+\end{itemize}
+
+\subsubsection{การพิจารณาสภาวะโปรไฟล์ไม่สมบูรณ์ (Partial Profiles)}
+
+ในทางปฏิบัติ ระยะทาง $\Delta\theta$ อาจสั้นเกินกว่าที่ระบบจะเร่งไปถึง $v_{\max}$ หรือ $a_{\max}$ ได้ อัลกอริทึมจึงต้องตรวจสอบเงื่อนไขและคำนวณพารามิเตอร์ยอดแหลม (Peak Values) ใหม่ ดังนี้
+
+\begin{itemize}
+    \item \textbf{กรณีไม่ถึงความเร่งสูงสุด ($T_a \leq 0$):} ระบบจะถูกตัดเฟส 2 และ 6 ออก ความเร่งสูงสุดใหม่ที่ทำได้จะถูกจำกัดด้วย Jerk คือ $a_{reach} = \sqrt{v_{\max} j_{\max}}$
+    \item \textbf{กรณีไม่ถึงความเร็วสูงสุด ($T_v \leq 0$):} ระบบจะถูกตัดเฟส 4 ออก และต้องคำนวณ $v_{reach}$ ใหม่จากสมการรากของระยะทางที่กำหนด
+\end{itemize}
+
+\subsubsection{ความสัมพันธ์กับ Cycle Time และ ZVD Shaper}
+
+การกำหนดค่าพารามิเตอร์ต้องสอดคล้องกับข้อกำหนดของโครงงาน กล่าวคือ $v_{\max} \leq 5.84$\,rad/s (P3) และ $a_{\max} \leq 22.0$\,rad/s$^2$ (P4) เพื่อให้ Cycle Time รวมไม่เกิน 35 วินาที (P1)
+ทั้งนี้ การใช้ S-Curve ทำหน้าที่เสมือน Pre-filter ที่ช่วยลดแอมพลิจูดของการแกว่งตั้งแต่ต้นทาง ส่งผลให้ ZVD Input Shaper ใน\cref{subsec:zv_shaping} รับภาระในการหักล้างการสั่นน้อยลง และลดโอกาสที่ Command จะทะลุขีดจำกัด Saturation ของวงจรควบคุมความเร็ว
+% ============================================================================
+\section{การระบุเอกลักษณ์ของระบบ (System Identification)}
+\label{sec:system_id}
+% ============================================================================
+
+การนำแบบจำลอง State-Space ไปใช้งานจริงในตัวควบคุมและตัวประมาณค่าสถานะ (Kalman Filter) จำเป็นต้องทราบค่าพารามิเตอร์ทางกายภาพที่แม่นยำ ในโครงงานนี้ใช้แนวทาง Grey-Box Modeling โดยยึดโครงสร้างสมการทางฟิสิกส์เป็นหลัก แล้วหาค่าพารามิเตอร์จากการทดลองจริง
+
+% ----------------------------------------------------------------------------
+\subsection{การประมาณค่าพารามิเตอร์ทางไฟฟ้า (Stalled Rotor Test)}
+
+เมื่อทำการล็อกเพลามอเตอร์ไม่ให้หมุน ($\omega = 0$) แรงเคลื่อนไฟฟ้าย้อนกลับ $e_b$ จะมีค่าเป็นศูนย์ 
+ในการทดลองจะต่อตัวต้านทานชันต์ (Shunt Resistor, $R_{sh}$) อนุกรมเข้ากับมอเตอร์เพื่อใช้วัดกระแสทางอ้อมผ่านแรงดันตกคร่อม ($V_{sh}$) 
+ตามกฎแรงดันของ Kirchhoff (KVL) จะได้สมการวงจรดังนี้
+
+\begin{equation}
+    V_{in} = i(t)\left(R_a + R_{sh}\right) + L_a \frac{di(t)}{dt}
+    \label{eq:kvl_shunt}
+\end{equation}
+
+\noindent โดยที่ $V_{in}$ คือแรงดันแบบขั้นบันได (Step Voltage) ที่ป้อนเข้าสู่วงจร
+
+\subsubsection{การหาค่าความต้านทานอาร์เมเจอร์ ($R_a$)}
+เมื่อเวลาผ่านไปจนเข้าสู่สภาวะคงตัว (Steady State, $t \to \infty$) อัตราการเปลี่ยนแปลงของกระแสจะมีค่าเป็นศูนย์ ($di/dt = 0$) และกระแสไหลสูงสุด ($i_{ss}$) ซึ่งสามารถหาได้จากแรงดันที่ตกคร่อม Shunt Resistor ในสภาวะคงตัว ($V_{sh}$)
+
+\begin{equation}
+    V_{in} = i_{ss}\left(R_a + R_{sh}\right) \quad \text{โดยที่} \quad i_{ss} = \frac{V_{sh}}{R_{sh}}
+\end{equation}
+
+\noindent แทนค่า $i_{ss}$ และจัดรูปสมการเพื่อหา $R_a$ จะได้ความสัมพันธ์ดังนี้
+
+\begin{equation}
+    V_{in} = \frac{V_{sh}}{R_{sh}}\left(R_a + R_{sh}\right) \implies \frac{V_{in}}{V_{sh}} = \frac{R_a}{R_{sh}} + 1
+\end{equation}
+
+\begin{equation}
+    R_a = R_{sh} \left( \frac{V_{in}}{V_{sh}} - 1 \right)
+    \label{eq:calc_Ra}
+\end{equation}
+
+\subsubsection{การหาค่าความเหนี่ยวนำอาร์เมเจอร์ ($L_a$)}
+การตอบสนองของกระแสในวงจร RL อนุกรม จะมีลักษณะเป็น First-order System ค่าคงที่เวลา (Time Constant, $\tau$) คือเวลาที่แรงดัน $V_{sh}$ ไต่ระดับขึ้นไปถึง 63.2\% ของค่าสูงสุดในสภาวะคงตัว โดยค่า $\tau$ ของวงจรนี้มีค่าเท่ากับ
+
+\begin{equation}
+    \tau = \frac{L_a}{R_{total}} = \frac{L_a}{R_a + R_{sh}}
+\end{equation}
+
+\noindent ดังนั้น $L_a = \tau(R_a + R_{sh})$ 
+จากสภาวะคงตัวก่อนหน้า เราทราบว่า $(R_a + R_{sh}) = R_{sh}\frac{V_{in}}{V_{sh}}$ เมื่อนำมาแทนค่าจะได้สมการสำหรับคำนวณ $L_a$ ที่สามารถหาได้จากข้อมูลที่วัดได้โดยตรง
+
+\begin{equation}
+    L_a = R_{sh} \left( \tau \frac{V_{in}}{V_{sh}} \right)
+    \label{eq:calc_La}
+\end{equation}
+
+% ----------------------------------------------------------------------------
+\subsection{การระบุเอกลักษณ์แบบกล่องเทาด้วย MATLAB (Grey-Box Identification)}
+\label{subsec:matlab_sysid}
+
+แม้ว่าการหาพารามิเตอร์ด้วยวิธีล็อกเพลาและการหมุนตัวเปล่าจะให้ค่าประมาณการเบื้องต้น (Initial Guess) ที่อ้างอิงจากสมการทางฟิสิกส์ แต่ในสภาพแวดล้อมจริงระบบอาจมีความไม่เป็นเชิงเส้น (Non-linearities) เล็กน้อยแอบแฝงอยู่ 
+โครงงานนี้จึงเลือกใช้ System Identification Toolbox ของซอฟต์แวร์ MATLAB เป็นเทคโนโลยีสำหรับปรับจูนค่าพารามิเตอร์ให้มีความแม่นยำสูงสุดผ่านกระบวนการหาค่าเหมาะสมที่สุด (Optimization)
+
+\subsubsection{วิธีพยากรณ์ความคลาดเคลื่อน (Prediction Error Method: PEM)}
+อัลกอริทึมของ MATLAB ทำงานโดยอาศัยหลักการลดรูปความคลาดเคลื่อนระหว่างผลตอบสนองของแบบจำลองคณิตศาสตร์ ($\hat{y}$) และข้อมูลที่วัดได้จริงจากเซนเซอร์ ($y$) โดยนิยามฟังก์ชันต้นทุน (Cost Function) ในรูปแบบของค่าผลรวมความผิดพลาดกำลังสอง (Sum of Squared Errors) ดังสมการ
+
+\begin{equation}
+    V_N(\mathbf{p}) = \frac{1}{N} \sum_{k=1}^N \left| y(k) - \hat{y}(k | \mathbf{p}) \right|^2
+    \label{eq:pem_cost}
+\end{equation}
+
+\noindent โดยที่ $N$ คือจำนวนข้อมูลทั้งหมด (Samples) และ $\mathbf{p} = [R_a,\; L_a,\; K_t,\; J,\; B]^\top$ คือเวกเตอร์ของพารามิเตอร์อิสระ (Free Parameters) ที่ต้องการค้นหา
+
+\subsubsection{กระบวนการประมวลผลอัลกอริทึม}
+การประมาณค่าพารามิเตอร์แบบ Grey-Box บน MATLAB มีกลไกการทำงาน 3 ขั้นตอนหลัก ดังนี้
+\begin{enumerate}
+    \item \textbf{การสร้างแบบจำลอง (Model Definition):} กำหนดโครงสร้างเมทริกซ์ $\mathbf{A}, \mathbf{B}, \mathbf{C}, \mathbf{D}$ ของสมการ State-Space แบบ Continuous-Time ผ่านฟังก์ชันโครงสร้าง \texttt{idgrey} โดยป้อนค่าประมาณการเบื้องต้นที่ได้จากการคำนวณเชิงวิเคราะห์
+    \item \textbf{การหาค่าเหมาะสมที่สุด (Parameter Estimation):} ป้อนข้อมูลอินพุต (แรงดัน $V_a$) และเอาต์พุต (กระแส $i_a$ และความเร็ว $\omega$) ที่บันทึกจากการทดลองจริงเข้าสู่ฟังก์ชัน \texttt{greyest} ซึ่งอัลกอริทึมจะใช้วิธีการค้นหาแบบไม่เป็นเชิงเส้น (Non-linear Least Squares) เช่น Levenberg-Marquardt ในการอัปเดตเวกเตอร์ $\mathbf{p}$ ซ้ำๆ (Iteration) จนกว่าฟังก์ชัน $V_N(\mathbf{p})$ จะลู่เข้าสู่ค่าจุดต่ำสุด (Convergence)
+    \item \textbf{การตรวจสอบความถูกต้อง (Model Validation):} ประเมินความแม่นยำของแบบจำลองด้วยเปอร์เซ็นต์ความพอดี (Fit Percentage) ซึ่งคำนวณจากค่า Normalized Root Mean Square Error (NRMSE) ระหว่างกราฟผลตอบสนองจากการซิมูเลชัน (Simulated Output) และข้อมูลการวัดจริง (Measured Data)
+\end{enumerate}
+
+% % ----------------------------------------------------------------------------
+% \subsection{การประมาณค่าพารามิเตอร์ทางกล (Free Run Test)}
+
+% ในการทำงานที่สภาวะไม่มีโหลด ($\tau_d \approx 0$) และป้อนแรงดันคงที่จนมอเตอร์หมุนด้วยความเร็วคงตัว ($d\omega/dt = 0$) สมการโดเมนเชิงกลจะลดรูปลงเหลือ
+
+% \begin{equation}
+%     B\,\omega_{ss} = K_t\, i_{a,ss}
+% \end{equation}
+
+% \noindent ทำให้สามารถหาค่าสัมประสิทธิ์แรงหน่วงหนืด $B$ ได้จากการวัดกระแสและความเร็วรอบในสภาวะคงตัว สำหรับโมเมนต์ความเฉื่อย $J$ สามารถวิเคราะห์ได้จากการตอบสนองทางเวลา (Transient Response) และเวลาที่ใช้ในการเร่งความเร็ว (Rise Time) ของเพลา
+
+% % ============================================================================
+% \section{การขับกำลังมอเตอร์ด้วยสัญญาณ PWM}
+% \label{sec:pwm_drive}
+% % ============================================================================
+
+% สัญญาณควบคุม $u$ ที่คำนวณจากตัวควบคุม PID จะถูกแปลงเป็นเปอร์เซ็นต์ Duty Cycle ($D \in [0, 1]$) เนื่องจากไมโครคอนโทรลเลอร์ไม่สามารถจ่ายแรงดันอนาล็อกกำลังสูงได้ จึงต้องทำงานร่วมกับวงจรขับมอเตอร์ (H-Bridge) สำหรับการขับแบบ Sign-Magnitude แรงดันอาร์เมเจอร์เฉลี่ยจะมีค่าเท่ากับ
+
+% \begin{equation}
+%     V_a = D \cdot V_{cc}
+% \end{equation}
+
+% \noindent โดยที่ $V_{cc}$ คือแรงดันจากแหล่งจ่ายกำลัง การเลือกความถี่ PWM ($f_{pwm}$) จะต้องสอดคล้องกับค่าคงที่เวลาทางไฟฟ้า ($\tau_e$) ของมอเตอร์ โดยทั่วไปควรกำหนดให้ $f_{pwm} \gg 1/\tau_e$ เพื่อให้วงจรอาร์เมเจอร์ทำหน้าที่เป็นตัวกรองสัญญาณความถี่ต่ำผ่าน (Low-Pass Filter) ได้อย่างสมบูรณ์ ป้องกันไม่ให้กระแสขาดตอน (Discontinuous Current Mode) และลดกระแสกระเพื่อม (Current Ripple)
+
+% ----------------------------------------------------------------------------
+\subsection{Zero-Phase Filtering ด้วย \texttt{filtfilt}}
+\label{subsec:filtfilt}
+% ----------------------------------------------------------------------------
+
+ในงาน System Identification ข้อมูลที่บันทึกจาก Hardware
+มักมีสัญญาณรบกวนความถี่สูงที่ต้องกำจัดออกก่อนนำเข้า Estimator
+การกรองสัญญาณด้วย Digital Filter แบบทั่วไป (Causal Filter)
+แม้จะลด Noise ได้ แต่มีผลข้างเคียงที่สำคัญคือ
+\textbf{Phase Lag} ซึ่งส่งผลโดยตรงต่อความแม่นยำของพารามิเตอร์
+ที่ประมาณได้
+
+% ----------------------------------------------------------------------------
+\subsubsection{ปัญหาของ Causal Filter: Phase Lag}
+
+Causal Filter ประมวลผลข้อมูลจากอดีตไปปัจจุบันทิศทางเดียว
+ทำให้ Output มี Phase Lag สัมพันธ์กับ Input
+ที่ทุกความถี่ สำหรับ Butterworth Order~$n$ ที่ Cutoff $\omega_c$
+Phase Response คือ
+
+\begin{equation}
+    \angle H(j\omega)
+    = -n \arctan\!\left(\frac{\omega}{\omega_c}\right)
+    \label{eq:butter_phase}
+\end{equation}
+
+ตัวอย่างเช่น Butterworth Order~4 ที่ $f_c = 10$\,Hz
+มี Phase Lag ที่ $f = 1$\,Hz เท่ากับ
+
+\begin{equation}
+    \angle H(j2\pi \cdot 1)
+    = -4\arctan\!\left(\frac{1}{10}\right)
+    \approx -22.9°
+    \label{eq:butter_phase_example}
+\end{equation}
+
+Phase Lag นี้ทำให้ข้อมูล Output ($\omega$) ล่าช้ากว่า
+Input ($V_a$) ในชุดข้อมูลที่นำเข้า Estimator
+Estimator จะพยายามปรับค่า Time Constant ของแบบจำลอง
+ให้ตรงกับ Delay ที่เกิดจาก Filter แทนที่จะเป็น
+Delay จากระบบจริง
+ส่งผลให้พารามิเตอร์ที่ควบคุม Phase ของการตอบสนอง
+โดยเฉพาะ $L_a$ และ $J$ มี \textbf{Bias Error}
+
+% ----------------------------------------------------------------------------
+\subsubsection{หลักการทำงานของ \texttt{filtfilt}}
+
+\texttt{filtfilt} แก้ปัญหา Phase Lag ด้วยการประมวลผลข้อมูล
+สองรอบในทิศทางตรงข้ามกัน ดังนี้
+
+\begin{enumerate}
+    \item \textbf{Forward Pass:}
+          กรองข้อมูลจากต้นจนจบตามปกติ
+          Output มี Phase Lag $-\phi(\omega)$
+          และ Magnitude Response $|H(j\omega)|$
+
+    \item \textbf{Backward Pass:}
+          Reverse ลำดับ Output จาก Forward Pass
+          แล้วกรองอีกครั้ง
+          ซึ่งเทียบเท่ากับการกรองสัญญาณที่มี
+          Phase $+\phi(\omega)$ อยู่แล้ว
+          ผลที่ได้จึงมี Phase Lag สุทธิ
+          $-\phi(\omega) + \phi(\omega) = 0$
+
+    \item \textbf{Reverse กลับ:}
+          Reverse ลำดับ Output จาก Backward Pass
+          เพื่อให้ได้ข้อมูลที่เรียงลำดับถูกต้อง
+\end{enumerate}
+
+ผลลัพธ์คือสัญญาณที่มี \textbf{Zero-Phase Response}
+ในทุกความถี่ แต่ Magnitude Response เทียบเท่ากับ
+Filter เดิมยกกำลังสอง
+
+\begin{equation}
+    \left|H_{filtfilt}(j\omega)\right|
+    = \left|H(j\omega)\right|^2
+    = \frac{1}{\sqrt{1 + \left(\omega/\omega_c\right)^{2n}}}^{\,2}
+    = \frac{1}{1 + \left(\omega/\omega_c\right)^{2n}}
+    \label{eq:filtfilt_mag}
+\end{equation}
+
+กล่าวคือ Butterworth Order~4 เมื่อใช้ \texttt{filtfilt}
+จะให้ Effective Order~8 และ Roll-off Rate $-160$\,dB/decade
+ทำให้กำจัด Noise ได้รุนแรงขึ้นด้วย
+
+% -----------------------------------------------------------------------
+% รูปที่: filtfilt Zero-Phase Filtering
+% ชื่อไฟล์แนะนำ: fig_filtfilt_concept.png
+% เนื้อหา: กราฟ 3 แถวซ้อนกัน แกน X คือเวลา (s)
+%   แถวบน:   Raw signal (สีเทา noisy) overlay กับ
+%             Causal filter output (สีแดง) เห็น phase lag ชัดเจน
+%   แถวกลาง: Raw signal (สีเทา) overlay กับ
+%             filtfilt output (สีน้ำเงิน) ทับ peak ตรงๆ ไม่ lag
+%   แถวล่าง: Causal (สีแดง) vs filtfilt (สีน้ำเงิน) overlay
+%             พร้อม annotation ลูกศรชี้ phase difference
+% สร้างด้วย MATLAB (run ใน command window):
+%   fs = 1000; t = 0:1/fs:2;
+%   x = sin(2*pi*1*t) + 0.3*randn(size(t));
+%   [b,a] = butter(4, 10/(fs/2));
+%   y_c = filter(b,a,x);
+%   y_f = filtfilt(b,a,x);
+%   figure('Color','w');
+%   subplot(3,1,1); plot(t,x,'Color',[.7 .7 .7]); hold on;
+%     plot(t,y_c,'r','LineWidth',1.5);
+%     legend('Raw','Causal'); ylabel('Amplitude');
+%   subplot(3,1,2); plot(t,x,'Color',[.7 .7 .7]); hold on;
+%     plot(t,y_f,'b','LineWidth',1.5);
+%     legend('Raw','filtfilt'); ylabel('Amplitude');
+%   subplot(3,1,3); plot(t,y_c,'r','LineWidth',1.5); hold on;
+%     plot(t,y_f,'b','LineWidth',1.5);
+%     legend('Causal','filtfilt'); ylabel('Amplitude'); xlabel('Time (s)');
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{fig_filtfilt_concept}
+    \caption{เปรียบเทียบ Causal Filter (สีแดง) และ \texttt{filtfilt}
+             Zero-Phase Filter (สีน้ำเงิน) บนสัญญาณเดียวกัน
+             (บน) Causal Filter มี Phase Lag ที่สังเกตได้
+             (กลาง) \texttt{filtfilt} ทับ Peak ของสัญญาณต้นฉบับได้ตรงทุกจุด
+             (ล่าง) Phase Difference ระหว่างทั้งสองวิธี}
+    \label{fig:filtfilt_concept}
+\end{figure}
+
+% ----------------------------------------------------------------------------
+\subsubsection{ข้อจำกัดของ \texttt{filtfilt}}
+
+เนื่องจากต้องใช้ข้อมูลทั้งชุดก่อนประมวลผล
+\texttt{filtfilt} จึงเป็น \textbf{Offline Filter}
+ไม่สามารถใช้งาน Real-time บน Embedded System ได้
+ซึ่งเป็นที่ยอมรับได้ในบริบทของ System Identification
+ที่ข้อมูลทั้งหมดถูกบันทึกไว้ก่อนแล้ว
+สำหรับการใช้งานบน STM32G474RE ใน Closed-loop Control
+จะใช้ Kalman Filter เป็น State Estimator แบบ Real-time
+ตามที่อธิบายใน\cref{subsec:kalman_filter}
+แทนการกรองสัญญาณโดยตรง
+
+% ============================================================================
+\section{ปรากฏการณ์อินทิกรัลไวนด์อัป (Integral Windup)}
+\label{sec:integral_windup}
+% ============================================================================
+
+% -----------------------------------------------------------------------
+% รูปที่ 12: กราฟแสดงปรากฏการณ์ Integral Windup และการแก้ปัญหาด้วย Back-Calculation
+% แนะนำให้เปลี่ยนชื่อไฟล์ภาพเป็น fig_integral_windup.png ก่อนนำไปใช้งาน
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig_integral_windup}
+    \caption{การเปรียบเทียบการตอบสนองของระบบ (บน) สัญญาณควบคุม (กลาง) และการสะสมสถานะของตัวอินทิเกรต (ล่าง) ระหว่างตัวควบคุม PID มาตรฐานและตัวควบคุมที่มีการติดตั้งระบบ Anti-Windup แบบ Back-Calculation}
+    \label{fig:integral_windup}
+\end{figure}
+
+ในระบบควบคุมจริง อุปกรณ์ขับกำลัง (เช่น H-Bridge) มีขีดจำกัดการจ่ายแรงดันสูงสุด (Saturation Limit, $u_{\max}$) หากระบบเกิดความคลาดเคลื่อนสะสมเป็นเวลานาน เทอมอินทิกรัล ($K_i \int e \,dt$) จะมีค่าเพิ่มขึ้นเรื่อยๆ จนเกินความสามารถของอุปกรณ์ ปรากฏการณ์นี้เรียกว่า Integral Windup ซึ่งส่งผลให้ระบบมีการตอบสนองที่ล่าช้าเมื่อความคลาดเคลื่อนเปลี่ยนทิศทาง และทำให้เกิด Overshoot ขนาดใหญ่
+
+ดังที่ได้แสดงสมการการทำงานของระบบ Anti-Windup แบบ Back-Calculation ไว้ใน\cref{eq:anti_windup} อัลกอริทึมจะป้อนกลับส่วนต่างระหว่างคำสั่งก่อนจำกัด (Unsaturated Command) และหลังจำกัด (Saturated Command) มาลดทอนสถานะของ Integrator แบบ Real-time เพื่อรักษาระบบให้อยู่ในขอบเขตเชิงเส้น
+
+% ============================================================================
+\section{มาตรฐานตู้ควบคุมอุตสาหกรรม (Industrial Enclosures)}
+\label{sec:industrial_standards}
+% ============================================================================
+
+% การนำระบบควบคุมหุ่นยนต์ไปใช้งานในสภาพแวดล้อมคลังสินค้า (Warehouse Environment) ตู้ควบคุม (Control Cabinet) จะต้องได้รับการออกแบบให้ทนทานต่อสภาวะแวดล้อมและมีความปลอดภัยทางไฟฟ้าตามมาตรฐานอุตสาหกรรม การออกแบบตู้ควบคุมที่ดีไม่เพียงแต่ปกป้องฮาร์ดแวร์ภายใน แต่ยังช่วยลดปัญหาสัญญาณรบกวนและยืดอายุการใช้งานของระบบ
+
+% \subsection{การป้องกันสิ่งแปลกปลอม (Ingress Protection: IEC 60529)}
+% การปกป้องแผงวงจรและอุปกรณ์อิเล็กทรอนิกส์จากฝุ่นละอองและน้ำอ้างอิงตามมาตรฐาน IEC 60529 (IP Rating) ในสภาพแวดล้อมคลังสินค้าทั่วไป มักกำหนดระดับการป้องกันขั้นต่ำที่ IP54
+% \begin{itemize}
+%     \item \textbf{เลขหลักแรก (Solid Particle Protection):} ระดับ 5 หมายถึงป้องกันฝุ่นละอองได้ในระดับที่ฝุ่นไม่สามารถเข้าไปรบกวนการทำงานและทำให้เกิดการลัดวงจรของอุปกรณ์
+%     \item \textbf{เลขหลักที่สอง (Liquid Ingress Protection):} ระดับ 4 หมายถึงป้องกันละอองน้ำที่กระเด็นมาจากทุกทิศทาง
+% \end{itemize}
+% อย่างไรก็ตาม การเพิ่มระดับการป้องกันที่สูงกว่านี้ (เช่น IP65) จะทำให้ตู้เป็นระบบปิดสมบูรณ์แบบ ซึ่งส่งผลกระทบโดยตรงต่อการระบายความร้อน จึงต้องมีการวิเคราะห์การจัดการทางความร้อนควบคู่กันเสมอ
+
+% \subsection{การจัดการความร้อน (Thermal Management)}
+% อุปกรณ์ขับกำลัง (Motor Driver) และหน่วยประมวลผลแบบ Edge AI มีการคายความร้อน (Heat Dissipation) ระหว่างทำงาน หากตู้ควบคุมเป็นระบบปิด ความร้อนสะสมจะทำให้อุณหภูมิภายในพุ่งสูงขึ้น อุณหภูมิที่เพิ่มขึ้น ($\Delta T$) สามารถประเมินได้จากสมการสมดุลความร้อน
+
+% \begin{equation}
+%     \Delta T = \frac{P_{loss}}{U \cdot A}
+%     \label{eq:enclosure_temp}
+% \end{equation}
+
+% \noindent โดยที่ $P_{loss}$ คือกำลังงานสูญเสียรวมของอุปกรณ์ภายใน (\si{\watt}), $U$ คือสัมประสิทธิ์การถ่ายเทความร้อนของวัสดุตู้ (\si{\watt\per\metre\squared\per\kelvin}) (เช่น แผ่นเหล็กพ่นสีมีค่าประมาณ 5.5) และ $A$ คือพื้นที่ผิวสัมผัสอากาศของตู้ควบคุม (\si{\metre\squared}) 
+% หากผลรวมอุณหภูมิแวดล้อมกับ $\Delta T$ มีค่าเกินกว่าอุณหภูมิการทำงานสูงสุด (Maximum Operating Temperature) ของอุปกรณ์ จะต้องพิจารณาติดตั้งพัดลมระบายอากาศพร้อมฟิลเตอร์กันฝุ่น (Filter Fan) หรือแผ่นระบายความร้อน (Heatsink)
+
+\subsection{การจัดการสายไฟและลดสัญญาณรบกวน (Wiring \& EMI Mitigation)}
+การออกแบบการจัดวางสายไฟอ้างอิงตามมาตรฐานความปลอดภัยของเครื่องจักร IEC 60204-1 โดยยึดรางอุปกรณ์มาตรฐาน (DIN 35mm) และมีหลักการจัดการคลื่นแม่เหล็กไฟฟ้าแทรกสอด (Electromagnetic Interference: EMI) ดังนี้
+\begin{itemize}
+    \item \textbf{Cable Segregation:} สายไฟฟ้ากำลัง (Power Cables) และสายสัญญาณ (Signal Cables) จะต้องถูกแยกเดินในรางเก็บสาย (Wire Duct) ที่ต่างกัน โดยมีระยะห่างอย่างน้อย 50 มิลลิเมตร หากมีความจำเป็นต้องเดินสายพาดผ่านกัน จะต้องจัดวางให้ตัดกันแบบตั้งฉาก ($90^\circ$) เพื่อลดค่าความเหนี่ยวนำร่วม (Mutual Inductance) ให้เหลือน้อยที่สุด
+    \item \textbf{Shielding \& Grounding:} สายสัญญาณแอนะล็อกและสายสื่อสาร (เช่น CAN Bus) ต้องใช้สายคู่ตีเกลียวมีชิลด์ (Shielded Twisted Pair) และจุดต่อสายดิน (Grounding) ของระบบควบคุมทั้งหมดต้องเชื่อมต่อรวมกันแบบจุดเดียว (Star Grounding) เพื่อป้องกันการเกิดลูปของสายดิน (Ground Loop) ที่จะสร้างความต่างศักย์รบกวนสัญญาณเซนเซอร์
+\end{itemize}
+
+\subsection{ความปลอดภัยทางไฟฟ้าและวงจรหยุดฉุกเฉิน (Electrical Safety \& E-Stop)}
+ภายในตู้ควบคุมต้องติดตั้งอุปกรณ์ป้องกันกระแสเกิน (Overcurrent Protection) เช่น เบรกเกอร์ (MCB) หรือฟิวส์ ที่มีพิกัดสอดคล้องกับขนาดหน้าตัดของสายไฟ นอกจากนี้ หุ่นยนต์เคลื่อนที่อัตโนมัติต้องมีวงจรหยุดฉุกเฉิน (Emergency Stop) ระดับฮาร์ดแวร์ โดยสวิตช์ E-Stop ต้องต่ออนุกรมเพื่อตัดแหล่งจ่ายไฟออกจากอุปกรณ์ขับกำลัง (Actuators) โดยตรง (Hard-wired) โดยไม่พึ่งพาการประมวลผลทางซอฟต์แวร์เพียงอย่างเดียว เพื่อรับประกันความปลอดภัยเมื่อไมโครคอนโทรลเลอร์เกิดการค้าง (System Hang)
+
+% ============================================================================
+\section{การออกแบบระบบไฟฟ้าและวงจรป้องกัน (Electrical System and Protection Design)}
+\label{sec:electrical_protection}
+% ============================================================================
+
+การออกแบบฮาร์ดแวร์สำหรับหุ่นยนต์อัตโนมัติ ไม่เพียงแต่ต้องพิจารณาด้านประสิทธิภาพการประมวลผล แต่ยังต้องคำนึงถึงเสถียรภาพของระบบจ่ายกำลังและการป้องกันความเสียหายจากสภาวะผิดปกติทางไฟฟ้า โดยอ้างอิงหลักการออกแบบวงจรสำหรับระบบหุ่นยนต์ระดับอุตสาหกรรม ดังนี้
+
+\subsection{วงจรป้องกันความผิดปกติทางไฟฟ้า (Electrical Protection Circuits)}
+ในระบบที่ต้องจัดการกับกระแสไฟฟ้าสูงและอุปกรณ์ทางกล มีความเสี่ยงที่จะเกิดความผิดปกติทางไฟฟ้าซึ่งอาจทำลายหน่วยประมวลผลหลักได้ การออกแบบจึงต้องมีมาตรการป้องกันใน 3 ระดับ:
+
+\begin{itemize}
+    \item \textbf{การป้องกันกระแสเกิน (Overcurrent Protection):} การใช้งานฟิวส์ (Fuses) หรือฟิวส์แบบตั้งค่าใหม่ได้ (PTC Resettable Fuses) ต่ออนุกรมในวงจรแหล่งจ่ายกำลัง เพื่อตัดวงจรเมื่อกระแสโหลดเกินพิกัด (Overload) หรือเกิดการลัดวงจร (Short Circuit) ป้องกันความร้อนสะสมที่อาจทำให้สายไฟหลอมละลายหรือเกิดเพลิงไหม้
+    \item \textbf{การป้องกันการต่อสลับขั้ว (Reverse Polarity Protection):} การใช้ไดโอดกำลัง (Power Diode) แบบชอตต์กี (Schottky Diode) หรือวงจร P-Channel MOSFET เพื่อป้องกันกระแสไหลย้อนกลับเข้าไปทำลายแผงวงจรหลัก ในกรณีที่มีการต่อขั้วแบตเตอรี่หรือจุดเชื่อมต่อแหล่งจ่ายไฟสลับขั้ว
+    \item \textbf{การป้องกันแรงดันกระชาก (Transient Voltage Suppression):} มอเตอร์กระแสตรงมีคุณสมบัติเป็นโหลดทางเหนี่ยวนำ (Inductive Load) เมื่อมีการตัดต่อกระแสไฟฟ้าอย่างรวดเร็ว (เช่น สัญญาณ PWM) หรือเมื่อเกิดสภาวะหยุดกะทันหัน จะเกิดแรงดันเหนี่ยวนำย้อนกลับ (Inductive Kickback) การติดตั้งตัวต้านทานแรงดันกระชาก (TVS Diode) ขนานกับสายไฟกำลัง จะช่วยขริบแรงดันกระชาก (Voltage Clamping) ไม่ให้ทะลุขีดจำกัดแรงดันของอุปกรณ์เซมิคอนดักเตอร์
+\end{itemize}
+
+\subsection{การแยกกัลวานิกทางแสง (Galvanic Isolation)}
+
+% -----------------------------------------------------------------------
+% รูปที่ 8: การแยกกัลวานิกด้วย Optocoupler
+% ชื่อไฟล์แนะนำ: fig_galvanic_isolation.pdf
+% เนื้อหา: Block diagram แสดงการแยก Ground ระหว่างภาค Logic และภาค Power อย่างเด็ดขาด
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{fig_galvanic_isolation}
+    \caption{หลักการแยกกัลวานิกทางแสง (Galvanic Isolation) เพื่อป้องกันสัญญาณรบกวนจากภาคขับกำลังไหลกลับเข้าสู่ภาคตรรกะ}
+    \label{fig:galvanic_isolation}
+\end{figure}
+
+ระบบควบคุมหุ่นยนต์จำเป็นต้องแยกสภาวะทางไฟฟ้าระหว่าง "วงจรลอจิกแรงดันต่ำ" (Low-Voltage Logic เช่น MCU 3.3V/5V) และ "วงจรขับกำลังแรงดันสูง" (High-Power Drive เช่น Motor 24V) ออกจากกันอย่างเด็ดขาด โครงงานนี้ใช้ ออปโตคัปเปลอร์ (Optocouplers หรือ Optoisolators) ในการส่งผ่านสัญญาณ PWM จากไมโครคอนโทรลเลอร์ไปยัง H-Bridge ผ่านแสงอินฟราเรด ซึ่งช่วยป้องกันไม่ให้สัญญาณรบกวน (Noise) และแรงดันกระชากจากฝั่งมอเตอร์ไหลกลับมาทำลายหน่วยประมวลผลหลัก แม้ว่าอุปกรณ์ขับกำลังจะเกิดความเสียหายรุนแรงก็ตาม
+
+\subsection{การจัดการสายไฟและหน้าสัมผัส (Wiring and Strain Relief)}
+ความต้านทานแฝงและความเค้นทางกลในระบบสายไฟ เป็นสาเหตุหลักที่ทำให้หุ่นยนต์ทำงานผิดพลาด
+\begin{itemize}
+    \item \textbf{ขนาดพิกัดสายไฟ (Wire Gauge):} การเลือกขนาดหน้าตัดสายไฟตามมาตรฐาน AWG (American Wire Gauge) ต้องสอดคล้องกับพิกัดกระแสไฟฟ้าสูงสุด โดยสายกำลังของมอเตอร์ (Power Lines) ต้องมีค่า AWG ต่ำ (หน้าตัดใหญ่) เพื่อลดค่าความต้านทานและกำลังสูญเสียในรูปความร้อน ($I^2R$) ในขณะที่สายสัญญาณ (Signal Lines) สามารถใช้สาย AWG สูง (หน้าตัดเล็ก) เพื่อความยืดหยุ่นได้
+    \item \textbf{จุดเชื่อมต่อและการลดความเค้น (Connectors \& Strain Relief):} บริเวณจุดเชื่อมต่อระหว่างบอร์ด PCB และสายไฟภายนอก จะต้องใช้คอนเนกเตอร์ที่ทนกระแสสูงและมีการล็อกทางกล (Mechanical Lock) อย่างแน่นหนา รวมถึงการออกแบบตัวลดความเค้นสายไฟ (Strain Relief) เพื่อป้องกันการขยับตัวที่อาจทำให้จุดบัดกรีฉีกขาด (Solder Joint Fatigue) ระหว่างที่กลไกของหุ่นยนต์มีการเคลื่อนที่และสั่นสะเทือน
+\end{itemize}
+
+% ============================================================================
+\section{โพรโทคอลการสื่อสารข้อมูลอุตสาหกรรม}
+\label{sec:communication_protocols}
+% ============================================================================
+
+การแลกเปลี่ยนข้อมูลระหว่าง Node ประมวลผล ระบบ Edge AI และอุปกรณ์ระดับล่าง (Sensors/Actuators) จำเป็นต้องใช้โครงข่ายการสื่อสารที่มีความน่าเชื่อถือสูงและทนทานต่อสภาพแวดล้อมทางอุตสาหกรรมที่มีสัญญาณรบกวนทางแม่เหล็กไฟฟ้า (EMI) หนาแน่น
+
+% ----------------------------------------------------------------------------
+\subsection{Controller Area Network (CAN Bus)}
+
+CAN Bus เป็นโพรโทคอลแบบอนุกรมที่ถูกออกแบบมาสำหรับระบบยานยนต์และหุ่นยนต์โดยเฉพาะ ตามมาตรฐาน ISO 11898
+
+
+\subsubsection{หลักการทำงานเชิงลึกและกลไกการเข้าถึงบัส}
+ชั้นกายภาพ (Physical Layer) ของ CAN ใช้สายคู่ตีเกลียวส่งสัญญาณแบบผลต่าง (Differential Signaling) ผ่านสาย CAN\_H และ CAN\_L โดยกำหนดสถานะลอจิกเป็นสองระดับ ได้แก่
+\begin{itemize}
+    \item \textbf{Dominant State (ลอจิก '0'):} สาย CAN\_H มีแรงดันสูงกว่า CAN\_L ($V_{diff} \approx 2.0\text{V}$)
+    \item \textbf{Recessive State (ลอจิก '1'):} สาย CAN\_H และ CAN\_L มีแรงดันเท่ากัน ($V_{diff} \approx 0\text{V}$)
+\end{itemize}
+
+% -----------------------------------------------------------------------
+% รูปที่แนะนำ: แสดงกลไก Arbitration ของ CAN Bus
+% ชื่อไฟล์แนะนำ: fig_can_arbitration.pdf
+% เนื้อหา: แผนภาพแสดง Node A และ Node B ส่งข้อมูลพร้อมกัน และ Node ที่ส่งบิต '1' (Recessive) จะพ่ายแพ้ให้กับบิต '0' (Dominant)
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.85\textwidth]{fig_can_arbitration}
+%     \caption{กลไก Bit-wise Arbitration ของ CAN Bus ที่ให้สิทธิ์ Node ที่มี ID ต่ำกว่าสามารถยึดบัสได้โดยข้อมูลไม่สูญหาย}
+%     \label{fig:can_arbitration}
+% \end{figure}
+
+% -----------------------------------------------------------------------
+% รูปที่ 9: ระดับแรงดันของสัญญาณ CAN Bus
+% ชื่อไฟล์แนะนำ: fig_can_voltage_levels.pdf
+% เนื้อหา: กราฟแสดงผลต่างแรงดันระหว่างสาย CAN_H และ CAN_L ในสถานะ Dominant และ Recessive
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig_can_voltage_levels}
+    \caption{ลักษณะทางกายภาพของสัญญาณ CAN Bus แสดงผลต่างแรงดันในการกำหนดสถานะตรรกะแบบ Dominant และ Recessive}
+    \label{fig:can_voltage_levels}
+\end{figure}
+
+กลไกจัดการการชนกันของข้อมูลใช้เทคนิค \textbf{CSMA/CD+AMP} (Carrier Sense Multiple Access / Collision Detection with Arbitration on Message Priority) เมื่อมีหลาย Node พยายามส่งข้อมูลพร้อมกัน บัสจะทำการเปรียบเทียบรหัสประจำตัว (Message ID) ทีละบิต (Bit-wise Arbitration) หาก Node ใดส่งสถานะ Recessive ('1') แต่ตรวจพบว่าบัสอยู่ในสถานะ Dominant ('0') จาก Node อื่น Node นั้นจะหยุดส่งข้อมูลทันทีและเปลี่ยนเป็นผู้รับ ส่งผลให้ Message ID ที่มีค่าน้อยที่สุดจะมีความสำคัญสูงสุด (Highest Priority) และสามารถยึดบัสได้โดยที่เฟรมข้อมูลไม่เกิดการสูญหาย
+
+% \subsubsection{ความเหมาะสมต่อระบบหุ่นยนต์}
+% CAN Bus เหมาะสมอย่างยิ่งสำหรับโครงสร้างการควบคุมแบบกระจายศูนย์ (Distributed Control) เช่น การสื่อสารระหว่างตัวควบคุมหลัก (Main Controller) และตัวขับมอเตอร์ (Motor Drivers) ในแต่ละข้อต่อของหุ่นยนต์ เนื่องจากรองรับสถาปัตยกรรมแบบ Multi-Master ทำให้ทุก Node สามารถริเริ่มการส่งข้อมูลได้ทันทีเมื่อเกิดเหตุการณ์สำคัญ (Event-Driven) และให้ความแน่นอนทางเวลา (Real-time Determinism) สูง
+
+% ----------------------------------------------------------------------------
+\subsection{ชั้นกายภาพ RS-485 และโพรโทคอล Modbus RTU}
+
+ในขณะที่ CAN Bus เหมาะสำหรับระบบภายในตัวหุ่นยนต์ การสื่อสารระยะไกลกับอุปกรณ์อุตสาหกรรมภายนอก (เช่น เซนเซอร์ระยะทาง, PLC, หรืออุปกรณ์ในคลังสินค้า) มักอาศัยมาตรฐาน RS-485 ร่วมกับ Modbus RTU
+
+\subsubsection{หลักการทำงานของ UART และ RS-485}
+ไมโครคอนโทรลเลอร์ประมวลผลข้อมูลผ่านฮาร์ดแวร์ UART (Universal Asynchronous Receiver-Transmitter) ซึ่งจัดข้อมูลในรูปของเฟรม ประกอบด้วย Start Bit, Data Bits (8 บิต), Parity Bit (ทางเลือก) และ Stop Bit แต่เนื่องจากสัญญาณ UART เป็นแบบ Single-Ended (อ้างอิงกับกราวด์) จึงมีข้อจำกัดด้านระยะทางและอ่อนไหวต่อสัญญาณรบกวน 
+
+เพื่อแก้ปัญหานี้ สัญญาณ UART จะถูกแปลงผ่าน Transceiver ให้เข้าสู่มาตรฐาน \textbf{RS-485} ซึ่งส่งสัญญาณแบบผลต่าง (Differential) ตามสมการ:
+\begin{equation}
+    V_{diff} = V_A - V_B
+\end{equation}
+\noindent หาก $V_A - V_B > +200\text{mV}$ ตัวรับจะอ่านค่าเป็นลอจิก '1' และหาก $V_A - V_B < -200\text{mV}$ จะอ่านเป็นลอจิก '0' การใช้ผลต่างแรงดันนี้ทำให้สามารถส่งข้อมูลได้ไกลสูงสุดถึง 1,200 เมตร และหักล้างสัญญาณรบกวนที่เหนี่ยวนำเข้ามาพร้อมกันทั้งสองเส้น (Common-Mode Noise Rejection)
+
+\subsubsection{กลไกของ Modbus RTU}
+Modbus RTU ทำงานในชั้น Application Layer บนโครงข่าย RS-485 ด้วยสถาปัตยกรรมแบบ \textbf{Master-Slave} โดยอุปกรณ์ Master เพียงตัวเดียวจะเป็นผู้สั่งการ (Polling) และ Slave จะตอบสนองเมื่อถูกเรียกตาม Address ของตนเท่านั้น ป้องกันปัญหาการชนกันของข้อมูลโดยเด็ดขาด 
+
+เฟรมข้อมูลของ Modbus RTU มีการต่อท้ายด้วยรหัส \textbf{CRC-16 (Cyclic Redundancy Check)} ซึ่งเป็นการหารพหุนาม (Polynomial Division) ระดับบิต เพื่อตรวจสอบความสมบูรณ์ของข้อมูลทั้งหมดในแพ็กเกจ หากฝั่งรับคำนวณ CRC ได้ไม่ตรงกับที่แนบมา ข้อมูลชุดนั้นจะถูกเพิกเฉยเพื่อป้องกันพฤติกรรมผิดพลาดของ Actuator
+
+% -----------------------------------------------------------------------
+% รูปที่ 11: โครงสร้างแพ็กเกจข้อมูล Modbus RTU
+% ชื่อไฟล์แนะนำ: fig_modbus_frame.pdf
+% เนื้อหา: แผนภาพแสดงไบต์ข้อมูลภายในเฟรม Modbus RTU โดยเน้นย้ำตำแหน่งของ CRC
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_modbus_frame}
+    \caption{โครงสร้างเฟรมข้อมูลของโพรโทคอล Modbus RTU แสดงการจัดเรียงไบต์ข้อมูลและรหัสตรวจสอบความผิดพลาด (CRC-16)}
+    \label{fig:modbus_frame}
+\end{figure}
+
+% \subsubsection{ความเหมาะสมต่อระบบหุ่นยนต์}
+% โครงสร้าง Master-Slave ของ Modbus RTU แม้จะมีความล่าช้า (Latency) จากวงรอบการ Polling แต่มีความน่าเชื่อถือสูงมาก และเป็นมาตรฐานที่พบได้ทั่วไปในอุปกรณ์อุตสาหกรรม จึงเหมาะสมสำหรับการเชื่อมต่อระหว่างระบบจัดการส่วนกลาง (Edge AI หรือ Warehouse Control System) กับอุปกรณ์โครงสร้างพื้นฐาน
+
+        % % ----------------------------------------------------------------------------
+        % \subsection{การสื่อสารไร้สาย Bluetooth (IEEE 802.15.1)}
+        % สำหรับการควบคุมแบบมนุษย์อยู่ในวงรอบ (Human-in-the-loop) ผ่านอุปกรณ์จอยสติ๊กไร้สาย โครงงานนี้เลือกใช้มาตรฐาน Bluetooth ซึ่งทำงานในย่านความถี่ ISM Band (2.4 GHz) 
+
+        % \subsubsection{เทคนิค Adaptive Frequency Hopping (AFH)}
+        % เนื่องจากย่านความถี่ 2.4 GHz เป็นย่านสาธารณะที่มีการรบกวนสูง (เช่น จาก Wi-Fi ในพื้นที่) มาตรฐาน Bluetooth ได้แก้ไขปัญหานี้ด้วยเทคนิค \textbf{AFH} ซึ่งอัลกอริทึมจะประเมินคุณภาพของช่องสัญญาณ (Channel Assessment) เพื่อสร้างแผนที่ช่องสัญญาณที่ใช้งานได้ (Channel Map) จากนั้นตัวส่งและตัวรับจะกระโดดสลับความถี่ (Frequency Hopping) ไปยังช่องสัญญาณที่ว่างในอัตรา 1,600 ครั้งต่อวินาที (ทุกๆ 625 ไมโครวินาที)
+
+        % \subsubsection{ความเหมาะสมต่อระบบ}
+        % ความสามารถในการหลบหลีกสัญญาณรบกวนแบบพลวัต (Dynamic Interference Avoidance) ทำให้ Bluetooth มีเสถียรภาพเพียงพอสำหรับการส่งคำสั่งควบคุมทิศทางแบบเรียลไทม์ (Teleoperation) ภายในระยะทำการของตัวหุ่นยนต์ โดยไม่ถูกตัดขาดแม้ทำงานในสภาพแวดล้อมที่มีสัญญาณวิทยุหนาแน่น
+        % % \subsection{การสื่อสารไร้สาย Bluetooth (IEEE 802.15.1)}
+        % % สำหรับการควบคุมแบบมนุษย์อยู่ในวงรอบ (Human-in-the-loop) ผ่านอุปกรณ์จอยสติ๊ก (Joystick) โครงงานนี้เลือกใช้การสื่อสารไร้สายผ่านมาตรฐาน Bluetooth ซึ่งทำงานในย่านความถี่ ISM Band (2.4 GHz) 
+        % % แม้ว่าย่านความถี่นี้จะมีการใช้งานหนาแน่นและมีโอกาสเกิดสัญญาณรบกวน (Interference) จากระบบ Wi-Fi ในพื้นที่ แต่มาตรฐาน Bluetooth ได้แก้ไขปัญหานี้ด้วยเทคนิค \textbf{Adaptive Frequency Hopping (AFH)} ซึ่งอัลกอริทึมจะทำการประเมินคุณภาพของช่องสัญญาณ (Channel Assessment) อย่างต่อเนื่อง และทำการกระโดดสลับความถี่ (Hopping) ไปยังช่องสัญญาณที่ว่างหรือมีสัญญาณรบกวนต่ำในอัตรา 1,600 ครั้งต่อวินาที ทำให้มีความน่าเชื่อถือเพียงพอสำหรับการส่งคำสั่งควบคุม (Control Command) เข้าสู่ระบบ
+
+% ============================================================================
+\section{เซนเซอร์และอุปกรณ์ตรวจวัด}
+\label{sec:sensors}
+% ============================================================================
+ 
+ระบบใช้เซนเซอร์สามประเภทที่ทำงานร่วมกัน
+ได้แก่ Encoder สำหรับวัดตำแหน่ง, Current Sensor สำหรับตรวจสอบความปลอดภัย
+และ Proximity Sensor สำหรับกำหนดจุด Home
+ 
+% ----------------------------------------------------------------------------
+\subsection{Incremental Encoder (AMT-103)}
+\label{subsec:encoder_theory}
+ 
+Incremental Encoder วัดการเปลี่ยนแปลงตำแหน่งเชิงมุมโดยนับพัลส์
+จาก Quadrature Signal สองช่อง (Channel A และ Channel B)
+ที่มีเฟสต่างกัน 90° ทำให้สามารถระบุทิศทางการหมุนได้
+ 
+% -----------------------------------------------------------------------
+% รูปที่ X: Encoder AMT-103 และ Quadrature Signal
+% ชื่อไฟล์แนะนำ: fig_encoder_quadrature.pdf
+% เนื้อหา: แสดงรูป AMT-103 (ซ้าย) และ Timing Diagram ของ CH A, CH B, Index (ขวา)
+%          พร้อม annotation ทิศทาง CW/CCW จากลำดับ edge
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_encoder_quadrature}
+    \caption{Encoder AMT-103 และ Quadrature Signal แสดงการระบุทิศทางจากลำดับ Phase}
+    \label{fig:encoder_quadrature}
+\end{figure}
+ 
+\subsubsection{Quadrature Encoding (×4)}
+ 
+การอ่านค่าแบบ ×4 (4-edge decoding) นับทั้ง Rising Edge และ Falling Edge
+ของทั้ง Channel A และ B ทำให้ Resolution เพิ่มขึ้น 4 เท่า
+ 
+\begin{equation}
+    \text{Resolution} = \text{PPR} \times 4
+                      = 2048 \times 4 = 8192\;\text{counts/rev}
+    \label{eq:encoder_resolution}
+\end{equation}
+ 
+ค่าตำแหน่งเชิงมุมแปลงจาก Encoder Count ได้จาก
+ 
+\begin{equation}
+    \theta\;(\text{deg}) = \frac{N_{count}}{8192} \times 360°
+    \label{eq:encoder_to_deg}
+\end{equation}
+ 
+\noindent โดยที่ $N_{count}$ คือค่า Counter ของ TIM3 (STM32 QEI Mode)
+Encoder ติดตั้งที่ Output Shaft โดยตรง (หลัง Gearbox และ Belt)
+ทำให้ค่าที่อ่านได้สะท้อนตำแหน่งแขนกลจริงโดยไม่มี Backlash Error
+ผ่านระบบส่งกำลัง
+ 
+\subsubsection{Index Pulse}
+ 
+AMT-103 มี Index Channel (Channel Z) ที่ให้พัลส์หนึ่งครั้งต่อรอบ
+ใช้สำหรับยืนยันตำแหน่ง Home ระหว่าง Homing Sequence
+ 
+% ----------------------------------------------------------------------------
+\subsection{Current Sensor (WCS1800)}
+\label{subsec:current_sensor_theory}
+ 
+WCS1800 เป็น Hall-Effect Current Sensor วัดกระแสแบบ Non-contact
+โดยอาศัยสนามแม่เหล็กที่เกิดจากกระแสไฟฟ้าไหลผ่านตัวนำ
+แปลงเป็นแรงดันเอาต์พุตแบบ Linear
+ 
+% -----------------------------------------------------------------------
+% รูปที่ X: WCS1800 Current Sensor และ Output Characteristic
+% ชื่อไฟล์แนะนำ: fig_current_sensor.pdf
+% เนื้อหา: แสดงรูป WCS1800 (ซ้าย) และกราฟ V_out vs Current (ขวา)
+%          พร้อม annotation จุด Zero-current voltage และ Sensitivity
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.80\textwidth]{fig_current_sensor}
+    \caption{WCS1800 Hall-Effect Current Sensor และลักษณะการตอบสนองเชิงเส้น}
+    \label{fig:current_sensor}
+\end{figure}
+ 
+\subsubsection{หลักการวัดกระแส}
+ 
+แรงดัน Output ของ WCS1800 มีความสัมพันธ์เชิงเส้นกับกระแส
+ 
+\begin{equation}
+    V_{out} = V_{zero} + S \cdot I_a
+    \label{eq:current_sensor}
+\end{equation}
+ 
+\noindent โดยที่ $V_{zero}$ คือแรงดันที่กระแสเป็นศูนย์ (ประมาณ 2.5\,V ที่ $V_{cc} = 5$\,V),
+$S = 0.040$\,V/A คือ Sensitivity และ $I_a$ คือกระแสที่ต้องการวัด (A)
+ค่า $V_{zero}$ ถูก Calibrate อัตโนมัติเมื่อ Boot โดยวัดเฉลี่ยจากตัวอย่าง
+100 ค่าแรกในขณะที่มอเตอร์ยังไม่ทำงาน
+ 
+\subsubsection{การนำไปใช้ใน Safety Stack}
+ 
+ค่ากระแสที่อ่านได้ผ่านการกรองด้วย Exponential Moving Average (EMA)
+เพื่อลด ADC Noise ก่อนนำไปตรวจสอบใน Safety Monitor
+หากกระแสเกิน $I_{limit} = 2.0$\,A ต่อเนื่องนานกว่า 100\,ms
+ระบบจะเข้าสู่ \texttt{STATE\_FAULT} (Fault Code 0x42)
+ 
+% ----------------------------------------------------------------------------
+\subsection{Proximity Sensor (Inductive)}
+\label{subsec:proximity_sensor_theory}
+ 
+Proximity Sensor แบบ Inductive ตรวจจับวัตถุโลหะโดยไม่สัมผัส
+โดยอาศัยการเปลี่ยนแปลงของสนามแม่เหล็กไฟฟ้าเมื่อมีวัตถุเข้ามาในระยะตรวจจับ
+ใช้สำหรับระบุตำแหน่ง Home ใน Two-Stage Homing Sequence
+ 
+% -----------------------------------------------------------------------
+% รูปที่ X: Proximity Sensor และการติดตั้งบนแขนกล
+% ชื่อไฟล์แนะนำ: fig_proximity_sensor.pdf
+% เนื้อหา: แสดงรูป Sensor ที่ติดตั้ง (ซ้าย) และ Timing Diagram ของสัญญาณ
+%          ระหว่าง Homing: Edge A, Backoff, Edge B, Center (ขวา)
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_proximity_sensor}
+    \caption{Proximity Sensor บนแขนกลและ Timing Diagram ของสัญญาณระหว่าง Two-Stage Homing}
+    \label{fig:proximity_sensor}
+\end{figure}
+ 
+\subsubsection{วงจรเอาต์พุตแบบ Open-Collector}
+ 
+Sensor ที่ใช้เป็นแบบ Open-Collector Optocoupler
+โดยมีสถานะดังนี้
+ 
+\begin{itemize}
+    \item \textbf{ไม่มีวัตถุ (Normal):} Transistor นำกระแส ขา Output ถูก Pull ลง GND \texttt{LOW}
+    \item \textbf{มีวัตถุ (Triggered):} Transistor หยุดนำกระแส ขา Output ลอย
+          ถูก Pull-up ขึ้น 3.3\,V ผ่าน Internal PULLUP ของ STM32 \texttt{HIGH}
+\end{itemize}
+ 
+ดังนั้น Active Condition คือ \texttt{GPIO\_PIN\_SET} (HIGH)
+และต้องตั้งค่า GPIO เป็น \texttt{GPIO\_PULLUP} เสมอ
+การตั้งค่าเป็น \texttt{GPIO\_PULLDOWN} จะทำให้ทั้งสองสถานะเป็น 0\,V
+และ MCU ไม่สามารถตรวจจับสัญญาณได้
+ 
+\subsubsection{การนำไปใช้ใน Homing Sequence}
+ 
+Proximity Sensor ใช้ Debounce 1 tick (10\,ms) ซึ่งสั้นกว่า Sensor อื่น
+เนื่องจาก Detection Zone แคบ ต้องการการตอบสนองที่รวดเร็วเพื่อจับ Edge ได้แม่นยำ
+ระบบ Homing ใช้หลักการ Midpoint Capture ระหว่าง Edge A และ Edge B
+ซึ่งมาจากทิศทางตรงกันข้ามที่ความเร็วเท่ากัน
+ทำให้ค่ากึ่งกลางที่ได้ไม่มี Bias จาก Sensor Switching Delay

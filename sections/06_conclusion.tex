@@ -1,0 +1,191 @@
+% ============================================================================
+%  บทที่ 6: สรุปผลและข้อเสนอแนะ
+% ============================================================================
+
+\chapter{สรุปผลและข้อเสนอแนะ}
+\label{ch:conclusion}
+
+% ============================================================================
+\section{สรุปผลการดำเนินงาน}
+\label{sec:conclusion}
+% ============================================================================
+
+โครงงานนี้ได้ออกแบบและพัฒนาหุ่นยนต์หยิบและวางชิ้นงานแบบวงกลม (Circular Pick and Place Robot)
+สำหรับลำเลียงชิ้นงาน Connection Rod ในกระบวนการผลิตเชิงอุตสาหกรรม
+โดยครอบคลุมวิศวกรรมทุกมิติของระบบ Cyber-Physical
+
+\textbf{ด้านเชิงกล}
+ระบบส่งกำลังแบบ 2 ชั้น (Planetary Gearbox $N_g = 24$ + Belt Drive HTD5M $N_b = 2.917$)
+ให้อัตราทดรวม $N = 70$ และประสิทธิภาพ $\eta = 0.836$
+การออกแบบเพลาตาม ASME MSST ได้ขนาดขั้นต่ำ 10.59\,mm
+และเลือกใช้ 17\,mm ที่จุดวิกฤต (FOS $\geq 1.6$)
+การวิเคราะห์ FEA พบการโก่งตัวสูงสุด 0.2281\,mm และ FOS ต่ำสุด 11.03
+ซึ่งเป็นไปตามข้อกำหนด M3 ทุกประการ
+
+\textbf{ด้านไฟฟ้า}
+ตู้ควบคุมออกแบบตามมาตรฐานอุตสาหกรรม
+แบ่ง Power Bus ออกเป็น High Power (24\,V) และ Logic (5\,V) อย่างชัดเจน
+E-Stop ทำงานในระดับ Hardware แบบ Fail-Safe
+และมีวงจรป้องกัน Overcurrent, Surge และ Short Circuit ตามข้อกำหนด E6 และ E7
+
+\textbf{ด้านการควบคุม}
+การระบุระบบด้วย Locked Rotor Test และ Chirp Excitation
+ให้ค่าพารามิเตอร์ที่สมบูรณ์ครบ 8 ตัว
+ตัวควบคุม Cascade PID ออกแบบด้วย Root Locus
+ได้ Settling Time 0.450\,s และ Overshoot 0.00\% จากการ Simulation
+ZV Input Shaper ลด Rod Settling Time จาก 6.44\,s เหลือ $\approx 0$\,s ต่อ Move
+ทำให้ Cycle Time รวมเหลือ 30\,s (Simulation) ซึ่งเป็นไปตาม P1
+Kalman Filter 4 สถานะใช้ Steady-State Gain จาก DARE
+ลด Computational Load บน STM32 ได้อย่างมีประสิทธิภาพ
+
+\textbf{ด้านซอฟต์แวร์และการบูรณาการ}
+Firmware บน STM32G474RE ประกอบด้วยโมดูลครบถ้วน
+ได้แก่ Cascade PID, ZV Shaper, Kalman Filter, FSM, Modbus RTU
+และ Joystick Interface
+การสื่อสารกับ Base System ผ่าน Modbus RTU (19200 bps, 8E1, Slave Address~21)
+พร้อม Python asyncio WebSocket Backend
+
+% ============================================================================
+\section{ปัญหา อุปสรรค และบทเรียนที่ได้}
+\label{sec:lessons_learned}
+% ============================================================================
+
+\subsection{ปัญหาเชิงกล}
+\label{subsec:mech_lessons}
+
+\begin{itemize}
+  \item \textbf{ความคลาดเคลื่อนของชิ้นส่วนที่ผลิตภายนอก:}
+        รูไม่ตรงแนวศูนย์และผิวหน้าไม่ได้รับการปาดตามแบบ
+        สะท้อนให้เห็นความสำคัญของการ Inspection
+        ชิ้นส่วนก่อนประกอบ และการสื่อสาร Tolerance ให้ชัดเจนกับผู้ผลิต
+
+  \item \textbf{Laser Cut Tolerance:}
+        ชิ้นส่วนที่ตัดด้วย Laser Cut มี Tolerance สะสมที่ส่งผลต่อการ Align
+        โดยเฉพาะที่จุดหมุนของแขนกล
+        แนะนำให้กำหนด Fitment Tolerance อย่างชัดเจนในแบบ
+        และทำ Shimming ระหว่างการประกอบ
+
+  \item \textbf{ขนาด Proximity Sensor ไม่ตรงกับแบบ:}
+        เกิดจากการเลือก Sensor รุ่นอื่นในภายหลัง
+        โดยไม่ได้อัพเดตแบบ CAD ก่อนส่งผลิต
+        ควรล็อก BOM ก่อน Finalize แบบ
+\end{itemize}
+
+\subsection{ปัญหาด้านซอฟต์แวร์และการบูรณาการ}
+\label{subsec:sw_lessons}
+
+\begin{itemize}
+  \item \textbf{Abnormal Heartbeat ใน Demo~1:}
+        Backend \texttt{main.exe} ของ Base System มีปัญหาคอขวด
+        ทำให้ Heartbeat Timeout และระบบ Handshake ไม่สำเร็จ
+        แก้ไขโดยเปลี่ยน Backend เป็น Python asyncio WebSocket
+        บทเรียน: ควรทดสอบ End-to-End Integration
+        กับ Base System จริงก่อน Demo อย่างน้อย 1 สัปดาห์
+
+  \item \textbf{Joystick Mode Blocking Bug:}
+        พบว่าคำสั่ง Joystick บางตัวไม่ถูก Block
+        เมื่อระบบอยู่ใน Base System Mode
+        เนื่องจาก Mode Check Logic ไม่ครอบคลุมทุก Command Path
+        แก้ไขโดยเพิ่ม Guard Condition ที่ Entry Point ของ
+        \texttt{Motor\_ProcessCommand}
+
+  \item \textbf{Gripper พังระหว่าง Demo~2:}
+        Base System ส่งคำสั่งตำแหน่งผิดพลาด
+        ทำให้แขนกลเคลื่อนที่ผิดทิศและชน Connection Rod
+        บทเรียน: ควรมี Software Workspace Limit
+        ที่ตรวจสอบทุก Incoming Command จาก Base System
+        ก่อน Execute เสมอ
+        และควรทดสอบ Safety Boundary ให้ครบก่อน Full Demo
+\end{itemize}
+
+\subsection{ปัญหาด้านการออกแบบระบบควบคุม}
+\label{subsec:ctrl_lessons}
+
+\begin{itemize}
+  \item \textbf{SysID Preprocessing vs Raw Data:}
+        การกรองสัญญาณด้วย Butterworth $f_c = 10$\,Hz ก่อน Estimation
+        ให้ผลดีกว่าข้อมูลดิบ แต่มีความเสี่ยงจาก Phase Shift
+        ที่แก้ไขด้วยการใช้ \texttt{filtfilt}
+        การตัดสินใจนี้ถูกต้องสำหรับโครงงานนี้
+        แต่ควรรายงาน Validation ให้ชัดเจนในทุกกรณีที่ Preprocess ข้อมูล
+
+  \item \textbf{Bandwidth Separation Heuristic:}
+        การตั้ง Inner Loop เร็วกว่า Outer Loop 6 เท่าเป็น Rule of Thumb
+        ไม่ใช่เกณฑ์ที่เข้มงวด
+        ในการออกแบบที่ต้องการความแม่นยำสูงขึ้น ควรออกแบบ Inner Loop ก่อน
+        แล้ว Model Closed-loop Inner Loop เป็น Plant ที่แท้จริง
+        สำหรับการออกแบบ Outer Loop ต่อไป
+
+  \item \textbf{ZV Shaper Sensitivity:}
+        ZV Shaper มีความไวต่อความคลาดเคลื่อนของ $\omega_{n,rod}$
+        หากค่าจริงต่างจากที่ออกแบบ $\pm 5\%$
+        Residual Vibration จะเพิ่มขึ้น
+        สำหรับระบบที่ต้องการความทนทานสูง
+        ควรพิจารณาใช้ ZVD (3-Impulse) แทน ZV (2-Impulse)
+\end{itemize}
+
+% ============================================================================
+\section{ข้อเสนอแนะสำหรับการพัฒนาต่อยอด}
+\label{sec:future_work}
+% ============================================================================
+
+\subsection{การพัฒนาระบบควบคุม}
+\label{subsec:future_control}
+
+\begin{itemize}
+  \item \textbf{Hardware Tuning ของ PID Gains:}
+        ค่า Gain ที่ใช้งานปัจจุบันมาจากการออกแบบบน Reduced-Order Model
+        ควรทำ Hardware Commissioning เพื่อปรับ Gain Fine-tuning
+        โดยเฉพาะ $K_{i,vel}$ ที่มีขนาดใหญ่
+        และตรวจสอบ Anti-windup ว่าทำงานถูกต้องภายใต้ Load จริง
+
+  \item \textbf{เปิดใช้งาน Feedforward Gains:}
+        $K_{vff} = 3.033$\,V/(rad/s) และ $K_{aff} = 0.445$\,V/(rad/s$^2$)
+        ถูก Disable ระหว่าง Commissioning
+        เมื่อ SysID Uncertainty ต่ำกว่า 10\% แล้ว
+        ควรเปิดใช้งานเพื่อลด Tracking Error ระหว่างการเคลื่อนที่
+
+  \item \textbf{Upgrade เป็น ZVD Shaper:}
+        ZVD (3-Impulse) มีความทนทานต่อความคลาดเคลื่อนของ $\omega_n$
+        มากกว่า ZV ควรพิจารณาเมื่อทราบ Uncertainty ของ $\omega_{n,rod}$
+        จากการวัดจริงแล้วว่าเกิน 10\%
+
+  \item \textbf{Online Parameter Estimation:}
+        ในอนาคตสามารถ Implement Recursive Least Squares (RLS)
+        เพื่อ Update $\omega_{n,rod}$ แบบ Online
+        เมื่อสภาพของ Connection Rod เปลี่ยนแปลงตามการใช้งาน
+\end{itemize}
+
+\subsection{การพัฒนาระบบกล}
+\label{subsec:future_mech}
+
+\begin{itemize}
+  \item \textbf{ลด Backlash ของ Belt Drive:}
+        ออกแบบ Tensioner ที่ปรับระยะได้ (Adjustable Idler)
+        เพื่อให้สามารถรักษา Belt Tension ได้อย่างสม่ำเสมอ
+        ตลอดอายุการใช้งาน
+
+  \item \textbf{ปรับปรุงความแข็งแกร่งของ Gripper Mounting:}
+        เพิ่ม Reinforcement ที่จุดยึด Gripper
+        เพื่อป้องกันการเสียหายจากการชนในกรณี Software Fault
+\end{itemize}
+
+\subsection{การพัฒนาระบบไฟฟ้าและซอฟต์แวร์}
+\label{subsec:future_elec_sw}
+
+\begin{itemize}
+  \item \textbf{Implement Software Workspace Limit:}
+        เพิ่มการตรวจสอบ Incoming Command ทุกตัวจาก Base System
+        ว่าอยู่ภายใน Safe Workspace ก่อน Execute
+        เพื่อป้องกันการชนซ้ำ
+
+  \item \textbf{Upgrade การสื่อสาร Gripper:}
+        ในอนาคตสามารถ Implement CAN Bus (FDCAN1)
+        เพื่อให้รองรับ Gripper Node ที่ซับซ้อนขึ้น
+        พร้อม Watchdog และ Feedback ที่ครบถ้วนกว่า Digital I/O
+
+  \item \textbf{Data Logging และ Monitoring:}
+        เพิ่ม SD Card หรือ Wireless Telemetry
+        สำหรับบันทึก Log ระยะยาว
+        เพื่อ Predictive Maintenance และวิเคราะห์ Drift ของ Bearing
+\end{itemize}

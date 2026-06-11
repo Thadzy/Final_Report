@@ -1,0 +1,93 @@
+% ============================================================================
+%  บทคัดย่อ / Abstract
+% ============================================================================
+
+\chapter*{บทคัดย่อ}
+\addcontentsline{toc}{chapter}{บทคัดย่อ}
+
+รายงานฉบับนี้นำเสนอการออกแบบและพัฒนาหุ่นยนต์หยิบและวางชิ้นงานแบบวงกลม (Circular Pick and Place Robot)
+สำหรับใช้งานในกระบวนการผลิตเชิงอุตสาหกรรม โดยมีหน้าที่ลำเลียงชิ้นงาน Connection Rod
+ระหว่างสถานีทำงานสี่สถานีในลักษณะการหมุนแบบหนึ่งองศาอิสระ
+
+ระบบประกอบด้วยแขนกลที่ขับเคลื่อนด้วยมอเตอร์กระแสตรง RS-775 กำลัง 24~V
+ผ่านชุดเฟืองดาวเคราะห์และสายพานฟันที่มีอัตราทดรวม $N = 70$ และประสิทธิภาพ $\eta = 0.836$
+ควบคุมด้วยไมโครคอนโทรลเลอร์ STM32G474RE
+การออกแบบระบบควบคุมใช้โครงสร้าง Cascade PID สองชั้น ได้แก่
+วงรอบความเร็วที่ความถี่ 1~kHz และวงรอบตำแหน่งที่ความถี่ 100~Hz
+โดยอ้างอิงพารามิเตอร์ของระบบจากการระบุระบบแบบ Black-Box
+ด้วยวิธี Least-Squares ร่วมกับการกรองสัญญาณ Butterworth อันดับสี่ที่ความถี่ตัด 10~Hz
+ผลการระบุระบบให้ค่า $R_a = \SI{1.4534}{\ohm}$, $K_t = \SI{0.04065}{\newton\metre\per\ampere}$,
+$J = \SI{0.72762}{\kilogram\metre\squared}$ และ $B = \SI{0.19279}{\newton\metre\second\per\radian}$
+
+เพื่อให้บรรลุข้อกำหนดด้าน Cycle Time ไม่เกิน 35~วินาทีสำหรับสี่ชิ้น
+ระบบติดตั้ง ZV Input Shaper ที่ออกแบบจากความถี่ธรรมชาติของแท่ง Connection Rod
+($\omega_{n,\mathrm{rod}} = \SI{12.386}{\radian\per\second}$, $\zeta_\mathrm{rod} = 0.0984$)
+ซึ่งช่วยยกเลิกการแกว่งของปลายแขนโดยแทบไม่เพิ่มเวลาหน่วง
+นอกจากนี้ยังใช้ Kalman Filter สี่สถานะ
+$\mathbf{x} = [\theta_\mathrm{arm},\; \omega_\mathrm{arm},\; i_a,\; \tau_d]^\top$
+สำหรับประมาณค่าแรงบิดรบกวนแบบ Real-time
+การสื่อสารกับระบบควบคุมส่วนกลางใช้โปรโตคอล Modbus RTU ผ่านบัส RS-485
+ส่วนกริปเปอร์ควบคุมด้วยสัญญาณ Digital I/O โดยตรง
+
+ผลการจำลองและการทดสอบระบบย่อยแสดงให้เห็นว่าระบบมีศักยภาพในการบรรลุข้อกำหนดสมรรถนะหลัก
+ได้แก่ Overshoot ไม่เกิน 1\% (P5), Settling time ไม่เกิน 0.5~s (P6),
+ความแม่นยำตำแหน่ง $\pm$[VAL\_ACCURACY]$^\circ$ (A1),
+ความซ้ำซากได้ $\pm$[VAL\_REPEAT]$^\circ$ ใน 100 รอบ (A2)
+และ Cycle time รวม [VAL\_CYCLE]~วินาที (P1)
+ทั้งนี้การทวนสอบข้อกำหนดเชิงปริมาณครบถ้วนอยู่ระหว่างดำเนินการเก็บข้อมูลบนฮาร์ดแวร์จริง
+
+\vspace{1.2cm}
+\noindent\textbf{คำสำคัญ:}
+หุ่นยนต์หยิบและวางชิ้นงาน,
+การควบคุมแบบ Cascade PID,
+ZV Input Shaping,
+Kalman Filter,
+การระบุระบบ,
+Modbus RTU
+
+\newpage
+
+% ============================================================================
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+This report presents the design and development of a circular pick-and-place robot
+for industrial manufacturing applications, tasked with transferring Connection Rod
+workpieces among four work stations via a single rotational degree of freedom.
+
+The mechanical system employs an RS-775 brushed DC motor at 24~V,
+coupled through a planetary gearbox and toothed belt drive with a combined gear ratio
+of $N = 70$ and efficiency $\eta = 0.836$, controlled by an STM32G474RE microcontroller.
+The control architecture adopts a two-loop Cascade PID structure comprising
+a velocity inner loop at 1~kHz and a position outer loop at 100~Hz.
+Plant parameters were obtained via Black-Box system identification using Least-Squares estimation
+with fourth-order Butterworth pre-filtering at 10~Hz, yielding
+$R_a = \SI{1.4534}{\ohm}$, $K_t = \SI{0.04065}{\newton\metre\per\ampere}$,
+$J = \SI{0.72762}{\kilogram\metre\squared}$, and $B = \SI{0.19279}{\newton\metre\second\per\radian}$.
+
+To satisfy the cycle time requirement of 35~s for four workpieces,
+a ZV Input Shaper was designed based on the measured natural frequency of the Connection Rod
+($\omega_{n,\mathrm{rod}} = \SI{12.386}{\radian\per\second}$, $\zeta_\mathrm{rod} = 0.0984$),
+effectively eliminating residual vibration with negligible additional delay.
+A four-state Kalman filter with state vector
+$\mathbf{x} = [\theta_\mathrm{arm},\; \omega_\mathrm{arm},\; i_a,\; \tau_d]^\top$
+provides real-time disturbance torque estimation.
+System integration with a central supervisory controller is achieved via
+Modbus RTU over RS-485, while the gripper is actuated through digital I/O signals.
+
+Simulation results and subsystem-level testing indicate that the system has the capability
+to meet its primary performance requirements,
+including overshoot not exceeding 1\% (P5), settling time within 0.5~s (P6),
+position accuracy of $\pm$[VAL\_ACCURACY]$^\circ$ (A1),
+repeatability of $\pm$[VAL\_REPEAT]$^\circ$ over 100 cycles (A2),
+and a total cycle time of [VAL\_CYCLE]~s for four workpieces (P1).
+Full quantitative verification against all requirements is pending hardware-level testing.
+
+\vspace{1.2cm}
+\noindent\textbf{Keywords:}
+Pick-and-place robot,
+Cascade PID control,
+ZV input shaping,
+Kalman filter,
+System identification,
+Modbus RTU

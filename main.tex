@@ -1,0 +1,265 @@
+% ============================================================================
+%  Circular Pick and Place Robot — Final Report
+%  FRA263/264: Robotics Studio III  |  FIBO, KMUTT
+%  Compiler: XeLaTeX  (xelatex → bibtex → xelatex → xelatex)
+% ============================================================================
+
+\documentclass[12pt, a4paper]{report}
+
+% ----------------------------------------------------------------------------
+% 1. Font & Language
+%
+% CRITICAL LOAD ORDER for XeLaTeX + Thai:
+%   1. fontspec  (must be first)
+%   2. polyglossia + setdefaultlanguage
+%   3. \newfontfamily\thaifont  (polyglossia REQUIRES this explicit declaration)
+%   4. \setmainfont  (re-confirms TH Sarabun New as document main font)
+%   5. lmodern loaded AFTER fontspec so it cannot override main font
+%   NOTE: Do NOT use unicode-math — it pulls fix-cm -> lmodern
+%         which silently overrides the Thai main font.
+% ----------------------------------------------------------------------------
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{thai}
+\setotherlanguage{english}
+
+% polyglossia requires \thaifont to be declared explicitly via \newfontfamily
+\newfontfamily\thaifont{TH Sarabun New}[Scale=1.35, Script=Thai]
+\setmainfont{TH Sarabun New}[Scale=1.35, Script=Thai]
+\setmonofont{Fira Code}[Scale=0.78]
+\newfontfamily\thaifonttt{Fira Code}[Scale=0.78]
+
+\XeTeXlinebreaklocale "th"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+% ----------------------------------------------------------------------------
+% 2. Page Layout
+% ----------------------------------------------------------------------------
+\usepackage[
+    left   = 1.0in,
+    right  = 1.0in,
+    top    = 1.2in,
+    bottom = 1.2in,
+    footskip = 0.5in
+]{geometry}
+
+\usepackage{setspace}
+\setstretch{1.15}
+\setlength{\parindent}{1.5cm}
+\setlength{\parskip}{6pt}
+
+% ----------------------------------------------------------------------------
+% 3. Headers & Footers
+% ----------------------------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\thepage}
+
+% plain style (used after \pagestyle{plain})
+\fancypagestyle{plain}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyfoot[R]{\thepage}
+}
+
+% ----------------------------------------------------------------------------
+% 4. Math & Science
+% lmodern loaded here (after fontspec) for math fonts only — safe at this point
+% ----------------------------------------------------------------------------
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker={.}}
+
+% ----------------------------------------------------------------------------
+% 5. Figures & Tables
+% ----------------------------------------------------------------------------
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% ----------------------------------------------------------------------------
+% 6. TikZ & Block Diagrams
+% ----------------------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{
+    arrows.meta,
+    angles,
+    quotes,
+    patterns,
+    positioning,
+    shapes.geometric,
+    calc
+}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% ----------------------------------------------------------------------------
+% 7. Code Listings
+% ----------------------------------------------------------------------------
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.97}
+
+\lstset{
+    backgroundcolor  = \color{backcolour},
+    commentstyle     = \color{codegreen},
+    keywordstyle     = \color{blue},
+    numberstyle      = \tiny\color{codegray},
+    stringstyle      = \color{codepurple},
+    basicstyle       = \ttfamily\footnotesize,
+    breakatwhitespace= false,
+    breaklines       = true,
+    captionpos       = b,
+    keepspaces       = true,
+    numbers          = left,
+    numbersep        = 5pt,
+    showspaces       = false,
+    showstringspaces = false,
+    showtabs         = false,
+    tabsize          = 4,
+    frame            = single,
+    rulecolor        = \color{codegray}
+}
+
+% ----------------------------------------------------------------------------
+% 8. Section Formatting
+% ----------------------------------------------------------------------------
+\usepackage{titlesec}
+
+\newcommand{\sizeTwentyTwo}{\fontsize{16.30}{19.56}\selectfont}
+\newcommand{\sizeEighteen}{\fontsize{13.33}{16.00}\selectfont}
+
+\titleformat{\chapter}[block]
+    {\sizeTwentyTwo\bfseries\centering}
+    {บทที่ \thechapter}{1ex}{}
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+
+\titleformat{\section}
+    {\sizeEighteen\bfseries}
+    {\thesection.}{1ex}{}
+
+\titleformat{\subsection}
+    {\normalsize\bfseries}
+    {\thesubsection}{1ex}{}
+    
+\titleformat{\subsubsection}
+    {\small\bfseries}
+    {\thesubsubsection}{1ex}{}
+
+% ----------------------------------------------------------------------------
+% 9. Bibliography
+% ----------------------------------------------------------------------------
+\usepackage[authoryear, round]{natbib}
+
+% ----------------------------------------------------------------------------
+% 10. Cross-references (cleveref — Thai overrides)
+% ----------------------------------------------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    linkcolor  = black,
+    citecolor  = black,
+    urlcolor   = blue
+}
+\usepackage[
+    nameinlink,
+    noabbrev
+]{cleveref}
+\makeatletter\def\cref@language{english}\makeatother
+
+% Thai cleveref overrides
+\crefname{equation}{สมการ}{สมการ}
+\Crefname{equation}{สมการ}{สมการ}
+\crefname{figure}{รูปที่}{รูปที่}
+\Crefname{figure}{รูปที่}{รูปที่}
+\crefname{table}{ตารางที่}{ตารางที่}
+\Crefname{table}{ตารางที่}{ตารางที่}
+\crefname{section}{หัวข้อ}{หัวข้อ}
+\Crefname{section}{หัวข้อ}{หัวข้อ}
+\crefname{chapter}{บทที่}{บทที่}
+\Crefname{chapter}{บทที่}{บทที่}
+\crefname{lstlisting}{โค้ดที่}{โค้ดที่}
+\Crefname{lstlisting}{โค้ดที่}{โค้ดที่}
+
+% ----------------------------------------------------------------------------
+% 11. Misc
+% ----------------------------------------------------------------------------
+\usepackage{enumitem}
+\usepackage{emptypage}
+\emergencystretch=1em
+\tolerance=2000
+
+% ============================================================================
+\begin{document}
+% ============================================================================
+
+% ----------------------------------------------------------------------------
+% Front Matter
+% ----------------------------------------------------------------------------
+\pagestyle{empty}
+\input{sections/00_cover.tex}
+
+\newpage
+\pagestyle{plain}
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\input{sections/00_abstract.tex}
+\newpage
+
+\input{sections/00_executive_summary.tex}
+\newpage
+
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+% ----------------------------------------------------------------------------
+% Main Matter
+% ----------------------------------------------------------------------------
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\pagestyle{plain}
+
+\input{sections/01_introduction.tex}
+\input{sections/02_background_theory.tex}
+\input{sections/03_system_design.tex}
+\input{sections/04_implementation.tex}
+\input{sections/05_results_verification.tex}
+\input{sections/06_conclusion.tex}
+
+% ----------------------------------------------------------------------------
+% Bibliography
+% ----------------------------------------------------------------------------
+\newpage
+% \nocite{*}
+\bibliographystyle{apalike}
+\bibliography{references}
+
+% ----------------------------------------------------------------------------
+% Appendices
+% ----------------------------------------------------------------------------
+\newpage
+\appendix
+% \input{sections/appendix_a_cad.tex}
+% \input{sections/appendix_b_schematics.tex}
+% \input{sections/appendix_c_code.tex}
+% \input{sections/appendix_d_simscape.tex}
+
+\end{document}

@@ -1,0 +1,51 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces System Architecture ของระบบ Circular Pick and Place Robot แสดง Physical Architecture และ Cyber Architecture}}{4}{figure.caption.8}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces แผนภาพ Electro-mechanical ของมอเตอร์กระแสตรง แสดงความสัมพันธ์ระหว่างโดเมนไฟฟ้าและโดเมนเชิงกล}}{7}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Block Diagram ของระบบควบคุม Cascade PID แสดงวงรอบความเร็วและวงรอบตำแหน่ง}}{9}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ลักษณะของสัญญาณ ZVD Impulse Sequence (บน) และเปรียบเทียบการตอบสนองของระบบเพื่อลดการแกว่ง (ล่าง)}}{11}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ขั้นตอนการทำงานของ Discrete-Time Kalman Filter ในแต่ละ Time Step}}{13}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การเปรียบเทียบประสิทธิภาพการประมาณค่าความเร็วเชิงมุมระหว่าง Kalman Filter กับการหาอนุพันธ์โดยประมาณ (Approximate Derivative)}}{15}{figure.caption.28}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Free Body Diagram ของ Connection Rod จำลองเป็น Simple Pendulum ที่ถูกกระตุ้นด้วยความเร่งเชิงมุมของแขนกล}}{18}{figure.caption.33}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces โปรไฟล์การเคลื่อนที่แบบ S-Curve (Jerk-Limited) แสดงความสัมพันธ์เชิงจลนศาสตร์ทั้ง 7 เฟส}}{20}{figure.caption.37}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces \xpg@aux {}{thai}\ignorespaces เปรียบเทียบ Causal Filter (สีแดง) และ \texttt {filtfilt} Zero-Phase Filter (สีน้ำเงิน) บนสัญญาณเดียวกัน (บน) Causal Filter มี Phase Lag ที่สังเกตได้ (กลาง) \texttt {filtfilt} ทับ Peak ของสัญญาณต้นฉบับได้ตรงทุกจุด (ล่าง) Phase Difference ระหว่างทั้งสองวิธี}}{25}{figure.caption.47}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การเปรียบเทียบการตอบสนองของระบบ (บน) สัญญาณควบคุม (กลาง) และการสะสมสถานะของตัวอินทิเกรต (ล่าง) ระหว่างตัวควบคุม PID มาตรฐานและตัวควบคุมที่มีการติดตั้งระบบ Anti-Windup แบบ Back-Calculation}}{26}{figure.caption.49}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces \xpg@aux {}{thai}\ignorespaces หลักการแยกกัลวานิกทางแสง (Galvanic Isolation) เพื่อป้องกันสัญญาณรบกวนจากภาคขับกำลังไหลกลับเข้าสู่ภาคตรรกะ}}{28}{figure.caption.50}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ลักษณะทางกายภาพของสัญญาณ CAN Bus แสดงผลต่างแรงดันในการกำหนดสถานะตรรกะแบบ Dominant และ Recessive}}{29}{figure.caption.52}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces \xpg@aux {}{thai}\ignorespaces โครงสร้างเฟรมข้อมูลของโพรโทคอล Modbus RTU แสดงการจัดเรียงไบต์ข้อมูลและรหัสตรวจสอบความผิดพลาด (CRC-16)}}{31}{figure.caption.55}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Encoder AMT-103 และ Quadrature Signal แสดงการระบุทิศทางจากลำดับ Phase}}{31}{figure.caption.56}%
+\contentsline {figure}{\numberline {2.14}{\ignorespaces \xpg@aux {}{thai}\ignorespaces WCS1800 Hall-Effect Current Sensor และลักษณะการตอบสนองเชิงเส้น}}{32}{figure.caption.59}%
+\contentsline {figure}{\numberline {2.15}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Proximity Sensor บนแขนกลและ Timing Diagram ของสัญญาณระหว่าง Two-Stage Homing}}{33}{figure.caption.62}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces System Architecture ของระบบ Circular Pick and Place Robot แสดง Physical Architecture และ Cyber Architecture}}{35}{figure.caption.65}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces แผนผังห่วงโซ่การส่งกำลังแสดงการเปลี่ยนแปลงความเร็วและแรงบิด ตั้งแต่มอเตอร์ถึงแขนกล พร้อมตำแหน่ง Encoder ที่ Output Shaft}}{36}{figure.caption.66}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Application FSM แสดง 5 สถานะหลักและเงื่อนไข Transition โดย FAULT สามารถถูก Trigger ได้จากทุกสถานะ (ลูกศรสีแดง)}}{37}{figure.caption.67}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces CAD Assembly ของระบบเชิงกล แสดงส่วนประกอบหลักทั้งหมด}}{38}{figure.caption.68}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Free Body Diagram ของระบบเพลาแสดงแรงและโมเมนต์ที่จุดวิกฤต}}{39}{figure.caption.71}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การตั้งค่าโมเดล FEA เพลา แสดง Fixture ที่ตำแหน่งลูกปืน และภาระแรงดึงสายพาน 130\,N พร้อม Moment 1.7\,N$\cdot $m}}{42}{figure.caption.78}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล FEA เพลา: การกระจายตัวของ Upper Bound Axial and Bending Stress (Max $= 2.221 \times 10^7$\,N/m$^2$ บริเวณตำแหน่ง Belt Pulley)}}{42}{figure.caption.80}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล FEA เพลา: ระยะการเบี่ยงเบน (URES Displacement) (Max $= 4.721 \times 10^{-3}$\,mm ที่ปลายเพลา)}}{43}{figure.caption.81}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล FEA เพลา: ค่าความปลอดภัย (Factor of Safety) (Min FOS $= 9.313$ บริเวณตำแหน่ง Belt Pulley)}}{43}{figure.caption.82}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล FEA เพลา: แผนภาพแรงเฉือน (Shear Force in Dir2) แสดงการเปลี่ยนแปลงแรงเฉือนตลอดความยาวเพลา}}{44}{figure.caption.83}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล FEA เพลา: แผนภาพโมเมนต์ดัด (Bending Moment about Dir2) แสดงการกระจาย Bending Moment ตลอดความยาวเพลา}}{44}{figure.caption.84}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Step Shaft Drawing แสดงขนาดเพลาแต่ละช่วงและตำแหน่งลูกปืน}}{45}{figure.caption.87}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ตารางค่า Admissible Peripheral Force ของสายพาน HTD5M จาก Habasit Engineering Guide แสดงพิกัด 400\,N สำหรับความกว้าง 15\,mm}}{47}{figure.caption.91}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces \xpg@aux {}{thai}\ignorespaces โมเดลจำลอง FEA แสดงจุดจับยึด Fixture (สีฟ้า) และทิศทางของภาระแรง Remote Load (ลูกศรสีชมพู)}}{49}{figure.caption.97}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การตั้งค่า Remote Load 2.76\,kg แสดง Remote Point และ Moment of Inertia ที่กำหนด}}{49}{figure.caption.98}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล FEA: การกระจายตัวของ Von Mises Stress บนแขนกล (Max $= 2.721 \times 10^7$\,N/m$^2$ บริเวณขอบหน้าสัมผัสกับฐาน)}}{50}{figure.caption.102}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล FEA: ระยะการแอ่นตัว (Displacement) บนแขนกล (Max $= 0.2337$\,mm ที่ปลายสุดของแขนกล)}}{51}{figure.caption.103}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล FEA: ค่าความปลอดภัย (Factor of Safety) บนแขนกล (Min FOS $= 8.6$)}}{51}{figure.caption.104}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Electrical Block Diagram แสดงการแบ่ง Power Bus และการแยก Signal ระหว่าง High Power และ Logic Domain}}{52}{figure.caption.106}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การออกแบบ PCB สำหรับระบบควบคุม รวม STM32, ESP32, Optocoupler และ Relay ไว้บน Board เดียว}}{55}{figure.caption.110}%
+\contentsline {figure}{\numberline {3.21}{\ignorespaces \xpg@aux {}{thai}\ignorespaces STM32G474RE Pin Configuration จาก STM32CubeMX แสดง Peripheral Assignment ทั้งหมดของระบบ}}{56}{figure.caption.111}%
+\contentsline {figure}{\numberline {3.22}{\ignorespaces \xpg@aux {}{thai}\ignorespaces วงจรทดสอบ Locked Rotor Test แสดงการต่อ Shunt Resistor อนุกรมกับมอเตอร์เพื่อวัดกระแสทางอ้อมผ่าน Oscilloscope}}{58}{figure.caption.115}%
+\contentsline {figure}{\numberline {3.23}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Oscilloscope Waveform จาก Locked Rotor Test ที่ $V_{in} = 12$\,V แสดงแรงดัน $V_{sh}$ ที่ไต่ระดับแบบ First-order Exponential พร้อมจุดอ่านค่า $V_{sh,ss}$ และ $\tau $}}{59}{figure.caption.118}%
+\contentsline {figure}{\numberline {3.24}{\ignorespaces \xpg@aux {}{thai}\ignorespaces เปรียบเทียบ Causal Filter (สีแดง) และ \texttt {filtfilt} (สีน้ำเงิน) ในโดเมนเวลา (ก)~Causal Filter มี Phase Lag สังเกตได้ชัดเจน (ข)~\texttt {filtfilt} ทับ Raw Signal ได้ตรงทุกจุด (ค)~Phase Difference ระหว่างสองวิธี}}{61}{figure.caption.124}%
+\contentsline {figure}{\numberline {3.25}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การตรวจสอบความเหมาะสมของ $f_c = 10$\,Hz กับข้อมูลจริงของระบบ: (ซ้าย) \texttt {filtfilt} ให้ Phase Shift เป็นศูนย์ และ Attenuation ที่ 2\,Hz น้อยกว่า 0.001\% (ขวา) Signal Dynamics ของระบบจริงทั้งหมด อยู่ในย่าน 0.1--2\,Hz ห่างจาก $f_c$ ถึง 5 เท่า ยืนยันว่า Filter ไม่รบกวน Signal ที่ต้องการ}}{62}{figure.caption.125}%
+\contentsline {figure}{\numberline {3.26}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Simulink Block Diagram ของแบบจำลอง DC Motor ที่ใช้ใน Grey-box Parameter Estimation แสดง Free Parameters ที่ปรับค่าโดย \texttt {greyest}}}{63}{figure.caption.128}%
+\contentsline {figure}{\numberline {3.27}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Cross-Validation Fit Score ทั้ง 21 Runs แสดงเป็น Histogram จำแนกตามประเภทข้อมูล เส้นประสีแดงคือเกณฑ์ขั้นต่ำที่ยอมรับได้ 80\%}}{64}{figure.caption.131}%
+\contentsline {figure}{\numberline {3.28}{\ignorespaces \xpg@aux {}{thai}\ignorespaces เปรียบเทียบ Measured (เส้นทึบ) และ Simulated (เส้นประ) ทั้ง 21 Runs จำแนกตามประเภท Input ได้แก่ Chirp 3 ย่านความถี่, Step 3 แรงดัน และ Stair-Step}}{64}{figure.caption.132}%
+\contentsline {figure}{\numberline {3.29}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Block Diagram ของระบบควบคุม Cascade PID แสดง Position Outer Loop, Velocity Inner Loop, Feedforward 3 ช่องทาง และ Anti-windup Back-calculation}}{66}{figure.caption.136}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
