@@ -18,8 +18,8 @@
 % -----------------------------------------------------------------------
 % รูปที่: System Architecture Overview
 % ชื่อไฟล์แนะนำ: fig_system_architecture.png
-% เนื้อหา: Layered block diagram แสดง 4 ระดับ (External → STM32 Cyber →
-%          Power Management → Physical Actuators/Sensors)
+% เนื้อหา: Layered block diagram แสดง 4 ระดับ (External $\rightarrow$ STM32 Cyber $\rightarrow$
+%          Power Management $\rightarrow$ Physical Actuators/Sensors)
 %          พร้อม color coding: blue=signal, red=power, green=mechanical
 % -----------------------------------------------------------------------
 \begin{figure}[H]
@@ -83,7 +83,7 @@ Encoder AMT-103 จึงติดตั้งโดยตรงที่ Output
 % -----------------------------------------------------------------------
 % รูปที่: แผนผังห่วงโซ่การส่งกำลัง
 % ชื่อไฟล์แนะนำ: fig_drivetrain_chain.png
-% เนื้อหา: Block diagram ลำดับ Motor → Planetary Gearbox → Belt → Output Shaft
+% เนื้อหา: Block diagram ลำดับ Motor $\rightarrow$ Planetary Gearbox $\rightarrow$ Belt $\rightarrow$ Output Shaft
 %          แสดงค่า RPM, Torque, และ N ที่แต่ละจุด พร้อมตำแหน่ง Encoder
 % -----------------------------------------------------------------------
 \begin{figure}[H]
@@ -1071,7 +1071,8 @@ Pin Assignment ทั้งหมดกำหนดใน STM32CubeMX และ�
   \centering
   \caption{STM32G474RE Pin Assignment (จาก CubeMX IOC)}
   \label{tab:pin_assignment}
-  \begin{tabular}{lllll}
+  \small
+  \begin{tabular}{p{1.0cm} p{2.7cm} p{2.3cm} p{3.5cm} p{5.5cm}}
     \toprule
     Pin & GPIO Label & Signal & Mode & Config \\
     \midrule
@@ -1338,7 +1339,7 @@ Chirp Signal (Linear Frequency Sweep) ถูกเลือกเนื่อง
 \begin{itemize}
   \item สูงกว่าย่านความถี่ Identification (0.1--2.0\,Hz) ถึง 5 เท่า
         ทำให้ Attenuation ที่ขอบบนของย่าน ($f = 2$\,Hz)
-        น้อยกว่า 0.001\% ตามที่แสดงใน\cref{eq:butter_atten}
+        น้อยกว่า 0.001\% ตามที่แสดงใน\cref{eq:filtfilt_mag}
         จึงไม่ลดทอน Amplitude ของ Signal ที่ต้องการ
   \item กำจัด Noise จาก PWM Switching ($f_{pwm} = 19.6$\,kHz)
         และ Quantization Noise ของ Encoder ที่ความถี่สูงได้อย่างมีประสิทธิภาพ
@@ -1480,7 +1481,7 @@ Step Input (3 แรงดัน: 6, 12, 24\,V) และ Stair-Step Input
 รวม 21 Runs ทั้งหมด
 ผล Fit Score วัดจาก NRMSE ระหว่าง Simulated Output
 กับ Measured Data แสดงใน\cref{tab:crossval_fit}
-และ\cref{fig:crossval_results}
+และ\cref{fig:crossval_all_runs}
 
 \begin{table}[H]
   \centering
@@ -1579,10 +1580,10 @@ Fit Score = 84.7--95.4\% (Step) และ 95.2--96.6\% (Stair-Step)
     a_1     &= \frac{R_a}{L_a} + \frac{B}{J}
              = \frac{1.4534}{0.001448} + \frac{0.19279}{0.72762}
              = 1003.5 + 0.265 = 1003.8 \label{eq:Gvel_a1} \\[4pt]
-    a_0     &= \frac{R_a B + K_b K_t N^2}{L_a J}
-             = \frac{(1.4534)(0.19279) + (0.04165)(0.04065)(70)^2}
-                    {(0.001448)(0.72762)}
-             = \frac{0.280 + 8.297}{0.001054} = 8136 \label{eq:Gvel_a0}
+    a_0     &= \frac{R_a B + K_b K_t N^2}{L_a J} \nonumber \\
+             &= \frac{(1.4534)(0.19279) + (0.04165)(0.04065)(70)^2}
+                    {(0.001448)(0.72762)} \nonumber \\
+             &= \frac{0.280 + 8.297}{0.001054} = 8136 \label{eq:Gvel_a0}
 \end{align}
 
 \begin{equation}
@@ -1611,7 +1612,7 @@ Velocity Feedforward ($K_{vff}$), Acceleration Feedforward ($K_{aff}$)
 % รูปที่: Block Diagram ของ Cascade PID พร้อม Feedforward
 % ชื่อไฟล์แนะนำ: fig_cascade_pid_block_ch3.png
 % เนื้อหา: Block diagram แสดง
-%   - ZVD Shaper → Position Outer Loop (P) → Velocity Inner Loop (PI)
+%   - ZVD Shaper $\rightarrow$ Position Outer Loop (P) $\rightarrow$ Velocity Inner Loop (PI)
 %   - Feedforward 3 ช่อง: Kvff (velocity), Kaff (acceleration),
 %     Ktff (torque disturbance) รวมเข้าที่ summing junction ก่อน Plant
 %   - Anti-windup Back-calculation ใน Velocity Loop

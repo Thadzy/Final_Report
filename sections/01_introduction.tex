@@ -241,27 +241,27 @@ Manual Mode ผ่าน Wireless Joystick ที่รับสัญญาณ 
   \centering
   \caption{สรุป Subsystem หลักของระบบ}
   \label{tab:subsystem_summary}
-  \begin{tabular}{lp{5cm}p{3.5cm}}
+  \begin{tabular}{l p{7.0cm} p{4.5cm}}
     \toprule
     \textbf{Subsystem} & \textbf{องค์ประกอบหลัก} & \textbf{รายละเอียดใน} \\
     \midrule
     Rotating Mechanism
-      & DC Motor RS-775, Planetary Gearbox ($N_g{=}24$),
+      & \raggedright DC Motor RS-775, Planetary Gearbox ($N_g{=}24$),
         Belt HTD5M ($N_b{=}2.9$), Encoder AMT-103
       & \cref{subsec:mech_arch} \\[0.4em]
     Power Management
-      & PSU 24\,V/10\,A, PSU 5\,V,
+      & \raggedright PSU 24\,V/10\,A, PSU 5\,V,
         Magnetic Contactor, E-Stop,
         Circuit Breaker, Fuse
       & \cref{subsec:elec_arch} \\[0.4em]
     Main Controller
-      & STM32G474RE, Cascade PID (1\,kHz / 100\,Hz),
+      & \raggedright STM32G474RE, Cascade PID (1\,kHz / 100\,Hz),
         Kalman Filter (4 states),
         ZVD Input Shaper,
         Modbus RTU Slave (Addr~21)
       & \cref{subsec:sysid}, \cref{subsec:pid_design} \\[0.4em]
     External Interface
-      & Joystick + ESP32 (Bluetooth/USART3),
+      & \raggedright Joystick + ESP32 (Bluetooth/USART3),
         Base System (Modbus RTU),
         Gripper (Digital I/O)
       & \cref{subsec:joystick_integration}, \cref{subsec:modbus_integration} \\

@@ -295,10 +295,6 @@ Encoder               & รุ่น AMT 103 & 1 \\
   \end{tabular}
 \end{table}
 
-\subsection{สถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณ (Power \& Signal Architecture)}
-\label{subsec:power_arch}
-
-ระบบไฟฟ้าภายในตู้ถูกออกแบบให้มีการแยกวงจรอย่างชัดเจน (Galvanic Isolation) ทั้งในระดับของแหล่งจ่ายไฟและระดับของสัญญาณสื่อสาร ดังแสดงในแผนภาพ\cref{fig:block_diagram_wiring}
 
 % \begin{figure}[H]
 % \centering
@@ -442,7 +438,7 @@ Firmware สำหรับควบคุมหุ่นยนต์พัฒ�
   \caption{โครงสร้างโมดูลและไลบรารีใน STM32 Firmware}
   \label{tab:firmware_modules}
   \small
-  \begin{tabular}{lp{6.2cm}l}
+  \begin{tabular}{p{3.5cm} p{7.0cm} p{3.5cm}}
     \toprule
     โมดูล / ไลบรารี & หน้าที่การทำงาน & ไฟล์อ้างอิง \\
     \midrule
@@ -644,7 +640,7 @@ Firmware สำหรับควบคุมหุ่นยนต์พัฒ�
 \subsection{การจัดการข้อมูลร่วม (Shared Data Architecture)}
 \label{subsec:shared_data}
 
-Firmware ถูกออกแบบให้มีการแลกเปลี่ยนข้อมูลผ่านโครงสร้างตัวแปรส่วนกลาง \texttt{g\_robot} (\texttt{RobotState\_t}) ซึ่งทำหน้าที่เป็น Single Source of Truth ดังแสดงใน\cref{fig:firmware_flow} 
+Firmware ถูกออกแบบให้มีการแลกเปลี่ยนข้อมูลผ่านโครงสร้างตัวแปรส่วนกลาง \texttt{g\_robot} (\texttt{RobotState\_t}) ซึ่งทำหน้าที่เป็น Single Source of Truth ดังแสดงในแผนภาพสถาปัตยกรรมระบบ (\cref{fig:system_architecture})
 
 กลยุทธ์การจัดการข้อมูลแบ่งออกเป็นสองระดับ:
 \begin{enumerate}

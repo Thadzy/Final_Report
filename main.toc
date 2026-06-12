@@ -174,14 +174,13 @@
 \contentsline {section}{\numberline {4.2}การประกอบตู้ควบคุมและการเดินสายไฟ}{107}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}รายการอุปกรณ์หลัก (Bill of Materials)}{107}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}สถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณ (Power \& Signal Architecture)}{108}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}สถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณ (Power \& Signal Architecture)}{108}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}แนวทางปฏิบัติในการเดินสายไฟ (Cable Management \& Wiring)}{108}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.3}แนวทางปฏิบัติในการเดินสายไฟ (Cable Management \& Wiring)}{108}{subsection.4.2.3}%
 \contentsline {section}{\numberline {4.3}การพัฒนา Firmware}{109}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}ภาพรวมสถาปัตยกรรมซอฟต์แวร์ (Software Architecture)}{109}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}ภาพรวมสถาปัตยกรรมซอฟต์แวร์ (Software Architecture)}{109}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}การจัดสรรเวลาทำงาน (Execution Model และ Task Timing)}{110}{subsection.4.3.3}%
 \contentsline {subsection}{\numberline {4.3.4}สถานะการทำงานของระบบ (Application FSM)}{111}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}กระบวนการหาจุดอ้างอิงระดับความแม่นยำสูง (Two-Stage Homing Sequence)}{112}{subsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.3.5}กระบวนการหาจุดอ้างอิงระดับความแม่นยำสูง (Two-Stage Homing Sequence)}{111}{subsection.4.3.5}%
 \contentsline {subsection}{\numberline {4.3.6}อัลกอริทึมควบคุมการเคลื่อนที่ (Motion Control Algorithms)}{112}{subsection.4.3.6}%
 \contentsline {subsubsection}{S-Curve Trajectory และ ZVD Input Shaper}{112}{subsubsection*.214}%
 \contentsline {subsubsection}{Steady-State Kalman Filter}{112}{subsubsection*.215}%
@@ -240,13 +239,13 @@
 \contentsline {subsection}{\numberline {5.3.1}Step Response: Overshoot และ Settling Time}{127}{subsection.5.3.1}%
 \contentsline {subsubsection}{วัตถุประสงค์}{127}{subsubsection*.259}%
 \contentsline {subsubsection}{วิธีการทดสอบ}{127}{subsubsection*.260}%
-\contentsline {subsubsection}{ผลการทดสอบ}{128}{subsubsection*.261}%
+\contentsline {subsubsection}{ผลการทดสอบ}{127}{subsubsection*.261}%
 \contentsline {subsection}{\numberline {5.3.2}ความแม่นยำตำแหน่ง (Position Accuracy)}{128}{subsection.5.3.2}%
 \contentsline {subsubsection}{วัตถุประสงค์}{128}{subsubsection*.263}%
 \contentsline {subsubsection}{วิธีการทดสอบ}{128}{subsubsection*.264}%
 \contentsline {subsubsection}{ผลการทดสอบ}{128}{subsubsection*.265}%
-\contentsline {subsection}{\numberline {5.3.3}ความซ้ำซากได้ (Repeatability)}{129}{subsection.5.3.3}%
-\contentsline {subsubsection}{วัตถุประสงค์}{129}{subsubsection*.267}%
+\contentsline {subsection}{\numberline {5.3.3}ความซ้ำซากได้ (Repeatability)}{128}{subsection.5.3.3}%
+\contentsline {subsubsection}{วัตถุประสงค์}{128}{subsubsection*.267}%
 \contentsline {subsubsection}{วิธีการทดสอบ}{129}{subsubsection*.268}%
 \contentsline {subsubsection}{ผลการทดสอบ}{129}{subsubsection*.269}%
 \contentsline {subsection}{\numberline {5.3.4}Cycle Time}{129}{subsection.5.3.4}%

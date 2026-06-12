@@ -56,7 +56,7 @@
 \contentsline {table}{\numberline {5.10}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผล Simulation เปรียบเทียบ Unshaped กับ ZVD-Shaped (Worst-case Move 360°, มีโหลด Connection Rod)}}{126}{table.caption.254}%
 \contentsline {table}{\numberline {5.11}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Process Noise $\mathbf {Q}$ และ Measurement Noise $R$ ที่ใช้ใน Kalman Filter}}{126}{table.caption.256}%
 \contentsline {table}{\numberline {5.12}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Steady-State Kalman Gain $\mathbf {K}_\infty $ ที่ใช้ใน Firmware (รอยืนยันจาก Firmware Version สุดท้าย)}}{127}{table.caption.258}%
-\contentsline {table}{\numberline {5.13}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Step Response บน Hardware จริง (With Load)}}{128}{table.caption.262}%
+\contentsline {table}{\numberline {5.13}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Step Response บน Hardware จริง (With Load)}}{127}{table.caption.262}%
 \contentsline {table}{\numberline {5.14}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบความแม่นยำตำแหน่ง (A1) --- ค่าเฉลี่ยจาก 10 ครั้ง}}{128}{table.caption.266}%
 \contentsline {table}{\numberline {5.15}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบความซ้ำซากได้ 100 รอบ (A2)}}{129}{table.caption.270}%
 \contentsline {table}{\numberline {5.16}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Cycle Time (P1) --- 3 รอบต่อเนื่อง}}{130}{table.caption.274}%

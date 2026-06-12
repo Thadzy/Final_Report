@@ -73,7 +73,8 @@ Planetary Gearbox (อัตราทด $N_g = 24$) และ Belt Drive (อ�
   \caption{ผลการวัดระยะคลอนของระบบส่งกำลัง
            (ค่าเฉลี่ยจากการวัด 3 ตำแหน่ง $\times$ 5 ครั้ง)}
   \label{tab:backlash}
-  \begin{tabular}{lccc}
+  \small
+  \begin{tabular}{l l l l}
     \toprule
     จุดวัด & ระยะคลอน (°) & $\sigma$ (°) & หมายเหตุ \\
     \midrule
@@ -148,7 +149,8 @@ Encoder AMT-103 เป็นอุปกรณ์หลักในการ Fee
   \centering
   \caption{ผลการทดสอบ Encoder AMT-103}
   \label{tab:encoder_test}
-  \begin{tabular}{lccc}
+  \small
+  \begin{tabular}{p{6.0cm} p{3.0cm} p{3.0cm} p{2.0cm}}
     \toprule
     รายการทดสอบ & ผล & เกณฑ์ & สถานะ \\
     \midrule
@@ -510,7 +512,8 @@ E-Stop (Emergency Stop) ตัดกำลังไฟให้ Cytron MD10C ผ
   \centering
   \caption{ผลการ Estimate พารามิเตอร์จาก Chirp Test (สรุปจาก 9 Experiments)}
   \label{tab:chirp_results}
-  \begin{tabular}{llccccc}
+  \small
+  \begin{tabular}{p{3.0cm} p{1.2cm} p{1.2cm} p{2.5cm} p{2.5cm} p{2.0cm} p{1.5cm}}
     \toprule
     พารามิเตอร์ & สัญลักษณ์ & เฉลี่ย & $\sigma$ & Uncertainty (\%) & หน่วย & หมายเหตุ \\
     \midrule
@@ -709,7 +712,8 @@ Noise Covariance Matrix เลือกตาม Physical Reasoning ดังน
   \caption{Process Noise $\mathbf{Q}$ และ Measurement Noise $R$
            ที่ใช้ใน Kalman Filter}
   \label{tab:kalman_qr}
-  \begin{tabular}{llcc}
+  \small
+  \begin{tabular}{l p{1.5cm} p{1.5cm} p{7.0cm}}
     \toprule
     พารามิเตอร์ & สัญลักษณ์ & ค่า & เหตุผลการเลือก \\
     \midrule
@@ -805,7 +809,8 @@ $t_s$ นิยามด้วยเกณฑ์ $\pm 2\%$ ของ Steady-stat
   \centering
   \caption{ผลการทดสอบ Step Response บน Hardware จริง (With Load)}
   \label{tab:step_response}
-  \begin{tabular}{lcccc}
+  \small
+  \begin{tabular}{p{3.5cm} p{3.0cm} p{2.5cm} p{2.5cm} p{2.0cm}}
     \toprule
     Metric & ผลจริง & Requirement & เกณฑ์ & สถานะ \\
     \midrule
@@ -869,7 +874,8 @@ Accuracy Test ทวนสอบข้อกำหนด A1 (Max Error $\leq \pm
   \centering
   \caption{ผลการทดสอบความแม่นยำตำแหน่ง (A1) --- ค่าเฉลี่ยจาก 10 ครั้ง}
   \label{tab:accuracy}
-  \begin{tabular}{lcccc}
+  \small
+  \begin{tabular}{p{3.0cm} p{3.0cm} p{2.5cm} p{2.5cm} p{2.0cm}}
     \toprule
     ตำแหน่งเป้าหมาย (°) & ค่าจริงเฉลี่ย (°) & Error (°) & $\sigma$ (°) & ผล \\
     \midrule
@@ -913,7 +919,7 @@ Repeatability สะท้อนความสม่ำเสมอของร
 
 \subsubsection{วิธีการทดสอบ}
 
-ดำเนิน Full Sequence 100 รอบ: 0° → 40° → 80° → 120° → 0°
+ดำเนิน Full Sequence 100 รอบ: $0^\circ \rightarrow 40^\circ \rightarrow 80^\circ \rightarrow 120^\circ \rightarrow 0^\circ$
 บันทึก \texttt{theta\_arm} ณ จุด IsAtTarget = true ทุกตำแหน่ง
 ทดสอบต่อเนื่องโดยไม่ Re-home ระหว่างรอบ
 เพื่อให้ Homing Error สะสมได้เต็มที่ตามสภาวะจริง
@@ -925,7 +931,8 @@ Max Deviation คำนวณจาก $\max |x_i - \bar{x}|$ ของ 100 ค�
   \centering
   \caption{ผลการทดสอบความซ้ำซากได้ 100 รอบ (A2)}
   \label{tab:repeatability}
-  \begin{tabular}{lcccc}
+  \small
+  \begin{tabular}{p{2.5cm} p{3.0cm} p{2.5cm} p{3.5cm} p{2.0cm}}
     \toprule
     ตำแหน่ง (°) & Mean Error (°) & $\sigma$ (°) & Max Deviation (°) & ผล \\
     \midrule
@@ -963,7 +970,7 @@ Max Deviation คำนวณจาก $\max |x_i - \bar{x}|$ ของ 100 ค�
 
 Cycle Time Test ทวนสอบข้อกำหนด P1 ($\leq 35$\,s สำหรับ 4 ชิ้นงาน)
 และ P2 (Pick/Place Time) โดย Cycle เต็มรูปแบบประกอบด้วย 9 Moves ดังนี้:
-Home → WS1 → WS2 → WS3 → WS4 → WS3 → WS2 → WS1 → Home
+Home $\rightarrow$ WS1 $\rightarrow$ WS2 $\rightarrow$ WS3 $\rightarrow$ WS4 $\rightarrow$ WS3 $\rightarrow$ WS2 $\rightarrow$ WS1 $\rightarrow$ Home
 พร้อม Gripper Operation (Pick + Place) ที่แต่ละ Workstation
 
 \subsubsection{การแบ่ง Cycle Time Budget}
@@ -1043,7 +1050,8 @@ Electrical (E1--E9) และ Joystick (J1)
 
 \cref{tab:vnv_matrix} สรุปผลการทวนสอบข้อกำหนดทั้ง 32 ข้อ
 
-\begin{longtable}{cllll}
+\setlength{\LTcapwidth}{\textwidth}
+\begin{longtable}{l l l l l}
   \caption{Requirements Traceability Matrix (32 ข้อ)}
   \label{tab:vnv_matrix} \\
   \toprule
