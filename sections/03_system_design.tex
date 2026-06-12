@@ -612,6 +612,101 @@ Max Displacement เพียง $4.721 \times 10^{-3}$\,mm
 \end{table}
 
 % -----------------------------------------------------------------------
+\subsection{การคำนวณแรงบิดที่ต้องการและการเลือกมอเตอร์}
+\label{subsec:torque_calc}
+% -----------------------------------------------------------------------
+
+การคำนวณนี้พิสูจน์ว่าชุดส่งกำลัง (RS-775 + Planetary Gearbox + Belt Drive)
+มีแรงบิดเพียงพอที่จะขับแขนกลให้เป็นไปตาม Requirements P3 และ P4
+ภายใต้โหลดสูงสุด 2\,kg
+
+\subsubsection{ความเฉื่อยรวมของระบบ}
+
+ความเฉื่อยรวม $J_{\mathrm{total}}$ ได้จากการวิเคราะห์ SolidWorks Model
+ครอบคลุมแขนกล, End Effector, และโหลดสูงสุด:
+
+\begin{equation}
+  J_{\mathrm{total}} = 0.5764 \; \mathrm{kg \cdot m^2}
+  \quad \text{(จาก SolidWorks)}
+  \label{eq:jtotal}
+\end{equation}
+
+\subsubsection{แรงบิดที่ต้องการ}
+
+แรงบิดที่ต้องการ ($T_{\mathrm{req}}$) คำนวณจากกฎของนิวตันสำหรับระบบหมุน
+โดยใช้ความเร่งต่ำสุดที่ระบบต้องทำได้ตาม Requirement P4:
+
+\begin{equation}
+  T_{\mathrm{req}} = J_{\mathrm{total}} \times \alpha_{\min}
+  = 0.5764 \times 2.0
+  = 1.153 \; \mathrm{Nm}
+  \label{eq:treq}
+\end{equation}
+
+รวม Safety Factor $SF = 2$ เพื่อรองรับแรงเสียดทานและความไม่แน่นอนในระบบ:
+
+\begin{equation}
+  T_{\mathrm{final}} = T_{\mathrm{req}} \times SF
+  = 1.153 \times 2.0
+  = 2.306 \; \mathrm{Nm}
+  \label{eq:tfinal}
+\end{equation}
+
+\subsubsection{แรงบิดที่ระบบสามารถส่งออกได้จริง}
+
+แรงบิดที่เพลาแขนกลคำนวณจากห่วงโซ่การส่งกำลังทั้งหมด:
+
+\begin{equation}
+  T_{\mathrm{arm}} = T_{\mathrm{motor}} \times i_{\mathrm{gear}} \times \eta_{\mathrm{gear}}
+                   \times i_{\mathrm{belt}} \times \eta_{\mathrm{belt}}
+  \label{eq:tarm_chain}
+\end{equation}
+
+\begin{equation}
+  T_{\mathrm{arm}} = 0.0955 \times 24 \times 0.85 \times 3 \times 0.95
+  = 5.3977 \; \mathrm{Nm}
+  \label{eq:tarm}
+\end{equation}
+
+\begin{table}[H]
+  \centering
+  \caption{พารามิเตอร์ห่วงโซ่การส่งกำลังสำหรับการคำนวณแรงบิด}
+  \label{tab:torque_budget}
+  \small
+  \begin{tabular}{>{\raggedright\arraybackslash}p{5.5cm}
+                  >{\centering\arraybackslash}p{3.0cm}
+                  >{\raggedright\arraybackslash}p{5.0cm}}
+    \toprule
+    พารามิเตอร์ & ค่า & หมายเหตุ \\
+    \midrule
+    ความเฉื่อยรวม $J_{\mathrm{total}}$ & $0.5764\;\mathrm{kg \cdot m^2}$ & จาก SolidWorks (แขนกล + EE + โหลด) \\
+    ความเร่งสูงสุดที่คำนวณได้ $\alpha_{\max}$ & $9.3641\;\mathrm{rad/s^2}$ & มากกว่า P4 ($\leq 28.0\;\mathrm{rad/s^2}$) \\
+    ความเร็วสูงสุดที่คำนวณได้ $\omega_{\max}$ & $8.9760\;\mathrm{rad/s}$ & มากกว่า P3 ($\leq 7.5\;\mathrm{rad/s}$) \\
+    แรงบิดมอเตอร์ RS-775 $T_{\mathrm{motor}}$ & $0.0955\;\mathrm{Nm}$ & จาก Datasheet (Stall Torque) \\
+    อัตราทด Planetary Gearbox $i_{\mathrm{gear}}$ & $24{:}1$ & ภายในชุด Gearmotor \\
+    ประสิทธิภาพ Gearmotor $\eta_{\mathrm{gear}}$ & $0.85$ & ค่าเฉลี่ยทั่วไปของ Planetary \\
+    แรงบิดหลัง Gearbox $T_{\mathrm{gear}}$ & $1.9481\;\mathrm{Nm}$ & $T_{\mathrm{motor}} \times i_{\mathrm{gear}} \times \eta_{\mathrm{gear}}$ \\
+    อัตราทดสายพาน $i_{\mathrm{belt}}$ (70T : 24T) & $3{:}1$ & Timing Belt HTD5M \\
+    ประสิทธิภาพสายพาน $\eta_{\mathrm{belt}}$ & $0.95$ & จาก Habasit Catalogue \\
+    แรงบิดรวมที่เพลาแขนกล $T_{\mathrm{arm}}$ & $5.3977\;\mathrm{Nm}$ & $T_{\mathrm{gear}} \times i_{\mathrm{belt}} \times \eta_{\mathrm{belt}}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{การตรวจสอบ Safety Factor}
+
+\begin{equation}
+  SF_{\mathrm{actual}} = \frac{T_{\mathrm{arm}}}{T_{\mathrm{req}}}
+  = \frac{5.3977}{1.153}
+  = 4.682
+  \label{eq:sf_actual}
+\end{equation}
+
+$SF_{\mathrm{actual}} = 4.682 > SF_{\mathrm{req}} = 2.0$ และ
+$T_{\mathrm{arm}} = 5.3977\;\mathrm{Nm} > T_{\mathrm{final}} = 2.306\;\mathrm{Nm}$
+ดังนั้นระบบส่งกำลัง \textbf{ผ่าน} ข้อกำหนดด้านแรงบิดและ Safety Factor
+
+% -----------------------------------------------------------------------
 \subsection{การเลือกตลับลูกปืนและการคำนวณอายุการใช้งาน}
 \label{subsec:bearing_calc}
 % -----------------------------------------------------------------------
@@ -2063,24 +2158,22 @@ Converge แล้วเท่านั้น ตามที่อธิบา�
     Loop & สัญลักษณ์ & Theoretical & Hardware & หน่วย (Theory) & หน่วย (HW) \\
     \midrule
     \multirow{2}{*}{Velocity (PI)}
-      & $K_{p,vel}$ & 68.940   & [HW\_KPV] & V/(rad/s)      & PWM/(rad/s) \\
-      & $K_{i,vel}$ & 3512.963 & [HW\_KIV] & V/rad          & PWM/rad     \\
+      & $K_{p,vel}$ & 68.940   & 1.58  & V/(rad/s)      & PWM/(rad/s) \\
+      & $K_{i,vel}$ & 3512.963 & 0.5   & V/rad          & PWM/rad     \\
     \midrule
     \multirow{3}{*}{Position (PID)}
-      & $K_{p,pos}$ & 8.889  & [HW\_KPP] & (rad/s)/rad & (rad/s)/rad \\
-      & $K_{i,pos}$ & --     & [HW\_KIP] & --          & (rad/s)/(rad·s) \\
-      & $K_{d,pos}$ & --     & [HW\_KDP] & --          & (rad/s)·s/rad \\
+      & $K_{p,pos}$ & 8.889  & 3.00  & (rad/s)/rad     & (rad/s)/rad \\
+      & $K_{i,pos}$ & --     & 0.02  & --              & (rad/s)/(rad·s) \\
+      & $K_{d,pos}$ & --     & 0     & --              & (rad/s)·s/rad \\
     \midrule
     Anti-windup
-      & $K_{t,aw}$  & 50.958 & [HW\_KAW] & s$^{-1}$ & s$^{-1}$ \\
+      & $K_{t,aw}$  & 50.958 & --    & s$^{-1}$        & s$^{-1}$ \\
     \midrule
     \multirow{3}{*}{Feedforward}
-      & $K_{vff}$ & 3.033 & [HW\_KVFF] & V/(rad/s)     & PWM/(rad/s) \\
-      & $K_{aff}$ & 0.445 & [HW\_KAFF] & V/(rad/s$^2$) & PWM/(rad/s$^2$) \\
-      & $K_{tff}$ & 0.612 & [HW\_KTFF] & V/(N·m)       & PWM/(N·m) \\
+      & $K_{vff}$ & 3.033 & 3.03  & V/(rad/s)         & PWM/(rad/s) \\
+      & $K_{aff}$ & 0.445 & 0.10  & V/(rad/s$^2$)     & PWM/(rad/s$^2$) \\
+      & $K_{tff}$ & 0.612 & 3.25  & V/(N·m)           & PWM/(N·m) \\
     \bottomrule
-    \multicolumn{6}{l}{\small [HW\_*] = ค่าที่ได้จาก Hardware Commissioning
-      — อัปเดตหลัง Tuning เสร็จสิ้น} \\
   \end{tabular}
 \end{table}
 
@@ -2110,11 +2203,10 @@ Converge แล้วเท่านั้น ตามที่อธิบา�
     \toprule
     Metric & ผล Hardware & Requirement & หน่วย & สถานะ \\
     \midrule
-    Settling Time  & [HW\_TS]  & $\leq 0.5$ & s   & [STATUS\_P5] \\
-    Overshoot      & [HW\_OS]  & $\leq 1$   & \%  & [STATUS\_P6] \\
-    Steady-State Error & [HW\_SSE] & --      & deg & -- \\
+    Settling Time  & 2.11      & $\leq 0.5$ & s   & ไม่ผ่าน \\
+    Overshoot      & 0.00      & $\leq 1$   & \%  & ผ่าน \\
+    Steady-State Error & 0.000 & --         & deg & -- \\
     \bottomrule
-    \multicolumn{5}{l}{\small [HW\_*] = อัปเดตหลังเก็บข้อมูลจาก Hardware} \\
   \end{tabular}
 \end{table}
 
@@ -2299,11 +2391,10 @@ Difference Equation ของ Position PID คือ
     \midrule
     \multirow{4}{*}{Position PID}
       & Sample Time       & $T_p$  & 0.010  & s \\
-      & Proportional      & $K_{p,pos}$ & 8.889 & (rad/s)/rad \\
-      & Integral Step     & $K_{i,pos}T_p/2$ & [HW\_KIP\_STEP] & (rad/s)/rad \\
-      & Derivative        & $K_{d,pos}/T_p$ & [HW\_KDP\_RATE] & (rad/s)·s/rad \\
+      & Proportional      & $K_{p,pos}$ & 3.00 & (rad/s)/rad \\
+      & Integral Step     & $K_{i,pos}T_p/2$ & 0.0001 & (rad/s)/rad \\
+      & Derivative        & $K_{d,pos}/T_p$ & 0 & (rad/s)·s/rad \\
     \bottomrule
-    \multicolumn{5}{l}{\small หมายเหตุ: ค่า [HW\_*] อัปเดตหลัง Hardware Commissioning} \\
   \end{tabular}
 \end{table}
 

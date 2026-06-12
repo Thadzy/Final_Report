@@ -251,6 +251,88 @@ Encoder               & รุ่น AMT 103 & 1 \\
     \label{fig:final_assembly_3d_corners}
 \end{figure}
 
+% ----------------------------------------------------------------------------
+\subsection{ขั้นตอนการติดตั้ง ณ จุดใช้งาน (Field Installation Procedure)}
+\label{subsec:field_installation}
+% ----------------------------------------------------------------------------
+
+หลังจากผ่านการประกอบและทดสอบระบบย่อยในห้องปฏิบัติการแล้ว
+การนำหุ่นยนต์ไปติดตั้ง ณ จุดใช้งานจริงดำเนินการตามลำดับดังนี้
+
+\subsubsection*{ขั้นตอนที่ 1 — ยึดฐานเครื่องกับฐานสนาม}
+
+นำสกรูหัวจมดำ M8 $\times$ 14\,mm จำนวน 4 ตัว
+ขันยึดฐานเครื่องเข้ากับฐานทดสอบของสนามให้แน่นด้วยประแจหกเหลี่ยม
+
+% -----------------------------------------------------------------------
+% รูปที่: การติดตั้งหุ่นยนต์กับฐานสนาม
+% ชื่อไฟล์แนะนำ: fig_field_base_install.jpg
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.70\textwidth]{fig_field_base_install}
+    \caption{การยึดฐานเครื่องกับฐานสนามด้วยสกรู M8 $\times$ 14\,mm ทั้ง 4 ตำแหน่ง}
+    \label{fig:field_base_install}
+\end{figure}
+
+\subsubsection*{ขั้นตอนที่ 2 — ติดตั้ง Field Encoder Shaft}
+
+นำ Shaft $\varnothing$8\,mm ยาว 200\,mm สอดผ่าน Coupling
+โดยขันสกรูตัวหนอน (Set Screw) ก่อนสอด Shaft เพื่อตั้งตำแหน่ง
+จากนั้นสอด Shaft และขันสกรูตัวหนอนกลับเพื่อล็อกให้แน่น
+เชื่อม Coupling ของสนามเข้ากับ Shaft แท่งนี้
+
+% -----------------------------------------------------------------------
+% รูปที่: การติดตั้ง Field Encoder Shaft
+% ชื่อไฟล์แนะนำ: fig_field_shaft_install.jpg
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{fig_field_shaft_install}
+    \caption{การติดตั้ง Field Encoder Shaft $\varnothing$8\,mm เข้ากับ Coupling}
+    \label{fig:field_shaft_install}
+\end{figure}
+
+\subsubsection*{ขั้นตอนที่ 3 — ติดตั้ง Gripper}
+
+นำ Gripper ติดตั้งเข้ากับปลายแขนด้วยสกรู M5 $\times$ 40\,mm จำนวน 3 ตัว
+และ Lock Nut M5 จำนวน 3 ตัว
+เมื่อยึดแน่นแล้วเสียบท่อลม (Label ตามลำดับ 1A, 1B, 2A, 2B)
+และสาย GX ให้เรียบร้อย
+
+% -----------------------------------------------------------------------
+% รูปที่: การติดตั้ง Gripper
+% ชื่อไฟล์แนะนำ: fig_field_gripper_install.jpg
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.50\textwidth]{fig_field_gripper_install}
+    \caption{การติดตั้ง Gripper ที่ปลายแขนด้วยสกรู M5 $\times$ 40\,mm และ Lock Nut M5}
+    \label{fig:field_gripper_install}
+\end{figure}
+
+% ----------------------------------------------------------------------------
+\subsubsection*{การตรวจสอบก่อนจ่ายกระแสไฟ (Pre-Power Checklist)}
+\label{subsubsec:pre_power}
+
+ก่อนเปิดสวิตช์จ่ายไฟหลัก ตรวจสอบความเรียบร้อยของฮาร์ดแวร์ตามรายการต่อไปนี้:
+
+\begin{itemize}
+    \item[$\square$] \textbf{Mechanical Check:}
+          ไม่มีสิ่งกีดขวางในรัศมีการหมุน 360\textdegree\ ของหุ่นยนต์
+          และชุด Gripper อยู่ในตำแหน่งที่ปลอดภัย
+    \item[$\square$] \textbf{Fastener Check:}
+          สกรูยึดฐาน (M8), สกรูยึด Gripper (M5) และ Set Screw ของ Shaft
+          ขันแน่นครบทุกตัว
+    \item[$\square$] \textbf{Pneumatic Check:}
+          ท่อลม 1A, 1B, 2A, 2B เสียบถูกพอร์ตและไม่มีรอยรั่ว
+    \item[$\square$] \textbf{Cable Check:}
+          สาย GX, สาย Motor และสาย Encoder ต่อครบและไม่ขวางเส้นทางหมุน
+    \item[$\square$] \textbf{E-Stop Check:}
+          กด E-Stop แล้วปล่อย ตรวจสอบว่าไฟ Emergency บนหน้าตู้ติดและดับตามสถานะ
+\end{itemize}
+
+% ----------------------------------------------------------------------------
 \subsection{ปัญหาที่พบระหว่างการประกอบและการแก้ไข}
 \label{subsec:assembly_issues}
 
@@ -397,29 +479,41 @@ Encoder               & รุ่น AMT 103 & 1 \\
 \end{itemize}
 
 % -----------------------------------------------------------------------
-% รูปที่ N: ผลการเดินสายภายในตู้ควบคุมไฟฟ้า
-% ชื่อไฟล์แนะนำ: fig_cabinet_assembled.png หรือ .jpg
-% เนื้อหา: ภาพถ่ายภายในตู้คอนโทรล แสดงการจัดเรียงสายไฟในรางพลาสติก 
-%          ตำแหน่งการวาง PSU, STM32, Optocoupler และ MD10C
+% รูปที่ N: ตู้ควบคุมไฟฟ้า — หน้าตู้และภายในตู้
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.78\textwidth]{fig_cabinet_assembled}
-%     \caption{การจัดเรียงอุปกรณ์และผลการเดินสายไฟภายในตู้ควบคุม}
-%     \label{fig:cabinet_assembled}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{fig_cabinet_front}
+        \caption{หน้าตู้ควบคุม แสดงไฟสถานะ Power/Emergency
+                 และปุ่ม E-Stop}
+        \label{fig:cabinet_front}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{fig_cabinet_assembled}
+        \caption{ภายในตู้ควบคุม แสดงการจัดเรียงอุปกรณ์
+                 และการเดินสายในรางพลาสติก}
+        \label{fig:cabinet_assembled}
+    \end{subfigure}
+    \caption{ตู้ควบคุมไฟฟ้าที่ประกอบเสร็จสมบูรณ์:
+             หน้าตู้ (ซ้าย) และภายในตู้ (ขวา)}
+    \label{fig:cabinet_complete}
+\end{figure}
 
 % -----------------------------------------------------------------------
 % รูปที่ N+1: แผนผังการต่อสายไฟ (Wiring Diagram)
 % ชื่อไฟล์แนะนำ: fig_wiring_schematic.png หรือ .jpg
 % เนื้อหา: Schematic แบบละเอียด แสดง Pin mapping จากบอร์ด STM32 ไปยังอุปกรณ์ต่างๆ
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.95\textwidth]{fig_wiring_schematic}
-%     \caption{แผนผังการต่อสายไฟ (Wiring Diagram) ของระบบควบคุม}
-%     \label{fig:wiring_schematic}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{fig_wiring_schematic}
+    \caption{แผนผังการต่อสายไฟ (Wiring Diagram) ของระบบควบคุม}
+    \label{fig:wiring_schematic}
+\end{figure}
 % ============================================================================
 \section{การพัฒนา Firmware}
 \label{sec:firmware}
@@ -428,14 +522,15 @@ Encoder               & รุ่น AMT 103 & 1 \\
 \subsection{ภาพรวมสถาปัตยกรรมซอฟต์แวร์ (Software Architecture)}
 \label{subsec:firmware_arch}
 
-Firmware สำหรับควบคุมหุ่นยนต์พัฒนาบนไมโครคอนโทรลเลอร์ STM32G474RE (Cortex-M4, 170\,MHz) ผ่านแพลตฟอร์ม STM32CubeIDE สถาปัตยกรรมซอฟต์แวร์ถูกออกแบบในลักษณะโมดูล (Modular Design) เพื่อแยกระบบควบคุมการเคลื่อนที่ (Motion Control) ออกจากระบบสื่อสาร (Communications) และระบบความปลอดภัย (Safety Stack) ข้อมูลสถานะทั้งหมดของระบบถูกจัดเก็บในโครงสร้างตัวแปรกลาง (\texttt{g\_robot}) เพื่อให้ทุกโมดูลสามารถอ้างอิงข้อมูลชุดเดียวกันได้ (Single System View)
-
-\subsection{ภาพรวมสถาปัตยกรรมซอฟต์แวร์ (Software Architecture)}
-\label{subsec:firmware_arch}
-
-Firmware สำหรับควบคุมหุ่นยนต์พัฒนาบนไมโครคอนโทรลเลอร์ STM32G474RE ผ่านแพลตฟอร์ม STM32CubeIDE สถาปัตยกรรมซอฟต์แวร์ถูกออกแบบด้วยแนวคิด Modular Programming และ Separation of Concerns โดยแยกอัลกอริทึมทางคณิตศาสตร์และการควบคุมออกเป็นไลบรารีย่อย (C-Libraries) อย่างชัดเจน 
-
-การออกแบบลักษณะนี้ช่วยลดความพึ่งพากันของโค้ด (Loose Coupling) ทำให้สามารถทำการทดสอบระดับหน่วย (Unit Test) แยกเฉพาะโมดูลได้ง่ายขึ้น และเพิ่มความสามารถในการนำโค้ดกลับมาใช้ซ้ำ (Reusability) ข้อมูลสถานะทั้งหมดของระบบถูกจัดเก็บในโครงสร้างตัวแปรกลาง (\texttt{g\_robot}) เพื่อให้ทุกโมดูลสามารถอ้างอิงข้อมูลชุดเดียวกันได้ โครงสร้างไลบรารีและโมดูลหลักแสดงใน\cref{tab:firmware_modules}
+Firmware สำหรับควบคุมหุ่นยนต์พัฒนาบนไมโครคอนโทรลเลอร์ STM32G474RE (Cortex-M4, 170\,MHz) ผ่านแพลตฟอร์ม STM32CubeIDE
+สถาปัตยกรรมซอฟต์แวร์ถูกออกแบบด้วยแนวคิด Modular Programming และ Separation of Concerns
+โดยแยกระบบควบคุมการเคลื่อนที่ (Motion Control) ออกจากระบบสื่อสาร (Communications)
+และระบบความปลอดภัย (Safety Stack) อย่างชัดเจน
+การออกแบบลักษณะนี้ช่วยลดความพึ่งพากันของโค้ด (Loose Coupling)
+ทำให้สามารถทดสอบระดับหน่วย (Unit Test) แยกเฉพาะโมดูลได้ง่ายขึ้น
+ข้อมูลสถานะทั้งหมดถูกจัดเก็บในโครงสร้างตัวแปรกลาง (\texttt{g\_robot})
+เพื่อให้ทุกโมดูลอ้างอิงข้อมูลชุดเดียวกัน (Single System View)
+โครงสร้างไลบรารีและโมดูลหลักแสดงใน\cref{tab:firmware_modules}
 
 \begin{table}[H]
   \centering
@@ -567,12 +662,12 @@ Firmware สำหรับควบคุมหุ่นยนต์พัฒ�
   \text{integ}[k] = \text{integ}[k-1] + K_{i,v}\,e_v[k]\,T_v + K_{t,aw}(u_{sat}[k] - u_{pre}[k])\,T_v
   \label{eq:pid_antiwindup}
 \end{equation}
-ส่วน Position Outer Loop (100\,Hz) จะคำนวณ Setpoint เชิงความเร็วเพื่อป้อนให้กับ Inner Loop ค่า Gain ที่ใช้ใน Firmware แสดงใน\cref{tab:pid_gains}
+ส่วน Position Outer Loop (100\,Hz) จะคำนวณ Setpoint เชิงความเร็วเพื่อป้อนให้กับ Inner Loop ค่า Gain ที่ใช้ใน Firmware แสดงใน\cref{tab:pid_gains_fw}
 
 \begin{table}[H]
   \centering
   \caption{PID Gains และ Feedforward ที่ใช้งานจริงบนระบบฮาร์ดแวร์}
-  \label{tab:pid_gains}
+  \label{tab:pid_gains_fw}
   \small
   \begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm} >{\raggedright\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{3.5cm} >{\centering\arraybackslash}p{2.0cm}}
     \toprule
@@ -653,29 +748,6 @@ Firmware ถูกออกแบบให้มีการแลกเปล�
     \item \textbf{Main Loop Context (Low Priority):} โมดูลสื่อสาร (\texttt{modbus\_bridge}, \texttt{canbus\_node}, \texttt{joystick}) จะทำการอ่านข้อมูลล่าสุดจาก \texttt{g\_robot} เพื่อส่ง Telemetry ไปยัง PC หรือรับคำสั่งใหม่เข้ามา ซึ่งช่วยลดความหน่วง (Latency) ของการประมวลผลคำสั่งสื่อสารที่อาจขัดจังหวะลูปการควบคุมหลักได้
 \end{enumerate}
 
-\subsection{การเชื่อมต่อ Base System และ Modbus RTU}
-\label{subsec:modbus_integration}
-
-ระบบสื่อสารระหว่างหุ่นยนต์และ Base System ใช้โปรโตคอล Modbus RTU ผ่านพอร์ต LPUART1 (230400 bps, 8N1) โดย STM32 ทำหน้าที่เป็น Slave Address 0x15 (21)
-
-การสื่อสารฝั่ง Base System ถูกพัฒนาด้วย Python โดยมี \texttt{serial\_bridge.py} ทำหน้าที่เป็น Multiplexer เพื่อแยกข้อมูล Telemetry (เช่น ตำแหน่ง, ความเร็ว, ค่ากระแส) ส่งต่อไปยัง Web Dashboard ผ่าน WebSocket และแยกคำสั่ง Modbus ส่งผ่าน Virtual COM Port ไปยังระบบควบคุมระดับสูง การทำงานร่วมกันแบบนี้ช่วยแก้ปัญหาคอขวดของการสื่อสารผ่าน Serial Port เดียว
-
-\subsection{การเชื่อมต่อ Motor, Encoder และ Motor Driver}
-\label{subsec:motor_integration}
-
-การประมวลผลสัญญาณฮาร์ดแวร์หลักเชื่อมต่อโดยตรงกับ Peripheral ของ STM32:
-\begin{itemize}
-    \item \textbf{Encoder AMT-103:} เชื่อมต่อผ่าน TIM3 ในโหมด Quadrature Encoder Interface (QEI) บนขา PB4 และ PB5 ให้ความละเอียด 8192 counts/rev
-    \item \textbf{Cytron MD10C Driver:} รับสัญญาณ PWM จาก TIM1 (PA8) ด้วยความถี่ Switching ที่ 19.6\,kHz เพื่อหลีกเลี่ยงความถี่เสียงที่มนุษย์ได้ยิน (Audible Noise) และสัญญาณทิศทาง (DIR) ถูกส่งผ่าน Optocoupler Module เพื่อป้องกัน Ground Loop
-    \item \textbf{Current Sensor (WCS1800):} เชื่อมต่อเข้ากับ ADC1 (PA0) ผ่านวงจร DMA Averaging (EMA Filter) เพื่ออ่านกระแสป้อนกลับเข้าสู่ Safety Stack
-\end{itemize}
-
-\subsection{การเชื่อมต่อ Joystick ผ่าน ESP32}
-\label{subsec:joystick_integration}
-
-ระบบรองรับการควบคุมแบบ Manual ผ่านจอยสติ๊ก Bluetooth โดยใช้ ESP32-DEVKIT-V1 เป็นตัวรับสัญญาณและถอดรหัส จากนั้นส่งคำสั่งในรูปแบบ ASCII Character ผ่าน USART3 (115200 bps, 8N1) ไปยัง STM32 
-
-การสลับโหมดควบคุมระหว่าง Base System และ Joystick ทำได้ผ่านสวิตช์ฮาร์ดแวร์ โดยเมื่ออยู่ในโหมด Base System คำสั่งจาก Joystick จะถูกตัดออกทั้งหมด (Blocked) ยกเว้นปุ่ม \texttt{P/X} (Emergency Stop) และปุ่มสลับโหมด เพื่อให้มั่นใจได้ว่าระบบสามารถหยุดฉุกเฉินได้จากจอยสติ๊กไร้สายตลอดเวลา
 \subsection{การเชื่อมต่ออุปกรณ์ขับเคลื่อนและเซนเซอร์ (Motor, Encoder \& Driver)}
 \label{subsec:motor_integration}
 
@@ -689,6 +761,14 @@ Firmware ถูกออกแบบให้มีการแลกเปล�
 \label{subsec:joystick_integration}
 
 ESP32-DEVKIT-V1 ทำหน้าที่เป็นตัวรับสัญญาณ Bluetooth จากจอยสติ๊กและแปลงข้อมูลเป็น Command Character ส่งต่อให้ STM32 ผ่าน USART3 (115200 bps, 8N1) ที่ขา PC10 (TX) และ PC11 (RX) เพื่อใช้ในการควบคุมระยะไกล
+จอยสติ๊กที่ใช้คือ MOCUTE-052 VR ดังแสดงใน\cref{fig:joystick}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{fig_joystick}
+  \caption{จอยสติ๊ก MOCUTE-052 VR ที่ใช้สำหรับการควบคุมระยะไกลผ่าน Bluetooth}
+  \label{fig:joystick}
+\end{figure}
 
 \begin{table}[H]
   \centering

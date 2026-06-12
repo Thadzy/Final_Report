@@ -1,60 +1,64 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {1.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ข้อกำหนดความต้องการของระบบทั้ง 32 ข้อ}}{3}{table.caption.7}%
 \contentsline {table}{\numberline {1.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุป Subsystem หลักของระบบ}}{5}{table.caption.14}%
+\contentsline {table}{\numberline {1.3}{\ignorespaces สรุปงบประมาณโครงงาน จำแนกตามหมวดหมู่}}{6}{table.1.3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces พารามิเตอร์ภาระโหลดของระบบเพลา}}{39}{table.caption.70}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการคำนวณเพลาและการออกแบบ Step Shaft}}{41}{table.caption.75}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces คุณสมบัติวัสดุที่ใช้ใน FEA เพลา (AISI 304)}}{41}{table.caption.77}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการวิเคราะห์ FEA เพลาเทียบกับการคำนวณ ASME Code}}{45}{table.caption.86}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ค่าเริ่มต้นของระบบสายพาน HTD5M}}{46}{table.caption.89}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการคำนวณสายพาน HTD5M}}{48}{table.caption.94}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการคำนวณอายุการใช้งานของตลับลูกปืน}}{48}{table.caption.95}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces \xpg@aux {}{thai}\ignorespaces คุณสมบัติวัสดุที่ใช้ใน FEA (Galvanized Steel)}}{50}{table.caption.101}%
-\contentsline {table}{\numberline {3.9}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการวิเคราะห์ FEA เทียบกับข้อกำหนด M3}}{52}{table.caption.105}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การคำนวณกำลังไฟฟ้าของ 24\,V Motor Bus}}{53}{table.caption.107}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การคำนวณกำลังไฟฟ้าของ 5\,V Logic Bus}}{54}{table.caption.108}%
-\contentsline {table}{\numberline {3.12}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การเลือกขนาด Circuit Breaker และ Fuse}}{54}{table.caption.109}%
-\contentsline {table}{\numberline {3.13}{\ignorespaces \xpg@aux {}{thai}\ignorespaces STM32G474RE Pin Assignment (จาก CubeMX IOC)}}{57}{table.caption.112}%
-\contentsline {table}{\numberline {3.14}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการวัด $R_a$ และ $L_a$ จาก Locked Rotor Test ทั้ง 3 แรงดัน}}{60}{table.caption.120}%
-\contentsline {table}{\numberline {3.15}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การตั้งค่า Chirp Signal สำหรับ Grey-box Estimation}}{63}{table.caption.127}%
-\contentsline {table}{\numberline {3.16}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการ Cross-Validation ของแบบจำลองกับข้อมูลประเภทต่าง ๆ}}{63}{table.caption.130}%
-\contentsline {table}{\numberline {3.17}{\ignorespaces \xpg@aux {}{thai}\ignorespaces พารามิเตอร์ที่ได้จาก System Identification}}{65}{table.caption.134}%
-\contentsline {table}{\numberline {3.18}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปค่า PID Gain และ Feedforward ของระบบควบคุม}}{72}{table.caption.148}%
-\contentsline {table}{\numberline {3.19}{\ignorespaces \xpg@aux {}{thai}\ignorespaces เปรียบเทียบค่า PID Gain จาก Theoretical Design และ Hardware Commissioning}}{73}{table.caption.151}%
-\contentsline {table}{\numberline {3.20}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Step Response บน Hardware เทียบกับ Requirements}}{74}{table.caption.152}%
-\contentsline {table}{\numberline {3.21}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปค่าสัมประสิทธิ์ Discrete-time Controller (Theoretical Gains, หน่วย V)}}{76}{table.caption.157}%
-\contentsline {table}{\numberline {3.22}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุป Stability Margin ของ Cascade PID}}{79}{table.caption.163}%
-\contentsline {table}{\numberline {3.23}{\ignorespaces \xpg@aux {}{thai}\ignorespaces พารามิเตอร์ ZVD Input Shaper ที่ใช้ใน Firmware}}{83}{table.caption.169}%
-\contentsline {table}{\numberline {3.24}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการ Simulation เปรียบเทียบ Unshaped กับ ZVD-Shaped (Worst-case Move $360\degree $)}}{84}{table.caption.174}%
-\contentsline {table}{\numberline {3.25}{\ignorespaces \xpg@aux {}{thai}\ignorespaces พารามิเตอร์ S-Curve Motion Profile จาก Hardware Identification}}{86}{table.caption.177}%
-\contentsline {table}{\numberline {3.26}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Move Sequence ของ Scenario 1 (Worst-case)}}{89}{table.caption.181}%
-\contentsline {table}{\numberline {3.27}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Move Sequence ของ Scenario 2 (Random Moderate)}}{89}{table.caption.183}%
-\contentsline {table}{\numberline {3.28}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุป Cycle Time เปรียบเทียบกับข้อกำหนด P1}}{90}{table.caption.184}%
-\contentsline {table}{\numberline {3.29}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปการวิเคราะห์ Rod Swing เทียบกับเกณฑ์การประกอบ}}{92}{table.caption.188}%
-\contentsline {table}{\numberline {3.30}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Modbus Write Register Map (PC $\rightarrow $ Robot)}}{93}{table.caption.189}%
-\contentsline {table}{\numberline {3.31}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Modbus Read Register Map (Robot $\rightarrow $ PC)}}{94}{table.caption.190}%
-\contentsline {table}{\numberline {3.32}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการออกแบบระบบทั้งหมดเทียบกับ Requirements}}{97}{table.caption.194}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces พารามิเตอร์ภาระโหลดของระบบเพลา}}{41}{table.caption.70}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการคำนวณเพลาและการออกแบบ Step Shaft}}{43}{table.caption.75}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces คุณสมบัติวัสดุที่ใช้ใน FEA เพลา (AISI 304)}}{43}{table.caption.77}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการวิเคราะห์ FEA เพลาเทียบกับการคำนวณ ASME Code}}{47}{table.caption.86}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ค่าเริ่มต้นของระบบสายพาน HTD5M}}{48}{table.caption.89}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการคำนวณสายพาน HTD5M}}{50}{table.caption.94}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces พารามิเตอร์ห่วงโซ่การส่งกำลังสำหรับการคำนวณแรงบิด}}{51}{table.caption.98}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการคำนวณอายุการใช้งานของตลับลูกปืน}}{52}{table.caption.100}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces \xpg@aux {}{thai}\ignorespaces คุณสมบัติวัสดุที่ใช้ใน FEA (Galvanized Steel)}}{54}{table.caption.106}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการวิเคราะห์ FEA เทียบกับข้อกำหนด M3}}{55}{table.caption.110}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การคำนวณกำลังไฟฟ้าของ 24\,V Motor Bus}}{56}{table.caption.112}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การคำนวณกำลังไฟฟ้าของ 5\,V Logic Bus}}{57}{table.caption.113}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การเลือกขนาด Circuit Breaker และ Fuse}}{57}{table.caption.114}%
+\contentsline {table}{\numberline {3.14}{\ignorespaces \xpg@aux {}{thai}\ignorespaces STM32G474RE Pin Assignment (จาก CubeMX IOC)}}{60}{table.caption.117}%
+\contentsline {table}{\numberline {3.15}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการวัด $R_a$ และ $L_a$ จาก Locked Rotor Test ทั้ง 3 แรงดัน}}{63}{table.caption.125}%
+\contentsline {table}{\numberline {3.16}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การตั้งค่า Chirp Signal สำหรับ Grey-box Estimation}}{66}{table.caption.132}%
+\contentsline {table}{\numberline {3.17}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการ Cross-Validation ของแบบจำลองกับข้อมูลประเภทต่าง ๆ}}{66}{table.caption.135}%
+\contentsline {table}{\numberline {3.18}{\ignorespaces \xpg@aux {}{thai}\ignorespaces พารามิเตอร์ที่ได้จาก System Identification}}{68}{table.caption.139}%
+\contentsline {table}{\numberline {3.19}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปค่า PID Gain และ Feedforward ของระบบควบคุม}}{75}{table.caption.153}%
+\contentsline {table}{\numberline {3.20}{\ignorespaces \xpg@aux {}{thai}\ignorespaces เปรียบเทียบค่า PID Gain จาก Theoretical Design และ Hardware Commissioning}}{76}{table.caption.156}%
+\contentsline {table}{\numberline {3.21}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Step Response บน Hardware เทียบกับ Requirements}}{77}{table.caption.157}%
+\contentsline {table}{\numberline {3.22}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปค่าสัมประสิทธิ์ Discrete-time Controller (Theoretical Gains, หน่วย V)}}{79}{table.caption.162}%
+\contentsline {table}{\numberline {3.23}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุป Stability Margin ของ Cascade PID}}{82}{table.caption.168}%
+\contentsline {table}{\numberline {3.24}{\ignorespaces \xpg@aux {}{thai}\ignorespaces พารามิเตอร์ ZVD Input Shaper ที่ใช้ใน Firmware}}{86}{table.caption.174}%
+\contentsline {table}{\numberline {3.25}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการ Simulation เปรียบเทียบ Unshaped กับ ZVD-Shaped (Worst-case Move $360\degree $)}}{87}{table.caption.179}%
+\contentsline {table}{\numberline {3.26}{\ignorespaces \xpg@aux {}{thai}\ignorespaces พารามิเตอร์ S-Curve Motion Profile จาก Hardware Identification}}{89}{table.caption.182}%
+\contentsline {table}{\numberline {3.27}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Move Sequence ของ Scenario 1 (Worst-case)}}{92}{table.caption.186}%
+\contentsline {table}{\numberline {3.28}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Move Sequence ของ Scenario 2 (Random Moderate)}}{92}{table.caption.188}%
+\contentsline {table}{\numberline {3.29}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุป Cycle Time เปรียบเทียบกับข้อกำหนด P1}}{93}{table.caption.189}%
+\contentsline {table}{\numberline {3.30}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปการวิเคราะห์ Rod Swing เทียบกับเกณฑ์การประกอบ}}{95}{table.caption.193}%
+\contentsline {table}{\numberline {3.31}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Modbus Write Register Map (PC $\rightarrow $ Robot)}}{96}{table.caption.194}%
+\contentsline {table}{\numberline {3.32}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Modbus Read Register Map (Robot $\rightarrow $ PC)}}{97}{table.caption.195}%
+\contentsline {table}{\numberline {3.33}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการออกแบบระบบทั้งหมดเทียบกับ Requirements}}{100}{table.caption.199}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนฐาน}}{100}{table.caption.198}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนแขนกล}}{102}{table.caption.202}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบชุดเอ็นโค้ดเดอร์}}{105}{table.caption.206}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Bill of Materials (BOM) ของตู้ควบคุม}}{108}{table.caption.210}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces โครงสร้างโมดูลและไลบรารีใน STM32 Firmware}}{111}{table.caption.212}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces PID Gains และ Feedforward ที่ใช้งานจริงบนระบบฮาร์ดแวร์}}{114}{table.caption.217}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ตารางการ Map Command Character สำหรับ Joystick}}{118}{table.caption.219}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนฐาน}}{103}{table.caption.203}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนแขนกล}}{105}{table.caption.207}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบชุดเอ็นโค้ดเดอร์}}{108}{table.caption.211}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Bill of Materials (BOM) ของตู้ควบคุม}}{114}{table.caption.218}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces โครงสร้างโมดูลและไลบรารีใน STM32 Firmware}}{118}{table.caption.222}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces PID Gains และ Feedforward ที่ใช้งานจริงบนระบบฮาร์ดแวร์}}{121}{table.caption.227}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ตารางการ Map Command Character สำหรับ Joystick}}{125}{table.caption.230}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการวัดระยะคลอนของระบบส่งกำลัง (ค่าเฉลี่ยจากการวัด 3 ตำแหน่ง $\times $ 5 ครั้ง)}}{120}{table.caption.223}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Encoder AMT-103}}{121}{table.caption.229}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Proximity Sensor สำหรับ Homing}}{122}{table.caption.234}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการวัด $R_a$ และ $L_a$ จาก Locked Rotor Test ที่ $V_{in} = 12$\,V (3 runs)}}{124}{table.caption.245}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการ Estimate พารามิเตอร์จาก Chirp Test (สรุปจาก 9 Experiments)}}{125}{table.caption.249}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล Cross-Validation ของแบบจำลองกับข้อมูลจริง}}{126}{table.caption.250}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผล Simulation เปรียบเทียบ Unshaped กับ ZVD-Shaped (Worst-case Move $360\degree $, มีโหลด Connection Rod)}}{127}{table.caption.253}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Process Noise $\mathbf {Q}$ และ Measurement Noise $R$ ที่ใช้ใน Kalman Filter}}{127}{table.caption.255}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Step Response บน Hardware จริง (With Load)}}{128}{table.caption.260}%
-\contentsline {table}{\numberline {5.10}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบความแม่นยำตำแหน่ง (A1) --- ค่าเฉลี่ยจาก 10 ครั้ง}}{130}{table.caption.265}%
-\contentsline {table}{\numberline {5.11}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบความซ้ำซากได้ 100 รอบ (A2)}}{131}{table.caption.270}%
-\contentsline {table}{\numberline {5.12}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Cycle Time (P1) --- 3 รอบต่อเนื่อง}}{133}{table.caption.275}%
-\contentsline {table}{\numberline {5.13}{\ignorespaces Requirements Traceability Matrix (32 ข้อ)}}{135}{table.5.13}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการวัดระยะคลอนของระบบส่งกำลัง (ค่าเฉลี่ยจากการวัด 3 ตำแหน่ง $\times $ 5 ครั้ง)}}{127}{table.caption.234}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Encoder AMT-103}}{128}{table.caption.240}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Proximity Sensor สำหรับ Homing}}{129}{table.caption.245}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการวัด $R_a$ และ $L_a$ จาก Locked Rotor Test ที่ $V_{in} = 12$\,V (3 runs)}}{131}{table.caption.256}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการ Estimate พารามิเตอร์จาก Chirp Test (สรุปจาก 9 Experiments)}}{133}{table.caption.262}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล Cross-Validation ของแบบจำลองกับข้อมูลจริง}}{134}{table.caption.263}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผล Simulation เปรียบเทียบ Unshaped กับ ZVD-Shaped (Worst-case Move $360\degree $, มีโหลด Connection Rod)}}{136}{table.caption.268}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Process Noise $\mathbf {Q}$ และ Measurement Noise $R$ ที่ใช้ใน Kalman Filter}}{137}{table.caption.270}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Step Response บน Hardware จริง (With Load)}}{138}{table.caption.275}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบความแม่นยำตำแหน่ง (A1) --- ค่าเฉลี่ยจาก 10 ครั้ง}}{140}{table.caption.280}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบความซ้ำซากได้ 100 รอบ (A2)}}{141}{table.caption.285}%
+\contentsline {table}{\numberline {5.12}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Cycle Time (P1) --- 3 รอบต่อเนื่อง}}{143}{table.caption.290}%
+\contentsline {table}{\numberline {5.13}{\ignorespaces Requirements Traceability Matrix (32 ข้อ)}}{146}{table.5.13}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
 \addvspace {10\p@ }

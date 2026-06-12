@@ -21,7 +21,7 @@ $J = \SI{0.72762}{\kilogram\metre\squared}$ และ $B = \SI{0.19279}{\newton\
 
 เพื่อให้บรรลุข้อกำหนดด้าน Cycle Time ไม่เกิน 35~วินาทีสำหรับสี่ชิ้น
 ระบบติดตั้ง ZV Input Shaper ที่ออกแบบจากความถี่ธรรมชาติของแท่ง Connection Rod
-($\omega_{n,\mathrm{rod}} = \SI{12.386}{\radian\per\second}$, $\zeta_\mathrm{rod} = 0.0984$)
+($\omega_{n,\mathrm{rod}} = \SI{12.386}{\radian\per\second}$, $\zeta_\mathrm{rod} = 0.041$)
 ซึ่งช่วยยกเลิกการแกว่งของปลายแขนโดยแทบไม่เพิ่มเวลาหน่วง
 นอกจากนี้ยังใช้ Kalman Filter สี่สถานะ
 $\mathbf{x} = [\theta_\mathrm{arm},\; \omega_\mathrm{arm},\; i_a,\; \tau_d]^\top$
@@ -30,10 +30,10 @@ $\mathbf{x} = [\theta_\mathrm{arm},\; \omega_\mathrm{arm},\; i_a,\; \tau_d]^\top
 ส่วนกริปเปอร์ควบคุมด้วยสัญญาณ Digital I/O โดยตรง
 
 ผลการจำลองและการทดสอบระบบย่อยแสดงให้เห็นว่าระบบมีศักยภาพในการบรรลุข้อกำหนดสมรรถนะหลัก
-ได้แก่ Overshoot ไม่เกิน 1\% (P5), Settling time ไม่เกิน 0.5~s (P6),
-ความแม่นยำตำแหน่ง $\pm$[VAL\_ACCURACY]$\degree$ (A1),
-ความซ้ำซากได้ $\pm$[VAL\_REPEAT]$\degree$ ใน 100 รอบ (A2)
-และ Cycle time รวม [VAL\_CYCLE]~วินาที (P1)
+ได้แก่ Settling Time ไม่เกิน 0.5~s (P5), Overshoot ไม่เกิน 1\% (P6),
+ความแม่นยำตำแหน่ง $\pm$0.100$\degree$ (A1),
+ความซ้ำซากได้ $\pm$0.143$\degree$ ใน 100 รอบ (A2)
+และ Cycle time รวม 32.2~วินาที (P1)
 ทั้งนี้การทวนสอบข้อกำหนดเชิงปริมาณครบถ้วนอยู่ระหว่างดำเนินการเก็บข้อมูลบนฮาร์ดแวร์จริง
 
 \vspace{1.2cm}
@@ -67,7 +67,7 @@ $J = \SI{0.72762}{\kilogram\metre\squared}$, and $B = \SI{0.19279}{\newton\metre
 
 To satisfy the cycle time requirement of 35~s for four workpieces,
 a ZV Input Shaper was designed based on the measured natural frequency of the Connection Rod
-($\omega_{n,\mathrm{rod}} = \SI{12.386}{\radian\per\second}$, $\zeta_\mathrm{rod} = 0.0984$),
+($\omega_{n,\mathrm{rod}} = \SI{12.386}{\radian\per\second}$, $\zeta_\mathrm{rod} = 0.041$),
 effectively eliminating residual vibration with negligible additional delay.
 A four-state Kalman filter with state vector
 $\mathbf{x} = [\theta_\mathrm{arm},\; \omega_\mathrm{arm},\; i_a,\; \tau_d]^\top$
@@ -77,10 +77,10 @@ Modbus RTU over RS-485, while the gripper is actuated through digital I/O signal
 
 Simulation results and subsystem-level testing indicate that the system has the capability
 to meet its primary performance requirements,
-including overshoot not exceeding 1\% (P5), settling time within 0.5~s (P6),
-position accuracy of $\pm$[VAL\_ACCURACY]$\degree$ (A1),
-repeatability of $\pm$[VAL\_REPEAT]$\degree$ over 100 cycles (A2),
-and a total cycle time of [VAL\_CYCLE]~s for four workpieces (P1).
+including settling time within 0.5~s (P5), overshoot not exceeding 1\% (P6),
+position accuracy of $\pm$0.100$\degree$ (A1),
+repeatability of $\pm$0.143$\degree$ over 100 cycles (A2),
+and a total cycle time of 32.2~s for four workpieces (P1).
 Full quantitative verification against all requirements is pending hardware-level testing.
 
 \vspace{1.2cm}

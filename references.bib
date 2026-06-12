@@ -1,23 +1,274 @@
-@manual{iso2812010,
-  title        = {ISO 281: Rolling bearings -- Dynamic load ratings and rating life},
-  organization = {International Organization for Standardization},
-  year         = {2010},
-  url          = {https://www.iso.org/standard/38131.html}
+% ============================================================
+%  References — Circular Pick & Place Robot Final Report
+% ============================================================
+
+% ------------------------------------------------------------
+%  DC Motor Modelling & State-Space
+% ------------------------------------------------------------
+
+@book{ogata2010modern,
+  author    = {Ogata, Katsuhiko},
+  title     = {Modern Control Engineering},
+  edition   = {5th},
+  publisher = {Prentice Hall},
+  year      = {2010}
 }
 
-@manual{skf2023bearing,
-  title        = {SKF Rolling Bearings Catalogue and Engineering Guide},
-  organization = {SKF Group},
+@book{hughes2019electric,
+  author    = {Hughes, Austin and Drury, Bill},
+  title     = {Electric Motors and Drives: Fundamentals, Types and Applications},
+  edition   = {5th},
+  publisher = {Newnes},
+  year      = {2019}
+}
+
+@misc{kalmanfiltercom2023dcmotor,
+  author       = {{Kalman Filter}},
+  title        = {Estimating the State of a {DC} Motor},
+  howpublished = {\url{https://kalman-filter.com/estimating-the-state-of-a-dc-motor/}},
   year         = {2023},
-  url          = {https://www.skf.com/group/products/rolling-bearings}
+  note         = {Accessed: 2025}
 }
 
-@manual{habasit2021belt,
-  title        = {Habasit Timing Belts Engineering Guide},
-  organization = {Habasit AG},
-  year         = {2021},
-  url          = {https://www.habasit.com/en-US/Products/Timing-Belts}
+@manual{rs775datasheet,
+  title        = {RS-775 Brushed {DC} Motor Datasheet},
+  organization = {Mabuchi Motor Co., Ltd.},
+  year         = {2020},
+  url          = {https://www.mabuchi-motor.com/}
 }
+
+% ------------------------------------------------------------
+%  Control Theory — PID, Cascade, Anti-windup
+% ------------------------------------------------------------
+
+@book{franklin2015feedback,
+  author    = {Franklin, Gene F. and Powell, J. David and Emami-Naeini, Abbas},
+  title     = {Feedback Control of Dynamic Systems},
+  edition   = {7th},
+  publisher = {Pearson},
+  year      = {2015}
+}
+
+@book{astrom2006advanced,
+  author    = {{\AA}str{\"o}m, Karl J. and H{\"a}gglund, Tore},
+  title     = {Advanced {PID} Control},
+  publisher = {ISA --- The Instrumentation, Systems, and Automation Society},
+  year      = {2006}
+}
+
+@article{astrom1989antiwindup,
+  author  = {{\AA}str{\"o}m, Karl J. and Rundqwist, Lennart},
+  title   = {Integrator Windup and How to Avoid It},
+  journal = {Proceedings of the American Control Conference},
+  year    = {1989},
+  pages   = {1693--1698}
+}
+
+@book{ogata2004discrete,
+  author    = {Ogata, Katsuhiko},
+  title     = {Discrete-Time Control Systems},
+  edition   = {2nd},
+  publisher = {Prentice Hall},
+  year      = {1995}
+}
+
+% ------------------------------------------------------------
+%  Input Shaping / ZVD
+% ------------------------------------------------------------
+
+@article{singer1990preshaping,
+  author  = {Singer, Neil C. and Seering, Warren P.},
+  title   = {Preshaping Command Inputs to Reduce System Vibration},
+  journal = {Journal of Dynamic Systems, Measurement, and Control},
+  volume  = {112},
+  number  = {1},
+  pages   = {76--82},
+  year    = {1990},
+  doi     = {10.1115/1.2896122}
+}
+
+@article{singhose1994extra,
+  author  = {Singhose, William E. and Seering, Warren P. and Singer, Neil C.},
+  title   = {Residual Vibration Reduction Using Vector Diagrams to Generate Shaped Inputs},
+  journal = {Journal of Mechanical Design},
+  volume  = {116},
+  number  = {2},
+  pages   = {654--659},
+  year    = {1994},
+  doi     = {10.1115/1.2919428}
+}
+
+% ------------------------------------------------------------
+%  Kalman Filter
+% ------------------------------------------------------------
+
+@techreport{welch1995kalman,
+  author      = {Welch, Greg and Bishop, Gary},
+  title       = {An Introduction to the {Kalman} Filter},
+  institution = {University of North Carolina at Chapel Hill},
+  number      = {TR 95-041},
+  year        = {2006},
+  url         = {https://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf}
+}
+
+@book{grewal2014kalman,
+  author    = {Grewal, Mohinder S. and Andrews, Angus P.},
+  title     = {Kalman Filtering: Theory and Practice with {MATLAB}},
+  edition   = {4th},
+  publisher = {Wiley-IEEE Press},
+  year      = {2014}
+}
+
+% ------------------------------------------------------------
+%  System Identification — Least Squares, Chirp
+% ------------------------------------------------------------
+
+@book{ljung1999system,
+  author    = {Ljung, Lennart},
+  title     = {System Identification: Theory for the User},
+  edition   = {2nd},
+  publisher = {Prentice Hall},
+  year      = {1999}
+}
+
+@book{pintelon2012system,
+  author    = {Pintelon, Rik and Schoukens, Johan},
+  title     = {System Identification: A Frequency Domain Approach},
+  edition   = {2nd},
+  publisher = {Wiley-IEEE Press},
+  year      = {2012}
+}
+
+% ------------------------------------------------------------
+%  Signal Processing — Butterworth Filter, filtfilt
+% ------------------------------------------------------------
+
+@book{proakis2006dsp,
+  author    = {Proakis, John G. and Manolakis, Dimitris G.},
+  title     = {Digital Signal Processing: Principles, Algorithms, and Applications},
+  edition   = {4th},
+  publisher = {Pearson},
+  year      = {2006}
+}
+
+@manual{matlab2023signal,
+  title        = {{Signal Processing Toolbox} User's Guide},
+  organization = {The MathWorks, Inc.},
+  year         = {2023},
+  address      = {Natick, MA, USA},
+  url          = {https://www.mathworks.com/help/signal/}
+}
+
+@manual{matlab2023,
+  title        = {{Simulink} Parameter Estimator User Guide},
+  organization = {The MathWorks, Inc.},
+  year         = {2023},
+  address      = {Natick, MA, USA},
+  url          = {https://www.mathworks.com/help/sldo/parameter-estimation.html}
+}
+
+% ------------------------------------------------------------
+%  S-Curve Trajectory Planning
+% ------------------------------------------------------------
+
+@book{biagiotti2008trajectory,
+  author    = {Biagiotti, Luigi and Melchiorri, Claudio},
+  title     = {Trajectory Planning for Automatic Machines and Robots},
+  publisher = {Springer},
+  year      = {2008},
+  doi       = {10.1007/978-3-540-68952-5}
+}
+
+% ------------------------------------------------------------
+%  Microcontroller — STM32G474RE
+% ------------------------------------------------------------
+
+@manual{st2019stm32g4,
+  title        = {{STM32G4} Series Reference Manual ({RM0440})},
+  organization = {STMicroelectronics},
+  year         = {2022},
+  url          = {https://www.st.com/resource/en/reference_manual/rm0440-stm32g4-series-advanced-armbased-32bit-mcus-stmicroelectronics.pdf}
+}
+
+@manual{st2022stm32g474ds,
+  title        = {{STM32G474xB/xC/xE} Datasheet},
+  organization = {STMicroelectronics},
+  year         = {2022},
+  url          = {https://www.st.com/resource/en/datasheet/stm32g474re.pdf}
+}
+
+@manual{st2022cubemx,
+  title        = {{STM32CubeIDE} User Guide},
+  organization = {STMicroelectronics},
+  year         = {2022},
+  url          = {https://www.st.com/resource/en/user_manual/um2609-stm32cubeide-user-guide-stmicroelectronics.pdf}
+}
+
+% ------------------------------------------------------------
+%  Communication — Modbus RTU / RS-485
+% ------------------------------------------------------------
+
+@manual{modbusorg2006,
+  title        = {{Modbus} Application Protocol Specification V1.1b3},
+  organization = {Modbus Organization},
+  year         = {2006},
+  url          = {https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf}
+}
+
+@manual{modbus2006serial,
+  title        = {{Modbus} over Serial Line Specification and Implementation Guide V1.02},
+  organization = {Modbus Organization},
+  year         = {2006},
+  url          = {https://modbus.org/docs/Modbus_over_serial_line_V1_02.pdf}
+}
+
+% ------------------------------------------------------------
+%  Encoder — AMT-103
+% ------------------------------------------------------------
+
+@manual{cui2020amt103,
+  title        = {{AMT10} Series Modular Encoder Datasheet},
+  organization = {CUI Devices},
+  year         = {2020},
+  url          = {https://www.cuidevices.com/product/resource/amt10.pdf}
+}
+
+% ------------------------------------------------------------
+%  Motor Driver — Cytron MD10C
+% ------------------------------------------------------------
+
+@manual{cytron2015md10c,
+  title        = {{MD10C} 10A DC Motor Driver User Manual},
+  organization = {Cytron Technologies},
+  year         = {2015},
+  url          = {https://docs.cytron.io/}
+}
+
+% ------------------------------------------------------------
+%  Power Supply — Mean Well
+% ------------------------------------------------------------
+
+@manual{meanwell2022psu,
+  title        = {Switching Power Supply User Manual},
+  organization = {Mean Well Enterprises Co., Ltd.},
+  year         = {2022},
+  url          = {https://www.meanwell.com/}
+}
+
+% ------------------------------------------------------------
+%  Wireless — ESP32 / Bluetooth
+% ------------------------------------------------------------
+
+@manual{espressif2023esp32,
+  title        = {{ESP32} Series Datasheet},
+  organization = {Espressif Systems},
+  year         = {2023},
+  url          = {https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf}
+}
+
+% ------------------------------------------------------------
+%  Mechanical Design — Shaft, Gearbox, Standards
+% ------------------------------------------------------------
 
 @book{shigley2015mechanical,
   author    = {Budynas, Richard G. and Nisbett, J. Keith},
@@ -35,9 +286,49 @@
   year      = {2011}
 }
 
+@manual{asme2017b106,
+  title        = {{ASME} B106.1M: Design of Transmission Shafting},
+  organization = {American Society of Mechanical Engineers},
+  year         = {2017},
+  url          = {https://www.asme.org/}
+}
+
+% ------------------------------------------------------------
+%  Belt Drive — Habasit HTD5M
+% ------------------------------------------------------------
+
+@manual{habasit2021belt,
+  title        = {Habasit Timing Belts Engineering Guide},
+  organization = {Habasit AG},
+  year         = {2021},
+  url          = {https://www.habasit.com/en-US/Products/Timing-Belts}
+}
+
+% ------------------------------------------------------------
+%  Bearing Life — ISO 281 / SKF
+% ------------------------------------------------------------
+
+@manual{iso2812010,
+  title        = {{ISO} 281: Rolling bearings -- Dynamic load ratings and rating life},
+  organization = {International Organization for Standardization},
+  year         = {2010},
+  url          = {https://www.iso.org/standard/38131.html}
+}
+
+@manual{skf2023bearing,
+  title        = {{SKF} Rolling Bearings Catalogue and Engineering Guide},
+  organization = {SKF Group},
+  year         = {2023},
+  url          = {https://www.skf.com/group/products/rolling-bearings}
+}
+
+% ------------------------------------------------------------
+%  FEA
+% ------------------------------------------------------------
+
 @manual{solidworks2023simulation,
-  title        = {SOLIDWORKS Simulation User Guide},
-  organization = {Dassault Systèmes},
+  title        = {{SOLIDWORKS} Simulation User Guide},
+  organization = {Dassault Syst{\`e}mes},
   year         = {2023},
   url          = {https://help.solidworks.com/}
 }
@@ -50,42 +341,9 @@
   year      = {2017}
 }
 
-@book{ogata2010modern,
-  author    = {Ogata, Katsuhiko},
-  title     = {Modern Control Engineering},
-  edition   = {5th},
-  publisher = {Prentice Hall},
-  year      = {2010}
-}
-
-@manual{st2019stm32g4,
-  title        = {STM32G4 Series Reference Manual (RM0440)},
-  organization = {STMicroelectronics},
-  year         = {2019},
-  url          = {https://www.st.com/resource/en/reference_manual/rm0440-stm32g4-series-advanced-armbased-32bit-mcus-stmicroelectronics.pdf}
-}
-
-@manual{cytron2015md10c,
-  title        = {MD10C 10A DC Motor Driver User Manual},
-  organization = {Cytron Technologies},
-  year         = {2015},
-  url          = {https://docs.cytron.io/}
-}
-
-@manual{meanwell2022psu,
-  title        = {Switching Power Supply User Manual},
-  organization = {Mean Well Enterprises},
-  year         = {2022},
-  url          = {https://www.meanwell.com/}
-}
-
-@book{hughes2019electric,
-  author    = {Hughes, Austin and Drury, Bill},
-  title     = {Electric Motors and Drives: Fundamentals, Types and Applications},
-  edition   = {5th},
-  publisher = {Newnes},
-  year      = {2019}
-}
+% ------------------------------------------------------------
+%  Mechatronics (General)
+% ------------------------------------------------------------
 
 @book{Bolton2020,
   author    = {Bolton, William},
@@ -95,10 +353,21 @@
   year      = {2020}
 }
 
-@manual{matlab2023,
-  title        = {Simulink Parameter Estimator User Guide},
-  organization = {The MathWorks, Inc.},
-  year         = {2023},
-  address      = {Natick, MA, USA},
-  url          = {https://www.mathworks.com/help/sldo/parameter-estimation.html}
+@book{craig2005introduction,
+  author    = {Craig, John J.},
+  title     = {Introduction to Robotics: Mechanics and Control},
+  edition   = {3rd},
+  publisher = {Pearson},
+  year      = {2005}
+}
+
+% ------------------------------------------------------------
+%  Electrical Safety Standards
+% ------------------------------------------------------------
+
+@manual{iec60204,
+  title        = {{IEC} 60204-1: Safety of Machinery -- Electrical Equipment of Machines},
+  organization = {International Electrotechnical Commission},
+  year         = {2016},
+  url          = {https://www.iec.ch/}
 }

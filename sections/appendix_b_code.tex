@@ -1,0 +1,44 @@
+% ============================================================================
+%  ภาคผนวก ข: Source Code Repository
+% ============================================================================
+
+\chapter{Source Code Repository}
+\label{app:code}
+
+Source Code ทั้งหมดของ STM32 Firmware สำหรับโครงงานนี้
+เผยแพร่เป็นสาธารณะที่ GitHub Repository ดังนี้
+
+\begin{center}
+    \large
+    \url{https://github.com/Thadzy/STM32_Firmware_Studio_G6}
+\end{center}
+
+\vspace{1em}
+\noindent Repository นี้ประกอบด้วย:
+
+\begin{itemize}
+    \item \textbf{Cascade PID Controller} --- Velocity Inner Loop (1\,kHz)
+          และ Position Outer Loop (100\,Hz) พร้อม Anti-windup Back-Calculation
+    \item \textbf{Kalman Filter (4-State)} --- State Estimator สำหรับ
+          $[\theta,\,\omega,\,i_a,\,\tau_d]^\top$ ที่ทำงานแบบ Real-time บน STM32
+    \item \textbf{ZVD Input Shaper} --- Impulse Sequence Convolution
+          ออกแบบจาก $\omega_{n,\mathrm{rod}}$ และ $\zeta_\mathrm{rod}$
+    \item \textbf{S-Curve Trajectory Generator} --- 7-Phase Jerk-limited Profile
+          สำหรับ Point-to-Point Motion
+    \item \textbf{Modbus RTU Slave} --- FC03/FC06 บน LPUART1 (230400\,baud, 8N1,
+          Slave Address~21)
+    \item \textbf{Two-Stage Homing Sequence} --- Fast Search + Precision Edge Detection
+    \item \textbf{Application FSM} ---
+          \texttt{INIT} $\to$ \texttt{HOMING} $\to$
+          \texttt{IDLE} $\to$ \texttt{RUNNING} $\to$ \texttt{FAULT}
+\end{itemize}
+
+\vspace{1em}
+\noindent\textbf{วิธี Clone:}
+
+\begin{verbatim}
+git clone https://github.com/Thadzy/STM32_Firmware_Studio_G6.git
+\end{verbatim}
+
+% \noindent เปิดด้วย STM32CubeIDE และ Build ด้วย Toolchain \texttt{arm-none-eabi-gcc}
+% Target: \texttt{STM32G474RETx}

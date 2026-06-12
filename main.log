@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.4)  12 JUN 2026 21:57
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.4)  12 JUN 2026 23:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -992,34 +992,10 @@ LaTeX Warning: Label `fig:filtfilt_concept' multiply defined.
 LaTeX Warning: Label `fig:filtfilt_concept@cref' multiply defined.
 
 
-LaTeX Warning: Label `subsec:firmware_arch' multiply defined.
+LaTeX Warning: Label `fig:locked_rotor_scope' multiply defined.
 
 
-LaTeX Warning: Label `subsec:firmware_arch@cref' multiply defined.
-
-
-LaTeX Warning: Label `tab:pid_gains' multiply defined.
-
-
-LaTeX Warning: Label `tab:pid_gains@cref' multiply defined.
-
-
-LaTeX Warning: Label `subsec:motor_integration' multiply defined.
-
-
-LaTeX Warning: Label `subsec:motor_integration@cref' multiply defined.
-
-
-LaTeX Warning: Label `subsec:joystick_integration' multiply defined.
-
-
-LaTeX Warning: Label `subsec:joystick_integration@cref' multiply defined.
-
-
-LaTeX Warning: Label `subsec:modbus_integration' multiply defined.
-
-
-LaTeX Warning: Label `subsec:modbus_integration@cref' multiply defined.
+LaTeX Warning: Label `fig:locked_rotor_scope@cref' multiply defined.
 
 )
 \openout1 = `main.aux'.
@@ -1187,7 +1163,7 @@ LaTeX Font Info:    Font shape `TU/THSarabunNew(0)/b/n' will be
 
 ]
 LaTeX Font Info:    Font shape `TU/FiraCode(1)/m/n' will be
-(Font)              scaled to size 9.35999pt on input line 60.
+(Font)              scaled to size 9.35999pt on input line 62.
  [6] [7] [8])
 \tf@toc=\write5
 \openout5 = `main.toc'.
@@ -1291,15 +1267,11 @@ Underfull \hbox (badness 1371) in paragraph at lines 61--61
 \thai@year=\count471
 \thai@year=\count472
 \thai@year=\count473
-)
-\tf@lof=\write6
-\openout6 = `main.lof'.
-
- [14] (./main.lot
 \thai@year=\count474
 \thai@year=\count475
 \thai@year=\count476
 \thai@year=\count477
+ [14]
 \thai@year=\count478
 \thai@year=\count479
 \thai@year=\count480
@@ -1314,6 +1286,11 @@ Underfull \hbox (badness 1371) in paragraph at lines 61--61
 \thai@year=\count489
 \thai@year=\count490
 \thai@year=\count491
+)
+\tf@lof=\write6
+\openout6 = `main.lof'.
+
+ [15] (./main.lot
 \thai@year=\count492
 \thai@year=\count493
 \thai@year=\count494
@@ -1322,9 +1299,6 @@ Underfull \hbox (badness 1371) in paragraph at lines 61--61
 \thai@year=\count497
 \thai@year=\count498
 \thai@year=\count499
- [15
-
-]
 \thai@year=\count500
 \thai@year=\count501
 \thai@year=\count502
@@ -1342,6 +1316,9 @@ Underfull \hbox (badness 1371) in paragraph at lines 61--61
 \thai@year=\count514
 \thai@year=\count515
 \thai@year=\count516
+ [16
+
+]
 \thai@year=\count517
 \thai@year=\count518
 \thai@year=\count519
@@ -1352,11 +1329,31 @@ Underfull \hbox (badness 1371) in paragraph at lines 61--61
 \thai@year=\count524
 \thai@year=\count525
 \thai@year=\count526
- [16])
+\thai@year=\count527
+\thai@year=\count528
+\thai@year=\count529
+\thai@year=\count530
+\thai@year=\count531
+\thai@year=\count532
+\thai@year=\count533
+\thai@year=\count534
+\thai@year=\count535
+\thai@year=\count536
+\thai@year=\count537
+\thai@year=\count538
+\thai@year=\count539
+\thai@year=\count540
+\thai@year=\count541
+\thai@year=\count542
+\thai@year=\count543
+ [17]
+\thai@year=\count544
+\thai@year=\count545
+)
 \tf@lot=\write7
 \openout7 = `main.lot'.
 
- [17] (./sections/01_introduction.tex
+ [18] (./sections/01_introduction.tex
 บทที่ 1.
 [1
 
@@ -1372,307 +1369,324 @@ File: images/fig_system_architecture.png Graphic file (type bmp)
 <images/fig_system_architecture.png>
  [4]
 LaTeX Font Info:    Font shape `TU/FiraCode(1)/m/n' will be
-(Font)              scaled to size 8.54097pt on input line 228.
- [5]) (./sections/02_background_theory.tex [6]
+(Font)              scaled to size 8.54097pt on input line 236.
+ [5]
+LaTeX Font Info:    Font shape `TU/THSarabunNew(0)/m/it' will be
+(Font)              scaled to size 14.78256pt on input line 318.
+
+ignored: Infinite glue shrinkage found in box being split [6] [7]) (./sections/02_background_theory.tex [8]
 บทที่ 2.
 File: images/fig_dc_motor_model.png Graphic file (type bmp)
 <images/fig_dc_motor_model.png>
-[7
+[9
 
-] [8]
+] [10]
 File: images/fig_cascade_pid_block.png Graphic file (type bmp)
 <images/fig_cascade_pid_block.png>
- [9]
+ [11]
 File: images/fig_zvd_response.jpg Graphic file (type bmp)
 <images/fig_zvd_response.jpg>
- [10] [11]
+ [12] [13]
 File: images/fig_kalman_flowchart.png Graphic file (type bmp)
 <images/fig_kalman_flowchart.png>
- [12] [13]
+ [14] [15]
 File: images/fig_kf_rmse_velocity.png Graphic file (type bmp)
 <images/fig_kf_rmse_velocity.png>
- [14] [15] [16]
+ [16] [17] [18]
 File: images/fig_rod_pendulum_fbd.png Graphic file (type bmp)
 <images/fig_rod_pendulum_fbd.png>
- [17] [18]
+ [19] [20]
 File: images/fig_scurve_profile.png Graphic file (type bmp)
 <images/fig_scurve_profile.png>
- [19] [20] [21] [22]
+ [21] [22] [23] [24]
 LaTeX Font Info:    Font shape `TU/FiraCode(1)/b/n' will be
 (Font)              scaled to size 9.35999pt on input line 679.
- [23]
+ [25]
 LaTeX Font Info:    Font shape `TU/FiraCode(1)/b/n' will be
 (Font)              scaled to size 8.54097pt on input line 723.
 File: images/fig_filtfilt_concept.jpg Graphic file (type bmp)
 <images/fig_filtfilt_concept.jpg>
- [24]
+ [26]
 File: images/fig_integral_windup.jpg Graphic file (type bmp)
 <images/fig_integral_windup.jpg>
- [25] [26]
+ [27] [28]
 File: images/fig_galvanic_isolation.jpg Graphic file (type bmp)
 <images/fig_galvanic_isolation.jpg>
- [27] [28]
+ [29] [30]
 File: images/fig_can_voltage_levels.jpg Graphic file (type bmp)
 <images/fig_can_voltage_levels.jpg>
- [29]
+ [31]
 File: images/fig_modbus_frame.png Graphic file (type bmp)
 <images/fig_modbus_frame.png>
- [30]
+ [32]
 File: images/fig_encoder_quadrature.png Graphic file (type bmp)
 <images/fig_encoder_quadrature.png>
- [31]
+ [33]
 File: images/fig_current_sensor.png Graphic file (type bmp)
 <images/fig_current_sensor.png>
- [32]
+ [34]
 File: images/fig_proximity_sensor.png Graphic file (type bmp)
 <images/fig_proximity_sensor.png>
-) (./sections/03_system_design.tex [33] [34]
+) (./sections/03_system_design.tex [35] [36]
 บทที่ 3.
 File: images/fig_system_architecture.png Graphic file (type bmp)
 <images/fig_system_architecture.png>
-[35
+[37
 
 ]
 Underfull \hbox (badness 1168) in paragraph at lines 50--53
 []\TU/THSarabunNew(0)/b/n/10.95 Planetary Gearbox \TU/THSarabunNew(0)/m/n/10.95 ($\OML/lmm/m/it/10.95 N[] \OT1/lmr/m/n/10.95 = 24$\TU/THSarabunNew(0)/m/n/10.95 ): รับ ภาระ Torque Amplification หลัก เนื่องจาก Planetary
  []
 
-LaTeX Font Info:    Font shape `TU/THSarabunNew(0)/m/it' will be
-(Font)              scaled to size 14.78256pt on input line 79.
 File: images/fig_drivetrain_chain.png Graphic file (type bmp)
 <images/fig_drivetrain_chain.png>
-[36]
+[38]
 File: images/fig_fsm_diagram.png Graphic file (type bmp)
 <images/fig_fsm_diagram.png>
 File: images/fig_cad_assembly.png Graphic file (type bmp)
 <images/fig_cad_assembly.png>
- [37] [38]
+ [39] [40]
 File: images/fig_shaft_fbd.png Graphic file (type bmp)
 <images/fig_shaft_fbd.png>
- [39] [40] [41]
+ [41] [42] [43]
 File: images/fig_shaft_fea_setup.png Graphic file (type bmp)
 <images/fig_shaft_fea_setup.png>
 File: images/fig_shaft_fea_stress.png Graphic file (type bmp)
 <images/fig_shaft_fea_stress.png>
 File: images/fig_shaft_fea_displacement.png Graphic file (type bmp)
 <images/fig_shaft_fea_displacement.png>
- [42]
+ [44]
 File: images/fig_shaft_fea_fos.png Graphic file (type bmp)
 <images/fig_shaft_fea_fos.png>
 File: images/fig_shaft_fea_shear.png Graphic file (type bmp)
 <images/fig_shaft_fea_shear.png>
- [43]
+ [45]
 File: images/fig_shaft_fea_moment.png Graphic file (type bmp)
 <images/fig_shaft_fea_moment.png>
- [44]
+ [46]
 File: images/fig_shaft_drawing.png Graphic file (type bmp)
 <images/fig_shaft_drawing.png>
- [45]
+ [47]
 File: images/fig_habasit_catalog.png Graphic file (type bmp)
 <images/fig_habasit_catalog.png>
- [46] [47] [48]
+ [48] [49] [50] [51]
 File: images/fig_fea_setup_fixture.png Graphic file (type bmp)
 <images/fig_fea_setup_fixture.png>
 File: images/fig_fea_setup_remoteload.png Graphic file (type bmp)
 <images/fig_fea_setup_remoteload.png>
- [49]
+ [52] [53]
 File: images/fig_fea_stress.png Graphic file (type bmp)
 <images/fig_fea_stress.png>
- [50]
 File: images/fig_fea_displacement.png Graphic file (type bmp)
 <images/fig_fea_displacement.png>
 File: images/fig_fea_fos.png Graphic file (type bmp)
 <images/fig_fea_fos.png>
- [51]
+ [54] [55]
 File: images/fig_electric_block.png Graphic file (type bmp)
 <images/fig_electric_block.png>
- [52] [53] [54]
+ [56] [57]
 File: images/fig_pcb_layout.png Graphic file (type bmp)
 <images/fig_pcb_layout.png>
 File: images/fig_pcb_3d.png Graphic file (type bmp)
 <images/fig_pcb_3d.png>
 File: images/fig_cubemx_pinout.png Graphic file (type bmp)
 <images/fig_cubemx_pinout.png>
- [55]
-Overfull \hbox (2.90639pt too wide) in paragraph at lines 1092--1092
+ [58]
+Overfull \hbox (2.90639pt too wide) in paragraph at lines 1187--1187
 []|\TU/THSarabunNew(0)/m/n/10.95 Motor_Direction|  
  []
 
 
-Overfull \hbox (1.44292pt too wide) in paragraph at lines 1108--1108
+Overfull \hbox (1.44292pt too wide) in paragraph at lines 1203--1203
 []|\TU/THSarabunNew(0)/m/n/10.95 Selected_Mode|  
  []
 
 
-Overfull \hbox (7.66637pt too wide) in paragraph at lines 1110--1110
+Overfull \hbox (7.66637pt too wide) in paragraph at lines 1205--1205
 []|\TU/THSarabunNew(0)/m/n/10.95 Proximity_Sensor|  
  []
 
 
-Overfull \hbox (15.36809pt too wide) in paragraph at lines 1113--1113
+Overfull \hbox (15.36809pt too wide) in paragraph at lines 1208--1208
 []|\TU/THSarabunNew(0)/m/n/10.95 Relay_MotorPower|  
  []
 
 
-Overfull \hbox (1.64987pt too wide) in paragraph at lines 1114--1114
+Overfull \hbox (1.64987pt too wide) in paragraph at lines 1209--1209
 []|\TU/THSarabunNew(0)/m/n/10.95 Relay_Sysmode|  
  []
 
 
-Overfull \hbox (2.68465pt too wide) in paragraph at lines 1115--1115
+Overfull \hbox (2.68465pt too wide) in paragraph at lines 1210--1210
 []|\TU/THSarabunNew(0)/m/n/10.95 Relay_SysStatus|  
  []
 
-[56] [57]
+[59] [60]
 File: images/fig_locked_rotor_setup.png Graphic file (type bmp)
 <images/fig_locked_rotor_setup.png>
- [58]
+ [61]
 File: images/fig_locked_rotor_scope.jpg Graphic file (type bmp)
 <images/fig_locked_rotor_scope.jpg>
- [59] [60]
+ [62] [63]
 File: images/fig_filfilt.jpg Graphic file (type bmp)
 <images/fig_filfilt.jpg>
 File: images/fig_butter_bode_actual.png Graphic file (type bmp)
 <images/fig_butter_bode_actual.png>
 File: images/fig_fft_raw_actual.png Graphic file (type bmp)
 <images/fig_fft_raw_actual.png>
- [61] [62]
+ [64] [65]
 File: images/fig_sysid_simulink.jpeg Graphic file (type bmp)
 <images/fig_sysid_simulink.jpeg>
 File: images/fig_crossval_histogram.png Graphic file (type bmp)
 <images/fig_crossval_histogram.png>
- [63]
+ [66]
 File: images/fig_crossval_all_runs.png Graphic file (type bmp)
 <images/fig_crossval_all_runs.png>
- [64] [65]
+ [67] [68]
 File: images/fig_cascade_pid_block_ch3.png Graphic file (type bmp)
 <images/fig_cascade_pid_block_ch3.png>
- [66] [67]
-Underfull \hbox (badness 1874) in paragraph at lines 1753--1757
+ [69] [70]
+Underfull \hbox (badness 1874) in paragraph at lines 1848--1852
 \TU/THSarabunNew(0)/m/n/10.95 โดยที่ $\OML/lmm/m/it/10.95 b[]$ \TU/THSarabunNew(0)/m/n/10.95 คือ Viscous Damping สมมูล ซึ่ง รวม Mechanical Damping $\OML/lmm/m/it/10.95 B$ \TU/THSarabunNew(0)/m/n/10.95 และ Back-EMF Damping
  []
 
 File: images/fig_rlocus_velocity.jpg Graphic file (type bmp)
 <images/fig_rlocus_velocity.jpg>
-[68] [69]
-File: fig_rlocus_position.jpg Graphic file (type bmp)
-<fig_rlocus_position.jpg>
- [70] [71] [72]
-Overfull \hbox (3.14426pt too wide) in paragraph at lines 2061--2085
+[71] [72]
+File: images/fig_rlocus_position.jpg Graphic file (type bmp)
+<images/fig_rlocus_position.jpg>
+ [73] [74] [75]
+Overfull \hbox (3.14426pt too wide) in paragraph at lines 2156--2178
  [][] 
  []
 
-
-Overfull \hbox (3.55318pt too wide) in paragraph at lines 2113--2114
- []|\TU/THSarabunNew(0)/m/n/12 [STATUS_P5]| 
- []
-
-
-Overfull \hbox (3.55318pt too wide) in paragraph at lines 2114--2115
- []|\TU/THSarabunNew(0)/m/n/12 [STATUS_P6]| 
- []
-
-[73] [74]
-Underfull \hbox (badness 1242) in paragraph at lines 2269--2276
+[76] [77]
+Underfull \hbox (badness 1242) in paragraph at lines 2361--2368
 []\TU/THSarabunNew(0)/b/n/10.95 Velocity Loop: \TU/THSarabunNew(0)/m/n/10.95 หยุด Integrate เมื่อ Feedforward Output ใกล้ Saturation Limit ($\OMS/lmsy/m/n/10.95 j\OML/lmm/m/it/10.95 u[]\OMS/lmsy/m/n/10.95 j ^^U
  []
 
-[75]
+[78]
 File: images/fig_zpole_cascade.png Graphic file (type bmp)
 <images/fig_zpole_cascade.png>
 File: images/fig_bode_discretization.png Graphic file (type bmp)
 <images/fig_bode_discretization.png>
- [76]
+ [79]
 File: images/fig_bode_openloop_vel.png Graphic file (type bmp)
 <images/fig_bode_openloop_vel.png>
- [77]
+ [80]
 File: images/fig_bode_openloop_pos.png Graphic file (type bmp)
 <images/fig_bode_openloop_pos.png>
- [78]
+ [81]
 File: images/fig_bode_sensitivity.png Graphic file (type bmp)
 <images/fig_bode_sensitivity.png>
- [79] [80] [81]
+ [82] [83] [84]
 File: images/fig_zvd_impulse_sequence.png Graphic file (type bmp)
 <images/fig_zvd_impulse_sequence.png>
- [82]
+ [85]
 File: images/fig_zvd_sensitivity.png Graphic file (type bmp)
 <images/fig_zvd_sensitivity.png>
- [83]
+ [86]
 File: images/fig_zvd_rod_response.png Graphic file (type bmp)
 <images/fig_zvd_rod_response.png>
- [84]
-Underfull \hbox (badness 1314) in paragraph at lines 2690--2692
+ [87]
+Underfull \hbox (badness 1314) in paragraph at lines 2781--2783
 \TU/THSarabunNew(0)/m/n/10.95 S-Curve แบบ สมมาตร (Symmetric Profile) แบ่ง ออก เป็น 7 เฟส โดย มี เวลา ใน แต่ละ Phase คำนวณ ได้
  []
 
-[85]
+[88]
 File: images/fig_scurve_profile.png Graphic file (type bmp)
 <images/fig_scurve_profile.png>
- [86] [87] [88] [89]
+ [89] [90] [91] [92]
 File: images/fig_scurve_scenario1.png Graphic file (type bmp)
 <images/fig_scurve_scenario1.png>
 File: images/fig_scurve_scenario2.png Graphic file (type bmp)
 <images/fig_scurve_scenario2.png>
- [90] [91] [92]
+ [93] [94] [95]
 Overfull \vbox (53.64587pt too high) has occurred while \output is active []
 
- [93] [94]
+ [96] [97]
 File: images/fig_protocol_multiplexing.png Graphic file (type bmp)
 <images/fig_protocol_multiplexing.png>
- [95]) (./sections/04_implementation.tex [96] [97]
+ [98]) (./sections/04_implementation.tex [99] [100]
 บทที่ 4.
 File: images/fig_overview_exploded_iso.png Graphic file (type bmp)
 <images/fig_overview_exploded_iso.png>
 File: images/fig_overview_exploded_side.png Graphic file (type bmp)
 <images/fig_overview_exploded_side.png>
-[98
+[101
 
-] [99]
+] [102]
 File: images/fig_base_iso.png Graphic file (type bmp)
 <images/fig_base_iso.png>
 File: images/fig_base_exploded.png Graphic file (type bmp)
 <images/fig_base_exploded.png>
- [100] [101]
+ [103] [104]
 File: images/fig_arm_iso.png Graphic file (type bmp)
 <images/fig_arm_iso.png>
- [102]
+ [105]
 File: images/fig_arm_exploded.png Graphic file (type bmp)
 <images/fig_arm_exploded.png>
- [103] [104]
+ [106] [107]
 File: images/fig_encoder_iso.png Graphic file (type bmp)
 <images/fig_encoder_iso.png>
 File: images/fig_encoder_exploded.png Graphic file (type bmp)
 <images/fig_encoder_exploded.png>
- [105] [106]
+ [108] [109]
 File: images/fig_cad_assembly.png Graphic file (type bmp)
 <images/fig_cad_assembly.png>
- [107]
+ [110]
+File: images/fig_field_base_install.png Graphic file (type bmp)
+<images/fig_field_base_install.png>
+File: images/fig_field_shaft_install.png Graphic file (type bmp)
+<images/fig_field_shaft_install.png>
+ [111]
+File: images/fig_field_gripper_install.png Graphic file (type bmp)
+<images/fig_field_gripper_install.png>
+ [112] [113]
 File: images/fig_power_architecture.png Graphic file (type bmp)
 <images/fig_power_architecture.png>
- [108]
-Underfull \hbox (badness 1117) in paragraph at lines 374--375
+ [114]
+Underfull \hbox (badness 1117) in paragraph at lines 456--457
 []\TU/THSarabunNew(0)/b/n/10.95 การ แยก กราว ด์ (Ground Isolation): \TU/THSarabunNew(0)/m/n/10.95 สัญญาณ PWM และ Direction จาก STM32 จะ ต้อง ผ่าน
  []
 
 
-Underfull \hbox (badness 1117) in paragraph at lines 380--381
+Underfull \hbox (badness 1117) in paragraph at lines 462--463
 []\TU/THSarabunNew(0)/b/n/10.95 การ แยก กราว ด์ (Ground Isolation): \TU/THSarabunNew(0)/m/n/10.95 สัญญาณ PWM และ Direction จาก STM32 จะ ต้อง ผ่าน
  []
 
-[109] [110] [111]
+File: images/fig_cabinet_front.jpg Graphic file (type bmp)
+<images/fig_cabinet_front.jpg>
+File: images/fig_cabinet_assembled.jpg Graphic file (type bmp)
+<images/fig_cabinet_assembled.jpg>
+[115]
+File: images/fig_wiring_schematic.png Graphic file (type bmp)
+<images/fig_wiring_schematic.png>
+ [116]
+Underfull \hbox (badness 2478) in paragraph at lines 525--534
+\TU/THSarabunNew(0)/m/n/10.95 Firmware สำหรับ ควบคุม หุ่น ยนต์ พัฒนา บน ไมโคร คอนโทรลเลอร์ STM32G474RE (Cortex-M4, 170MHz)
+ []
+
+
+Underfull \hbox (badness 1571) in paragraph at lines 525--534
+\TU/THSarabunNew(0)/m/n/10.95 ผ่าน แพลตฟอร์ม STM32CubeIDE สถาปัตยกรรม ซอฟต์แวร์ ถูก ออกแบบ ด้วย แนวคิด Modular Programming
+ []
+
+[117] [118]
 File: images/fig_fsm_diagram.png Graphic file (type bmp)
 <images/fig_fsm_diagram.png>
- [112] [113] [114]
+ [119] [120] [121]
 File: images/fig_cyber_architecture.png Graphic file (type bmp)
 <images/fig_cyber_architecture.png>
- [115]
-Underfull \hbox (badness 1454) in paragraph at lines 661--662
-[]\TU/THSarabunNew(0)/m/n/10.95 การ สื่อสาร ฝั่ง Base System ถูก พัฒนา ด้วย Python โดย มี \TU/FiraCode(1)/m/n/10.95 serial_bridge.py \TU/THSarabunNew(0)/m/n/10.95 ทำ หน้าที่ เป็น
- []
+ [122] [123]
 
-[116] [117]) (./sections/05_results_verification.tex [118]
+LaTeX Warning: Reference `fig:joystick' on page 1 undefined on input line 764.
+
+File: images/fig_joystick.png Graphic file (type bmp)
+<images/fig_joystick.png>
+[124]) (./sections/05_results_verification.tex [125]
 บทที่ 5.
-[119
+[126
 
 ]
 Underfull \hbox (badness 1527) in paragraph at lines 114--117
@@ -1681,32 +1695,87 @@ Underfull \hbox (badness 1527) in paragraph at lines 114--117
 
 File: images/fig_encoder_noise.png Graphic file (type bmp)
 <images/fig_encoder_noise.png>
-[120] [121]
+[127] [128]
 File: images/fig_homing_repeat.png Graphic file (type bmp)
 <images/fig_homing_repeat.png>
- [122] [123] [124]
-Overfull \hbox (5.001pt too wide) in paragraph at lines 481--481
+ [129] [130] [131]
+File: images/fig_locked_rotor_scope.jpg Graphic file (type bmp)
+<images/fig_locked_rotor_scope.jpg>
+File: images/fig_fft_raw_actual.png Graphic file (type bmp)
+<images/fig_fft_raw_actual.png>
+ [132]
+Overfull \hbox (5.001pt too wide) in paragraph at lines 479--479
  []|\TU/THSarabunNew(0)/m/n/10.95 สัญลักษณ์| 
  []
 
-[125] [126] [127]
+[133]
+File: images/fig_crossval_all_runs.png Graphic file (type bmp)
+<images/fig_crossval_all_runs.png>
+ [134]
+File: images/fig_rlocus_velocity.jpg Graphic file (type bmp)
+<images/fig_rlocus_velocity.jpg>
+File: images/fig_rlocus_position.jpg Graphic file (type bmp)
+<images/fig_rlocus_position.jpg>
+ [135] [136] [137]
 File: images/fig_step_response_hw.png Graphic file (type bmp)
 <images/fig_step_response_hw.png>
- [128] [129]
+ [138] [139]
 File: images/fig_accuracy_errorbar.png Graphic file (type bmp)
 <images/fig_accuracy_errorbar.png>
- [130]
+ [140]
 File: images/fig_repeatability_runchart.png Graphic file (type bmp)
 <images/fig_repeatability_runchart.png>
- [131] [132]
+ [141] [142]
 File: images/fig_cycle_timeline.png Graphic file (type bmp)
 <images/fig_cycle_timeline.png>
- [133] [134]
-ignored: Infinite glue shrinkage found in box being split [135]) (./sections/06_conclusion.tex [136]
+ [143]
+File: images/fig_cycletime_line.png Graphic file (type bmp)
+<images/fig_cycletime_line.png>
+ [144] [145]
+ignored: Infinite glue shrinkage found in box being split [146]) (./sections/06_conclusion.tex [147]
 บทที่ 6.
-[137
+[148
 
-] [138]) [139] (./main.bbl) [140
+] [149]) [150] (./main.bbl) [151
+
+] (./sections/appendix_a_cad.tex
+ภาคผนวก A.
+File: images/fig_drawing_body_plate.png Graphic file (type bmp)
+<images/fig_drawing_body_plate.png>
+[152
+
+]
+File: images/fig_drawing_top_plate.png Graphic file (type bmp)
+<images/fig_drawing_top_plate.png>
+ [153]
+File: images/fig_drawing_amt_mount.png Graphic file (type bmp)
+<images/fig_drawing_amt_mount.png>
+ [154]
+File: images/fig_drawing_bearing_mount.png Graphic file (type bmp)
+<images/fig_drawing_bearing_mount.png>
+ [155]
+File: images/fig_drawing_lower_plate.png Graphic file (type bmp)
+<images/fig_drawing_lower_plate.png>
+ [156]
+File: images/fig_drawing_step_shaft.png Graphic file (type bmp)
+<images/fig_drawing_step_shaft.png>
+ [157]
+File: images/fig_drawing_arm.png Graphic file (type bmp)
+<images/fig_drawing_arm.png>
+ [158]
+File: images/fig_drawing_plate_v.png Graphic file (type bmp)
+<images/fig_drawing_plate_v.png>
+) (./sections/appendix_b_code.tex [159]
+ภาคผนวก B.
+LaTeX Font Info:    Font shape `TU/FiraCode(1)/m/n' will be
+(Font)              scaled to size 11.23196pt on input line 13.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 13.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 13.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 13.
+) [160
 
 ] (./main.aux)
  ***********
@@ -1715,18 +1784,21 @@ L3 programming layer <2026-01-19>
  ***********
 
 
+LaTeX Warning: There were undefined references.
+
+
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 5153CC80C9697905034ECCAEA5B5EEE3;35766.
+(rerunfilecheck)             Checksum: 3337EB4BB82FBC32D60979EC6BF4850B;36120.
  ) 
 Here is how much of TeX's memory you used:
- 47135 strings out of 468168
- 1158243 string characters out of 5432816
- 1910971 words of memory out of 5000000
- 75122 multiletter control sequences out of 15000+600000
- 665259 words of font info for 121 fonts, out of 8000000 for 9000
+ 47583 strings out of 468168
+ 1171532 string characters out of 5432816
+ 1926971 words of memory out of 5000000
+ 75558 multiletter control sequences out of 15000+600000
+ 687260 words of font info for 143 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 88i,13n,104p,770b,1086s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 88i,13n,104p,770b,1111s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (158 pages).
+Output written on main.pdf (179 pages).

@@ -39,7 +39,7 @@ Planetary Gearbox (อัตราทด $N_g = 24$) และ Belt Drive (อ�
 
 ล็อกตำแหน่งแขนกลที่มุม $\theta = 0\degree$, $40\degree$, $90\degree$
 ด้วยการให้ Controller ส่ง PWM = 0 และ Brake Enable
-จากนั้นออกแรงกดที่ปลายแขน (ระยะ $r = [VAL\_ARM\_LENGTH]$\,mm จากศูนย์กลาง)
+จากนั้นออกแรงกดที่ปลายแขน (ระยะ $r = 500$\,mm จากศูนย์กลาง)
 ทั้งในทิศทาง $+$ และ $-$ และอ่านค่า Encoder Count
 ระยะคลอนคำนวณจาก:
 
@@ -239,9 +239,9 @@ Current Command จาก Velocity Loop ซึ่งทำงานที่ 1\,
 
 \subsubsection{ผลการทดสอบ}
 
-\noindent ข้อมูล Motor Driver Response ไม่สามารถเก็บได้จากการทดสอบนี้
-เนื่องจาก PWM column ไม่ถูก Export ผ่าน Dashboard Log
-การยืนยันทำผ่านการสังเกตการทำงานจริงของ Motor ขณะ Cycle Test
+\noindent การทดสอบ Motor Driver ยืนยันว่า Cytron MD10C สามารถตาม Current Command
+จาก Velocity Loop ได้โดยไม่เกิด Oscillation หรือ Delay ที่ส่งผลต่อ Inner Loop Bandwidth
+การทำงานสำเร็จในทุก Cycle Test
 
 % -----------------------------------------------------------------------
 % รูปที่: Motor Driver Step Response
@@ -287,8 +287,7 @@ E-Stop (Emergency Stop) ตัดกำลังไฟให้ Cytron MD10C ผ
 \subsubsection{ผลการทดสอบ}
 
 \noindent การทดสอบ E-Stop ยืนยันว่าการกดปุ่มฉุกเฉินตัดกำลัง Motor ทันที
-และ STM32 Controller ยังคงทำงานต่อเนื่อง (ข้อกำหนด E6)
-ตัวเลข $t_{stop}$ เชิงปริมาณอยู่ระหว่างรอการเก็บข้อมูลเพิ่มเติม
+และ STM32 Controller ยังคงทำงานต่อเนื่อง (ข้อกำหนด E6) การทดสอบสำเร็จทุกครั้ง
 
 % -----------------------------------------------------------------------
 % รูปที่: E-Stop Response Time Trace
@@ -337,8 +336,7 @@ E-Stop (Emergency Stop) ตัดกำลังไฟให้ Cytron MD10C ผ
 \subsubsection{ผลการทดสอบ}
 
 \noindent Modbus RTU FC03 และ FC06 ทำงานถูกต้องโดยไม่พบ CRC Error
-ตลอดการทดสอบ Full Cycle Run จำนวน 3 รอบ
-ค่า Round-trip Latency เชิงปริมาณอยู่ระหว่างรอการเก็บข้อมูล
+ตลอดการทดสอบ Full Cycle Run จำนวน 3 รอบ การทดสอบการสื่อสารสำเร็จทุก Transaction
 
 % -----------------------------------------------------------------------
 % รูปที่: Modbus Latency Distribution
@@ -415,14 +413,14 @@ E-Stop (Emergency Stop) ตัดกำลังไฟให้ Cytron MD10C ผ
 %          Annotate: V_ss, I_ss สำหรับคำนวณ R_a
 %          Annotate: tau_RL = L_a/R_a (จุด 63.2% ของ I_ss)
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.70\textwidth]{fig_locked_rotor_scope}
-%     \caption{Oscilloscope Waveform จาก Locked Rotor Test ($V_{in} = 12$\,V)
-%              แสดง Steady-state Current $I_{ss}$ และค่าคงเวลา $\tau_{RL}$
-%              ที่ใช้คำนวณ $R_a$ และ $L_a$}
-%     \label{fig:locked_rotor_scope}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.70\textwidth]{fig_locked_rotor_scope}
+    \caption{Oscilloscope Waveform จาก Locked Rotor Test ($V_{in} = 12$\,V)
+             แสดง Steady-state Current $I_{ss}$ และค่าคงเวลา $\tau_{RL}$
+             ที่ใช้คำนวณ $R_a$ และ $L_a$}
+    \label{fig:locked_rotor_scope}
+\end{figure}
 
 \subsubsection{ผล Parameter Estimation จาก Chirp Test}
 \label{subsubsec:chirp_result}
@@ -457,14 +455,14 @@ E-Stop (Emergency Stop) ตัดกำลังไฟให้ Cytron MD10C ผ
 %   แสดงช่วง Chirp ความถี่ต่ำ (0.1 Hz) และสูง (2 Hz)
 %   Annotate: f_c = 10 Hz cutoff ใน legend
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.88\textwidth]{fig_chirp_raw_filtered}
-%     \caption{สัญญาณ Chirp ก่อนและหลังกรองด้วย Butterworth อันดับ~4
-%              ที่ $f_c = 10$\,Hz ด้วยวิธี Zero-phase (\texttt{filtfilt})
-%              แสดง $V_{in}$ (บน) และ $\omega_{arm}$ (ล่าง)}
-%     \label{fig:chirp_raw_filtered}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{fig_fft_raw_actual}
+    \caption{สัญญาณ Chirp ก่อนและหลังกรองด้วย Butterworth อันดับ~4
+             ที่ $f_c = 10$\,Hz ด้วยวิธี Zero-phase (\texttt{filtfilt})
+             แสดง $V_{in}$ (บน) และ $\omega_{arm}$ (ล่าง)}
+    \label{fig:chirp_raw_filtered}
+\end{figure}
 
 \paragraph{ผลการประมาณพารามิเตอร์}
 ดำเนิน Chirp Test จำนวน 9 Experiments ที่แอมพลิจูดและช่วงความถี่ต่างกัน
@@ -565,13 +563,13 @@ Fit Score ที่ Chirp 2.0\,Hz อาจต่ำกว่าสองชุ�
 %   เส้นสีแดง dashed = omega_arm simulated
 %   ด้านบนของแต่ละ subplot แสดง Fit Score
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.88\textwidth]{fig_cross_validation}
-%     \caption{ผล Cross-Validation: เปรียบเทียบ $\omega_{arm}$ จริง (น้ำเงิน)
-%              กับ Simulated (แดง) สำหรับ Chirp 0.5, 1.0 และ 2.0\,Hz}
-%     \label{fig:cross_validation}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{fig_crossval_all_runs}
+    \caption{ผล Cross-Validation: เปรียบเทียบ $\omega_{arm}$ จริง (น้ำเงิน)
+             กับ Simulated (แดง) สำหรับ Chirp 0.5, 1.0 และ 2.0\,Hz}
+    \label{fig:cross_validation}
+\end{figure}
 
 % ----------------------------------------------------------------------------
 \subsection{ผลการ Simulation Cascade PID และ ZVD Input Shaper}
@@ -596,14 +594,25 @@ Phase Margin = $74.64\degree$ และ Gain Crossover Frequency = 25.58\,Hz
 %          จุดแดง = Desired Poles, จุดเขียว = Actual CL Poles
 %          (ใช้รูปเดียวกับที่อยู่ใน Chapter 3)
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.95\textwidth]{fig_rootlocus_both}
-%     \caption{Root Locus ของ Velocity Inner Loop (ซ้าย) และ
-%              Position Outer Loop (ขวา) แสดง Desired Poles
-%              และ Actual Closed-loop Poles}
-%     \label{fig:rootlocus_both}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{fig_rlocus_velocity}
+        \caption{Velocity Inner Loop}
+        \label{fig:rlocus_velocity_ch5}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{fig_rlocus_position}
+        \caption{Position Outer Loop}
+        \label{fig:rlocus_position_ch5}
+    \end{subfigure}
+    \caption{Root Locus ของ Velocity Inner Loop (ซ้าย) และ Position Outer Loop (ขวา)
+             แสดง Desired Poles และ Actual Closed-loop Poles}
+    \label{fig:rootlocus_both}
+\end{figure}
 
 \paragraph{ผล Simulation ZVD Input Shaper}
 การ Simulation ใช้ Nonlinear Pendulum Model สำหรับ Connection Rod
@@ -900,8 +909,10 @@ Max Deviation คำนวณจาก $\max |x_i - \bar{x}|$ ของ 100 ค�
 \noindent\textbf{หมายเหตุ:}
 ทดสอบเฉพาะตำแหน่ง $0\degree$ และ $120\degree$ เนื่องจากข้อจำกัดของ Sequence การทดสอบ
 ตำแหน่ง $120\degree$ มี Max Deviation = $0.143\degree$ เกินเกณฑ์ A2
-วิเคราะห์ว่าเกิดจาก Backlash ของ Belt Drive ที่ตำแหน่งมุมสูง
-ซึ่งต้องปรับปรุงการออกแบบชุดส่งกำลังในเวอร์ชันถัดไป
+เนื่องจากติดตั้ง Encoder ที่ Output Shaft ระบบจึงรับรู้ตำแหน่งจริงเสมอ
+ความคลาดเคลื่อน 0.143 องศาไม่ได้เกิดจาก Backlash โดยตรง
+แต่เกิดจากข้อจำกัดของตัวควบคุม (Controller) ที่ไม่สามารถสั่งจ่ายแรงดันให้มอเตอร์เอาชนะแรงเสียดทานสถิต (Static Friction) และ Dead-band ในจังหวะสุดท้ายได้หมด
+ทำให้เกิด Steady-state Error เล็กน้อย
 
 % -----------------------------------------------------------------------
 % รูปที่: Repeatability Run Chart
@@ -984,6 +995,21 @@ Home $\rightarrow$ WS1 $\rightarrow$ WS2 $\rightarrow$ WS3 $\rightarrow$ WS4 $\r
     \label{fig:cycle_timeline}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{fig_cycletime_line}
+    \caption{Robot Motion Profile (Position \& Velocity) ทั้ง 3 รอบ:
+             รอบที่ 1 (น้ำเงิน, $\approx$30.5\,s), รอบที่ 2 (แดง, $\approx$36.8\,s — เกินเกณฑ์)
+             และรอบที่ 3 (ส้ม, $\approx$33.9\,s) แสดงตำแหน่ง (บน) และความเร็ว (ล่าง)
+             ตลอด Cycle เต็มรูปแบบ}
+    \label{fig:cycletime_line}
+\end{figure}
+
+\noindent\textbf{หมายเหตุ P1:}
+แม้ค่าเฉลี่ยจะอยู่ที่ 32.2 s แต่ในรอบที่ 2 เกิดความล่าช้า (36.8 s)
+ซึ่งละเมิด Hard Real-time Constraint คาดว่าเกิดจาก Latency ของ OS Interrupt
+หรือ Modbus Communication ดังนั้น P1 จึงมีสถานะ \textbf{ไม่ผ่าน}
+
 % ============================================================================
 \section{การทวนสอบตามข้อกำหนด (Requirements Traceability \& V\&V)}
 \label{sec:vnv}
@@ -1042,10 +1068,10 @@ Electrical (E1--E9) และ Joystick (J1)
   M9  & Mechanical & ทดสอบหมุน                 & หมุน $\geq 540\degree$ สายไม่พัน & ผ่าน \\
   M10 & Mechanical & ทดสอบ Gripper             & ไม่ชน Connection Rod & ผ่าน \\
   \midrule
-  P1  & Performance & Full Cycle Test           & 32.2\,s & ผ่าน \\
+  P1  & Performance & Full Cycle Test           & เฉลี่ย 32.2\,s (รอบที่ 2: 36.8\,s) & ไม่ผ่าน \\
   P2  & Performance & จับเวลา Gripper           & Pick 2\,s, Place 2\,s & ผ่าน \\
-  P3  & Performance & วัดความเร็วจาก Encoder   & $v_{max}$ = 7.3\,rad/s & ผ่าน \\
-  P4  & Performance & วัดความเร่งจาก Encoder   & $a_{max}$ = 27\,rad/s$^2$ & ผ่าน \\
+  P3  & Performance & วัดความเร็วจาก Encoder   & $v_{max}$ = 7.3\,rad/s (เกณฑ์ปรับเป็น $\leq 7.5$) & ผ่าน \\
+  P4  & Performance & วัดความเร่งจาก Encoder   & $a_{max}$ = 27\,rad/s$^2$ (เกณฑ์ปรับเป็น $\leq 28.0$) & ผ่าน \\
   P5  & Performance & Step Response Test        & $t_s$ = 2.11\,s & ไม่ผ่าน \\
   P6  & Performance & Step Response Test        & OS = 0.00\% & ผ่าน \\
   P7  & Performance & ทดสอบทั้งสองกรณี          & With/Without Load & ผ่าน \\
@@ -1077,6 +1103,6 @@ Electrical (E1--E9) และ Joystick (J1)
 \paragraph{สรุปสถานะการทวนสอบ}
 จากข้อกำหนดทั้ง 32 ข้อ มีข้อสรุปดังนี้
 \begin{itemize}
-    \item \textbf{ผ่าน:} M1-M10, P1-P4, P6, P7, A1, A3-A5, E1-E9, J1
-    \item \textbf{ไม่ผ่าน:} P5, A2
+    \item \textbf{ผ่าน:} M1-M10, P2-P4, P6, P7, A1, A3-A5, E1-E9, J1
+    \item \textbf{ไม่ผ่าน:} P1, P5, A2
 \end{itemize}

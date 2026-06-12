@@ -133,8 +133,8 @@
     \midrule
     P1  & Performance & ทำงานครบ 1 รอบ (หยิบวาง 4 ชิ้น + กลับ Homing) ใน $\leq$ 35 วินาที \\
     P2  & Performance & Gripper ใช้เวลาหยิบ $\sim$2 วินาที และวาง $\sim$2 วินาที \\
-    P3  & Performance & ความเร็วเชิงมุม $\geq 2.9$ rad/s และ $\leq 5.84$ rad/s \\
-    P4  & Performance & ความเร่งเชิงมุม $\geq 2.0$ rad/s$^2$ และ $\leq 22.0$ rad/s$^2$ \\
+    P3  & Performance & ความเร็วเชิงมุม $\geq 2.9$ rad/s และ $\leq 7.5$ rad/s \\
+    P4  & Performance & ความเร่งเชิงมุม $\geq 2.0$ rad/s$^2$ และ $\leq 28.0$ rad/s$^2$ \\
     P5  & Performance & Settling Time $\leq 0.5$ วินาที \\
     P6  & Performance & Overshoot $\leq 1\%$ \\
     P7  & Performance & รองรับการทดสอบทั้งแบบมีโหลด (2 kg) และไม่มีโหลด \\
@@ -160,8 +160,16 @@
   \end{tabular}
 \end{table}
 
-\noindent\small{$^*$ ขอบบนของ P3 ($\leq 5.84$ rad/s) และ P4 ($\leq 22.0$ rad/s²)
-คำนวณจาก Torque Budget และข้อจำกัดทางกลของระบบส่งกำลัง}
+\noindent\small{$^*$ ขอบบนของ P3 ($\leq 7.5$ rad/s) และ P4 ($\leq 28.0$ rad/s²)
+ปรับปรุงจาก Torque Budget ภายหลัง — ดู\cref{subsec:req_amendment}}
+
+% ----------------------------------------------------------------------------
+\subsection{การปรับปรุงข้อกำหนด (Requirement Amendment)}
+\label{subsec:req_amendment}
+
+จากการวิเคราะห์ Torque Budget ภายหลัง พบว่าชุดส่งกำลังและมอเตอร์สามารถรองรับความเร็วและความเร่งได้สูงกว่าขีดจำกัดเดิมที่ตั้งไว้แบบ Conservative
+ดังนั้นเพื่อให้บรรลุ Cycle Time (P1) จึงปรับขอบบนของ P3 เป็น $v_{max} \le 7.5$ rad/s
+และ P4 เป็น $a_{max} \le 28.0$ rad/s$^2$
 
 % ----------------------------------------------------------------------------
 \section{ภาพรวมระบบ}
@@ -269,6 +277,128 @@ Manual Mode ผ่าน Wireless Joystick ที่รับสัญญาณ 
     \bottomrule
   \end{tabular}
 \end{table}
+
+% ----------------------------------------------------------------------------
+\section{งบประมาณโครงงาน}
+\label{sec:budget}
+
+งบประมาณรวมที่ได้รับอนุมัติสำหรับโครงงานนี้คือ \textbf{17{,}000 บาท}
+ตารางที่~\ref{tab:budget} สรุปรายการจัดซื้อหลักจำแนกตามหมวดหมู่
+(รายการสิ้นเปลืองเล็กน้อย เช่น น็อต สกรู แหวน และสายไฟ รวมไว้เป็นรายการกลุ่ม)
+
+\noindent\textbf{หมายเหตุ:} ยอดรวมในตารางนี้แสดงเฉพาะค่าใช้จ่ายของอุปกรณ์ที่นำมาใช้งานจริงในระบบขั้นสุดท้าย
+ไม่รวมค่าใช้จ่ายจากการทดลองและชิ้นส่วนที่เสียหายระหว่างกระบวนการพัฒนา (ค่าลองผิดลองถูก)
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{6.5cm}
+                  >{\centering\arraybackslash}p{1.5cm}
+                  >{\centering\arraybackslash}p{1.5cm}
+                  >{\raggedleft\arraybackslash}p{1.8cm}
+                  >{\raggedleft\arraybackslash}p{1.8cm}}
+  \caption{สรุปงบประมาณโครงงาน จำแนกตามหมวดหมู่}
+  \label{tab:budget} \\
+  \toprule
+  รายการ & จำนวน & หน่วย & ราคาต่อหน่วย & รวม (บาท) \\
+  \midrule
+  \endfirsthead
+  \toprule
+  รายการ & จำนวน & หน่วย & ราคาต่อหน่วย & รวม (บาท) \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
+
+  % --- ระบบขับเคลื่อน ---
+  \multicolumn{5}{l}{\textbf{ระบบขับเคลื่อน (Drive System)}} \\
+  \midrule
+  ZGX60RMM Gearmotor 24V 250RPM (RS-775 + Planetary 24:1) & 1 & ชุด & 2{,}800 & 2{,}800 \\
+  เฟืองสายพาน HTD5M 70T (Driven Pulley) & 1 & ชิ้น & 600 & 600 \\
+  เฟืองสายพาน HTD5M 24T (Driver Pulley) & 1 & ชิ้น & 230 & 230 \\
+  สายพาน HTD5M หน้ากว้าง 15\,mm & 1 & เส้น & 300 & 300 \\
+  \midrule
+  \textit{รวมระบบขับเคลื่อน} & & & & \textit{3{,}930} \\
+
+  \addlinespace
+  % --- Encoder & Sensor ---
+  \multicolumn{5}{l}{\textbf{Encoder \& Sensor}} \\
+  \midrule
+  CUI AMT103-V Incremental Encoder & 1 & ชิ้น & 1{,}250 & 1{,}250 \\
+  WCS1800 Hall Effect Current Sensor & 1 & ชิ้น & 360 & 360 \\
+  Proximity Sensor PR12-2DN (Homing) & 1 & ชิ้น & 320 & 320 \\
+  \midrule
+  \textit{รวม Encoder \& Sensor} & & & & \textit{1{,}930} \\
+
+  \addlinespace
+  % --- Electronics & Control ---
+  \multicolumn{5}{l}{\textbf{อิเล็กทรอนิกส์และระบบควบคุม}} \\
+  \midrule
+  Cytron MD10C 10A DC Motor Driver & 1 & ชิ้น & 430 & 430 \\
+  ESP32-WROOM-32U (Bluetooth Receiver) & 1 & ชิ้น & 240 & 240 \\
+  ESP-32S DevKit V1 & 1 & ชิ้น & 170 & 170 \\
+  Opto 817 Module 8 ช่อง (Optocoupler) & 1 & ชิ้น & 25 & 25 \\
+  Relay Module 8 CH 5V & 1 & ชุด & 190 & 190 \\
+  Relay Module 4 CH 5V & 2 & ชุด & 37 & 75 \\
+  PCB 15$\times$20\,cm + วัสดุประกอบ & 1 & ชุด & 49 & 49 \\
+  MOCUTE-052 VR Joystick (Bluetooth) & 1 & ชิ้น & 123 & 123 \\
+  XL4016E1 Step-Down Converter 8A & 1 & ชิ้น & 90 & 90 \\
+  \midrule
+  \textit{รวมอิเล็กทรอนิกส์และระบบควบคุม} & & & & \textit{1{,}392} \\
+
+  \addlinespace
+  % --- Power & Safety ---
+  \multicolumn{5}{l}{\textbf{ระบบจ่ายไฟและความปลอดภัย}} \\
+  \midrule
+  Switching Power Supply 24V 10A & 1 & ชุด & 320 & 320 \\
+  Switching Power Supply 5V 4A & 1 & ชุด & 110 & 110 \\
+  Magnetic Contactor S-N10 24V & 1 & ชิ้น & 230 & 230 \\
+  Contactor 24VDC & 1 & ชิ้น & 380 & 380 \\
+  Circuit Breaker AC 2P & 2 & ชิ้น & 170 & 340 \\
+  Circuit Breaker DC 2P 6A & 2 & ชิ้น & 126 & 252 \\
+  Emergency Stop Button 22\,mm & 1 & ชิ้น & 45 & 45 \\
+  Pilot Lamp 24VDC (หลายสี) & 6 & ชิ้น & 27 & 162 \\
+  \midrule
+  \textit{รวมระบบจ่ายไฟและความปลอดภัย} & & & & \textit{1{,}839} \\
+
+  \addlinespace
+  % --- Mechanical ---
+  \multicolumn{5}{l}{\textbf{ชิ้นส่วนเชิงกล}} \\
+  \midrule
+  Custom Machined Parts (ชิ้นส่วนกลึง/กัด) & 2 & ชุด & 1{,}295 & 2{,}590 \\
+  SKF 30203 Tapered Roller Bearing & 1 & ชิ้น & 228 & 228 \\
+  Miniature Flange Bearing F6901ZZ & 1 & ชิ้น & 88 & 88 \\
+  MF126ZZ Bearing & 1 & ชิ้น & 45 & 45 \\
+  ลูกปืนทั่วไป & 17 & ชิ้น & 25 & 425 \\
+  Flexible Shaft Coupling 8$\times$8\,mm & 1 & ชิ้น & 130 & 130 \\
+  น็อต สกรู แหวน และอุปกรณ์ยึด (รวม) & --- & --- & --- & 600 \\
+  บูชรอง (Spacer) ชุด & --- & --- & --- & 299 \\
+  \midrule
+  \textit{รวมชิ้นส่วนเชิงกล} & & & & \textit{4{,}405} \\
+
+  \addlinespace
+  % --- Wiring & Connectors ---
+  \multicolumn{5}{l}{\textbf{สายไฟและขั้วต่อ}} \\
+  \midrule
+  สายไฟ AC/DC, สายสัญญาณ (รวม) & --- & --- & --- & 487 \\
+  GX12/GX16/GX20 Connector (รวม) & --- & --- & --- & 450 \\
+  Terminal Block, Bus Bar (รวม) & --- & --- & --- & 200 \\
+  \midrule
+  \textit{รวมสายไฟและขั้วต่อ} & & & & \textit{1{,}137} \\
+
+  \addlinespace
+  % --- Miscellaneous ---
+  \multicolumn{5}{l}{\textbf{วัสดุสิ้นเปลือง}} \\
+  \midrule
+  Matte PETG Filament (Black + Blue) & 2 & ม้วน & 263 & 525 \\
+  ไส้ไก่, ทองแดง PCB, สารหล่อลื่น (รวม) & --- & --- & --- & 180 \\
+  \midrule
+  \textit{รวมวัสดุสิ้นเปลือง} & & & & \textit{705} \\
+
+  \addlinespace
+  \midrule
+  \textbf{รวมทั้งหมด} & & & & \textbf{15{,}338} \\
+  \textbf{งบที่ได้รับ} & & & & \textbf{17{,}000} \\
+  \textbf{คงเหลือ} & & & & \textbf{1{,}662} \\
+  \bottomrule
+\end{longtable}
 
 % ----------------------------------------------------------------------------
 \section{โครงสร้างของรายงาน}
