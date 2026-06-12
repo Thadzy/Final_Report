@@ -1770,6 +1770,23 @@ Mechanical Damping ($0.193$) ถึง 25 เท่า
     \label{eq:Gv_red_num}
 \end{equation}
 
+% -----------------------------------------------------------------------
+% รูปที่: Root Locus — Velocity Inner Loop
+% ชื่อไฟล์แนะนำ: fig_rlocus_velocity.png
+% เนื้อหา: Root Locus ของ PI × G_v_reduced(s)
+%          Desired Poles s* = -80 ± j38.7 แสดงด้วย * สีแดง
+%          เส้นประสีน้ำเงินแสดง Damping Ratio ζ = 0.9
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{fig_rlocus_velocity}
+    \caption{Root Locus ของ Velocity Inner Loop (PI + Reduced Plant)
+             แสดง Desired Poles $s^*_{vel} = -80.000 \pm j38.747$
+             (เครื่องหมาย $\times$ สีแดง) บนเส้น Damping Ratio
+             $\zeta = 0.9$ (เส้นประสีน้ำเงิน)}
+    \label{fig:rlocus_velocity}
+\end{figure}
+
 \paragraph{การคำนวณ Velocity PI Gains}
 
 ใช้ Pole Placement บน Reduced Plant
@@ -1822,6 +1839,23 @@ Plant สำหรับ Position Loop จึงประมาณได้เ�
     \quad\checkmark
     \label{eq:Kpp}
 \end{equation}
+
+% -----------------------------------------------------------------------
+% รูปที่: Root Locus — Position Outer Loop
+% ชื่อไฟล์แนะนำ: fig_rlocus_position.png
+% เนื้อหา: Root Locus ของ P × (1/s)
+%          Desired Poles s* = -8 ± j3.875 แสดงด้วย * สีแดง
+%          เส้นประสีน้ำเงินแสดง Damping Ratio ζ = 0.9
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{fig_rlocus_position}
+    \caption{Root Locus ของ Position Outer Loop (P + Integrator Plant)
+             แสดง Desired Poles $s^*_{pos} = -8.000 \pm j3.875$
+             (เครื่องหมาย $\times$ สีแดง) บนเส้น Damping Ratio
+             $\zeta = 0.9$ (เส้นประสีน้ำเงิน)}
+    \label{fig:rlocus_position}
+\end{figure}
 
 % -----------------------------------------------------------------------
 \subsubsection{Anti-windup และ Feedforward}
@@ -1925,24 +1959,438 @@ Converge แล้วเท่านั้น ตามที่อธิบา�
       และ Kalman Filter Converge} \\
   \end{tabular}
 \end{table}
-\subsubsection{ผลการ Simulation}
+
+% -----------------------------------------------------------------------
+\subsubsection{Hardware Commissioning และค่า Gain จริง}
+\label{subsubsec:hw_commissioning}
+% -----------------------------------------------------------------------
+
+ค่า Gain ที่ได้จาก Pole Placement ใน\cref{eq:Kpv,eq:Kiv,eq:Kpp}
+คำนวณภายใต้สมมติฐานว่าแบบจำลอง Plant มีความแม่นยำสมบูรณ์
+และ Output ของ Controller คือแรงดัน $V_a$ ในหน่วย Volt
+อย่างไรก็ตาม Firmware จริงบน STM32G474RE
+ส่งคำสั่งในรูป PWM Count ($0$ ถึง $\pm$50)
+ผ่านฟังก์ชัน \texttt{Motor\_SetPWM()} โดยมี Scale Factor
+
+\begin{equation}
+    \text{Scale} = \frac{V_{supply}}{PWM_{max}}
+                 = \frac{24}{50}
+                 = 0.48\,\text{V/PWM}
+    \label{eq:pwm_scale}
+\end{equation}
+
+ดังนั้น Theoretical Gains ที่แปลงหน่วยเป็น PWM Unit แล้วคือ
+
+\begin{equation}
+    K_{p,vel}^{theory,hw}
+        = \frac{K_{p,vel}^{theory}}{\text{Scale}}
+        = \frac{68.940}{0.48}
+        \approx 143.6\,\text{PWM/(rad/s)}
+    \label{eq:Kpv_scaled}
+\end{equation}
+
+ซึ่งยังคงสูงกว่าค่าที่ใช้งานได้จริงอย่างมีนัยสำคัญ
+เนื่องจากปัจจัยหลักสามประการ ได้แก่
+
+\begin{itemize}
+    \item \textbf{Model Uncertainty:}
+          พารามิเตอร์ $J = 0.728\,\text{kg·m}^2$ และ $B = 0.193\,\text{N·m·s/rad}$
+          ประมาณจาก Chirp Excitation ที่ความถี่ต่ำ (0.1--2\,Hz)
+          ซึ่งอาจไม่สะท้อน Dynamic ของระบบที่ Bandwidth สูงกว่าได้อย่างแม่นยำ
+
+    \item \textbf{Nonlinearity:}
+          แบบจำลอง LTI ละทิ้ง Static Friction ของ Bearing และ Belt Drive
+          ซึ่งมีผลต่อ Gain ที่เหมาะสมในสภาวะ Low-Velocity
+
+    \item \textbf{PWM Saturation:}
+          Gain สูงทำให้ Controller Output Saturate ที่ $\pm$50 PWM
+          ในช่วง Transient เกือบตลอดเวลา
+          ทำให้ระบบไม่ทำงานในย่าน Linear ตามที่ Pole Placement สมมติ
+\end{itemize}
+
+ด้วยเหตุนี้ Theoretical Gains จึงใช้เป็น \textbf{Order-of-Magnitude Reference}
+และ \textbf{Starting Point} สำหรับ Hardware Commissioning เท่านั้น
+ไม่ใช่ค่าที่นำไปใช้งานโดยตรง
+
+\paragraph{ขั้นตอน Hardware Commissioning}
+
+ดำเนินการ Tune Gains บน Hardware จริงตามลำดับดังนี้
+
+\begin{enumerate}
+    \item \textbf{Velocity Loop ก่อน:}
+          ปิด Position Loop ชั่วคราว
+          เพิ่ม $K_{p,vel}$ ทีละน้อยจนระบบเริ่ม Oscillate
+          บันทึก $K_{p,crit}$ แล้วลดลงเหลือประมาณ $0.5 \times K_{p,crit}$
+          จากนั้นเพิ่ม $K_{i,vel}$ ช้าๆ จนกำจัด Steady-State Error ได้
+
+    \item \textbf{Position Loop ถัดไป:}
+          เปิด Position Loop แล้วเพิ่ม $K_{p,pos}$ ทีละน้อย
+          จนได้ Response ที่เร็วเพียงพอโดยไม่มี Overshoot
+          จากนั้นปรับ $K_{d,pos}$ เพื่อ Damp การสั่น
+          และ $K_{i,pos}$ เพื่อกำจัด Steady-State Error จาก Friction
+
+    \item \textbf{ตรวจสอบ Requirements:}
+          วัด Settling Time และ Overshoot จากการทดสอบ Step Response
+          บน Hardware จริง เทียบกับ P5 ($t_s \leq 0.5$\,s)
+          และ P6 (\%OS $\leq 1\%$)
+\end{enumerate}
+
+\subsection{ค่า Gain ที่ใช้งานจริง (Hardware-Tuned)}
 
 \begin{table}[H]
   \centering
-  \caption{ผลการ Simulation Cascade PID เปรียบเทียบกับ Requirements}
-  \label{tab:sim_results}
-  \begin{tabular}{lcccc}
+  \caption{เปรียบเทียบค่า PID Gain จาก Theoretical Design
+           และ Hardware Commissioning}
+  \label{tab:pid_gains_comparison}
+  \begin{tabular}{llcccc}
     \toprule
-    Metric & Unshaped & ZV-Shaped & Requirement & สถานะ \\
+    Loop & สัญลักษณ์ & Theoretical & Hardware & หน่วย (Theory) & หน่วย (HW) \\
     \midrule
-    Settling Time (Arm)  & 0.450\,s & 0.450\,s & $\leq 0.5$\,s & \textbf{PASS} \\
-    Overshoot            & 0.00\%   & 0.00\%   & $\leq 1\%$    & \textbf{PASS} \\
-    Steady-state Error   & $0.004°$ & $0.004°$ & --            & -- \\
-    Rod Peak Deflection  & $21.7°$  & $9.9°$   & $\leq 0.57°$ (at rest) & -- \\
-    Rod Settling Time    & 6.44\,s  & $\approx 0$\,s & -- & -- \\
+    \multirow{2}{*}{Velocity (PI)}
+      & $K_{p,vel}$ & 68.940   & [HW\_KPV] & V/(rad/s)      & PWM/(rad/s) \\
+      & $K_{i,vel}$ & 3512.963 & [HW\_KIV] & V/rad          & PWM/rad     \\
+    \midrule
+    \multirow{3}{*}{Position (PID)}
+      & $K_{p,pos}$ & 8.889  & [HW\_KPP] & (rad/s)/rad & (rad/s)/rad \\
+      & $K_{i,pos}$ & --     & [HW\_KIP] & --          & (rad/s)/(rad·s) \\
+      & $K_{d,pos}$ & --     & [HW\_KDP] & --          & (rad/s)·s/rad \\
+    \midrule
+    Anti-windup
+      & $K_{t,aw}$  & 50.958 & [HW\_KAW] & s$^{-1}$ & s$^{-1}$ \\
+    \midrule
+    \multirow{3}{*}{Feedforward}
+      & $K_{vff}$ & 3.033 & [HW\_KVFF] & V/(rad/s)     & PWM/(rad/s) \\
+      & $K_{aff}$ & 0.445 & [HW\_KAFF] & V/(rad/s$^2$) & PWM/(rad/s$^2$) \\
+      & $K_{tff}$ & 0.612 & [HW\_KTFF] & V/(N·m)       & PWM/(N·m) \\
     \bottomrule
+    \multicolumn{6}{l}{\small [HW\_*] = ค่าที่ได้จาก Hardware Commissioning
+      — อัปเดตหลัง Tuning เสร็จสิ้น} \\
   \end{tabular}
 \end{table}
+
+% -----------------------------------------------------------------------
+% รูปที่: Step Response จาก Hardware Commissioning
+% ชื่อไฟล์แนะนำ: fig_step_response_hw.png
+% เนื้อหา: กราฟ Position (deg) vs Time (s) แสดง Step Response จริง
+%          บน Hardware พร้อม annotation Settling Time และ Overshoot
+%          เปรียบเทียบ Reference (เส้นประ) กับ Actual (เส้นทึบ)
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.85\textwidth]{fig_step_response_hw}
+%     \caption{Step Response ของระบบ Cascade PID บน Hardware จริง
+%              แสดง Settling Time และ Overshoot
+%              เทียบกับข้อกำหนด P5 ($t_s \leq 0.5$\,s)
+%              และ P6 (\%OS $\leq 1\%$)}
+%     \label{fig:step_response_hw}
+% \end{figure}
+
+\begin{table}[H]
+  \centering
+  \caption{ผลการทดสอบ Step Response บน Hardware
+           เทียบกับ Requirements}
+  \label{tab:hw_step_results}
+  \begin{tabular}{lcccc}
+    \toprule
+    Metric & ผล Hardware & Requirement & หน่วย & สถานะ \\
+    \midrule
+    Settling Time  & [HW\_TS]  & $\leq 0.5$ & s   & [STATUS\_P5] \\
+    Overshoot      & [HW\_OS]  & $\leq 1$   & \%  & [STATUS\_P6] \\
+    Steady-State Error & [HW\_SSE] & --      & deg & -- \\
+    \bottomrule
+    \multicolumn{5}{l}{\small [HW\_*] = อัปเดตหลังเก็บข้อมูลจาก Hardware} \\
+  \end{tabular}
+\end{table}
+
+% \subsubsection{ผลการ Simulation}
+
+% \begin{table}[H]
+%   \centering
+%   \caption{ผลการ Simulation Cascade PID เปรียบเทียบกับ Requirements}
+%   \label{tab:sim_results}
+%   \begin{tabular}{lcccc}
+%     \toprule
+%     Metric & Unshaped & ZV-Shaped & Requirement & สถานะ \\
+%     \midrule
+%     Settling Time (Arm)  & 0.450\,s & 0.450\,s & $\leq 0.5$\,s & \textbf{PASS} \\
+%     Overshoot            & 0.00\%   & 0.00\%   & $\leq 1\%$    & \textbf{PASS} \\
+%     Steady-state Error   & $0.004°$ & $0.004°$ & --            & -- \\
+%     Rod Peak Deflection  & $21.7°$  & $9.9°$   & $\leq 0.57°$ (at rest) & -- \\
+%     Rod Settling Time    & 6.44\,s  & $\approx 0$\,s & -- & -- \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+
+% -----------------------------------------------------------------------
+\subsubsection{การ Discretize สู่ Z-Domain (Tustin Transform)}
+\label{subsubsec:discretization}
+% -----------------------------------------------------------------------
+
+การ Implement ตัวควบคุม Cascade PID บน STM32G474RE
+จำเป็นต้องแปลง Continuous-time Controller
+ให้เป็น Discrete-time ก่อน
+โดยใช้วิธี Tustin (Bilinear Transform)
+
+\begin{equation}
+    s \;\longleftarrow\; \frac{2}{T}\cdot\frac{z-1}{z+1}
+    \label{eq:tustin_sub}
+\end{equation}
+
+เหตุผลที่เลือก Tustin แทน Forward Euler ได้แก่
+Tustin Map โพลทุกตัวในครึ่งซ้ายของระนาบ $s$
+ให้อยู่ภายใน Unit Circle ของระนาบ $z$ อย่างสมบูรณ์
+ในขณะที่ Forward Euler อาจทำให้ Discrete System
+ไม่เสถียรแม้ Continuous System จะเสถียร
+โดยเฉพาะเมื่อ $K_i/f_s$ มีขนาดใหญ่
+ตามที่อธิบายใน\cref{subsec:cascade_pid}
+
+% -----------------------------------------------------------------------
+\paragraph{Velocity Inner Loop — PI (Tustin)}
+% -----------------------------------------------------------------------
+
+Continuous-time PI Controller ของ Velocity Loop คือ
+
+\begin{equation}
+    C_v(s) = K_{p,vel} + \frac{K_{i,vel}}{s}
+    \label{eq:Cv_ct}
+\end{equation}
+
+แทน\cref{eq:tustin_sub} ลงใน\cref{eq:Cv_ct}
+ที่ Sample Time $T_v = 1$\,ms ได้
+
+\begin{equation}
+    C_v(z) = K_{p,vel}
+           + K_{i,vel}\cdot\frac{T_v}{2}\cdot\frac{z+1}{z-1}
+    \label{eq:Cv_z}
+\end{equation}
+
+จัดรูปให้ได้ Difference Equation
+โดยกำหนด $u_v[k]$ เป็น PWM Output
+และ $e_v[k] = \omega_{sp}[k] - \omega_{act}[k]$
+เป็น Velocity Error
+
+\begin{equation}
+    u_v[k] = u_v[k-1]
+           + \underbrace{\left(K_{p,vel} + \frac{K_{i,vel}\,T_v}{2}\right)}_{c_1}
+             e_v[k]
+           + \underbrace{\left(-K_{p,vel} + \frac{K_{i,vel}\,T_v}{2}\right)}_{c_2}
+             e_v[k-1]
+    \label{eq:vel_diff_eq}
+\end{equation}
+
+\noindent โดยที่
+
+\begin{align}
+    c_1 &= K_{p,vel} + \frac{K_{i,vel}\,T_v}{2}
+         = 68.940 + \frac{3512.963 \times 0.001}{2}
+         = 68.940 + 1.756
+         = 70.696
+    \label{eq:c1_vel} \\[4pt]
+    c_2 &= -K_{p,vel} + \frac{K_{i,vel}\,T_v}{2}
+         = -68.940 + 1.756
+         = -67.184
+    \label{eq:c2_vel}
+\end{align}
+
+Difference Equation นี้ implement ได้โดยตรงใน Firmware
+โดยเก็บเพียง $u_v[k-1]$ และ $e_v[k-1]$
+เป็น Static Variable ซึ่งมี Memory Footprint
+เพียง 2 ตัวแปร Float (8 bytes) ต่อ Loop
+
+% -----------------------------------------------------------------------
+\paragraph{Position Outer Loop — PID (Tustin, Derivative on Measurement)}
+% -----------------------------------------------------------------------
+
+Continuous-time PID Controller ของ Position Loop คือ
+
+\begin{equation}
+    C_p(s) = K_{p,pos} + \frac{K_{i,pos}}{s} + K_{d,pos}\,s
+    \label{eq:Cp_ct}
+\end{equation}
+
+แทน Tustin Transform ที่ $T_p = 10$\,ms
+และใช้ Derivative on Measurement
+(แทน Derivative on Error เพื่อป้องกัน Derivative Kick
+เมื่อ Setpoint เปลี่ยนแบบ Step)
+
+\begin{equation}
+    \text{D-term} = -K_{d,pos}\,\frac{d\theta_{act}}{dt}
+    \label{eq:d_on_meas}
+\end{equation}
+
+Difference Equation ของ Position PID คือ
+
+\begin{align}
+    u_p[k] &= K_{p,pos}\,e_p[k] \notag \\
+            &+ \frac{K_{i,pos}\,T_p}{2}
+               \bigl(e_p[k] + e_p[k-1]\bigr)
+               + I_p[k-1] \notag \\
+            &- K_{d,pos}\,\frac{\theta_{act}[k] - \theta_{act}[k-1]}{T_p}
+    \label{eq:pos_diff_eq}
+\end{align}
+
+\noindent โดยที่ $I_p[k]$ คือ Integral State ที่ Update ตาม
+
+\begin{equation}
+    I_p[k] = I_p[k-1]
+           + \frac{K_{i,pos}\,T_p}{2}
+             \bigl(e_p[k] + e_p[k-1]\bigr)
+    \label{eq:pos_integral_update}
+\end{equation}
+
+และ $u_p[k]$ คือ Velocity Setpoint
+ที่ส่งเข้า Velocity Inner Loop
+ซึ่ง Clamp ไว้ที่ $\pm v_{max} = \pm 7.304$\,rad/s
+
+% -----------------------------------------------------------------------
+\paragraph{Anti-windup ใน Discrete-time}
+% -----------------------------------------------------------------------
+
+ทั้งสอง Loop ใช้ Conditional Integration
+เพื่อป้องกัน Integral Windup โดย
+
+\begin{itemize}
+    \item \textbf{Velocity Loop:}
+          หยุด Integrate เมื่อ Feedforward Output
+          ใกล้ Saturation Limit
+          ($|u_{ff}| \geq PWM_{max} - 1$)
+          เนื่องจากสภาวะดังกล่าว PID Output
+          จะถูก Clamp อยู่ดีและ Integral State
+          ที่สะสมต่อไปจะไม่มีผลต่อ Output จริง
+
+    \item \textbf{Position Loop:}
+          หยุด Integrate เมื่อ Position Error
+          อยู่ภายใน Deadband
+          ($|e_p| < \delta_{dead}$)
+          ป้องกัน Windup ขณะจอดนิ่ง
+\end{itemize}
+
+% -----------------------------------------------------------------------
+\begin{table}[H]
+  \centering
+  \caption{สรุปค่าสัมประสิทธิ์ Discrete-time Controller
+           (Theoretical Gains, หน่วย V)}
+  \label{tab:discrete_coeffs}
+  \begin{tabular}{llccc}
+    \toprule
+    Loop & พารามิเตอร์ & สัญลักษณ์ & ค่า & หน่วย \\
+    \midrule
+    \multirow{4}{*}{Velocity PI}
+      & Sample Time       & $T_v$  & 0.001   & s \\
+      & Forward Coeff     & $c_1$  & 70.696  & V/(rad/s) \\
+      & Backward Coeff    & $c_2$  & $-67.184$ & V/(rad/s) \\
+      & Integral Clamp    & $I_{max,v}$ & \texttt{PID\_SPEED\_IMAX} & V \\
+    \midrule
+    \multirow{4}{*}{Position PID}
+      & Sample Time       & $T_p$  & 0.010  & s \\
+      & Proportional      & $K_{p,pos}$ & 8.889 & (rad/s)/rad \\
+      & Integral Step     & $K_{i,pos}T_p/2$ & [HW\_KIP\_STEP] & (rad/s)/rad \\
+      & Derivative        & $K_{d,pos}/T_p$ & [HW\_KDP\_RATE] & (rad/s)·s/rad \\
+    \bottomrule
+    \multicolumn{5}{l}{\small หมายเหตุ: ค่า [HW\_*] อัปเดตหลัง Hardware Commissioning} \\
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{fig_zpole_cascade}
+    \caption{Pole-Zero Map ใน Z-Domain ของ Velocity PI (ซ้าย)
+             และ Position PID (ขวา) หลัง Tustin Discretization
+             Poles และ Zeros ทั้งหมดอยู่ภายใน Unit Circle
+             ยืนยันความเสถียรของ Discrete-time Controller}
+    \label{fig:zpole_cascade}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{fig_bode_discretization}
+    \caption{Bode Plot เปรียบเทียบ Continuous-time (สีเทา),
+             Tustin (สีน้ำเงิน) และ Forward Euler (สีแดง)
+             แสดงว่า Tustin ให้ Frequency Response
+             ใกล้เคียง Continuous ในย่าน Passband
+             ในขณะที่ Forward Euler มี Phase Error
+             สูงกว่าเมื่อความถี่เข้าใกล้ $f_{Nyquist}$}
+    \label{fig:bode_discretization}
+\end{figure}
+
+% -----------------------------------------------------------------------
+\subsubsection{การวิเคราะห์เสถียรภาพในโดเมนความถี่}
+\label{subsubsec:frequency_analysis}
+% -----------------------------------------------------------------------
+
+การวิเคราะห์เสถียรภาพของ Cascade PID ดำเนินการใน
+Frequency Domain โดยใช้ Open-loop Bode Plot
+เพื่อหา Gain Margin (GM) และ Phase Margin (PM)
+ซึ่งเป็น Stability Margin มาตรฐานสำหรับ
+Linear Feedback System
+เกณฑ์ขั้นต่ำที่ยอมรับได้ทั่วไปคือ
+GM $> 6$\,dB และ PM $> 30°$
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_bode_openloop_vel}
+    \caption{Open-Loop Bode Plot ของ Velocity Inner Loop
+             แสดง Phase Margin ที่ Gain Crossover Frequency
+             ยืนยันความเสถียรของ Velocity Loop}
+    \label{fig:bode_openloop_vel}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_bode_openloop_pos}
+    \caption{Open-Loop Bode Plot ของ Position Outer Loop (Cascade)
+             แสดง Gain Margin และ Phase Margin
+             ของระบบ Cascade รวมทั้งสอง Loop}
+    \label{fig:bode_openloop_pos}
+\end{figure}
+
+\begin{table}[H]
+  \centering
+  \caption{สรุป Stability Margin ของ Cascade PID}
+  \label{tab:stability_margin}
+  \begin{tabular}{lcccc}
+    \toprule
+    Loop & GM (dB) & PM (deg) & $f_{cp}$ (Hz) & สถานะ \\
+    \midrule
+    Velocity Inner & $\infty$ & 74.64 & 25.58 & \textbf{ผ่าน} \\
+    Position Outer & $\infty$ & 98.07 &  1.46 & \textbf{ผ่าน} \\
+    \bottomrule
+    \multicolumn{5}{l}{\small เกณฑ์: GM $> 6$\,dB และ PM $> 30°$} \\
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{fig_bode_sensitivity}
+    \caption{Closed-loop Frequency Response แสดง
+             Complementary Sensitivity $T(s)$ (บน)
+             และ Sensitivity $S(s)$ (ล่าง)
+             ของ Velocity Loop (ซ้าย) และ Position Loop (ขวา)
+             เส้นประแสดงจุด $-3$\,dB Bandwidth ของแต่ละ Loop}
+    \label{fig:bode_sensitivity}
+\end{figure}
+
+Gain Margin มีค่าเป็น $\infty$ ในทั้งสอง Loop
+เนื่องจาก Phase ของ Open-loop Transfer Function
+ไม่เคยลดลงถึง $-180°$ ในย่านความถี่ใด
+ซึ่งเป็นลักษณะปกติของระบบ PI และ PID
+ที่มี Integrator เพียงหนึ่งตัวใน Loop
+ดังนั้น Phase Margin จึงเป็น Stability Indicator
+หลักของระบบนี้
+
+Phase Margin ของ Velocity Loop ($74.6°$)
+และ Position Loop ($98.1°$) สูงกว่าเกณฑ์ขั้นต่ำ
+$30°$ อย่างมีนัยสำคัญ
+แสดงว่าระบบมี Stability Margin เพียงพอ
+และสามารถรองรับ Plant Model Uncertainty
+ได้ในระดับสูง
+
+Gain Crossover Frequency ของ Velocity Loop
+ที่ $f_{cp} = 25.58$\,Hz ยืนยัน Bandwidth
+Separation จาก Position Loop ($f_{cp} = 1.46$\,Hz)
+ที่อัตราส่วน $25.58/1.46 \approx 17.5$ เท่า
+ซึ่งเกินกว่าเกณฑ์ 10 เท่าที่ออกแบบไว้
+ตาม\cref{eq:bw_sep}
 
 \subsection{การออกแบบ ZVD Input Shaper และ Motion Profile}
 \label{subsec:zv_design}
