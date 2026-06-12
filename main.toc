@@ -146,63 +146,71 @@
 \contentsline {paragraph}{Position Outer Loop — PID (Tustin, Derivative on Measurement)}{74}{paragraph*.155}%
 \contentsline {paragraph}{Anti-windup ใน Discrete-time}{75}{paragraph*.156}%
 \contentsline {subsubsection}{การวิเคราะห์เสถียรภาพในโดเมนความถี่}{77}{subsubsection*.160}%
-\contentsline {subsection}{\numberline {3.3.8}การออกแบบ ZVD Input Shaper และ Motion Profile}{81}{subsection.3.3.8}%
+\contentsline {subsection}{\numberline {3.3.8}การออกแบบ ZVD Input Shaper}{81}{subsection.3.3.8}%
 \contentsline {subsubsection}{แบบจำลอง Connection Rod และเหตุผลที่ต้องใช้ Input Shaping}{81}{subsubsection*.165}%
-\contentsline {subsubsection}{ZVD Input Shaper (3-Impulse)}{81}{subsubsection*.166}%
-\contentsline {subsubsection}{ผลการเปรียบเทียบ Unshaped กับ ZVD-Shaped}{82}{subsubsection*.168}%
-\contentsline {subsubsection}{S-Curve Motion Profile}{82}{subsubsection*.170}%
-\contentsline {subsection}{\numberline {3.3.9}การวิเคราะห์ระยะคลอน (Backlash Analysis)}{82}{subsection.3.3.9}%
-\contentsline {subsection}{\numberline {3.3.10}Modbus RTU Protocol และ Register Map}{82}{subsection.3.3.10}%
-\contentsline {chapter}{\numberline {4}การสร้างและบูรณาการระบบ}{85}{chapter.4}%
-\contentsline {section}{\numberline {4.1}การประกอบโครงสร้างทางกล}{85}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}ภาพรวมการประกอบ}{85}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}การประกอบ Sub-assembly}{85}{subsection.4.1.2}%
-\contentsline {subsubsection}{ส่วนฐาน (Base Sub-assembly)}{85}{subsubsection*.175}%
-\contentsline {subsubsection}{ส่วนแขนกลและข้อต่อ (Arm Sub-assembly)}{86}{subsubsection*.177}%
-\contentsline {subsubsection}{ชุดเอ็นโค้ดเดอร์ (Encoder Sub-assembly)}{87}{subsubsection*.179}%
-\contentsline {subsection}{\numberline {4.1.3}การประกอบรวมขั้นสุดท้าย}{87}{subsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.1.4}ปัญหาที่พบระหว่างการประกอบ}{87}{subsection.4.1.4}%
-\contentsline {section}{\numberline {4.2}การประกอบตู้ควบคุมและการเดินสายไฟ}{88}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Bill of Materials ของตู้ควบคุม}{88}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}แนวทางการเดินสายไฟ}{88}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}การพัฒนา Firmware}{89}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}โครงสร้างโมดูลและ Task Timing}{89}{subsection.4.3.1}%
-\contentsline {subsubsection}{Execution Model และ Task Timing}{89}{subsubsection*.183}%
-\contentsline {subsubsection}{PID Gains ที่ใช้ใน Firmware จริง}{90}{subsubsection*.185}%
-\contentsline {subsection}{\numberline {4.3.2}การทำงานร่วมกันของโมดูล}{91}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}การ Implement ZV Input Shaper (Circular Buffer)}{91}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}การ Implement Kalman Filter (Steady-State)}{91}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}การ Implement Cascade PID (Discrete)}{91}{subsection.4.3.5}%
-\contentsline {section}{\numberline {4.4}การบูรณาการระดับระบบ}{92}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}การเชื่อมต่อ Motor, Encoder และ Motor Driver}{92}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}การเชื่อมต่อ Joystick ผ่าน ESP32}{92}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}การเชื่อมต่อ Modbus RTU และ Base System}{93}{subsection.4.4.3}%
-\contentsline {chapter}{\numberline {5}ผลการทดสอบและการทวนสอบ}{94}{chapter.5}%
-\contentsline {section}{\numberline {5.1}ผลการทดสอบระบบย่อย}{94}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}การวัดระยะคลอน (Backlash Measurement)}{94}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}การทดสอบ Encoder และ Sensor}{94}{subsection.5.1.2}%
-\contentsline {subsubsection}{การทดสอบ Encoder AMT-103}{94}{subsubsection*.189}%
-\contentsline {subsubsection}{การทดสอบ Proximity Sensor (Homing)}{95}{subsubsection*.191}%
-\contentsline {section}{\numberline {5.2}ผลการระบุระบบและการจำลอง}{95}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}ผลการระบุพารามิเตอร์ของมอเตอร์}{95}{subsection.5.2.1}%
-\contentsline {subsubsection}{ผล Locked Rotor Test (ละเอียด)}{95}{subsubsection*.193}%
-\contentsline {subsubsection}{ผล Parameter Estimation จาก Chirp Test}{95}{subsubsection*.195}%
-\contentsline {subsection}{\numberline {5.2.2}ผลการตรวจสอบความถูกต้องของแบบจำลอง (Model Validation)}{96}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}ผลการ Simulation Cascade PID และ ZV Shaper}{96}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}ผลการออกแบบ Kalman Filter (DARE)}{96}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}ผลการทดสอบสมรรถนะการทำงานจริง}{96}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Step Response: Overshoot และ Settling Time}{96}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}ความแม่นยำตำแหน่ง (Position Accuracy)}{97}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}ความซ้ำซากได้ (Repeatability)}{97}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}Cycle Time}{97}{subsection.5.3.4}%
-\contentsline {section}{\numberline {5.4}การทวนสอบตามข้อกำหนด (Requirements Traceability \& V\&V)}{97}{section.5.4}%
-\contentsline {chapter}{\numberline {6}สรุปผลและข้อเสนอแนะ}{99}{chapter.6}%
-\contentsline {section}{\numberline {6.1}สรุปผลการดำเนินงาน}{99}{section.6.1}%
-\contentsline {section}{\numberline {6.2}ปัญหา อุปสรรค และบทเรียนที่ได้}{99}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}ปัญหาเชิงกล}{99}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}ปัญหาด้านซอฟต์แวร์และการบูรณาการ}{100}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}ปัญหาด้านการออกแบบระบบควบคุม}{100}{subsection.6.2.3}%
-\contentsline {section}{\numberline {6.3}ข้อเสนอแนะสำหรับการพัฒนาต่อยอด}{100}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}การพัฒนาระบบควบคุม}{100}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}การพัฒนาระบบกล}{101}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}การพัฒนาระบบไฟฟ้าและซอฟต์แวร์}{101}{subsection.6.3.3}%
+\contentsline {subsubsection}{การออกแบบ ZVD Input Shaper (3-Impulse)}{81}{subsubsection*.166}%
+\contentsline {paragraph}{การคำนวณพารามิเตอร์ ZVD}{81}{paragraph*.167}%
+\contentsline {subsubsection}{การวิเคราะห์ความทนทานต่อความไม่แน่นอนของความถี่}{83}{subsubsection*.170}%
+\contentsline {subsubsection}{ผลการ Simulation: Unshaped กับ ZVD-Shaped}{84}{subsubsection*.172}%
+\contentsline {subsection}{\numberline {3.3.9}การออกแบบ S-Curve Motion Profile}{85}{subsection.3.3.9}%
+\contentsline {subsubsection}{พารามิเตอร์ S-Curve จาก Hardware Identification}{85}{subsubsection*.175}%
+\contentsline {subsubsection}{การคำนวณ Phase Times}{85}{subsubsection*.176}%
+\contentsline {subsubsection}{การวิเคราะห์ Cycle Time}{88}{subsubsection*.179}%
+\contentsline {paragraph}{Scenario 1: Worst-case ($0° \leftrightarrow 360°$)}{88}{paragraph*.180}%
+\contentsline {paragraph}{Scenario 2: Random Moderate}{89}{paragraph*.182}%
+\contentsline {subsubsection}{การวิเคราะห์ Rod Swing ต่อเกณฑ์การประกอบ}{91}{subsubsection*.187}%
+\contentsline {subsection}{\numberline {3.3.10}การวิเคราะห์ระยะคลอน (Backlash Analysis)}{92}{subsection.3.3.10}%
+\contentsline {subsection}{\numberline {3.3.11}Modbus RTU Protocol และ Register Map}{92}{subsection.3.3.11}%
+\contentsline {chapter}{\numberline {4}การสร้างและบูรณาการระบบ}{95}{chapter.4}%
+\contentsline {section}{\numberline {4.1}การประกอบโครงสร้างทางกล}{95}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}ภาพรวมการประกอบ}{95}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}การประกอบ Sub-assembly}{95}{subsection.4.1.2}%
+\contentsline {subsubsection}{ส่วนฐาน (Base Sub-assembly)}{95}{subsubsection*.192}%
+\contentsline {subsubsection}{ส่วนแขนกลและข้อต่อ (Arm Sub-assembly)}{96}{subsubsection*.194}%
+\contentsline {subsubsection}{ชุดเอ็นโค้ดเดอร์ (Encoder Sub-assembly)}{97}{subsubsection*.196}%
+\contentsline {subsection}{\numberline {4.1.3}การประกอบรวมขั้นสุดท้าย}{97}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}ปัญหาที่พบระหว่างการประกอบ}{97}{subsection.4.1.4}%
+\contentsline {section}{\numberline {4.2}การประกอบตู้ควบคุมและการเดินสายไฟ}{98}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Bill of Materials ของตู้ควบคุม}{98}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}แนวทางการเดินสายไฟ}{98}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}การพัฒนา Firmware}{99}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}โครงสร้างโมดูลและ Task Timing}{99}{subsection.4.3.1}%
+\contentsline {subsubsection}{Execution Model และ Task Timing}{99}{subsubsection*.200}%
+\contentsline {subsubsection}{PID Gains ที่ใช้ใน Firmware จริง}{100}{subsubsection*.202}%
+\contentsline {subsection}{\numberline {4.3.2}การทำงานร่วมกันของโมดูล}{101}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}การ Implement ZV Input Shaper (Circular Buffer)}{101}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}การ Implement Kalman Filter (Steady-State)}{101}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}การ Implement Cascade PID (Discrete)}{101}{subsection.4.3.5}%
+\contentsline {section}{\numberline {4.4}การบูรณาการระดับระบบ}{102}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}การเชื่อมต่อ Motor, Encoder และ Motor Driver}{102}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}การเชื่อมต่อ Joystick ผ่าน ESP32}{102}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}การเชื่อมต่อ Modbus RTU และ Base System}{103}{subsection.4.4.3}%
+\contentsline {chapter}{\numberline {5}ผลการทดสอบและการทวนสอบ}{104}{chapter.5}%
+\contentsline {section}{\numberline {5.1}ผลการทดสอบระบบย่อย}{104}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}การวัดระยะคลอน (Backlash Measurement)}{104}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}การทดสอบ Encoder และ Sensor}{104}{subsection.5.1.2}%
+\contentsline {subsubsection}{การทดสอบ Encoder AMT-103}{104}{subsubsection*.206}%
+\contentsline {subsubsection}{การทดสอบ Proximity Sensor (Homing)}{105}{subsubsection*.208}%
+\contentsline {section}{\numberline {5.2}ผลการระบุระบบและการจำลอง}{105}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}ผลการระบุพารามิเตอร์ของมอเตอร์}{105}{subsection.5.2.1}%
+\contentsline {subsubsection}{ผล Locked Rotor Test (ละเอียด)}{105}{subsubsection*.210}%
+\contentsline {subsubsection}{ผล Parameter Estimation จาก Chirp Test}{105}{subsubsection*.212}%
+\contentsline {subsection}{\numberline {5.2.2}ผลการตรวจสอบความถูกต้องของแบบจำลอง (Model Validation)}{106}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}ผลการ Simulation Cascade PID และ ZV Shaper}{106}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}ผลการออกแบบ Kalman Filter (DARE)}{106}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}ผลการทดสอบสมรรถนะการทำงานจริง}{106}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Step Response: Overshoot และ Settling Time}{106}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}ความแม่นยำตำแหน่ง (Position Accuracy)}{107}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}ความซ้ำซากได้ (Repeatability)}{107}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Cycle Time}{107}{subsection.5.3.4}%
+\contentsline {section}{\numberline {5.4}การทวนสอบตามข้อกำหนด (Requirements Traceability \& V\&V)}{107}{section.5.4}%
+\contentsline {chapter}{\numberline {6}สรุปผลและข้อเสนอแนะ}{109}{chapter.6}%
+\contentsline {section}{\numberline {6.1}สรุปผลการดำเนินงาน}{109}{section.6.1}%
+\contentsline {section}{\numberline {6.2}ปัญหา อุปสรรค และบทเรียนที่ได้}{109}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}ปัญหาเชิงกล}{109}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}ปัญหาด้านซอฟต์แวร์และการบูรณาการ}{110}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}ปัญหาด้านการออกแบบระบบควบคุม}{110}{subsection.6.2.3}%
+\contentsline {section}{\numberline {6.3}ข้อเสนอแนะสำหรับการพัฒนาต่อยอด}{110}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}การพัฒนาระบบควบคุม}{110}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}การพัฒนาระบบกล}{111}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}การพัฒนาระบบไฟฟ้าและซอฟต์แวร์}{111}{subsection.6.3.3}%

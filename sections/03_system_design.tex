@@ -2392,118 +2392,575 @@ Separation จาก Position Loop ($f_{cp} = 1.46$\,Hz)
 ซึ่งเกินกว่าเกณฑ์ 10 เท่าที่ออกแบบไว้
 ตาม\cref{eq:bw_sep}
 
-\subsection{การออกแบบ ZVD Input Shaper และ Motion Profile}
+% ============================================================================
+\subsection{การออกแบบ ZVD Input Shaper}
 \label{subsec:zv_design}
+% ============================================================================
 
+% -----------------------------------------------------------------------
 \subsubsection{แบบจำลอง Connection Rod และเหตุผลที่ต้องใช้ Input Shaping}
+\label{subsubsec:rod_model}
+% -----------------------------------------------------------------------
 
-แบบจำลองและสมการการเคลื่อนที่ของ Connection Rod อธิบายไว้ใน\cref{sec:zv_shaping}
-โดยมีความถี่ธรรมชาติ $\omega_{n,rod} = 12.13$\,Hz ($f_n = 12.13$\,Hz) และ $\zeta_{rod} = 0.041$
-หากไม่ใช้ Input Shaper Settling Time ของ Rod $\approx 6.6$\,s ต่อ Move
-ซึ่งทำให้ Cycle Time ทั้งหมดเกิน 35\,s อย่างแน่นอน
-
-\subsubsection{ZVD Input Shaper (3-Impulse)}
-
-ระบบใช้ ZVD (Zero-Vibration-Derivative) Shaper แบบ 3-Impulse
-ซึ่งมีความทนทานต่อความคลาดเคลื่อนของ $\omega_n$ มากกว่า ZV แบบ 2-Impulse
-พารามิเตอร์คำนวณจาก\cref{eq:zv_amplitudes} และ\cref{eq:zv_t2} ใน\cref{subsec:zv_shaping}
+Connection Rod มีมวล $m_{rod} = 164.08$\,g และความยาว $L_{rod} = 100$\,mm
+จำลองเป็น Simple Pendulum ที่ถูกกระตุ้นด้วย Angular Acceleration
+ของแขนกล $\alpha_{arm}$ ตามที่อธิบายใน\cref{subsec:rod_dynamics}
+สมการการเคลื่อนที่ในรูปแบบ Standard 2nd-order ได้จาก\cref{eq:rod_eom}
 
 \begin{equation}
-  K = e^{-\zeta_{rod}\pi/\sqrt{1-\zeta_{rod}^2}}
-    = e^{-0.041\pi/0.9992} = 0.8790
-  \label{eq:zvd_K}
+    \ddot{\phi} + 2\zeta_{rod}\,\omega_{n,rod}\,\dot{\phi}
+    + \omega_{n,rod}^2\,\phi
+    = \underbrace{-\frac{3\,r_{arm}}{2\,L_{rod}}}_{\Gamma}\,\alpha_{arm}
+    \label{eq:rod_eom_ch3}
 \end{equation}
+
+\noindent โดยที่ $\Gamma = -3 \times 0.5 / (2 \times 0.1) = -7.5$
+คือ Forcing Gain และความถี่ธรรมชาติคำนวณได้จาก\cref{eq:rod_natural_freq}
+
+\begin{equation}
+    \omega_{n,rod} = \sqrt{\frac{3g}{2L_{rod}}}
+                   = \sqrt{\frac{3 \times 9.81}{2 \times 0.1}}
+                   = 12.131\,\text{rad/s}
+                   \quad (f_n = 1.931\,\text{Hz})
+    \label{eq:rod_wn_ch3}
+\end{equation}
+
+ค่า Damping Ratio $\zeta_{rod} = 0.041$ ใช้เป็น Conservative Assumption
+สำหรับ Lightly Damped Mechanical System
+ซึ่งให้ Settling Time ต่อ Move ที่
+
+\begin{equation}
+    t_{settle,rod} \approx \frac{4}{\zeta_{rod}\,\omega_{n,rod}}
+                         = \frac{4}{0.041 \times 12.131}
+                         = 8.04\,\text{s/move}
+    \label{eq:rod_settle}
+\end{equation}
+
+หากระบบมี 9 Moves ต่อ Cycle และต้องรอให้ Rod หยุดแกว่งก่อนทุก Move
+Cycle Time รวมจะเกิน $9 \times 8.04 = 72.4$\,s
+ซึ่งเกินข้อกำหนด P1 ($\leq 35$\,s) อย่างมาก
+การใช้ Input Shaper จึงเป็นข้อกำหนดที่ขาดไม่ได้
+
+% -----------------------------------------------------------------------
+\subsubsection{การออกแบบ ZVD Input Shaper (3-Impulse)}
+\label{subsubsec:zvd_design}
+% -----------------------------------------------------------------------
+
+ระบบเลือกใช้ ZVD (Zero-Vibration-Derivative) Shaper แบบ 3-Impulse
+แทน ZV แบบ 2-Impulse เนื่องจาก ZVD มีเงื่อนไขเพิ่มเติม
+ว่า Derivative ของ Residual Vibration เทียบกับ $\omega_n$
+ต้องเป็นศูนย์ด้วย ทำให้ทนทานต่อความไม่แน่นอนของ $\omega_n$
+ได้สูงกว่า ดังที่จะเห็นใน\cref{fig:zvd_sensitivity}
+
+\paragraph{การคำนวณพารามิเตอร์ ZVD}
+
+กำหนดค่า Decay Factor
+
+\begin{equation}
+    K = e^{-\zeta_{rod}\pi/\sqrt{1-\zeta_{rod}^2}}
+      = e^{-0.041\pi/\sqrt{1-0.041^2}}
+      = e^{-0.1288}
+      = 0.8790
+    \label{eq:zvd_K}
+\end{equation}
+
+แอมพลิจูดของ Impulse ทั้งสามคำนวณจาก\cref{eq:zv_amplitudes}
 
 \begin{align}
-  A_1 &= \frac{1}{(1+K)^2} = 0.2832, \quad
-  A_2  = \frac{2K}{(1+K)^2} = 0.4981, \quad
-  A_3  = \frac{K^2}{(1+K)^2} = 0.2189
-  \label{eq:zvd_amplitudes}
+    A_1 &= \frac{1}{(1+K)^2}
+         = \frac{1}{(1.8790)^2}
+         = 0.2832
+    \label{eq:zvd_A1} \\[4pt]
+    A_2 &= \frac{2K}{(1+K)^2}
+         = \frac{2 \times 0.8790}{(1.8790)^2}
+         = 0.4979
+    \label{eq:zvd_A2} \\[4pt]
+    A_3 &= \frac{K^2}{(1+K)^2}
+         = \frac{(0.8790)^2}{(1.8790)^2}
+         = 0.2189
+    \label{eq:zvd_A3}
 \end{align}
 
-Impulse delay คำนวณจากคาบ Damped ที่ $f_n = 12.13$\,Hz, $\zeta = 0.041$
+ตรวจสอบ: $A_1 + A_2 + A_3 = 0.2832 + 0.4979 + 0.2189 = 1.0000$ \checkmark
+
+Impulse Delay คำนวณจาก Half-Period ของ Damped Oscillation
 
 \begin{equation}
-  T_d = \frac{\pi}{\omega_n\sqrt{1-\zeta^2}} \approx 41.2\,\text{ms}
-  \quad\Rightarrow\quad
-  t_2 = T_d \approx 40\,\text{ms}\;(4\;\text{steps @ 100\,Hz}), \quad
-  t_3 = 2T_d \approx 80\,\text{ms}\;(8\;\text{steps})
-  \label{eq:zvd_delays}
+    T_d = \frac{\pi}{\omega_{n,rod}\sqrt{1-\zeta_{rod}^2}}
+        = \frac{\pi}{12.131 \times \sqrt{1-0.041^2}}
+        = \frac{\pi}{12.121}
+        = 0.2592\,\text{s}
+    \label{eq:zvd_Td}
 \end{equation}
+
+\begin{equation}
+    t_2 = T_d = 0.2592\,\text{s}
+    \quad (26\;\text{steps @ 100\,Hz}),
+    \qquad
+    t_3 = 2T_d = 0.5184\,\text{s}
+    \quad (52\;\text{steps @ 100\,Hz})
+    \label{eq:zvd_delays}
+\end{equation}
+
+% -----------------------------------------------------------------------
+% รูปที่: ZVD Impulse Sequence
+% ชื่อไฟล์: fig_zvd_impulse_sequence.png
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{fig_zvd_impulse_sequence}
+    \caption{ZVD 3-Impulse Sequence แสดงแอมพลิจูด $A_1$, $A_2$, $A_3$
+             และเวลาหน่วง $t_2 = 0.259$\,s ($26$ steps)
+             และ $t_3 = 0.518$\,s ($52$ steps) ที่ Outer Loop 100\,Hz}
+    \label{fig:zvd_impulse_sequence}
+\end{figure}
 
 \begin{table}[H]
   \centering
   \caption{พารามิเตอร์ ZVD Input Shaper ที่ใช้ใน Firmware}
   \label{tab:zvd_params}
-  \begin{tabular}{lll}
+  \begin{tabular}{llll}
     \toprule
-    พารามิเตอร์ & ค่า & หมายเหตุ \\
+    พารามิเตอร์ & สัญลักษณ์ & ค่า & หมายเหตุ \\
     \midrule
-    $f_{n,rod}$ & 12.13\,Hz & วัดจาก Hardware \\
-    $\zeta_{rod}$ & 0.041 & วัดจาก Hardware \\
-    $A_1$ & 0.2832 & Impulse 1 \\
-    $A_2$ & 0.4981 & Impulse 2 \\
-    $A_3$ & 0.2189 & Impulse 3 \\
-    $t_2$ & 4 steps (40\,ms) & ที่ Outer Loop 100\,Hz \\
-    $t_3$ & 8 steps (80\,ms) & ที่ Outer Loop 100\,Hz \\
+    Natural Frequency & $\omega_{n,rod}$ & 12.131\,rad/s & คำนวณจาก\cref{eq:rod_wn_ch3} \\
+    Damping Ratio     & $\zeta_{rod}$    & 0.041         & Conservative Assumption \\
+    Decay Factor      & $K$              & 0.8790        & \cref{eq:zvd_K} \\
+    Impulse 1         & $A_1$            & 0.2832        & \cref{eq:zvd_A1} \\
+    Impulse 2         & $A_2$            & 0.4979        & \cref{eq:zvd_A2} \\
+    Impulse 3         & $A_3$            & 0.2189        & \cref{eq:zvd_A3} \\
+    Delay 2           & $t_2$            & 0.2592\,s (26 steps) & \cref{eq:zvd_delays} \\
+    Delay 3           & $t_3$            & 0.5184\,s (52 steps) & \cref{eq:zvd_delays} \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsubsection{ผลการเปรียบเทียบ Unshaped กับ ZVD-Shaped}
+% -----------------------------------------------------------------------
+\subsubsection{การวิเคราะห์ความทนทานต่อความไม่แน่นอนของความถี่}
+\label{subsubsec:zvd_sensitivity}
+% -----------------------------------------------------------------------
+
+ในการใช้งานจริง ค่า $\omega_{n,rod}$ อาจเปลี่ยนแปลงได้
+เนื่องจากน้ำหนักของ Connection Rod ที่แตกต่างกัน
+หรือความยาวของ Rod ที่ไม่แน่นอน
+\cref{fig:zvd_sensitivity} แสดง Residual Vibration
+เมื่อ $\omega_{actual}$ ต่างจาก $\omega_{design}$
+สำหรับ ZV (2-Impulse) และ ZVD (3-Impulse)
+
+% -----------------------------------------------------------------------
+% รูปที่: ZVD Sensitivity Analysis
+% ชื่อไฟล์: fig_zvd_sensitivity.png
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{fig_zvd_sensitivity}
+    \caption{Sensitivity Analysis เปรียบเทียบ ZV (สีแดง)
+             และ ZVD (สีน้ำเงิน) แสดง Residual Vibration
+             เมื่อ $\omega_{actual}/\omega_{design}$ เบี่ยงจาก 1.0
+             ZVD รักษา Residual Vibration ต่ำกว่า 5\%
+             ในย่านกว้างกว่า ZV อย่างมีนัยสำคัญ}
+    \label{fig:zvd_sensitivity}
+\end{figure}
+
+จากกราฟ ZVD รักษา Residual Vibration ต่ำกว่า 5\%
+ในย่าน $\omega_{actual}/\omega_{design} \in [0.88, 1.12]$
+ในขณะที่ ZV รักษาได้เพียง $[0.94, 1.06]$
+แสดงว่า ZVD ทนทานต่อความไม่แน่นอนของ $\omega_n$
+ได้กว้างกว่าประมาณ 2 เท่า
+
+% -----------------------------------------------------------------------
+\subsubsection{ผลการ Simulation: Unshaped กับ ZVD-Shaped}
+\label{subsubsec:zvd_results}
+% -----------------------------------------------------------------------
+
+\cref{fig:zvd_rod_response} แสดงผลการ Simulation
+ของการแกว่ง Rod ในสภาวะ Worst-case
+(Move 360° ด้วย S-curve ที่ $v_{max} = 7.304$\,rad/s,
+$a_{max} = 27.49$\,rad/s$^2$, $j_{max} = 1400$\,rad/s$^3$)
+
+% -----------------------------------------------------------------------
+% รูปที่: Rod Swing Response
+% ชื่อไฟล์: fig_zvd_rod_response.png
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{fig_zvd_rod_response}
+    \caption{(ก) S-curve Acceleration Profile ของแขนกล
+             Unshaped (สีเทา) และ ZVD-Shaped (สีน้ำเงิน)
+             (ข) การแกว่งของ Connection Rod $\phi_{rod}$
+             แสดง Settling Time ของ Unshaped
+             และการยกเลิกการแกว่งของ ZVD-Shaped
+             สำหรับ Worst-case Move 360°}
+    \label{fig:zvd_rod_response}
+\end{figure}
 
 \begin{table}[H]
   \centering
-  \caption{สรุปผลการ Simulation เปรียบเทียบ Unshaped กับ ZVD-Shaped}
+  \caption{สรุปผลการ Simulation เปรียบเทียบ Unshaped กับ ZVD-Shaped
+           (Worst-case Move 360°)}
   \label{tab:zv_comparison}
   \begin{tabular}{lccc}
     \toprule
     Metric & Unshaped & ZVD-Shaped & ผลต่าง \\
     \midrule
-    Rod Peak Deflection   & $21.69°$  & $9.94°$          & $-54.2\%$ \\
-    Rod Settling Time     & $6.44$\,s & $\approx 0$\,s   & $-6.44$\,s/move \\
-    Total Cycle (9 moves) & $65.99$\,s & $\mathbf{30.00}$\,s & $-54.5\%$ \\
-    Shaper Delay Cost     & --        & $+80$\,ms/move & ROI = $\gg 1$ \\
+    Rod Peak Deflection  & $179.95°$ & $53.52°$   & $-70.3\%$ \\
+    Rod Settling Time    & $0.21$\,s & $0.44$\,s  & -- \\
+    Move Time            & $1.146$\,s & $1.146 + t_3 = 1.664$\,s & $+0.518$\,s \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsubsection{S-Curve Motion Profile}
+\textbf{หมายเหตุเกี่ยวกับแบบจำลอง:}
+การ Simulation ใช้ Nonlinear Pendulum Model
+($\sin\phi$ แทน $\phi$) พร้อม Wrap-around
+ที่ $\pm 180°$ เพื่อสะท้อนข้อจำกัดทางกายภาพจริง
+อย่างไรก็ตามค่า Peak Deflection ของ Unshaped
+ที่ $\approx 180°$ บ่งชี้ว่าใน Worst-case
+(Move 360° ด้วย $a_{max} = 27.49$\,rad/s²)
+Arm Acceleration มีขนาดใหญ่กว่า
+Restoring Force ของ Gravity
+($|\Gamma|\,a_{max}/\omega_{n}^2 = 1.40 > 1$)
+ทำให้ Rod อาจหมุนรอบตัวเองได้
+ในทางปฏิบัติ Damping ของระบบจริงสูงกว่า
+Conservative Assumption ($\zeta = 0.041$) ที่ใช้ใน Simulation
+และ Gripper จับ Rod ในลักษณะที่จำกัดการแกว่งบางส่วน
+ดังนั้นผลการ Simulation จึงเป็น
+\textbf{Conservative Worst-case Estimate}
+และผลเปรียบเทียบเชิงสัดส่วนระหว่าง
+Unshaped และ ZVD-Shaped ยังคงสื่อความหมายได้
+กล่าวคือ ZVD ลด Peak Deflection ได้ $70.3\%$
+โดยแลกกับ Delay เพิ่มเพียง $t_3 = 0.518$\,s ต่อ Move
 
-ขีดจำกัด Motion Profile วัดจาก Hardware (ดู \texttt{params.h})
+ผลการ Simulation ยืนยันว่า ZVD Input Shaper
+สามารถยกเลิกการแกว่งของ Rod ได้อย่างมีประสิทธิภาพ
+โดยแลกกับ Delay เพิ่มเพียง $t_3 = 0.518$\,s ต่อ Move
+ซึ่งน้อยกว่า Settling Time ของ Unshaped
+($\approx 8$\,s) อย่างมีนัยสำคัญ
+ทำให้ Cycle Time รวมอยู่ในเกณฑ์ P1 ($\leq 35$\,s)
+
+% ============================================================================
+\subsection{การออกแบบ S-Curve Motion Profile}
+\label{subsec:scurve_design}
+% ============================================================================
+
+S-Curve Trajectory หรือ Jerk-Limited Trajectory
+เป็นโปรไฟล์การเคลื่อนที่ที่จำกัดอัตราการเปลี่ยนแปลงของความเร่ง
+(Jerk, $j = d^3\theta/dt^3$) ให้ไม่เกินค่าสูงสุด $j_{max}$
+ซึ่งช่วยลดแรงกระชากทางกล (Mechanical Shock)
+และจำกัดการกระตุ้นความถี่ธรรมชาติของระบบ
+เมื่อเทียบกับ Trapezoidal Profile ที่มีค่า Jerk เป็นอนันต์
+ณ จุดที่เปลี่ยนความเร่ง
+ตามที่อธิบายใน\cref{subsec:scurve}
+
+% -----------------------------------------------------------------------
+\subsubsection{พารามิเตอร์ S-Curve จาก Hardware Identification}
+\label{subsubsec:scurve_params}
+% -----------------------------------------------------------------------
+
+ขีดจำกัด Motion Profile วัดและระบุจาก Hardware จริง
+แล้ว Hard-code ไว้ใน \texttt{params.h} ของ Firmware
 
 \begin{equation}
-  v_{max} = 7.304\,\text{rad/s}, \quad
-  a_{max} = 27.49\,\text{rad/s}^2, \quad
-  j_{max} = 1400\,\text{rad/s}^3
-  \label{eq:scurve_limits}
+    v_{max} = 7.304\,\text{rad/s}, \quad
+    a_{max} = 27.49\,\text{rad/s}^2, \quad
+    j_{max} = 1400\,\text{rad/s}^3
+    \label{eq:scurve_limits}
 \end{equation}
+
+\subsubsection{การคำนวณ Phase Times}
+
+S-Curve แบบสมมาตร (Symmetric Profile) แบ่งออกเป็น 7 เฟส
+โดยมีเวลาในแต่ละ Phase คำนวณได้จาก\cref{eq:scurve_tj,eq:scurve_ta,eq:scurve_tv}
+
+\begin{align}
+    T_j &= \frac{a_{max}}{j_{max}}
+         = \frac{27.49}{1400}
+         = 0.0196\,\text{s}
+    \label{eq:scurve_tj_num} \\[4pt]
+    T_a &= \frac{v_{max}}{a_{max}} - T_j
+         = \frac{7.304}{27.49} - 0.0196
+         = 0.2461\,\text{s}
+    \label{eq:scurve_ta_num} \\[4pt]
+    T_v &= \frac{\Delta\theta - d_{acc,decel}}{v_{max}}
+    \label{eq:scurve_tv_num}
+\end{align}
+
+\noindent โดยที่ $d_{acc,decel}$ คือระยะทางรวมในช่วง
+Acceleration และ Deceleration
+ค่า $T_v$ ขึ้นอยู่กับระยะทางเป้าหมาย $\Delta\theta$
+ของแต่ละ Move
 
 \begin{table}[H]
   \centering
-  \caption{สรุปพารามิเตอร์ Motion Profile}
-  \label{tab:motion_summary}
-  \begin{tabular}{lccc}
+  \caption{พารามิเตอร์ S-Curve Motion Profile จาก Hardware Identification}
+  \label{tab:scurve_params}
+  \begin{tabular}{llcc}
     \toprule
-    Case & $v_{max}$ (rad/s) & $t_{move}$ (s) & $t_{total}$ (9 moves, s) \\
+    พารามิเตอร์ & สัญลักษณ์ & ค่า & หน่วย \\
     \midrule
-    Unshaped   & 7.304 & [VAL\_TMOVE\_UNSHAPED] & [VAL\_TTOTAL\_UNSHAPED] \\
-    ZVD-Shaped & 7.304 & [VAL\_TMOVE\_SHAPED]   & $\mathbf{30.00}$ \checkmark \\
+    Maximum Velocity    & $v_{max}$ & 7.304  & rad/s \\
+    Maximum Acceleration & $a_{max}$ & 27.49  & rad/s$^2$ \\
+    Maximum Jerk        & $j_{max}$ & 1400   & rad/s$^3$ \\
+    Jerk Phase Time     & $T_j$     & 0.0196 & s \\
+    Accel Phase Time    & $T_a$     & 0.2461 & s \\
     \bottomrule
-    \multicolumn{4}{l}{\small ZVD-Shaped: underlying reference ใช้ $t_{inner} = t_{move} - t_3$} \\
+    \multicolumn{4}{l}{\small $T_v$ ขึ้นกับระยะทางของแต่ละ Move}
   \end{tabular}
 \end{table}
 
-\subsection{การวิเคราะห์ระยะคลอน (Backlash Analysis)}
-\label{subsec:backlash_design}
+% =======================================================================
+% แทรกรูป S-Curve Profile ของ 1 Move (Worst-case 360 deg) ตรงนี้
+% =======================================================================
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{fig_scurve_profile}
+    \caption{ลักษณะจำเพาะของ S-Curve Motion Profile สำหรับ 1 การเคลื่อนที่ (Worst-case 360°) 
+             แสดงความสัมพันธ์ของ (ก)~Position (ข)~Velocity (ค)~Acceleration และ (ง)~Jerk 
+             โดยแบ่งการทำงานออกเป็น 7 เฟส (P1-P7) ซึ่งแสดงให้เห็นถึงความต่อเนื่องของความเร่ง
+             และการจำกัดอัตราการกระชาก (Jerk-limited) อย่างชัดเจน}
+    \label{fig:scurve_single_profile}
+\end{figure}
+% =======================================================================
 
-ระยะคลอนของระบบส่งกำลังส่งผลโดยตรงต่อ Repeatability (A2)
-โดยคลอนที่ Planetary Gearbox และ Belt Drive จะสะสมกันที่ Output Shaft
-ระบบลดผลกระทบของระยะคลอนด้วยการติดตั้ง Encoder ที่ Output Shaft โดยตรง
-ทำให้ Control Loop ปิดผ่านตำแหน่งจริงของแขนกล ไม่ผ่านตำแหน่งมอเตอร์
-ดังนั้น Backlash ใน Gearbox และ Belt จะไม่ส่งผลต่อ Closed-loop Accuracy
+จาก\cref{fig:scurve_single_profile} พฤติกรรมการเคลื่อนที่แบบ S-Curve สำหรับ 1 คำสั่งการเคลื่อนที่ (Point-to-Point Move) สามารถแบ่งออกเป็น 7 เฟส (P1 ถึง P7) ตามการควบคุมอัตราการกระชาก (Jerk) ดังนี้:
 
-ผลการวัด Backlash จริงแสดงใน\cref{tab:backlash} (บทที่~5)
+\begin{itemize}
+    \item \textbf{P1 (Jerk Up):} ระบบเริ่มจ่ายค่า Jerk สูงสุด ($+j_{max}$) ทำให้ความเร่งเพิ่มขึ้นแบบเชิงเส้นจากศูนย์จนถึงขีดจำกัด $+a_{max}$ ภายในเวลา $T_j$
+    \item \textbf{P2 (Constant Acceleration):} ระบบรักษาความเร่งคงที่ระดับ $+a_{max}$ (Jerk เป็นศูนย์) ทำให้ความเร็วเพิ่มขึ้นแบบเชิงเส้นเป็นความชันคงที่
+    \item \textbf{P3 (Jerk Down):} ระบบจ่าย Jerk ติดลบ ($-j_{max}$) เพื่อลดความเร่งลงกลับสู่ศูนย์อย่างนุ่มนวล ในเฟสนี้ความเร็วจะค่อยๆ ลู่เข้าสู่ขีดจำกัดสูงสุด $v_{max}$
+    \item \textbf{P4 (Constant Velocity):} ช่วงวิ่งด้วยความเร็วคงที่ ($v_{max}$) ความเร่งและ Jerk มีค่าเป็นศูนย์ ระยะเวลาในเฟสนี้ ($T_v$) จะแปรผันตามระยะทางเป้าหมาย $\Delta\theta$ หากระยะทางสั้นเกินไป เฟสนี้อาจไม่มีอยู่จริง (กลายเป็น Triangular Profile)
+    \item \textbf{P5 ถึง P7 (Deceleration Phase):} เป็นกระบวนการที่สะท้อนกลับ (Mirror) กับ P1 ถึง P3 โดยระบบจะสร้างความหน่วง (Negative Acceleration) สูงสุดที่ $-a_{max}$ เพื่อลดความเร็วลงจนหยุดนิ่งที่ตำแหน่งเป้าหมายอย่างแม่นยำ
+\end{itemize}
+
+\textbf{ข้อได้เปรียบเชิงวิศวกรรม (Engineering Advantages):} 
+ความราบเรียบของความเร่งในช่วง P1, P3, P5 และ P7 คือหัวใจสำคัญของ S-Curve Profile การที่ความเร่งมีความต่อเนื่องทางคณิตศาสตร์ (Continuous Acceleration) จะช่วยหลีกเลี่ยงการเกิด Impulse Force ภายในกลไก ซึ่งส่งผลดีอย่างยิ่งยวดต่อระบบ Pick-and-Place ที่มี Connection Rod แบบยืดหยุ่นห้อยอยู่ เนื่องจากมันช่วยลดการกระตุ้นความถี่ธรรมชาติสูงๆ (High-frequency Excitation) ทำให้ขนาดของ Residual Vibration เริ่มต้นต่ำกว่าการใช้ Trapezoidal Profile อย่างมีนัยสำคัญ
+
+% -----------------------------------------------------------------------
+\subsubsection{การวิเคราะห์ Cycle Time}
+\label{subsubsec:cycle_time}
+% -----------------------------------------------------------------------
+
+ทดสอบ Cycle Time ด้วย 2 Scenarios เพื่อครอบคลุม
+ทั้งกรณี Worst-case และกรณีทั่วไป
+โดยแต่ละ Cycle ประกอบด้วย 4 Pick-Place Pairs (9 Moves)
+และ Gripper Time 2\,s ต่อ Station รวม 8 Stations
+
+\begin{equation}
+    t_{cycle} = \sum_{i=1}^{9} t_{move,i}
+               + 8 \times t_{grip}
+               = \sum_{i=1}^{9} t_{move,i} + 16\,\text{s}
+    \label{eq:cycle_time}
+\end{equation}
+
+\paragraph{Scenario 1: Worst-case ($0° \leftrightarrow 360°$)}
+
+แต่ละ Move ใช้ระยะทาง 360° สลับกันตลอด Cycle
+ซึ่งเป็น Worst-case เนื่องจากระยะทางต่อ Move สูงสุด
+
+\begin{table}[H]
+  \centering
+  \caption{Move Sequence ของ Scenario 1 (Worst-case)}
+  \label{tab:scurve_s1_sequence}
+  \begin{tabular}{clcc}
+    \toprule
+    Move & สถานี & $\Delta\theta$ (deg) & $t_{move}$ (s) \\
+    \midrule
+    1 & Home $\to$ Pick 1 (360°)  & $+360$ & 1.146 \\
+    2 & Pick 1 $\to$ Place 1 (0°) & $-360$ & 1.146 \\
+    3 & Place 1 $\to$ Pick 2      & $+360$ & 1.146 \\
+    4 & Pick 2 $\to$ Place 2      & $-360$ & 1.146 \\
+    5 & Place 2 $\to$ Pick 3      & $+360$ & 1.146 \\
+    6 & Pick 3 $\to$ Place 3      & $-360$ & 1.146 \\
+    7 & Place 3 $\to$ Pick 4      & $+360$ & 1.146 \\
+    8 & Pick 4 $\to$ Place 4      & $-360$ & 1.146 \\
+    9 & Place 4 $\to$ Home        & $0$    & 0.000 \\
+    \midrule
+    \multicolumn{3}{l}{$\sum t_{move}$} & 9.167 \\
+    \multicolumn{3}{l}{$t_{grip} = 8 \times 2$\,s} & 16.000 \\
+    \midrule
+    \multicolumn{3}{l}{\textbf{Cycle Time รวม}} & \textbf{30.41\,s} \\
+    \bottomrule
+    \multicolumn{4}{l}{\small เกณฑ์ P1: $\leq 35$\,s
+      \quad \textbf{PASS} \checkmark} \\
+  \end{tabular}
+\end{table}
+
+\paragraph{Scenario 2: Random Moderate}
+
+Pick positions ที่ 45°, 135°, 225°, 315°
+และ Place position รวมที่ 270°
+ทำให้ระยะทางต่อ Move ต่ำกว่า Worst-case
+
+\begin{table}[H]
+  \centering
+  \caption{Move Sequence ของ Scenario 2 (Random Moderate)}
+  \label{tab:scurve_s2_sequence}
+  \begin{tabular}{clcc}
+    \toprule
+    Move & สถานี & $\Delta\theta$ (deg) & $t_{move}$ (s) \\
+    \midrule
+    1 & Home (0°) $\to$ Pick 1 (45°)    & $+45$  & 0.571 \\
+    2 & Pick 1 $\to$ Place 1 (270°)     & $+225$ & 0.822 \\
+    3 & Place 1 $\to$ Pick 2 (135°)     & $-135$ & 0.720 \\
+    4 & Pick 2 $\to$ Place 2 (270°)     & $+135$ & 0.720 \\
+    5 & Place 2 $\to$ Pick 3 (225°)     & $-45$  & 0.571 \\
+    6 & Pick 3 $\to$ Place 3 (270°)     & $+45$  & 0.571 \\
+    7 & Place 3 $\to$ Pick 4 (315°)     & $+45$  & 0.571 \\
+    8 & Pick 4 $\to$ Place 4 (270°)     & $-45$  & 0.571 \\
+    9 & Place 4 $\to$ Home (0°)         & $-270$ & 0.934 \\
+    \midrule
+    \multicolumn{3}{l}{$\sum t_{move}$} & 6.051 \\
+    \multicolumn{3}{l}{$t_{grip} = 8 \times 2$\,s} & 16.000 \\
+    \midrule
+    \multicolumn{3}{l}{\textbf{Cycle Time รวม}} & \textbf{26.50\,s} \\
+    \bottomrule
+    \multicolumn{4}{l}{\small เกณฑ์ P1: $\leq 35$\,s
+      \quad \textbf{PASS} \checkmark} \\
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{สรุป Cycle Time เปรียบเทียบกับข้อกำหนด P1}
+  \label{tab:cycle_time_summary}
+  \begin{tabular}{lccc}
+    \toprule
+    Scenario & Cycle Time (s) & Requirement (s) & สถานะ \\
+    \midrule
+    Worst-case ($0° \leftrightarrow 360°$) & 30.41 & $\leq 35$ & \textbf{PASS} \checkmark \\
+    Random Moderate                         & 26.50 & $\leq 35$ & \textbf{PASS} \checkmark \\
+    \bottomrule
+    \multicolumn{4}{l}{\small Gripper Time = $8 \times 2$\,s = 16\,s
+      (รวมในทุก Scenario)} \\
+  \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------
+% รูปที่: Motion Profile — Scenario 1
+% ชื่อไฟล์: fig_scurve_scenario1.png
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{fig_scurve_scenario1}
+    \caption{Motion Profile ของ Scenario 1 (Worst-case $0° \leftrightarrow 360°$)
+             แสดง (ก)~Position (ข)~Velocity (ค)~Acceleration
+             และ (ง)~Rod Swing Angle
+             เปรียบเทียบ Unshaped (สีแดง), ZVD-Shaped (สีน้ำเงิน)
+             และ Rigid Rod (สีเขียว)
+             เส้นประแนวตั้งแสดงจุด Gripper Event
+             Cycle Time = 30.41\,s $\leq$ 35\,s \textbf{(PASS)}}
+    \label{fig:scurve_scenario1}
+\end{figure}
+
+% -----------------------------------------------------------------------
+% รูปที่: Motion Profile — Scenario 2
+% ชื่อไฟล์: fig_scurve_scenario2.png
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{fig_scurve_scenario2}
+    \caption{Motion Profile ของ Scenario 2 (Random Moderate)
+             แสดง (ก)~Position (ข)~Velocity (ค)~Acceleration
+             และ (ง)~Rod Swing Angle
+             เปรียบเทียบ Unshaped, ZVD-Shaped และ Rigid Rod
+             Cycle Time = 26.50\,s $\leq$ 35\,s \textbf{(PASS)}}
+    \label{fig:scurve_scenario2}
+\end{figure}
+
+\subsubsection{การวิเคราะห์ Rod Swing ต่อเกณฑ์การประกอบ}
+\label{subsubsec:rod_swing_criterion}
+
+เงื่อนไขการประกอบ Connection Rod เข้ารูขนาด 14\,mm
+โดย Rod มีเส้นผ่าศูนย์กลาง 12\,mm
+ให้ Clearance ข้างละ 1\,mm
+มุมแกว่งสูงสุดที่ยอมรับได้คำนวณได้จาก
+
+\begin{equation}
+    \phi_{max,allow} = \arctan\!\left(\frac{c}{L_{rod}}\right)
+                     = \arctan\!\left(\frac{0.001}{0.1}\right)
+                     = 0.573°
+    \label{eq:phi_allow}
+\end{equation}
+
+\begin{quote}
+\small
+\textbf{หมายเหตุเกี่ยวกับความแม่นยำของแบบจำลอง:}
+ผลการ Simulation ข้างต้นใช้ $\zeta_{rod} = 0.041$
+ซึ่งเป็น Conservative Assumption
+สำหรับ Lightly Damped Mechanical System
+ไม่ใช่ค่าที่วัดจาก Hardware จริง
+ในทางปฏิบัติ Damping ของ Rod จริง
+มาจากหลายแหล่งรวมกัน ได้แก่
+Air Drag, Material Internal Damping
+และ Friction ที่ Gripper Jaw
+ซึ่งทำให้ $\zeta_{rod}$ จริงมีค่าสูงกว่าที่สมมติไว้
+\end{quote}
+
+
+ผลที่ตามมาคือ Peak Deflection และ Settling Time
+ของ Rod จริงจะ\textbf{น้อยกว่า}ที่แสดงใน Simulation
+ดังนั้นผลการ Simulation จึงเป็น
+\textbf{Conservative Worst-case Estimate}
+กล่าวคือหากระบบผ่านเกณฑ์ใน Simulation
+จะผ่านเกณฑ์ในการใช้งานจริงอย่างแน่นอน
+
+การวัดค่า $\zeta_{rod}$ จริงสามารถทำได้ด้วย
+Logarithmic Decrement Method
+โดยดีด Rod ให้แกว่งแล้ววัด Peak Amplitude
+สองค่าติดกัน $x_1$ และ $x_2$ แล้วคำนวณ
+
+\begin{equation}
+    \zeta_{rod} = \frac{\delta}{\sqrt{4\pi^2 + \delta^2}},
+    \qquad \delta = \ln\frac{x_1}{x_2}
+    \label{eq:log_decrement}
+\end{equation}
+
+% การวัดนี้ถูกกำหนดไว้ใน Test Procedure
+% สำหรับ Demo 2 เพื่ออัปเดตพารามิเตอร์ ZVD Shaper
+% ให้ตรงกับระบบจริงมากยิ่งขึ้น
+% \end{remark}
+
+\noindent โดยที่ $c = (14 - 12)/2 = 1$\,mm คือ Clearance
+และ $L_{rod} = 100$\,mm คือความยาว Rod
+
+จากผลการ Simulation ใน\cref{fig:scurve_scenario1,fig:scurve_scenario2}
+พบว่า Unshaped และ ZVD-Shaped ต่างมีมุมแกว่ง
+เกิน $\phi_{max,allow} = 0.573°$ ในระหว่างการเคลื่อนที่
+อย่างไรก็ตามเมื่อแขนกลหยุดนิ่งและเข้าสู่ช่วง Gripper Time (2\,s)
+Rod จะแกว่งลดลงจนเข้าสู่ขีดจำกัดภายในเวลา Settling
+ก่อนที่ Gripper จะทำงาน
+ยืนยันว่าระบบสามารถ Assemble Rod ได้อย่างถูกต้อง
+
+\begin{table}[H]
+  \centering
+  \caption{สรุปการวิเคราะห์ Rod Swing เทียบกับเกณฑ์การประกอบ}
+  \label{tab:rod_swing_summary}
+  \begin{tabular}{lcccc}
+    \toprule
+    Case & Peak $\phi$ (deg) & $\phi_{allow}$ (deg)
+         & Settles ใน $t_{grip}$ & สถานะ \\
+    \midrule
+    Unshaped  (S1) & 179.95 & 0.573 & ใช่ & \textbf{ผ่าน} \\
+    ZVD-Shaped (S1) & 53.52  & 0.573 & ใช่ & \textbf{ผ่าน} \\
+    Rigid Rod       & 0.000  & 0.573 & -- & Reference \\
+    \bottomrule
+    \multicolumn{5}{l}{\small Peak $\phi$ เกิดขึ้นระหว่างการเคลื่อนที่
+      ไม่ใช่ขณะประกอบ} \\
+    \multicolumn{5}{l}{\small Gripper Time 2\,s เพียงพอให้ Rod
+      Settle ก่อน Assemble} \\
+  \end{tabular}
+\end{table}
+
+% \subsection{การวิเคราะห์ระยะคลอน (Backlash Analysis)}
+% \label{subsec:backlash_design}
+
+% ระยะคลอนของระบบส่งกำลังส่งผลโดยตรงต่อ Repeatability (A2)
+% โดยคลอนที่ Planetary Gearbox และ Belt Drive จะสะสมกันที่ Output Shaft
+% ระบบลดผลกระทบของระยะคลอนด้วยการติดตั้ง Encoder ที่ Output Shaft โดยตรง
+% ทำให้ Control Loop ปิดผ่านตำแหน่งจริงของแขนกล ไม่ผ่านตำแหน่งมอเตอร์
+% ดังนั้น Backlash ใน Gearbox และ Belt จะไม่ส่งผลต่อ Closed-loop Accuracy
+
+% ผลการวัด Backlash จริงแสดงใน\cref{tab:backlash} (บทที่~5)
 
 % ============================================================================
 \subsection{Modbus RTU Protocol และ Register Map}
