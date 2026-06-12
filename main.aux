@@ -826,244 +826,384 @@
 \@writefile{lot}{\contentsline {table}{\numberline {3.29}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปการวิเคราะห์ Rod Swing เทียบกับเกณฑ์การประกอบ}}{92}{table.caption.188}\protected@file@percent }
 \newlabel{tab:rod_swing_summary}{{3.29}{92}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces สรุปการวิเคราะห์ Rod Swing เทียบกับเกณฑ์การประกอบ}{table.caption.188}{}}
 \newlabel{tab:rod_swing_summary@cref}{{[table][29][3]3.29}{[1][92][]92}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.10}การวิเคราะห์ระยะคลอน (Backlash Analysis)}{92}{subsection.3.3.10}\protected@file@percent }
-\newlabel{subsec:backlash_design}{{3.3.10}{92}{การวิเคราะห์ระยะคลอน (Backlash Analysis)}{subsection.3.3.10}{}}
-\newlabel{subsec:backlash_design@cref}{{[subsection][10][3,3]3.3.10}{[1][92][]92}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.11}Modbus RTU Protocol และ Register Map}{92}{subsection.3.3.11}\protected@file@percent }
-\newlabel{subsec:fsm_modbus}{{3.3.11}{92}{Modbus RTU Protocol และ Register Map}{subsection.3.3.11}{}}
-\newlabel{subsec:fsm_modbus@cref}{{[subsection][11][3,3]3.3.11}{[1][92][]92}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.10}Modbus RTU Protocol และ Register Map}{92}{subsection.3.3.10}\protected@file@percent }
+\newlabel{subsec:fsm_modbus}{{3.3.10}{92}{Modbus RTU Protocol และ Register Map}{subsection.3.3.10}{}}
+\newlabel{subsec:fsm_modbus@cref}{{[subsection][10][3,3]3.3.10}{[1][92][]92}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3.30}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Modbus Write Register Map (PC $\rightarrow $ Robot)}}{93}{table.caption.189}\protected@file@percent }
 \newlabel{tab:modbus_write}{{3.30}{93}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces Modbus Write Register Map (PC $\rightarrow $ Robot)}{table.caption.189}{}}
 \newlabel{tab:modbus_write@cref}{{[table][30][3]3.30}{[1][92][]93}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3.31}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Modbus Read Register Map (Robot $\rightarrow $ PC)}}{93}{table.caption.190}\protected@file@percent }
 \newlabel{tab:modbus_read}{{3.31}{93}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces Modbus Read Register Map (Robot $\rightarrow $ PC)}{table.caption.190}{}}
 \newlabel{tab:modbus_read@cref}{{[table][31][3]3.31}{[1][93][]93}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.32}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการออกแบบระบบทั้งหมดเทียบกับ Requirements}}{94}{table.caption.191}\protected@file@percent }
-\newlabel{tab:design_summary}{{3.32}{94}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces สรุปผลการออกแบบระบบทั้งหมดเทียบกับ Requirements}{table.caption.191}{}}
-\newlabel{tab:design_summary@cref}{{[table][32][3]3.32}{[1][93][]94}{}{}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}การสร้างและบูรณาการระบบ}{95}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{กลไกความปลอดภัยของการสื่อสาร (Communication Watchdog \& Heartbeat)}{94}{subsubsection*.191}\protected@file@percent }
+\newlabel{subsubsec:modbus_watchdog}{{3.3.10}{94}{กลไกความปลอดภัยของการสื่อสาร (Communication Watchdog \& Heartbeat)}{subsubsection*.191}{}}
+\newlabel{subsubsec:modbus_watchdog@cref}{{[subsection][10][3,3]3.3.10}{[1][93][]94}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{สถาปัตยกรรมการรับส่งข้อมูลแบบ Protocol Multiplexing}{94}{subsubsection*.192}\protected@file@percent }
+\newlabel{subsubsec:protocol_multiplexing}{{3.3.10}{94}{สถาปัตยกรรมการรับส่งข้อมูลแบบ Protocol Multiplexing}{subsubsection*.192}{}}
+\newlabel{subsubsec:protocol_multiplexing@cref}{{[subsection][10][3,3]3.3.10}{[1][94][]94}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.43}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สถาปัตยกรรม Protocol Multiplexing ที่จัดการข้อมูล Modbus RTU ร่วมกับ ASCII Command บนพอร์ต LPUART1}}{95}{figure.caption.193}\protected@file@percent }
+\newlabel{fig:protocol_multiplexing}{{3.43}{95}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces สถาปัตยกรรม Protocol Multiplexing ที่จัดการข้อมูล Modbus RTU ร่วมกับ ASCII Command บนพอร์ต LPUART1}{figure.caption.193}{}}
+\newlabel{fig:protocol_multiplexing@cref}{{[figure][43][3]3.43}{[1][94][]95}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.32}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผลการออกแบบระบบทั้งหมดเทียบกับ Requirements}}{96}{table.caption.194}\protected@file@percent }
+\newlabel{tab:design_summary}{{3.32}{96}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces สรุปผลการออกแบบระบบทั้งหมดเทียบกับ Requirements}{table.caption.194}{}}
+\newlabel{tab:design_summary@cref}{{[table][32][3]3.32}{[1][95][]96}{}{}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}การสร้างและบูรณาการระบบ}{97}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:implementation}{{4}{95}{การสร้างและบูรณาการระบบ}{chapter.4}{}}
-\newlabel{ch:implementation@cref}{{[chapter][4][]4}{[1][95][]95}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}การประกอบโครงสร้างทางกล}{95}{section.4.1}\protected@file@percent }
-\newlabel{sec:mech_assembly}{{4.1}{95}{การประกอบโครงสร้างทางกล}{section.4.1}{}}
-\newlabel{sec:mech_assembly@cref}{{[section][1][4]4.1}{[1][95][]95}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}ภาพรวมการประกอบ}{95}{subsection.4.1.1}\protected@file@percent }
-\newlabel{subsec:mech_overview}{{4.1.1}{95}{ภาพรวมการประกอบ}{subsection.4.1.1}{}}
-\newlabel{subsec:mech_overview@cref}{{[subsection][1][4,1]4.1.1}{[1][95][]95}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}การประกอบ Sub-assembly}{95}{subsection.4.1.2}\protected@file@percent }
-\newlabel{subsec:sub_assembly}{{4.1.2}{95}{การประกอบ Sub-assembly}{subsection.4.1.2}{}}
-\newlabel{subsec:sub_assembly@cref}{{[subsection][2][4,1]4.1.2}{[1][95][]95}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{ส่วนฐาน (Base Sub-assembly)}{95}{subsubsection*.192}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนฐาน}}{95}{table.caption.193}\protected@file@percent }
-\newlabel{tab:base_parts}{{4.1}{95}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนฐาน}{table.caption.193}{}}
-\newlabel{tab:base_parts@cref}{{[table][1][4]4.1}{[1][95][]95}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{ส่วนแขนกลและข้อต่อ (Arm Sub-assembly)}{96}{subsubsection*.194}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนแขนกล}}{96}{table.caption.195}\protected@file@percent }
-\newlabel{tab:arm_parts}{{4.2}{96}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนแขนกล}{table.caption.195}{}}
-\newlabel{tab:arm_parts@cref}{{[table][2][4]4.2}{[1][96][]96}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{ชุดเอ็นโค้ดเดอร์ (Encoder Sub-assembly)}{97}{subsubsection*.196}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบชุดเอ็นโค้ดเดอร์}}{97}{table.caption.197}\protected@file@percent }
-\newlabel{tab:encoder_parts}{{4.3}{97}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces รายการชิ้นส่วนสำหรับประกอบชุดเอ็นโค้ดเดอร์}{table.caption.197}{}}
-\newlabel{tab:encoder_parts@cref}{{[table][3][4]4.3}{[1][96][]97}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}การประกอบรวมขั้นสุดท้าย}{97}{subsection.4.1.3}\protected@file@percent }
-\newlabel{subsec:final_assembly}{{4.1.3}{97}{การประกอบรวมขั้นสุดท้าย}{subsection.4.1.3}{}}
-\newlabel{subsec:final_assembly@cref}{{[subsection][3][4,1]4.1.3}{[1][97][]97}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}ปัญหาที่พบระหว่างการประกอบ}{97}{subsection.4.1.4}\protected@file@percent }
-\newlabel{subsec:assembly_issues}{{4.1.4}{97}{ปัญหาที่พบระหว่างการประกอบ}{subsection.4.1.4}{}}
-\newlabel{subsec:assembly_issues@cref}{{[subsection][4][4,1]4.1.4}{[1][97][]97}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}การประกอบตู้ควบคุมและการเดินสายไฟ}{98}{section.4.2}\protected@file@percent }
-\newlabel{sec:elec_assembly}{{4.2}{98}{การประกอบตู้ควบคุมและการเดินสายไฟ}{section.4.2}{}}
-\newlabel{sec:elec_assembly@cref}{{[section][2][4]4.2}{[1][97][]98}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Bill of Materials ของตู้ควบคุม}{98}{subsection.4.2.1}\protected@file@percent }
-\newlabel{subsec:bom}{{4.2.1}{98}{Bill of Materials ของตู้ควบคุม}{subsection.4.2.1}{}}
-\newlabel{subsec:bom@cref}{{[subsection][1][4,2]4.2.1}{[1][97][]98}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Bill of Materials (BOM) ของตู้ควบคุม}}{98}{table.caption.198}\protected@file@percent }
-\newlabel{tab:bom}{{4.4}{98}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces Bill of Materials (BOM) ของตู้ควบคุม}{table.caption.198}{}}
-\newlabel{tab:bom@cref}{{[table][4][4]4.4}{[1][97][]98}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}แนวทางการเดินสายไฟ}{98}{subsection.4.2.2}\protected@file@percent }
-\newlabel{subsec:cable_management}{{4.2.2}{98}{แนวทางการเดินสายไฟ}{subsection.4.2.2}{}}
-\newlabel{subsec:cable_management@cref}{{[subsection][2][4,2]4.2.2}{[1][98][]98}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}การพัฒนา Firmware}{99}{section.4.3}\protected@file@percent }
-\newlabel{sec:firmware}{{4.3}{99}{การพัฒนา Firmware}{section.4.3}{}}
-\newlabel{sec:firmware@cref}{{[section][3][4]4.3}{[1][98][]99}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}โครงสร้างโมดูลและ Task Timing}{99}{subsection.4.3.1}\protected@file@percent }
-\newlabel{subsec:firmware_modules}{{4.3.1}{99}{โครงสร้างโมดูลและ Task Timing}{subsection.4.3.1}{}}
-\newlabel{subsec:firmware_modules@cref}{{[subsection][1][4,3]4.3.1}{[1][98][]99}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces โมดูลหลักใน STM32 Firmware}}{99}{table.caption.199}\protected@file@percent }
-\newlabel{tab:firmware_modules}{{4.5}{99}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces โมดูลหลักใน STM32 Firmware}{table.caption.199}{}}
-\newlabel{tab:firmware_modules@cref}{{[table][5][4]4.5}{[1][98][]99}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Execution Model และ Task Timing}{99}{subsubsection*.200}\protected@file@percent }
-\newlabel{subsubsec:execution_model}{{4.3.1}{99}{Execution Model และ Task Timing}{subsubsection*.200}{}}
-\newlabel{subsubsec:execution_model@cref}{{[subsection][1][4,3]4.3.1}{[1][99][]99}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ISR และ Task Timing ของ Firmware}}{100}{table.caption.201}\protected@file@percent }
-\newlabel{tab:isr_timing}{{4.6}{100}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ISR และ Task Timing ของ Firmware}{table.caption.201}{}}
-\newlabel{tab:isr_timing@cref}{{[table][6][4]4.6}{[1][100][]100}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{PID Gains ที่ใช้ใน Firmware จริง}{100}{subsubsection*.202}\protected@file@percent }
-\newlabel{subsubsec:pid_gains_firmware}{{4.3.1}{100}{PID Gains ที่ใช้ใน Firmware จริง}{subsubsection*.202}{}}
-\newlabel{subsubsec:pid_gains_firmware@cref}{{[subsection][1][4,3]4.3.1}{[1][100][]100}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces PID Gains ที่ใช้ใน Firmware จริง (Hardware-Identified)}}{100}{table.caption.203}\protected@file@percent }
-\newlabel{tab:pid_gains_hw}{{4.7}{100}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces PID Gains ที่ใช้ใน Firmware จริง (Hardware-Identified)}{table.caption.203}{}}
-\newlabel{tab:pid_gains_hw@cref}{{[table][7][4]4.7}{[1][100][]100}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}การทำงานร่วมกันของโมดูล}{101}{subsection.4.3.2}\protected@file@percent }
-\newlabel{subsec:module_interaction}{{4.3.2}{101}{การทำงานร่วมกันของโมดูล}{subsection.4.3.2}{}}
-\newlabel{subsec:module_interaction@cref}{{[subsection][2][4,3]4.3.2}{[1][100][]101}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}การ Implement ZV Input Shaper (Circular Buffer)}{101}{subsection.4.3.3}\protected@file@percent }
-\newlabel{subsec:zv_impl}{{4.3.3}{101}{การ Implement ZV Input Shaper (Circular Buffer)}{subsection.4.3.3}{}}
-\newlabel{subsec:zv_impl@cref}{{[subsection][3][4,3]4.3.3}{[1][101][]101}{}{}{}}
-\newlabel{eq:zv_impl}{{4.1}{101}{การ Implement ZV Input Shaper (Circular Buffer)}{equation.4.1}{}}
-\newlabel{eq:zv_impl@cref}{{[equation][1][4]4.1}{[1][101][]101}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}การ Implement Kalman Filter (Steady-State)}{101}{subsection.4.3.4}\protected@file@percent }
-\newlabel{subsec:kf_impl}{{4.3.4}{101}{การ Implement Kalman Filter (Steady-State)}{subsection.4.3.4}{}}
-\newlabel{subsec:kf_impl@cref}{{[subsection][4][4,3]4.3.4}{[1][101][]101}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.5}การ Implement Cascade PID (Discrete)}{101}{subsection.4.3.5}\protected@file@percent }
-\newlabel{subsec:pid_impl}{{4.3.5}{101}{การ Implement Cascade PID (Discrete)}{subsection.4.3.5}{}}
-\newlabel{subsec:pid_impl@cref}{{[subsection][5][4,3]4.3.5}{[1][101][]101}{}{}{}}
-\newlabel{eq:pid_discrete_v}{{4.2}{101}{การ Implement Cascade PID (Discrete)}{equation.4.2}{}}
-\newlabel{eq:pid_discrete_v@cref}{{[equation][2][4]4.2}{[1][101][]101}{}{}{}}
-\newlabel{eq:anti_windup_discrete}{{4.3}{102}{การ Implement Cascade PID (Discrete)}{equation.4.3}{}}
-\newlabel{eq:anti_windup_discrete@cref}{{[equation][3][4]4.3}{[1][101][]102}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}การบูรณาการระดับระบบ}{102}{section.4.4}\protected@file@percent }
-\newlabel{sec:integration}{{4.4}{102}{การบูรณาการระดับระบบ}{section.4.4}{}}
-\newlabel{sec:integration@cref}{{[section][4][4]4.4}{[1][102][]102}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}การเชื่อมต่อ Motor, Encoder และ Motor Driver}{102}{subsection.4.4.1}\protected@file@percent }
-\newlabel{subsec:motor_integration}{{4.4.1}{102}{การเชื่อมต่อ Motor, Encoder และ Motor Driver}{subsection.4.4.1}{}}
-\newlabel{subsec:motor_integration@cref}{{[subsection][1][4,4]4.4.1}{[1][102][]102}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}การเชื่อมต่อ Joystick ผ่าน ESP32}{102}{subsection.4.4.2}\protected@file@percent }
-\newlabel{subsec:joystick_integration}{{4.4.2}{102}{การเชื่อมต่อ Joystick ผ่าน ESP32}{subsection.4.4.2}{}}
-\newlabel{subsec:joystick_integration@cref}{{[subsection][2][4,4]4.4.2}{[1][102][]102}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.8}{\ignorespaces \xpg@aux {}{thai}\ignorespaces การ Map Command Character กับคำสั่งระบบ}}{102}{table.caption.204}\protected@file@percent }
-\newlabel{tab:joystick_map_fw}{{4.8}{102}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces การ Map Command Character กับคำสั่งระบบ}{table.caption.204}{}}
-\newlabel{tab:joystick_map_fw@cref}{{[table][8][4]4.8}{[1][102][]102}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}การเชื่อมต่อ Modbus RTU และ Base System}{103}{subsection.4.4.3}\protected@file@percent }
-\newlabel{subsec:modbus_integration}{{4.4.3}{103}{การเชื่อมต่อ Modbus RTU และ Base System}{subsection.4.4.3}{}}
-\newlabel{subsec:modbus_integration@cref}{{[subsection][3][4,4]4.4.3}{[1][102][]103}{}{}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}ผลการทดสอบและการทวนสอบ}{104}{chapter.5}\protected@file@percent }
+\newlabel{ch:implementation}{{4}{97}{การสร้างและบูรณาการระบบ}{chapter.4}{}}
+\newlabel{ch:implementation@cref}{{[chapter][4][]4}{[1][97][]97}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}การประกอบโครงสร้างทางกล}{97}{section.4.1}\protected@file@percent }
+\newlabel{sec:mech_assembly}{{4.1}{97}{การประกอบโครงสร้างทางกล}{section.4.1}{}}
+\newlabel{sec:mech_assembly@cref}{{[section][1][4]4.1}{[1][97][]97}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}ภาพรวมการประกอบ}{97}{subsection.4.1.1}\protected@file@percent }
+\newlabel{subsec:mech_overview}{{4.1.1}{97}{ภาพรวมการประกอบ}{subsection.4.1.1}{}}
+\newlabel{subsec:mech_overview@cref}{{[subsection][1][4,1]4.1.1}{[1][97][]97}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุม Isometric}}{97}{figure.caption.195}\protected@file@percent }
+\newlabel{fig:overview_exploded_iso}{{4.1}{97}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุม Isometric}{figure.caption.195}{}}
+\newlabel{fig:overview_exploded_iso@cref}{{[figure][1][4]4.1}{[1][97][]97}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุมมองด้านข้าง (Side View)}}{98}{figure.caption.196}\protected@file@percent }
+\newlabel{fig:overview_exploded_side}{{4.2}{98}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุมมองด้านข้าง (Side View)}{figure.caption.196}{}}
+\newlabel{fig:overview_exploded_side@cref}{{[figure][2][4]4.2}{[1][97][]98}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}การประกอบ Sub-assembly}{98}{subsection.4.1.2}\protected@file@percent }
+\newlabel{subsec:sub_assembly}{{4.1.2}{98}{การประกอบ Sub-assembly}{subsection.4.1.2}{}}
+\newlabel{subsec:sub_assembly@cref}{{[subsection][2][4,1]4.1.2}{[1][98][]98}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{ส่วนฐาน (Base Sub-assembly)}{98}{subsubsection*.197}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนฐาน}}{99}{table.caption.198}\protected@file@percent }
+\newlabel{tab:base_parts}{{4.1}{99}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนฐาน}{table.caption.198}{}}
+\newlabel{tab:base_parts@cref}{{[table][1][4]4.1}{[1][98][]99}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพรวมของส่วนฐานหลังการประกอบ มุม Isometric}}{99}{figure.caption.199}\protected@file@percent }
+\newlabel{fig:base_iso}{{4.3}{99}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ภาพรวมของส่วนฐานหลังการประกอบ มุม Isometric}{figure.caption.199}{}}
+\newlabel{fig:base_iso@cref}{{[figure][3][4]4.3}{[1][99][]99}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพแตกชิ้นส่วน (Exploded View) ของส่วนฐาน}}{100}{figure.caption.200}\protected@file@percent }
+\newlabel{fig:base_exploded}{{4.4}{100}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ภาพแตกชิ้นส่วน (Exploded View) ของส่วนฐาน}{figure.caption.200}{}}
+\newlabel{fig:base_exploded@cref}{{[figure][4][4]4.4}{[1][99][]100}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{ส่วนแขนกลและข้อต่อ (Arm Links \& Joints)}{101}{subsubsection*.201}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนแขนกล}}{101}{table.caption.202}\protected@file@percent }
+\newlabel{tab:arm_parts}{{4.2}{101}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces รายการชิ้นส่วนสำหรับประกอบส่วนแขนกล}{table.caption.202}{}}
+\newlabel{tab:arm_parts@cref}{{[table][2][4]4.2}{[1][100][]101}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพรวมของส่วนแขนกลและข้อต่อหลังการประกอบ มุม Isometric}}{102}{figure.caption.203}\protected@file@percent }
+\newlabel{fig:arm_iso}{{4.5}{102}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ภาพรวมของส่วนแขนกลและข้อต่อหลังการประกอบ มุม Isometric}{figure.caption.203}{}}
+\newlabel{fig:arm_iso@cref}{{[figure][5][4]4.5}{[1][101][]102}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพแตกชิ้นส่วน (Exploded View) ของส่วนแขนกลและข้อต่อ}}{103}{figure.caption.204}\protected@file@percent }
+\newlabel{fig:arm_exploded}{{4.6}{103}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ภาพแตกชิ้นส่วน (Exploded View) ของส่วนแขนกลและข้อต่อ}{figure.caption.204}{}}
+\newlabel{fig:arm_exploded@cref}{{[figure][6][4]4.6}{[1][102][]103}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{ชุดเอ็นโค้ดเดอร์ (Encoder Sub-assembly)}{103}{subsubsection*.205}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces รายการชิ้นส่วนสำหรับประกอบชุดเอ็นโค้ดเดอร์}}{104}{table.caption.206}\protected@file@percent }
+\newlabel{tab:encoder_parts}{{4.3}{104}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces รายการชิ้นส่วนสำหรับประกอบชุดเอ็นโค้ดเดอร์}{table.caption.206}{}}
+\newlabel{tab:encoder_parts@cref}{{[table][3][4]4.3}{[1][103][]104}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพรวมของชุดเอ็นโค้ดเดอร์ มุม Isometric}}{104}{figure.caption.207}\protected@file@percent }
+\newlabel{fig:encoder_iso}{{4.7}{104}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ภาพรวมของชุดเอ็นโค้ดเดอร์ มุม Isometric}{figure.caption.207}{}}
+\newlabel{fig:encoder_iso@cref}{{[figure][7][4]4.7}{[1][104][]104}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพแตกชิ้นส่วน (Exploded View) ของชุดเอ็นโค้ดเดอร์}}{105}{figure.caption.208}\protected@file@percent }
+\newlabel{fig:encoder_exploded}{{4.8}{105}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ภาพแตกชิ้นส่วน (Exploded View) ของชุดเอ็นโค้ดเดอร์}{figure.caption.208}{}}
+\newlabel{fig:encoder_exploded@cref}{{[figure][8][4]4.8}{[1][104][]105}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}การประกอบรวมขั้นสุดท้าย (Final Assembly Process)}{105}{subsection.4.1.3}\protected@file@percent }
+\newlabel{subsec:final_assembly}{{4.1.3}{105}{การประกอบรวมขั้นสุดท้าย (Final Assembly Process)}{subsection.4.1.3}{}}
+\newlabel{subsec:final_assembly@cref}{{[subsection][3][4,1]4.1.3}{[1][105][]105}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพประกอบรวมขั้นสุดท้ายของหุ่นยนต์ พร้อมชิ้นส่วน 3D Print สำหรับจัดระเบียบสายไฟ}}{106}{figure.caption.209}\protected@file@percent }
+\newlabel{fig:final_assembly_3d_corners}{{4.9}{106}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ภาพประกอบรวมขั้นสุดท้ายของหุ่นยนต์ พร้อมชิ้นส่วน 3D Print สำหรับจัดระเบียบสายไฟ}{figure.caption.209}{}}
+\newlabel{fig:final_assembly_3d_corners@cref}{{[figure][9][4]4.9}{[1][106][]106}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}ปัญหาที่พบระหว่างการประกอบและการแก้ไข}{107}{subsection.4.1.4}\protected@file@percent }
+\newlabel{subsec:assembly_issues}{{4.1.4}{107}{ปัญหาที่พบระหว่างการประกอบและการแก้ไข}{subsection.4.1.4}{}}
+\newlabel{subsec:assembly_issues@cref}{{[subsection][4][4,1]4.1.4}{[1][106][]107}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}การประกอบตู้ควบคุมและการเดินสายไฟ}{107}{section.4.2}\protected@file@percent }
+\newlabel{sec:elec_assembly}{{4.2}{107}{การประกอบตู้ควบคุมและการเดินสายไฟ}{section.4.2}{}}
+\newlabel{sec:elec_assembly@cref}{{[section][2][4]4.2}{[1][107][]107}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}รายการอุปกรณ์หลัก (Bill of Materials)}{107}{subsection.4.2.1}\protected@file@percent }
+\newlabel{subsec:bom}{{4.2.1}{107}{รายการอุปกรณ์หลัก (Bill of Materials)}{subsection.4.2.1}{}}
+\newlabel{subsec:bom@cref}{{[subsection][1][4,2]4.2.1}{[1][107][]107}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Bill of Materials (BOM) ของตู้ควบคุม}}{107}{table.caption.210}\protected@file@percent }
+\newlabel{tab:bom}{{4.4}{107}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces Bill of Materials (BOM) ของตู้ควบคุม}{table.caption.210}{}}
+\newlabel{tab:bom@cref}{{[table][4][4]4.4}{[1][107][]107}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}สถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณ (Power \& Signal Architecture)}{108}{subsection.4.2.2}\protected@file@percent }
+\newlabel{subsec:power_arch}{{4.2.2}{108}{สถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณ (Power \& Signal Architecture)}{subsection.4.2.2}{}}
+\newlabel{subsec:power_arch@cref}{{[subsection][2][4,2]4.2.2}{[1][107][]108}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}สถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณ (Power \& Signal Architecture)}{108}{subsection.4.2.3}\protected@file@percent }
+\newlabel{subsec:power_arch}{{4.2.3}{108}{สถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณ (Power \& Signal Architecture)}{subsection.4.2.3}{}}
+\newlabel{subsec:power_arch@cref}{{[subsection][3][4,2]4.2.3}{[1][108][]108}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Block Diagram แสดงสถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณภายในตู้ควบคุม}}{108}{figure.caption.211}\protected@file@percent }
+\newlabel{fig:power_architecture}{{4.10}{108}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces Block Diagram แสดงสถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณภายในตู้ควบคุม}{figure.caption.211}{}}
+\newlabel{fig:power_architecture@cref}{{[figure][10][4]4.10}{[1][108][]108}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}แนวทางปฏิบัติในการเดินสายไฟ (Cable Management \& Wiring)}{108}{subsection.4.2.4}\protected@file@percent }
+\newlabel{subsec:cable_management}{{4.2.4}{108}{แนวทางปฏิบัติในการเดินสายไฟ (Cable Management \& Wiring)}{subsection.4.2.4}{}}
+\newlabel{subsec:cable_management@cref}{{[subsection][4][4,2]4.2.4}{[1][108][]108}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}การพัฒนา Firmware}{109}{section.4.3}\protected@file@percent }
+\newlabel{sec:firmware}{{4.3}{109}{การพัฒนา Firmware}{section.4.3}{}}
+\newlabel{sec:firmware@cref}{{[section][3][4]4.3}{[1][109][]109}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}ภาพรวมสถาปัตยกรรมซอฟต์แวร์ (Software Architecture)}{109}{subsection.4.3.1}\protected@file@percent }
+\newlabel{subsec:firmware_arch}{{4.3.1}{109}{ภาพรวมสถาปัตยกรรมซอฟต์แวร์ (Software Architecture)}{subsection.4.3.1}{}}
+\newlabel{subsec:firmware_arch@cref}{{[subsection][1][4,3]4.3.1}{[1][109][]109}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}ภาพรวมสถาปัตยกรรมซอฟต์แวร์ (Software Architecture)}{109}{subsection.4.3.2}\protected@file@percent }
+\newlabel{subsec:firmware_arch}{{4.3.2}{109}{ภาพรวมสถาปัตยกรรมซอฟต์แวร์ (Software Architecture)}{subsection.4.3.2}{}}
+\newlabel{subsec:firmware_arch@cref}{{[subsection][2][4,3]4.3.2}{[1][109][]109}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces โครงสร้างโมดูลและไลบรารีใน STM32 Firmware}}{110}{table.caption.212}\protected@file@percent }
+\newlabel{tab:firmware_modules}{{4.5}{110}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces โครงสร้างโมดูลและไลบรารีใน STM32 Firmware}{table.caption.212}{}}
+\newlabel{tab:firmware_modules@cref}{{[table][5][4]4.5}{[1][109][]110}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}การจัดสรรเวลาทำงาน (Execution Model และ Task Timing)}{110}{subsection.4.3.3}\protected@file@percent }
+\newlabel{subsec:execution_model}{{4.3.3}{110}{การจัดสรรเวลาทำงาน (Execution Model และ Task Timing)}{subsection.4.3.3}{}}
+\newlabel{subsec:execution_model@cref}{{[subsection][3][4,3]4.3.3}{[1][110][]110}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}สถานะการทำงานของระบบ (Application FSM)}{111}{subsection.4.3.4}\protected@file@percent }
+\newlabel{subsec:application_fsm}{{4.3.4}{111}{สถานะการทำงานของระบบ (Application FSM)}{subsection.4.3.4}{}}
+\newlabel{subsec:application_fsm@cref}{{[subsection][4][4,3]4.3.4}{[1][111][]111}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces \xpg@aux {}{thai}\ignorespaces แผนภาพสถานะการทำงาน (Application FSM) ของระบบควบคุม}}{111}{figure.caption.213}\protected@file@percent }
+\newlabel{fig:application_fsm}{{4.11}{111}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces แผนภาพสถานะการทำงาน (Application FSM) ของระบบควบคุม}{figure.caption.213}{}}
+\newlabel{fig:application_fsm@cref}{{[figure][11][4]4.11}{[1][111][]111}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.5}กระบวนการหาจุดอ้างอิงระดับความแม่นยำสูง (Two-Stage Homing Sequence)}{112}{subsection.4.3.5}\protected@file@percent }
+\newlabel{subsec:homing_sequence}{{4.3.5}{112}{กระบวนการหาจุดอ้างอิงระดับความแม่นยำสูง (Two-Stage Homing Sequence)}{subsection.4.3.5}{}}
+\newlabel{subsec:homing_sequence@cref}{{[subsection][5][4,3]4.3.5}{[1][111][]112}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.6}อัลกอริทึมควบคุมการเคลื่อนที่ (Motion Control Algorithms)}{112}{subsection.4.3.6}\protected@file@percent }
+\newlabel{subsec:motion_control}{{4.3.6}{112}{อัลกอริทึมควบคุมการเคลื่อนที่ (Motion Control Algorithms)}{subsection.4.3.6}{}}
+\newlabel{subsec:motion_control@cref}{{[subsection][6][4,3]4.3.6}{[1][112][]112}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{S-Curve Trajectory และ ZVD Input Shaper}{112}{subsubsection*.214}\protected@file@percent }
+\newlabel{eq:zvd_impl}{{4.1}{112}{S-Curve Trajectory และ ZVD Input Shaper}{equation.4.1}{}}
+\newlabel{eq:zvd_impl@cref}{{[equation][1][4]4.1}{[1][112][]112}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Steady-State Kalman Filter}{112}{subsubsection*.215}\protected@file@percent }
+\newlabel{eq:kalman_update}{{4.2}{113}{Steady-State Kalman Filter}{equation.4.2}{}}
+\newlabel{eq:kalman_update@cref}{{[equation][2][4]4.2}{[1][113][]113}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Cascade PID (Discrete Tustin)}{113}{subsubsection*.216}\protected@file@percent }
+\newlabel{eq:pid_vel}{{4.3}{113}{Cascade PID (Discrete Tustin)}{equation.4.3}{}}
+\newlabel{eq:pid_vel@cref}{{[equation][3][4]4.3}{[1][113][]113}{}{}{}}
+\newlabel{eq:pid_antiwindup}{{4.4}{113}{Cascade PID (Discrete Tustin)}{equation.4.4}{}}
+\newlabel{eq:pid_antiwindup@cref}{{[equation][4][4]4.4}{[1][113][]113}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces PID Gains และ Feedforward ที่ใช้งานจริงบนระบบฮาร์ดแวร์}}{113}{table.caption.217}\protected@file@percent }
+\newlabel{tab:pid_gains}{{4.6}{113}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces PID Gains และ Feedforward ที่ใช้งานจริงบนระบบฮาร์ดแวร์}{table.caption.217}{}}
+\newlabel{tab:pid_gains@cref}{{[table][6][4]4.6}{[1][113][]113}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.7}ระบบความปลอดภัยทางซอฟต์แวร์ (Safety Stack)}{113}{subsection.4.3.7}\protected@file@percent }
+\newlabel{subsec:safety_stack}{{4.3.7}{113}{ระบบความปลอดภัยทางซอฟต์แวร์ (Safety Stack)}{subsection.4.3.7}{}}
+\newlabel{subsec:safety_stack@cref}{{[subsection][7][4,3]4.3.7}{[1][113][]113}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.8}การสื่อสารผ่านโครงข่ายและ CAN Bus Failsafe}{114}{subsection.4.3.8}\protected@file@percent }
+\newlabel{subsec:comms_canbus}{{4.3.8}{114}{การสื่อสารผ่านโครงข่ายและ CAN Bus Failsafe}{subsection.4.3.8}{}}
+\newlabel{subsec:comms_canbus@cref}{{[subsection][8][4,3]4.3.8}{[1][114][]114}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}การบูรณาการระดับระบบ (System Integration)}{114}{section.4.4}\protected@file@percent }
+\newlabel{sec:integration}{{4.4}{114}{การบูรณาการระดับระบบ (System Integration)}{section.4.4}{}}
+\newlabel{sec:integration@cref}{{[section][4][4]4.4}{[1][114][]114}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}ภาพรวมสถาปัตยกรรมระบบ (System Architecture)}{114}{subsection.4.4.1}\protected@file@percent }
+\newlabel{subsec:system_architecture}{{4.4.1}{114}{ภาพรวมสถาปัตยกรรมระบบ (System Architecture)}{subsection.4.4.1}{}}
+\newlabel{subsec:system_architecture@cref}{{[subsection][1][4,4]4.4.1}{[1][114][]114}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สถาปัตยกรรมระบบ (Cyber-Physical System Architecture) ของหุ่นยนต์}}{115}{figure.caption.218}\protected@file@percent }
+\newlabel{fig:system_architecture}{{4.12}{115}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces สถาปัตยกรรมระบบ (Cyber-Physical System Architecture) ของหุ่นยนต์}{figure.caption.218}{}}
+\newlabel{fig:system_architecture@cref}{{[figure][12][4]4.12}{[1][114][]115}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}การจัดการข้อมูลร่วม (Shared Data Architecture)}{115}{subsection.4.4.2}\protected@file@percent }
+\newlabel{subsec:shared_data}{{4.4.2}{115}{การจัดการข้อมูลร่วม (Shared Data Architecture)}{subsection.4.4.2}{}}
+\newlabel{subsec:shared_data@cref}{{[subsection][2][4,4]4.4.2}{[1][115][]115}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}การเชื่อมต่อ Base System และ Modbus RTU}{115}{subsection.4.4.3}\protected@file@percent }
+\newlabel{subsec:modbus_integration}{{4.4.3}{115}{การเชื่อมต่อ Base System และ Modbus RTU}{subsection.4.4.3}{}}
+\newlabel{subsec:modbus_integration@cref}{{[subsection][3][4,4]4.4.3}{[1][115][]115}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}การเชื่อมต่อ Motor, Encoder และ Motor Driver}{116}{subsection.4.4.4}\protected@file@percent }
+\newlabel{subsec:motor_integration}{{4.4.4}{116}{การเชื่อมต่อ Motor, Encoder และ Motor Driver}{subsection.4.4.4}{}}
+\newlabel{subsec:motor_integration@cref}{{[subsection][4][4,4]4.4.4}{[1][115][]116}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.5}การเชื่อมต่อ Joystick ผ่าน ESP32}{116}{subsection.4.4.5}\protected@file@percent }
+\newlabel{subsec:joystick_integration}{{4.4.5}{116}{การเชื่อมต่อ Joystick ผ่าน ESP32}{subsection.4.4.5}{}}
+\newlabel{subsec:joystick_integration@cref}{{[subsection][5][4,4]4.4.5}{[1][116][]116}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.6}การเชื่อมต่ออุปกรณ์ขับเคลื่อนและเซนเซอร์ (Motor, Encoder \& Driver)}{116}{subsection.4.4.6}\protected@file@percent }
+\newlabel{subsec:motor_integration}{{4.4.6}{116}{การเชื่อมต่ออุปกรณ์ขับเคลื่อนและเซนเซอร์ (Motor, Encoder \& Driver)}{subsection.4.4.6}{}}
+\newlabel{subsec:motor_integration@cref}{{[subsection][6][4,4]4.4.6}{[1][116][]116}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.7}การเชื่อมต่อระบบควบคุมไร้สาย (Joystick Integration)}{116}{subsection.4.4.7}\protected@file@percent }
+\newlabel{subsec:joystick_integration}{{4.4.7}{116}{การเชื่อมต่อระบบควบคุมไร้สาย (Joystick Integration)}{subsection.4.4.7}{}}
+\newlabel{subsec:joystick_integration@cref}{{[subsection][7][4,4]4.4.7}{[1][116][]116}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ตารางการ Map Command Character สำหรับ Joystick}}{117}{table.caption.219}\protected@file@percent }
+\newlabel{tab:joystick_map_fw}{{4.7}{117}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ตารางการ Map Command Character สำหรับ Joystick}{table.caption.219}{}}
+\newlabel{tab:joystick_map_fw@cref}{{[table][7][4]4.7}{[1][116][]117}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.8}การสื่อสารด้วยโปรโตคอล Modbus RTU}{117}{subsection.4.4.8}\protected@file@percent }
+\newlabel{subsec:modbus_integration}{{4.4.8}{117}{การสื่อสารด้วยโปรโตคอล Modbus RTU}{subsection.4.4.8}{}}
+\newlabel{subsec:modbus_integration@cref}{{[subsection][8][4,4]4.4.8}{[1][117][]117}{}{}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}ผลการทดสอบและการทวนสอบ}{118}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:results}{{5}{104}{ผลการทดสอบและการทวนสอบ}{chapter.5}{}}
-\newlabel{ch:results@cref}{{[chapter][5][]5}{[1][104][]104}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}ผลการทดสอบระบบย่อย}{104}{section.5.1}\protected@file@percent }
-\newlabel{sec:subsystem_test}{{5.1}{104}{ผลการทดสอบระบบย่อย}{section.5.1}{}}
-\newlabel{sec:subsystem_test@cref}{{[section][1][5]5.1}{[1][104][]104}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}การวัดระยะคลอน (Backlash Measurement)}{104}{subsection.5.1.1}\protected@file@percent }
-\newlabel{subsec:backlash}{{5.1.1}{104}{การวัดระยะคลอน (Backlash Measurement)}{subsection.5.1.1}{}}
-\newlabel{subsec:backlash@cref}{{[subsection][1][5,1]5.1.1}{[1][104][]104}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการวัดระยะคลอนของระบบส่งกำลัง}}{104}{table.caption.205}\protected@file@percent }
-\newlabel{tab:backlash}{{5.1}{104}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการวัดระยะคลอนของระบบส่งกำลัง}{table.caption.205}{}}
-\newlabel{tab:backlash@cref}{{[table][1][5]5.1}{[1][104][]104}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}การทดสอบ Encoder และ Sensor}{104}{subsection.5.1.2}\protected@file@percent }
-\newlabel{subsec:sensor_test}{{5.1.2}{104}{การทดสอบ Encoder และ Sensor}{subsection.5.1.2}{}}
-\newlabel{subsec:sensor_test@cref}{{[subsection][2][5,1]5.1.2}{[1][104][]104}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{การทดสอบ Encoder AMT-103}{104}{subsubsection*.206}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Encoder AMT-103}}{104}{table.caption.207}\protected@file@percent }
-\newlabel{tab:encoder_test}{{5.2}{104}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบ Encoder AMT-103}{table.caption.207}{}}
-\newlabel{tab:encoder_test@cref}{{[table][2][5]5.2}{[1][104][]104}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{การทดสอบ Proximity Sensor (Homing)}{105}{subsubsection*.208}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Proximity Sensor สำหรับ Homing}}{105}{table.caption.209}\protected@file@percent }
-\newlabel{tab:prox_test}{{5.3}{105}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบ Proximity Sensor สำหรับ Homing}{table.caption.209}{}}
-\newlabel{tab:prox_test@cref}{{[table][3][5]5.3}{[1][104][]105}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}ผลการระบุระบบและการจำลอง}{105}{section.5.2}\protected@file@percent }
-\newlabel{sec:sysid_results}{{5.2}{105}{ผลการระบุระบบและการจำลอง}{section.5.2}{}}
-\newlabel{sec:sysid_results@cref}{{[section][2][5]5.2}{[1][105][]105}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}ผลการระบุพารามิเตอร์ของมอเตอร์}{105}{subsection.5.2.1}\protected@file@percent }
-\newlabel{subsec:sysid_params_result}{{5.2.1}{105}{ผลการระบุพารามิเตอร์ของมอเตอร์}{subsection.5.2.1}{}}
-\newlabel{subsec:sysid_params_result@cref}{{[subsection][1][5,2]5.2.1}{[1][105][]105}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{ผล Locked Rotor Test (ละเอียด)}{105}{subsubsection*.210}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการวัด $R_a$ และ $L_a$ จาก Locked Rotor Test ที่ $V_{in} = 12$\,V (3 runs)}}{105}{table.caption.211}\protected@file@percent }
-\newlabel{tab:locked_rotor}{{5.4}{105}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการวัด $R_a$ และ $L_a$ จาก Locked Rotor Test ที่ $V_{in} = 12$\,V (3 runs)}{table.caption.211}{}}
-\newlabel{tab:locked_rotor@cref}{{[table][4][5]5.4}{[1][105][]105}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{ผล Parameter Estimation จาก Chirp Test}{105}{subsubsection*.212}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการ Estimate พารามิเตอร์จาก Chirp Test (สรุปจาก 9 Experiments)}}{105}{table.caption.213}\protected@file@percent }
-\newlabel{tab:chirp_results}{{5.5}{105}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการ Estimate พารามิเตอร์จาก Chirp Test (สรุปจาก 9 Experiments)}{table.caption.213}{}}
-\newlabel{tab:chirp_results@cref}{{[table][5][5]5.5}{[1][105][]105}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}ผลการตรวจสอบความถูกต้องของแบบจำลอง (Model Validation)}{106}{subsection.5.2.2}\protected@file@percent }
-\newlabel{subsec:model_validation_results}{{5.2.2}{106}{ผลการตรวจสอบความถูกต้องของแบบจำลอง (Model Validation)}{subsection.5.2.2}{}}
-\newlabel{subsec:model_validation_results@cref}{{[subsection][2][5,2]5.2.2}{[1][105][]106}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล Cross-Validation ของแบบจำลองกับข้อมูลจริง}}{106}{table.caption.214}\protected@file@percent }
-\newlabel{tab:cross_validation}{{5.6}{106}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผล Cross-Validation ของแบบจำลองกับข้อมูลจริง}{table.caption.214}{}}
-\newlabel{tab:cross_validation@cref}{{[table][6][5]5.6}{[1][105][]106}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}ผลการ Simulation Cascade PID และ ZV Shaper}{106}{subsection.5.2.3}\protected@file@percent }
-\newlabel{subsec:sim_results}{{5.2.3}{106}{ผลการ Simulation Cascade PID และ ZV Shaper}{subsection.5.2.3}{}}
-\newlabel{subsec:sim_results@cref}{{[subsection][3][5,2]5.2.3}{[1][106][]106}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}ผลการออกแบบ Kalman Filter (DARE)}{106}{subsection.5.2.4}\protected@file@percent }
-\newlabel{subsec:kf_results}{{5.2.4}{106}{ผลการออกแบบ Kalman Filter (DARE)}{subsection.5.2.4}{}}
-\newlabel{subsec:kf_results@cref}{{[subsection][4][5,2]5.2.4}{[1][106][]106}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Steady-State Kalman Gain $\mathbf  {K}_\infty $ ที่ใช้ใน Firmware}}{106}{table.caption.215}\protected@file@percent }
-\newlabel{tab:kalman_gain}{{5.7}{106}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces Steady-State Kalman Gain $\mathbf {K}_\infty $ ที่ใช้ใน Firmware}{table.caption.215}{}}
-\newlabel{tab:kalman_gain@cref}{{[table][7][5]5.7}{[1][106][]106}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}ผลการทดสอบสมรรถนะการทำงานจริง}{106}{section.5.3}\protected@file@percent }
-\newlabel{sec:performance}{{5.3}{106}{ผลการทดสอบสมรรถนะการทำงานจริง}{section.5.3}{}}
-\newlabel{sec:performance@cref}{{[section][3][5]5.3}{[1][106][]106}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Step Response: Overshoot และ Settling Time}{106}{subsection.5.3.1}\protected@file@percent }
-\newlabel{subsec:step_response}{{5.3.1}{106}{Step Response: Overshoot และ Settling Time}{subsection.5.3.1}{}}
-\newlabel{subsec:step_response@cref}{{[subsection][1][5,3]5.3.1}{[1][106][]106}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.8}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Step Response บน Hardware จริง}}{106}{table.caption.216}\protected@file@percent }
-\newlabel{tab:step_response}{{5.8}{106}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบ Step Response บน Hardware จริง}{table.caption.216}{}}
-\newlabel{tab:step_response@cref}{{[table][8][5]5.8}{[1][106][]106}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}ความแม่นยำตำแหน่ง (Position Accuracy)}{107}{subsection.5.3.2}\protected@file@percent }
-\newlabel{subsec:accuracy}{{5.3.2}{107}{ความแม่นยำตำแหน่ง (Position Accuracy)}{subsection.5.3.2}{}}
-\newlabel{subsec:accuracy@cref}{{[subsection][2][5,3]5.3.2}{[1][106][]107}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.9}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบความแม่นยำตำแหน่ง (A1)}}{107}{table.caption.217}\protected@file@percent }
-\newlabel{tab:accuracy}{{5.9}{107}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบความแม่นยำตำแหน่ง (A1)}{table.caption.217}{}}
-\newlabel{tab:accuracy@cref}{{[table][9][5]5.9}{[1][106][]107}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}ความซ้ำซากได้ (Repeatability)}{107}{subsection.5.3.3}\protected@file@percent }
-\newlabel{subsec:repeatability}{{5.3.3}{107}{ความซ้ำซากได้ (Repeatability)}{subsection.5.3.3}{}}
-\newlabel{subsec:repeatability@cref}{{[subsection][3][5,3]5.3.3}{[1][107][]107}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.10}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบความซ้ำซากได้ 100 รอบ (A2)}}{107}{table.caption.218}\protected@file@percent }
-\newlabel{tab:repeatability}{{5.10}{107}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบความซ้ำซากได้ 100 รอบ (A2)}{table.caption.218}{}}
-\newlabel{tab:repeatability@cref}{{[table][10][5]5.10}{[1][107][]107}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.4}Cycle Time}{107}{subsection.5.3.4}\protected@file@percent }
-\newlabel{subsec:cycle_time}{{5.3.4}{107}{Cycle Time}{subsection.5.3.4}{}}
-\newlabel{subsec:cycle_time@cref}{{[subsection][4][5,3]5.3.4}{[1][107][]107}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.11}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Cycle Time (P1)}}{107}{table.caption.219}\protected@file@percent }
-\newlabel{tab:cycle_time}{{5.11}{107}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบ Cycle Time (P1)}{table.caption.219}{}}
-\newlabel{tab:cycle_time@cref}{{[table][11][5]5.11}{[1][107][]107}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}การทวนสอบตามข้อกำหนด (Requirements Traceability \& V\&V)}{107}{section.5.4}\protected@file@percent }
-\newlabel{sec:vnv}{{5.4}{107}{การทวนสอบตามข้อกำหนด (Requirements Traceability \& V\&V)}{section.5.4}{}}
-\newlabel{sec:vnv@cref}{{[section][4][5]5.4}{[1][107][]107}{}{}{}}
+\newlabel{ch:results}{{5}{118}{ผลการทดสอบและการทวนสอบ}{chapter.5}{}}
+\newlabel{ch:results@cref}{{[chapter][5][]5}{[1][118][]118}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}ผลการทดสอบระบบย่อย}{118}{section.5.1}\protected@file@percent }
+\newlabel{sec:subsystem_test}{{5.1}{118}{ผลการทดสอบระบบย่อย}{section.5.1}{}}
+\newlabel{sec:subsystem_test@cref}{{[section][1][5]5.1}{[1][118][]118}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}การวัดระยะคลอน (Backlash Measurement)}{118}{subsection.5.1.1}\protected@file@percent }
+\newlabel{subsec:backlash}{{5.1.1}{118}{การวัดระยะคลอน (Backlash Measurement)}{subsection.5.1.1}{}}
+\newlabel{subsec:backlash@cref}{{[subsection][1][5,1]5.1.1}{[1][118][]118}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{วัตถุประสงค์และความสำคัญ}{118}{subsubsection*.220}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{วิธีการทดสอบ}{118}{subsubsection*.221}\protected@file@percent }
+\newlabel{eq:backlash_calc}{{5.1}{118}{วิธีการทดสอบ}{equation.5.1}{}}
+\newlabel{eq:backlash_calc@cref}{{[equation][1][5]5.1}{[1][118][]118}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{ผลการวัด}{119}{subsubsection*.222}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการวัดระยะคลอนของระบบส่งกำลัง (ค่าเฉลี่ยจากการวัด 3 ตำแหน่ง $\times $ 5 ครั้ง)}}{119}{table.caption.223}\protected@file@percent }
+\newlabel{tab:backlash}{{5.1}{119}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการวัดระยะคลอนของระบบส่งกำลัง (ค่าเฉลี่ยจากการวัด 3 ตำแหน่ง $\times $ 5 ครั้ง)}{table.caption.223}{}}
+\newlabel{tab:backlash@cref}{{[table][1][5]5.1}{[1][118][]119}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}การทดสอบ Encoder และ Sensor}{119}{subsection.5.1.2}\protected@file@percent }
+\newlabel{subsec:sensor_test}{{5.1.2}{119}{การทดสอบ Encoder และ Sensor}{subsection.5.1.2}{}}
+\newlabel{subsec:sensor_test@cref}{{[subsection][2][5,1]5.1.2}{[1][119][]119}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{การทดสอบ Encoder AMT-103}{119}{subsubsection*.224}\protected@file@percent }
+\newlabel{subsubsec:encoder_test}{{5.1.2}{119}{การทดสอบ Encoder AMT-103}{subsubsection*.224}{}}
+\newlabel{subsubsec:encoder_test@cref}{{[subsection][2][5,1]5.1.2}{[1][119][]119}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{วัตถุประสงค์}{119}{paragraph*.225}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{การทดสอบ Resolution}{119}{paragraph*.226}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{การทดสอบ Noise Floor}{119}{paragraph*.227}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Encoder AMT-103}}{119}{table.caption.228}\protected@file@percent }
+\newlabel{tab:encoder_test}{{5.2}{119}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบ Encoder AMT-103}{table.caption.228}{}}
+\newlabel{tab:encoder_test@cref}{{[table][2][5]5.2}{[1][119][]119}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{การทดสอบ Proximity Sensor (Homing)}{119}{subsubsection*.229}\protected@file@percent }
+\newlabel{subsubsec:prox_test}{{5.1.2}{119}{การทดสอบ Proximity Sensor (Homing)}{subsubsection*.229}{}}
+\newlabel{subsubsec:prox_test@cref}{{[subsection][2][5,1]5.1.2}{[1][119][]119}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{วัตถุประสงค์}{119}{paragraph*.230}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{วิธีการทดสอบ}{120}{paragraph*.231}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Proximity Sensor สำหรับ Homing}}{120}{table.caption.232}\protected@file@percent }
+\newlabel{tab:prox_test}{{5.3}{120}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบ Proximity Sensor สำหรับ Homing}{table.caption.232}{}}
+\newlabel{tab:prox_test@cref}{{[table][3][5]5.3}{[1][120][]120}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}การทดสอบ Motor Driver (Cytron MD10C)}{120}{subsection.5.1.3}\protected@file@percent }
+\newlabel{subsec:motor_driver_test}{{5.1.3}{120}{การทดสอบ Motor Driver (Cytron MD10C)}{subsection.5.1.3}{}}
+\newlabel{subsec:motor_driver_test@cref}{{[subsection][3][5,1]5.1.3}{[1][120][]120}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{วัตถุประสงค์}{120}{subsubsection*.233}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{วิธีการทดสอบ}{120}{subsubsection*.234}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{ผลการทดสอบ}{121}{subsubsection*.235}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Motor Driver Response}}{121}{table.caption.236}\protected@file@percent }
+\newlabel{tab:driver_test}{{5.4}{121}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบ Motor Driver Response}{table.caption.236}{}}
+\newlabel{tab:driver_test@cref}{{[table][4][5]5.4}{[1][120][]121}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}การทดสอบ E-Stop Response Time}{121}{subsection.5.1.4}\protected@file@percent }
+\newlabel{subsec:estop_test}{{5.1.4}{121}{การทดสอบ E-Stop Response Time}{subsection.5.1.4}{}}
+\newlabel{subsec:estop_test@cref}{{[subsection][4][5,1]5.1.4}{[1][121][]121}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{วัตถุประสงค์}{121}{subsubsection*.237}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{วิธีการทดสอบ}{121}{subsubsection*.238}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{ผลการทดสอบ}{122}{subsubsection*.239}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ E-Stop Response Time (5 ครั้ง)}}{122}{table.caption.240}\protected@file@percent }
+\newlabel{tab:estop_test}{{5.5}{122}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบ E-Stop Response Time (5 ครั้ง)}{table.caption.240}{}}
+\newlabel{tab:estop_test@cref}{{[table][5][5]5.5}{[1][121][]122}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.5}การทดสอบการสื่อสาร Modbus RTU}{122}{subsection.5.1.5}\protected@file@percent }
+\newlabel{subsec:modbus_test}{{5.1.5}{122}{การทดสอบการสื่อสาร Modbus RTU}{subsection.5.1.5}{}}
+\newlabel{subsec:modbus_test@cref}{{[subsection][5][5,1]5.1.5}{[1][122][]122}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{วัตถุประสงค์}{122}{subsubsection*.241}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{วิธีการทดสอบ}{122}{subsubsection*.242}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{ผลการทดสอบ}{123}{subsubsection*.243}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Modbus RTU Communication (100 Transactions)}}{123}{table.caption.244}\protected@file@percent }
+\newlabel{tab:modbus_test}{{5.6}{123}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบ Modbus RTU Communication (100 Transactions)}{table.caption.244}{}}
+\newlabel{tab:modbus_test@cref}{{[table][6][5]5.6}{[1][122][]123}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}ผลการระบุระบบและการจำลอง}{123}{section.5.2}\protected@file@percent }
+\newlabel{sec:sysid_results}{{5.2}{123}{ผลการระบุระบบและการจำลอง}{section.5.2}{}}
+\newlabel{sec:sysid_results@cref}{{[section][2][5]5.2}{[1][123][]123}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}ผลการระบุพารามิเตอร์ของมอเตอร์}{123}{subsection.5.2.1}\protected@file@percent }
+\newlabel{subsec:sysid_params_result}{{5.2.1}{123}{ผลการระบุพารามิเตอร์ของมอเตอร์}{subsection.5.2.1}{}}
+\newlabel{subsec:sysid_params_result@cref}{{[subsection][1][5,2]5.2.1}{[1][123][]123}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{ผล Locked Rotor Test}{123}{subsubsection*.245}\protected@file@percent }
+\newlabel{subsubsec:locked_rotor_result}{{5.2.1}{123}{ผล Locked Rotor Test}{subsubsection*.245}{}}
+\newlabel{subsubsec:locked_rotor_result@cref}{{[subsection][1][5,2]5.2.1}{[1][123][]123}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการวัด $R_a$ และ $L_a$ จาก Locked Rotor Test ที่ $V_{in} = 12$\,V (3 runs)}}{123}{table.caption.246}\protected@file@percent }
+\newlabel{tab:locked_rotor}{{5.7}{123}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการวัด $R_a$ และ $L_a$ จาก Locked Rotor Test ที่ $V_{in} = 12$\,V (3 runs)}{table.caption.246}{}}
+\newlabel{tab:locked_rotor@cref}{{[table][7][5]5.7}{[1][123][]123}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{ผล Parameter Estimation จาก Chirp Test}{124}{subsubsection*.247}\protected@file@percent }
+\newlabel{subsubsec:chirp_result}{{5.2.1}{124}{ผล Parameter Estimation จาก Chirp Test}{subsubsection*.247}{}}
+\newlabel{subsubsec:chirp_result@cref}{{[subsection][1][5,2]5.2.1}{[1][124][]124}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{การ Preprocessing สัญญาณ}{124}{paragraph*.248}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{ผลการประมาณพารามิเตอร์}{124}{paragraph*.249}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.8}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการ Estimate พารามิเตอร์จาก Chirp Test (สรุปจาก 9 Experiments)}}{124}{table.caption.250}\protected@file@percent }
+\newlabel{tab:chirp_results}{{5.8}{124}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการ Estimate พารามิเตอร์จาก Chirp Test (สรุปจาก 9 Experiments)}{table.caption.250}{}}
+\newlabel{tab:chirp_results@cref}{{[table][8][5]5.8}{[1][124][]124}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}ผลการตรวจสอบความถูกต้องของแบบจำลอง (Model Validation)}{125}{subsection.5.2.2}\protected@file@percent }
+\newlabel{subsec:model_validation_results}{{5.2.2}{125}{ผลการตรวจสอบความถูกต้องของแบบจำลอง (Model Validation)}{subsection.5.2.2}{}}
+\newlabel{subsec:model_validation_results@cref}{{[subsection][2][5,2]5.2.2}{[1][124][]125}{}{}{}}
+\newlabel{eq:fit_score}{{5.2}{125}{ผลการตรวจสอบความถูกต้องของแบบจำลอง (Model Validation)}{equation.5.2}{}}
+\newlabel{eq:fit_score@cref}{{[equation][2][5]5.2}{[1][125][]125}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.9}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผล Cross-Validation ของแบบจำลองกับข้อมูลจริง}}{125}{table.caption.251}\protected@file@percent }
+\newlabel{tab:cross_validation}{{5.9}{125}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผล Cross-Validation ของแบบจำลองกับข้อมูลจริง}{table.caption.251}{}}
+\newlabel{tab:cross_validation@cref}{{[table][9][5]5.9}{[1][125][]125}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}ผลการ Simulation Cascade PID และ ZVD Input Shaper}{125}{subsection.5.2.3}\protected@file@percent }
+\newlabel{subsec:sim_results}{{5.2.3}{125}{ผลการ Simulation Cascade PID และ ZVD Input Shaper}{subsection.5.2.3}{}}
+\newlabel{subsec:sim_results@cref}{{[subsection][3][5,2]5.2.3}{[1][125][]125}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{ผล Root Locus และ Stability Margin}{125}{paragraph*.252}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{ผล Simulation ZVD Input Shaper}{125}{paragraph*.253}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.10}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สรุปผล Simulation เปรียบเทียบ Unshaped กับ ZVD-Shaped (Worst-case Move 360°, มีโหลด Connection Rod)}}{126}{table.caption.254}\protected@file@percent }
+\newlabel{tab:zvd_sim_summary}{{5.10}{126}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces สรุปผล Simulation เปรียบเทียบ Unshaped กับ ZVD-Shaped (Worst-case Move 360°, มีโหลด Connection Rod)}{table.caption.254}{}}
+\newlabel{tab:zvd_sim_summary@cref}{{[table][10][5]5.10}{[1][125][]126}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}ผลการออกแบบ Kalman Filter}{126}{subsection.5.2.4}\protected@file@percent }
+\newlabel{subsec:kf_results}{{5.2.4}{126}{ผลการออกแบบ Kalman Filter}{subsection.5.2.4}{}}
+\newlabel{subsec:kf_results@cref}{{[subsection][4][5,2]5.2.4}{[1][126][]126}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{การเลือก Process Noise Q และ Measurement Noise R}{126}{paragraph*.255}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.11}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Process Noise $\mathbf  {Q}$ และ Measurement Noise $R$ ที่ใช้ใน Kalman Filter}}{126}{table.caption.256}\protected@file@percent }
+\newlabel{tab:kalman_qr}{{5.11}{126}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces Process Noise $\mathbf {Q}$ และ Measurement Noise $R$ ที่ใช้ใน Kalman Filter}{table.caption.256}{}}
+\newlabel{tab:kalman_qr@cref}{{[table][11][5]5.11}{[1][126][]126}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{Steady-State Kalman Gain $\mathbf  {K}_\infty $}{126}{paragraph*.257}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.12}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Steady-State Kalman Gain $\mathbf  {K}_\infty $ ที่ใช้ใน Firmware (รอยืนยันจาก Firmware Version สุดท้าย)}}{127}{table.caption.258}\protected@file@percent }
+\newlabel{tab:kalman_gain}{{5.12}{127}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces Steady-State Kalman Gain $\mathbf {K}_\infty $ ที่ใช้ใน Firmware (รอยืนยันจาก Firmware Version สุดท้าย)}{table.caption.258}{}}
+\newlabel{tab:kalman_gain@cref}{{[table][12][5]5.12}{[1][126][]127}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}ผลการทดสอบสมรรถนะการทำงานจริง}{127}{section.5.3}\protected@file@percent }
+\newlabel{sec:performance}{{5.3}{127}{ผลการทดสอบสมรรถนะการทำงานจริง}{section.5.3}{}}
+\newlabel{sec:performance@cref}{{[section][3][5]5.3}{[1][127][]127}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Step Response: Overshoot และ Settling Time}{127}{subsection.5.3.1}\protected@file@percent }
+\newlabel{subsec:step_response}{{5.3.1}{127}{Step Response: Overshoot และ Settling Time}{subsection.5.3.1}{}}
+\newlabel{subsec:step_response@cref}{{[subsection][1][5,3]5.3.1}{[1][127][]127}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{วัตถุประสงค์}{127}{subsubsection*.259}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{วิธีการทดสอบ}{127}{subsubsection*.260}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{ผลการทดสอบ}{128}{subsubsection*.261}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.13}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Step Response บน Hardware จริง (With Load)}}{128}{table.caption.262}\protected@file@percent }
+\newlabel{tab:step_response}{{5.13}{128}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบ Step Response บน Hardware จริง (With Load)}{table.caption.262}{}}
+\newlabel{tab:step_response@cref}{{[table][13][5]5.13}{[1][127][]128}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}ความแม่นยำตำแหน่ง (Position Accuracy)}{128}{subsection.5.3.2}\protected@file@percent }
+\newlabel{subsec:accuracy}{{5.3.2}{128}{ความแม่นยำตำแหน่ง (Position Accuracy)}{subsection.5.3.2}{}}
+\newlabel{subsec:accuracy@cref}{{[subsection][2][5,3]5.3.2}{[1][128][]128}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{วัตถุประสงค์}{128}{subsubsection*.263}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{วิธีการทดสอบ}{128}{subsubsection*.264}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{ผลการทดสอบ}{128}{subsubsection*.265}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.14}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบความแม่นยำตำแหน่ง (A1) --- ค่าเฉลี่ยจาก 10 ครั้ง}}{128}{table.caption.266}\protected@file@percent }
+\newlabel{tab:accuracy}{{5.14}{128}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบความแม่นยำตำแหน่ง (A1) --- ค่าเฉลี่ยจาก 10 ครั้ง}{table.caption.266}{}}
+\newlabel{tab:accuracy@cref}{{[table][14][5]5.14}{[1][128][]128}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}ความซ้ำซากได้ (Repeatability)}{129}{subsection.5.3.3}\protected@file@percent }
+\newlabel{subsec:repeatability}{{5.3.3}{129}{ความซ้ำซากได้ (Repeatability)}{subsection.5.3.3}{}}
+\newlabel{subsec:repeatability@cref}{{[subsection][3][5,3]5.3.3}{[1][128][]129}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{วัตถุประสงค์}{129}{subsubsection*.267}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{วิธีการทดสอบ}{129}{subsubsection*.268}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{ผลการทดสอบ}{129}{subsubsection*.269}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.15}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบความซ้ำซากได้ 100 รอบ (A2)}}{129}{table.caption.270}\protected@file@percent }
+\newlabel{tab:repeatability}{{5.15}{129}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบความซ้ำซากได้ 100 รอบ (A2)}{table.caption.270}{}}
+\newlabel{tab:repeatability@cref}{{[table][15][5]5.15}{[1][129][]129}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.4}Cycle Time}{129}{subsection.5.3.4}\protected@file@percent }
+\newlabel{subsec:cycle_time}{{5.3.4}{129}{Cycle Time}{subsection.5.3.4}{}}
+\newlabel{subsec:cycle_time@cref}{{[subsection][4][5,3]5.3.4}{[1][129][]129}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{วัตถุประสงค์}{129}{subsubsection*.271}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{การแบ่ง Cycle Time Budget}{129}{subsubsection*.272}\protected@file@percent }
 \gdef \LT@i {\LT@entry 
     {1}{42.52602pt}\LT@entry 
     {4}{68.61723pt}\LT@entry 
     {4}{154.81436pt}\LT@entry 
     {4}{201.71062pt}\LT@entry 
     {4}{75.03287pt}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.12}{\ignorespaces Requirements Traceability Matrix (32 ข้อ)}}{108}{table.5.12}\protected@file@percent }
-\newlabel{tab:vnv_matrix}{{5.12}{108}{Requirements Traceability Matrix (32 ข้อ)}{table.5.12}{}}
-\newlabel{tab:vnv_matrix@cref}{{[table][12][5]5.12}{[1][107][]108}{}{}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}สรุปผลและข้อเสนอแนะ}{109}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{ผลการทดสอบ}{130}{subsubsection*.273}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.16}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ผลการทดสอบ Cycle Time (P1) --- 3 รอบต่อเนื่อง}}{130}{table.caption.274}\protected@file@percent }
+\newlabel{tab:cycle_time}{{5.16}{130}{\texorpdfstring {\xpg@aux {\xpg@current@opts }{\languagename }}{}\ignorespaces ผลการทดสอบ Cycle Time (P1) --- 3 รอบต่อเนื่อง}{table.caption.274}{}}
+\newlabel{tab:cycle_time@cref}{{[table][16][5]5.16}{[1][130][]130}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}การทวนสอบตามข้อกำหนด (Requirements Traceability \& V\&V)}{130}{section.5.4}\protected@file@percent }
+\newlabel{sec:vnv}{{5.4}{130}{การทวนสอบตามข้อกำหนด (Requirements Traceability \& V\&V)}{section.5.4}{}}
+\newlabel{sec:vnv@cref}{{[section][4][5]5.4}{[1][130][]130}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.17}{\ignorespaces Requirements Traceability Matrix (32 ข้อ)}}{130}{table.5.17}\protected@file@percent }
+\newlabel{tab:vnv_matrix}{{5.17}{130}{Requirements Traceability Matrix (32 ข้อ)}{table.5.17}{}}
+\newlabel{tab:vnv_matrix@cref}{{[table][17][5]5.17}{[1][130][]130}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{สรุปสถานะการทวนสอบ}{131}{paragraph*.275}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}สรุปผลและข้อเสนอแนะ}{132}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:conclusion}{{6}{109}{สรุปผลและข้อเสนอแนะ}{chapter.6}{}}
-\newlabel{ch:conclusion@cref}{{[chapter][6][]6}{[1][109][]109}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}สรุปผลการดำเนินงาน}{109}{section.6.1}\protected@file@percent }
-\newlabel{sec:conclusion}{{6.1}{109}{สรุปผลการดำเนินงาน}{section.6.1}{}}
-\newlabel{sec:conclusion@cref}{{[section][1][6]6.1}{[1][109][]109}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}ปัญหา อุปสรรค และบทเรียนที่ได้}{109}{section.6.2}\protected@file@percent }
-\newlabel{sec:lessons_learned}{{6.2}{109}{ปัญหา อุปสรรค และบทเรียนที่ได้}{section.6.2}{}}
-\newlabel{sec:lessons_learned@cref}{{[section][2][6]6.2}{[1][109][]109}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}ปัญหาเชิงกล}{109}{subsection.6.2.1}\protected@file@percent }
-\newlabel{subsec:mech_lessons}{{6.2.1}{109}{ปัญหาเชิงกล}{subsection.6.2.1}{}}
-\newlabel{subsec:mech_lessons@cref}{{[subsection][1][6,2]6.2.1}{[1][109][]109}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}ปัญหาด้านซอฟต์แวร์และการบูรณาการ}{110}{subsection.6.2.2}\protected@file@percent }
-\newlabel{subsec:sw_lessons}{{6.2.2}{110}{ปัญหาด้านซอฟต์แวร์และการบูรณาการ}{subsection.6.2.2}{}}
-\newlabel{subsec:sw_lessons@cref}{{[subsection][2][6,2]6.2.2}{[1][109][]110}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}ปัญหาด้านการออกแบบระบบควบคุม}{110}{subsection.6.2.3}\protected@file@percent }
-\newlabel{subsec:ctrl_lessons}{{6.2.3}{110}{ปัญหาด้านการออกแบบระบบควบคุม}{subsection.6.2.3}{}}
-\newlabel{subsec:ctrl_lessons@cref}{{[subsection][3][6,2]6.2.3}{[1][110][]110}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}ข้อเสนอแนะสำหรับการพัฒนาต่อยอด}{110}{section.6.3}\protected@file@percent }
-\newlabel{sec:future_work}{{6.3}{110}{ข้อเสนอแนะสำหรับการพัฒนาต่อยอด}{section.6.3}{}}
-\newlabel{sec:future_work@cref}{{[section][3][6]6.3}{[1][110][]110}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}การพัฒนาระบบควบคุม}{110}{subsection.6.3.1}\protected@file@percent }
-\newlabel{subsec:future_control}{{6.3.1}{110}{การพัฒนาระบบควบคุม}{subsection.6.3.1}{}}
-\newlabel{subsec:future_control@cref}{{[subsection][1][6,3]6.3.1}{[1][110][]110}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}การพัฒนาระบบกล}{111}{subsection.6.3.2}\protected@file@percent }
-\newlabel{subsec:future_mech}{{6.3.2}{111}{การพัฒนาระบบกล}{subsection.6.3.2}{}}
-\newlabel{subsec:future_mech@cref}{{[subsection][2][6,3]6.3.2}{[1][111][]111}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.3}การพัฒนาระบบไฟฟ้าและซอฟต์แวร์}{111}{subsection.6.3.3}\protected@file@percent }
-\newlabel{subsec:future_elec_sw}{{6.3.3}{111}{การพัฒนาระบบไฟฟ้าและซอฟต์แวร์}{subsection.6.3.3}{}}
-\newlabel{subsec:future_elec_sw@cref}{{[subsection][3][6,3]6.3.3}{[1][111][]111}{}{}{}}
+\newlabel{ch:conclusion}{{6}{132}{สรุปผลและข้อเสนอแนะ}{chapter.6}{}}
+\newlabel{ch:conclusion@cref}{{[chapter][6][]6}{[1][132][]132}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}สรุปผลการดำเนินงาน}{132}{section.6.1}\protected@file@percent }
+\newlabel{sec:conclusion}{{6.1}{132}{สรุปผลการดำเนินงาน}{section.6.1}{}}
+\newlabel{sec:conclusion@cref}{{[section][1][6]6.1}{[1][132][]132}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}ปัญหา อุปสรรค และบทเรียนที่ได้}{132}{section.6.2}\protected@file@percent }
+\newlabel{sec:lessons_learned}{{6.2}{132}{ปัญหา อุปสรรค และบทเรียนที่ได้}{section.6.2}{}}
+\newlabel{sec:lessons_learned@cref}{{[section][2][6]6.2}{[1][132][]132}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}ปัญหาเชิงกล}{132}{subsection.6.2.1}\protected@file@percent }
+\newlabel{subsec:mech_lessons}{{6.2.1}{132}{ปัญหาเชิงกล}{subsection.6.2.1}{}}
+\newlabel{subsec:mech_lessons@cref}{{[subsection][1][6,2]6.2.1}{[1][132][]132}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}ปัญหาด้านซอฟต์แวร์และการบูรณาการ}{133}{subsection.6.2.2}\protected@file@percent }
+\newlabel{subsec:sw_lessons}{{6.2.2}{133}{ปัญหาด้านซอฟต์แวร์และการบูรณาการ}{subsection.6.2.2}{}}
+\newlabel{subsec:sw_lessons@cref}{{[subsection][2][6,2]6.2.2}{[1][132][]133}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}ปัญหาด้านการออกแบบระบบควบคุม}{133}{subsection.6.2.3}\protected@file@percent }
+\newlabel{subsec:ctrl_lessons}{{6.2.3}{133}{ปัญหาด้านการออกแบบระบบควบคุม}{subsection.6.2.3}{}}
+\newlabel{subsec:ctrl_lessons@cref}{{[subsection][3][6,2]6.2.3}{[1][133][]133}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}ข้อเสนอแนะสำหรับการพัฒนาต่อยอด}{133}{section.6.3}\protected@file@percent }
+\newlabel{sec:future_work}{{6.3}{133}{ข้อเสนอแนะสำหรับการพัฒนาต่อยอด}{section.6.3}{}}
+\newlabel{sec:future_work@cref}{{[section][3][6]6.3}{[1][133][]133}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}การพัฒนาระบบควบคุม}{133}{subsection.6.3.1}\protected@file@percent }
+\newlabel{subsec:future_control}{{6.3.1}{133}{การพัฒนาระบบควบคุม}{subsection.6.3.1}{}}
+\newlabel{subsec:future_control@cref}{{[subsection][1][6,3]6.3.1}{[1][133][]133}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}การพัฒนาระบบกล}{134}{subsection.6.3.2}\protected@file@percent }
+\newlabel{subsec:future_mech}{{6.3.2}{134}{การพัฒนาระบบกล}{subsection.6.3.2}{}}
+\newlabel{subsec:future_mech@cref}{{[subsection][2][6,3]6.3.2}{[1][134][]134}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.3}การพัฒนาระบบไฟฟ้าและซอฟต์แวร์}{134}{subsection.6.3.3}\protected@file@percent }
+\newlabel{subsec:future_elec_sw}{{6.3.3}{134}{การพัฒนาระบบไฟฟ้าและซอฟต์แวร์}{subsection.6.3.3}{}}
+\newlabel{subsec:future_elec_sw@cref}{{[subsection][3][6,3]6.3.3}{[1][134][]134}{}{}{}}
 \bibstyle{apalike}
 \bibdata{references}
 \bibcite{iso2812010}{{1}{2010}{{iso}}{{}}}
@@ -1080,4 +1220,4 @@
 \bibcite{norton2011machine}{{12}{2011}{{Norton}}{{}}}
 \bibcite{ogata2010modern}{{13}{2010}{{Ogata}}{{}}}
 \bibcite{rao2017fem}{{14}{2017}{{Rao}}{{}}}
-\gdef \@abspage@last{120}
+\gdef \@abspage@last{143}

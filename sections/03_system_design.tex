@@ -2965,10 +2965,11 @@ Rod จะแกว่งลดลงจนเข้าสู่ขีดจำ�
 % ============================================================================
 \subsection{Modbus RTU Protocol และ Register Map}
 \label{subsec:fsm_modbus}
+% ============================================================================
 
-ระบบสื่อสารกับ Base System ผ่าน Modbus RTU บน LPUART1
-(230400 bps, 8N1, RS-485, Slave Address~21 = 0x15)
-รองรับ Function Code 0x03 (Read Holding Registers)
+ระบบสื่อสารกับ Base System ผ่าน Modbus RTU บนพอร์ต LPUART1 
+(Baud rate 230400 bps, 8N1, RS-485, Slave Address~21 = 0x15) 
+รองรับ Function Code 0x03 (Read Holding Registers) 
 และ 0x06/0x10 (Write Single/Multiple Registers)
 
 \begin{table}[H]
@@ -2992,6 +2993,17 @@ Rod จะแกว่งลดลงจนเข้าสู่ขีดจำ�
     0x24 & int16  & P2P Target & Auto-clear หลัง Move เริ่ม \\
     0x25 & uint16 & Soft Stop & bit0 = decelerate และกลับ IDLE \\
     0x32 & int16  & Home Offset & degrees; ปรับ Zero Point หลัง Homing \\
+    \midrule
+    \multicolumn{4}{c}{\textbf{Auto-Tune (AT) Parameters (0x33 -- 0x3A)}} \\
+    \midrule
+    0x33 & uint16 & AT Command & 1=Start, 2=Apply Gains, 0=Idle \\
+    0x34 & int16  & AT Relay Amp & แอมพลิจูด (Unit/10.0) \\
+    0x35 & int16  & AT Setpoint & จุดทำงาน (Degrees/10.0) \\
+    0x36 & uint16 & AT Loop Target & 0=Velocity Loop, 1=Position Loop \\
+    0x37 & int16  & AT Hysteresis & แถบสเตริซิส (Degrees/100.0) \\
+    0x38 & int16  & AT New Kp & ค่า Kp ที่ได้จากการจูน (Value/1000.0) \\
+    0x39 & int16  & AT New Ki & ค่า Ki ที่ได้จากการจูน (Value/1000.0) \\
+    0x3A & int16  & AT New Kd & ค่า Kd ที่ได้จากการจูน (Value/1000.0) \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -3006,18 +3018,59 @@ Rod จะแกว่งลดลงจนเข้าสู่ขีดจำ�
     Address & Type & คำอธิบาย & หน่วย \\
     \midrule
     0x00 & uint16 & Heartbeat & Robot เขียน 22881 ("YA") \\
-    0x26 & uint16 & Reed Sensors & bit0=Up, bit1=Down, bit2=Claw \\
+    0x26 & uint16 & Reed Sensors \& Proximity & bit0=Up, 1=Down, 2=Claw, \textbf{3=Proximity} \\
     0x27 & uint16 & Task Flags & bit0=Homing, 1=GoPick, 2=GoPlace, 3=GoPoint \\
     0x28 & int16  & Position & degrees $\times$ 10 \\
     0x29 & int16  & Velocity & degrees/s $\times$ 10 \\
     0x30 & int16  & Acceleration & degrees/s² $\times$ 10 \\
-    0x31 & uint16 & Emergency & bit0 = E-Stop active \\
+    0x31 & uint16 & Emergency \& Fault & bit0=E-Stop, \textbf{bits15--8 = Fault Code} \\
+    \midrule
+    \multicolumn{4}{c}{\textbf{Auto-Tune (AT) Telemetry (0x3B -- 0x3C)}} \\
+    \midrule
+    0x3B & uint16 & AT Status & สถานะการจูนของ TIM6 ISR \\
+    0x3C & uint16 & AT Cycles & จำนวนรอบการแกว่ง (Relay Feedback) \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-Heartbeat Watchdog: หาก PC ไม่ส่ง Heartbeat นานกว่า 2\,s
-ระบบจะ Soft-stop และเข้าสู่ \texttt{STATE\_FAULT} (Fault Code 0x20)
+% -----------------------------------------------------------------------
+\subsubsection{กลไกความปลอดภัยของการสื่อสาร (Communication Watchdog \& Heartbeat)}
+\label{subsubsec:modbus_watchdog}
+% -----------------------------------------------------------------------
+
+ระบบใช้กลไก Active Heartbeat แบบ Two-way Handshake เพื่อรับประกันความปลอดภัยของระบบระหว่างการปฏิบัติงาน:
+\begin{enumerate}
+    \item \textbf{Robot 5Hz Ping:} บอร์ดไมโครคอนโทรลเลอร์จะเขียนค่า \texttt{22881} (ตัวอักษร ASCII "YA") ลงใน Register 0x00 ทุกๆ 200\,ms (5\,Hz) เพื่อแจ้ง PC ว่าระบบควบคุมระดับล่างยังทำงานปกติ
+    \item \textbf{PC Acknowledge:} ซอฟต์แวร์ฝั่ง PC ต้องอ่านค่าดังกล่าว และเขียนตอบกลับด้วยค่า \texttt{18537} (ตัวอักษร ASCII "HI") ลงใน Register 0x00 
+    \item \textbf{Watchdog Timeout:} หากไมโครคอนโทรลเลอร์ไม่ได้รับค่า "HI" ตอบกลับมาภายในระยะเวลา 2 วินาที ระบบจะถือว่าการเชื่อมต่อขาดหาย (Communication Loss) และบังคับเข้าสู่ \texttt{STATE\_FAULT} ทันที พร้อมระบุ Fault Code 0x20 และสั่ง Soft-Stop มอเตอร์เพื่อความปลอดภัย
+\end{enumerate}
+
+% -----------------------------------------------------------------------
+\subsubsection{สถาปัตยกรรมการรับส่งข้อมูลแบบ Protocol Multiplexing}
+\label{subsubsec:protocol_multiplexing}
+% -----------------------------------------------------------------------
+
+เนื่องจากระบบใช้พอร์ต LPUART1 ร่วมกันระหว่างการควบคุมแบบ Real-time และการทำ Web/GUI Dashboard สถาปัตยกรรมฝั่งรับข้อมูล (RX Callback) จึงถูกออกแบบให้ทำงานแบบ \textbf{Protocol Multiplexing} เพื่อแยกประเภทของ Data stream:
+
+\begin{itemize}
+    \item \textbf{Modbus RTU Parsing:} กรองแพ็กเก็ตที่มีขนาดตั้งแต่ 4 ไบต์ขึ้นไป, ตรวจสอบ Slave Address (0x15) และยืนยันความสมบูรณ์ของเฟรมด้วย CRC-16
+    \item \textbf{ASCII Command Intercept:} หากแพ็กเก็ตขึ้นต้นด้วยอักขระ \texttt{"LAB"} (3 ไบต์แรก) ระบบจะทำการดักจับ (Intercept) ข้ามกระบวนการ Modbus และส่ง Buffer ไปตีความแบบ String ให้กับโมดูล Dashboard ทันที
+    \item \textbf{Asynchronous Telemetry:} ฝั่ง TX สามารถส่งข้อมูลแบบ \texttt{\$GAINS,...} แทรกเข้าไปในสาย RS-485 ได้โดยอาศัย DMA (Direct Memory Access) เพื่อลดภาระของ CPU
+    \item \textbf{Interrupt-Safe Update:} คำสั่งที่ต้องใช้เวลาหรือมีความเสี่ยงต่อ Timing (เช่น การใช้ \texttt{\_\_disable\_irq()} เพื่ออัปเดตค่า Kp, Ki, Kd) จะไม่ถูกสั่งทำงานในระดับ RX Interrupt ทันที แต่จะถูกตั้งค่า Flag เพื่อให้ Main Loop (\texttt{ModbusBridge\_Tick}) เป็นผู้จัดการ ลดโอกาสเกิดปัญหา Jitter ในระบบควบคุมหลัก
+\end{itemize}
+
+% =======================================================================
+% PLACEHOLDER: แทรกรูปภาพ Data Flow หรือ Protocol Multiplexing Architecture
+% =======================================================================
+\begin{figure}[H]
+    \centering
+    % ปลดคอมเมนต์บรรทัดล่างแล้วใส่ชื่อไฟล์รูปภาพของคุณ
+    \includegraphics[width=0.85\textwidth]{fig_protocol_multiplexing.png}
+    % \framebox[\textwidth]{\rule{0pt}{200pt} \textbf{[PLACEHOLDER: รูปภาพ Data Flow Diagram หรือ Protocol Multiplexing Architecture]}}
+    \caption{สถาปัตยกรรม Protocol Multiplexing ที่จัดการข้อมูล Modbus RTU ร่วมกับ ASCII Command บนพอร์ต LPUART1}
+    \label{fig:protocol_multiplexing}
+\end{figure}
+% =======================================================================
 
 \begin{table}[H]
   \centering

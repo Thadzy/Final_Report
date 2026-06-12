@@ -13,37 +13,40 @@
 \subsection{ภาพรวมการประกอบ}
 \label{subsec:mech_overview}
 
-การประกอบระบบเชิงกลแบ่งออกเป็น 3 Sub-assembly หลัก
-ได้แก่ ส่วนฐาน (Base), ส่วนแขนกลและข้อต่อ (Arm Links \& Joints)
-และชุดเอ็นโค้ดเดอร์ (Encoder Sub-assembly)
-ก่อนประกอบรวมเป็นหุ่นยนต์เต็มรูปแบบ
+การประกอบชิ้นส่วนทางกลของหุ่นยนต์แบ่งออกเป็น 3 ชิ้นส่วนย่อย (Sub-assemblies) หลัก เพื่อให้ง่ายต่อการตรวจสอบ ลดข้อผิดพลาดในขั้นตอนการประกอบ และสะดวกต่อการซ่อมบำรุงในอนาคต ได้แก่ ส่วนฐาน (Base), ส่วนแขนกลและมอเตอร์ (Arm \& Motor) และชุดเอ็นโค้ดเดอร์ (Encoder Sub-assembly) 
+
+ชิ้นส่วนหลักอื่นๆ ที่จะถูกนำมาประกอบรวมในภายหลังประกอบด้วย ชุดมือจับ (Gripper), สายพานส่งกำลัง (Belt), คัปปลิ้ง (Coupling) และเพลาเชื่อมต่อเอ็นโค้ดเดอร์สนาม (Field Encoder Shaft) เครื่องมือหลักที่ใช้ในการประกอบประกอบด้วย ประแจหกเหลี่ยม ประแจปากตาย ประแจแหวน และค้อนยาง
 
 % -----------------------------------------------------------------------
-% รูปที่: Exploded View (Isometric)
-% ชื่อไฟล์แนะนำ: fig_exploded_iso.png
+% รูปที่ 1: ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุม Isometric
+% ชื่อไฟล์แนะนำ: fig_overview_exploded_iso.png หรือ .jpg
+% เนื้อหา: ภาพแตกชิ้นส่วน (Exploded View) ของหุ่นยนต์ทั้งตัวในมุม Isometric
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.88\textwidth]{fig_exploded_iso}
-%     \caption{ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุม Isometric}
-%     \label{fig:exploded_iso}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_overview_exploded_iso}
+    \caption{ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุม Isometric}
+    \label{fig:overview_exploded_iso}
+\end{figure}
 
 % -----------------------------------------------------------------------
-% รูปที่: Exploded View (Side)
-% ชื่อไฟล์แนะนำ: fig_exploded_side.png
+% รูปที่ 2: ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุม Side View
+% ชื่อไฟล์แนะนำ: fig_overview_exploded_side.png หรือ .jpg
+% เนื้อหา: ภาพแตกชิ้นส่วน (Exploded View) ของหุ่นยนต์ทั้งตัวในมุมมองด้านข้าง
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.88\textwidth]{fig_exploded_side}
-%     \caption{ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุม Side View}
-%     \label{fig:exploded_side}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_overview_exploded_side}
+    \caption{ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุมมองด้านข้าง (Side View)}
+    \label{fig:overview_exploded_side}
+\end{figure}
 
 \subsection{การประกอบ Sub-assembly}
 \label{subsec:sub_assembly}
 
 \subsubsection{ส่วนฐาน (Base Sub-assembly)}
+
+โครงสร้างส่วนฐานทำหน้าที่เป็นจุดรองรับน้ำหนักทั้งหมดของหุ่นยนต์และรองรับแรงบิดจากการหมุน รายการชิ้นส่วนแสดงใน\cref{tab:base_parts}
 
 \begin{table}[H]
 \centering
@@ -54,12 +57,12 @@
 ชิ้นส่วน & รายละเอียด & จำนวน \\
 \midrule
 อลูมิเนียมโปรไฟล์ 20$\times$40 & ยาว 100\,mm & 4 \\
-แผ่นฐานหุ่น (Base Plate)    & AISI 316 & 1 \\
-แผ่นรอง Pulley              & AISI 316 & 1 \\
-Pulley                       & 70 ฟัน, ID 19\,mm & 1 \\
-Bearing Mounting             & เหล็ก & 1 \\
+แผ่นชิ้นฐานหุ่น (Base Plate)    & ทำจาก AISI 316 & 1 \\
+แผ่นชิ้นรอง Pulley              & ทำจาก AISI 316 & 1 \\
+Pulley                       & 72 ฟัน, ID 19\,mm & 1 \\
+Bearing Mounting             & ทำจากเหล็ก & 1 \\
 Tapered Roller Bearing       & ID 17\,mm, OD 40\,mm & 1 \\
-ชิ้นส่วน Set Home            & เหล็ก & 1 \\
+ชิ้นส่วน Set Home            & ทำจากเหล็ก & 1 \\
 Ball Bearing                 & ID 12\,mm, OD 19\,mm & 1 \\
 Socket Head Cap Screw M5     & ยาว 12\,mm & 16 \\
 Socket Head Cap Screw M4     & ยาว 40\,mm & 4 \\
@@ -68,22 +71,43 @@ Nut M4                       & -- & 4 \\
 \end{tabular}
 \end{table}
 
+% -----------------------------------------------------------------------
+% รูปที่ 3: ภาพรวมของส่วนฐาน ในมุม Isometric
+% ชื่อไฟล์แนะนำ: fig_base_iso.png หรือ .jpg
+% เนื้อหา: ภาพส่วนฐานที่ประกอบเสร็จแล้วในมุม Isometric
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.60\textwidth]{fig_base_iso}
+    \caption{ภาพรวมของส่วนฐานหลังการประกอบ มุม Isometric}
+    \label{fig:base_iso}
+\end{figure}
+
+% -----------------------------------------------------------------------
+% รูปที่ 4: Exploded View ของส่วนฐานในมุม Side view และ Isometric
+% ชื่อไฟล์แนะนำ: fig_base_exploded.png หรือ .jpg
+% เนื้อหา: ภาพแตกชิ้นส่วนของส่วนฐาน แสดงลำดับการประกอบน็อต ลูกปืน และแผ่นเพลท
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_base_exploded}
+    \caption{ภาพแตกชิ้นส่วน (Exploded View) ของส่วนฐาน}
+    \label{fig:base_exploded}
+\end{figure}
+
 ขั้นตอนการประกอบส่วนฐาน:
 \begin{enumerate}
-    \item ประกอบอลูมิเนียมโปรไฟล์ 4 ชิ้นเข้ากับ Base Plate
-          ด้วยสกรู M5 ยาว 12\,mm จำนวน 8 ตัว
-    \item ประกอบแผ่นรอง Pulley ปิดทับด้านบน
-          ด้วยสกรู M5 ยาว 12\,mm จำนวน 8 ตัว
-    \item วาง Pulley 70 ฟัน ลงในตำแหน่งแกนกลาง
-    \item ยึด Bearing Mounting ด้วยสกรู M4 ยาว 40\,mm
-          จำนวน 3 ตัว พร้อม Nut
-    \item ใส่ Tapered Roller Bearing (ด้านบน)
-          และ Ball Bearing (ด้านล่าง)
-    \item ติดตั้งชิ้นส่วน Set Home
-          ด้วยสกรู M4 ยาว 40\,mm พร้อม Lock Nut
+    \item \textbf{การประกอบโครงสร้างฐาน (Base):} นำอลูมิเนียมโปรไฟล์ $20\times40$\,mm ทั้ง 4 ชิ้น มาประกอบเข้ากับแผ่นชิ้นฐานหุ่น (Base Plate) โดยจัดวางให้อลูมิเนียมโปรไฟล์สวมลงในร่องของแผ่นฐานพอดี จากนั้นใช้สกรู M5 ยาว 12\,mm จำนวน 8 ตัว ขันยึดให้โครงสร้างตั้งฉากและแน่นหนา
+    \item \textbf{การติดตั้งแผ่นรอง (Pulley Mounting Plate):} นำแผ่นชิ้นรอง Pulley มาประกอบปิดทับอลูมิเนียมโปรไฟล์จากทางด้านบน จัดให้รูน็อตของโปรไฟล์และแผ่นชิ้นรองตรงกัน ใช้สกรู M5 ยาว 12\,mm จำนวน 8 ตัว ขันยึดโครงสร้างทั้งหมด
+    \item \textbf{การวางพูลเลย์ (Pulley Placement):} วาง Pulley 72 ฟัน ลงในตำแหน่งแกนกลางของแผ่นชิ้นรอง โดยหมุนจัดให้รูน็อตของทั้งสองชิ้นตรงกัน
+    \item \textbf{การยึดเสื้อลูกปืน (Bearing Mounting):} นำ Bearing Mounting วางลงไปที่ตำแหน่งแกนกลางของ Pulley จัดรูน็อตให้ตรง ยึดชิ้นส่วนทั้งหมดเข้ากับโครงสร้างฐานด้วยสกรู M4 ยาว 40\,mm จำนวน 3 ตัว แล้วขันล็อกด้วยน็อตตัวเมีย (Nut) ให้แน่น
+    \item \textbf{การติดตั้งตลับลูกปืน (Bearing Installation):} สวมตลับลูกปืนเม็ดเรียว (Tapered Roller Bearing) เข้าไปด้านบนของ Bearing Mounting และนำตลับลูกปืนเม็ดกลม (Ball Bearing) ใส่เข้าไปที่รูแกนกลางบริเวณใต้แผ่นชิ้นรอง Pulley
+    \item \textbf{การติดตั้งชิ้นส่วนอ้างอิง (Set Home):} นำชิ้นส่วน Set Home ประกอบเข้ากับ Bearing Mounting บริเวณรูน็อตที่ยังว่างอยู่ ใช้สกรู M4 ยาว 40\,mm ยึดและขันล็อกให้แน่นด้วยน็อตตัวเมีย
 \end{enumerate}
 
-\subsubsection{ส่วนแขนกลและข้อต่อ (Arm Sub-assembly)}
+\subsubsection{ส่วนแขนกลและข้อต่อ (Arm Links \& Joints)}
+
+ส่วนแขนกลทำหน้าที่เป็นโครงสร้างเคลื่อนที่หลัก ติดตั้งร่วมกับระบบขับเคลื่อน รายการชิ้นส่วนแสดงใน\cref{tab:arm_parts}
 
 \begin{table}[H]
 \centering
@@ -93,32 +117,60 @@ Nut M4                       & -- & 4 \\
 \toprule
 ชิ้นส่วน & รายละเอียด & จำนวน \\
 \midrule
-Motor                        & RS-775 DC Motor & 1 \\
-แผ่นแขนกล (บน)              & Aluminum Alloy 6061 & 1 \\
-แผ่นแขนกล (ล่าง)            & Aluminum Alloy 6061 & 1 \\
-เหล็กกล่อง Galvanized       & 25$\times$25\,mm & 1 \\
+Motor                        & DC Motor & 1 \\
+แผ่นชิ้นส่วนแขนกล (บน)       & Aluminum Alloy 6061 & 1 \\
+แผ่นชิ้นส่วนแขนกล (ล่าง)     & Aluminum Alloy 6061 & 1 \\
+เหล็กกล่อง Galvanized        & ขนาด 25$\times$25\,mm & 1 \\
 Stepped Shaft                & Stainless Steel & 1 \\
-Pulley                       & 24 ฟัน, ID 12\,mm & 1 \\
+Pulley                       & 20 ฟัน, ID 12\,mm & 1 \\
 Idler                        & ID 10\,mm, Width 15\,mm & 1 \\
-Shaft Support                & Aluminum Alloy 10\,mm & 3 \\
-Key (ลิ่ม)                  & 5$\times$5$\times$8\,mm & 1 \\
-Proximity Sensor             & $\varnothing$12\,mm & 1 \\
+Shaft Support                & 10\,mm Aluminum Alloy & 3 \\
+บูชรอง M5                    & OD 10$\times$57\,mm & 1 \\
+บูชรอง M6                    & OD 8$\times$2\,mm & 4 \\
+บูชรอง M5                    & OD 10$\times$25\,mm & 8 \\
+Key (ลิ่ม)                   & ขนาด 5$\times$5$\times$8\,mm & 1 \\
+Proximity Sensor             & ขนาด $\varnothing$12\,mm & 1 \\
+สกรูและน็อตต่างๆ             & สกรู M3, M5, M6 และน็อตกันคลาย & 33 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
+% -----------------------------------------------------------------------
+% รูปที่ 5: ภาพรวมของส่วนแขนกลและข้อต่อ ในมุม Isometric
+% ชื่อไฟล์แนะนำ: fig_arm_iso.png หรือ .jpg
+% เนื้อหา: ภาพส่วนแขนกลและมอเตอร์ที่ประกอบเสร็จแล้วมุม Isometric
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_arm_iso}
+    \caption{ภาพรวมของส่วนแขนกลและข้อต่อหลังการประกอบ มุม Isometric}
+    \label{fig:arm_iso}
+\end{figure}
+
+% -----------------------------------------------------------------------
+% รูปที่ 6: Exploded View ของส่วนแขนกลและข้อต่อในมุม Side view และ Isometric
+% ชื่อไฟล์แนะนำ: fig_arm_exploded.png หรือ .jpg
+% เนื้อหา: ภาพแตกชิ้นส่วนของแขนกล แสดงการวางตำแหน่งบูชรองและมอเตอร์
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_arm_exploded}
+    \caption{ภาพแตกชิ้นส่วน (Exploded View) ของส่วนแขนกลและข้อต่อ}
+    \label{fig:arm_exploded}
+\end{figure}
+
 ขั้นตอนการประกอบส่วนแขนกล:
 \begin{enumerate}
-    \item ประกบแผ่นแขนกลบน-ล่างเข้ากับเหล็กกล่อง Galvanized
-          พร้อมบูชรองรักษาระยะ
-    \item ติดตั้งมอเตอร์และสวม Pulley 24 ฟัน เข้ากับเพลามอเตอร์
-    \item สอด Stepped Shaft พร้อม Key ที่จุดหมุนหลัก
-          และติดตั้ง Shaft Support
-    \item ติดตั้ง Idler และ Proximity Sensor
-    \item ขันน็อตทุกจุดและตรวจสอบการเคลื่อนที่
+    \item \textbf{ประกอบโครงแขน:} นำแผ่นชิ้นส่วนแขนกลบนและล่าง มาประกบเข้ากับเหล็กกล่อง Galvanized โดยใช้บูชรอง (M5 OD $10\times25$\,mm) เพื่อรักษาระยะห่าง และใช้บูชรอง (M6 OD $8\times2$\,mm) อุดพื้นที่ว่างบริเวณด้านบนเหล็กกล่อง จากนั้นร้อยสกรู M5 แล้วขันล็อกด้วยน็อตให้แน่น
+    \item \textbf{ติดตั้งระบบขับเคลื่อน:} ติดตั้งมอเตอร์เข้ากับแผ่นแขนกล จากนั้นสวม Pulley 20 ฟัน เข้ากับเพลามอเตอร์
+    \item \textbf{ติดตั้งแกนหมุนหลัก:} สอด Stepped Shaft เข้ากับจุดหมุนหลักของแขน โดยใส่ Key (ลิ่ม $5\times5\times8$\,mm) เพื่อป้องกันการหมุนฟรีของเพลา จากนั้นติดตั้ง Shaft Support เพื่อประคองแกนเพลาให้มั่นคง
+    \item \textbf{ติดตั้งอุปกรณ์เสริม:} ติดตั้งลูกกลิ้งประคองสายพาน (Idler) ด้วยบูชรองและสกรูที่กำหนด พร้อมทั้งติดตั้ง Proximity Sensor สำหรับใช้เป็นเซนเซอร์อ้างอิงตำแหน่ง (Homing Limit)
+    \item \textbf{ตรวจสอบ:} ตรวจเช็คการประกอบโดยขันน็อตทุกจุดให้แน่นตามค่าแรงบิด (Torque) ที่เหมาะสม และตรวจสอบความราบรื่นในการเคลื่อนที่ของข้อต่อ
 \end{enumerate}
 
 \subsubsection{ชุดเอ็นโค้ดเดอร์ (Encoder Sub-assembly)}
+
+ชุดเอ็นโค้ดเดอร์ทำหน้าที่วัดตำแหน่งเชิงมุมของข้อต่อหลัก เพื่อส่งกลับไปยังระบบควบคุม รายการชิ้นส่วนแสดงใน\cref{tab:encoder_parts}
 
 \begin{table}[H]
 \centering
@@ -128,64 +180,92 @@ Proximity Sensor             & $\varnothing$12\,mm & 1 \\
 \toprule
 ชิ้นส่วน & รายละเอียด & จำนวน \\
 \midrule
-AMT Mounting          & AISI 316 & 1 \\
-Encoder AMT-103       & 2048 PPR & 1 \\
-ชิ้นส่วนประกบ (บน/ล่าง) & 3D Print & อย่างละ 1 \\
 บูชรอง M3             & OD 5.5$\times$20\,mm & 4 \\
-สกรู M2/M3/M5         & ตามกำหนด & 16 \\
+AMT Mounting          & ทำจาก AISI 316 & 1 \\
+Encoder               & รุ่น AMT 103 & 1 \\
+ชิ้นส่วนประกบ (บน/ล่าง) & ทำจาก 3D Print & อย่างละ 1 \\
+สกรูและน็อต           & M2 ยาว 4\,mm, M3 ยาว 30\,mm, & 16 \\
+                      & M5 ยาว 25\,mm พร้อมน็อต & \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{การประกอบรวมขั้นสุดท้าย}
-\label{subsec:final_assembly}
+% -----------------------------------------------------------------------
+% รูปที่ 7: ภาพรวมของ ส่วน Encode ในมุม Isometric
+% ชื่อไฟล์แนะนำ: fig_encoder_iso.png หรือ .jpg
+% เนื้อหา: ภาพประกอบสำเร็จของชุด Encoder พร้อมชิ้นส่วน 3D print หุ้ม
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.60\textwidth]{fig_encoder_iso}
+    \caption{ภาพรวมของชุดเอ็นโค้ดเดอร์ มุม Isometric}
+    \label{fig:encoder_iso}
+\end{figure}
 
+% -----------------------------------------------------------------------
+% รูปที่ 8: Exploded View ของ ส่วน Encode side view และ Isometric
+% ชื่อไฟล์แนะนำ: fig_encoder_exploded.png หรือ .jpg
+% เนื้อหา: ภาพแตกชิ้นส่วนแสดงการประกบแผ่น 3D Print เข้ากับเซนเซอร์
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.80\textwidth]{fig_encoder_exploded}
+    \caption{ภาพแตกชิ้นส่วน (Exploded View) ของชุดเอ็นโค้ดเดอร์}
+    \label{fig:encoder_exploded}
+\end{figure}
+
+ขั้นตอนการประกอบชุดเอ็นโค้ดเดอร์:
 \begin{enumerate}
-    \item ติดตั้งชุดเอ็นโค้ดเดอร์เข้ากับฐาน
-    \item คล้องสายพาน HTD5M เตรียมไว้
-    \item สอดเพลาแขนกลลงในรูร้อยแกนกลางของฐาน
-    \item ตั้งค่า Bearing Preload โดยขันน็อตเพลา
-          เพื่อกดทับ Tapered Roller Bearing (ลดระยะคลอน)
-    \item ต่อเพลาเชื่อมต่อ Field Encoder ด้วย Shaft Coupling
-    \item ติดตั้ง Gripper ที่ปลายแขน ยึดด้วย Lock Nut 3 ตัว
+    \item \textbf{การติดตั้งเซนเซอร์:} นำ Encoder รุ่น AMT 103 ติดตั้งลงบนแผ่นยึด AMT Mounting โดยใช้สกรู M2 ยาว 4\,mm ขันยึดให้เข้าตำแหน่ง แล้วขันล็อกด้วยน็อตตัวเมียให้แน่น
+    \item \textbf{การประกอบชิ้นส่วนรองรับ (Bottom Enclosure):} นำชิ้นส่วนประกบแบบ 3D Print (ด้านล่าง) มาวางรองรับตัวเอ็นโค้ดเดอร์ สอดสกรู M5 เข้าที่รูน็อตทั้ง 4 จุดเตรียมไว้
+    \item \textbf{การปิดฝาครอบ (Top Enclosure):} นำชิ้นส่วนประกบ 3D Print (ด้านบน) มาครอบปิดทับ สอดสกรู M5 ผ่านรูร้อยของชิ้นส่วนประกบทั้งสองฝั่ง ขันล็อกด้วยน็อตตัวเมียด้านล่างให้แน่นหนา เพื่อป้องกันเซนเซอร์เคลื่อนหลุด
+    \item \textbf{การติดตั้งเข้ากับส่วนฐาน (Base Mounting):} นำชุดเอ็นโค้ดเดอร์เตรียมติดตั้งเข้ากับฐาน ใส่บูชรอง M3 เข้ารูน็อตทั้ง 4 จุดเพื่อรักษาระยะช่องว่าง (Clearance) ระหว่างชุดเอ็นโค้ดเดอร์กับฐาน ใช้สกรู M3 ยาว 25\,mm สอดผ่านรูและบูชรองเพื่อยึดเข้ากับส่วนฐาน
 \end{enumerate}
 
-\subsection{ปัญหาที่พบระหว่างการประกอบ}
+\subsection{การประกอบรวมขั้นสุดท้าย (Final Assembly Process)}
+\label{subsec:final_assembly}
+
+หลังจากประกอบชิ้นส่วนย่อยเสร็จสิ้น ดำเนินการประกอบรวมเป็นหุ่นยนต์เต็มรูปแบบตามลำดับดังนี้:
+
+\begin{enumerate}
+    \item \textbf{การติดตั้งเอ็นโค้ดเดอร์เข้ากับฐาน:} นำชุดเอ็นโค้ดเดอร์ไปประกอบเข้ากับส่วนฐาน ขันน็อตยึดเข้ากับรูต๊าปเกลียวบนฐานให้แน่นหนา
+    \item \textbf{การใส่สายพาน:} นำชุดฐานที่ยึดเอ็นโค้ดเดอร์แล้ว มาทำการคล้องสายพาน (Belt) เตรียมไว้สำหรับการส่งกำลัง
+    \item \textbf{การประกอบแขนกลและมอเตอร์:} นำส่วนแขนกลและมอเตอร์ประกอบเข้ากับฐาน โดยสอดเพลาของส่วนแขนกลลงในรูร้อยแกนกลางของส่วนฐาน
+    \item \textbf{การตั้งค่าพรีโหลดตลับลูกปืน (Bearing Preload):} จัดวางให้ส่วนแขนกลและมอเตอร์กดทับลงบนตลับลูกปืนเม็ดเรียวของส่วนฐาน ขันน็อตที่เพลาบริเวณด้านบนสุดและบริเวณก่อนเข้าชุดเอ็นโค้ดเดอร์ เพื่อสร้างแรงดึงล่วงหน้า (Preload) ซึ่งจะช่วยลดระยะคลอน (Backlash) ของกลไกได้อย่างมีนัยสำคัญ
+    \item \textbf{การเชื่อมต่อเอ็นโค้ดเดอร์สนาม:} นำเพลาเชื่อมต่อมาต่อเข้ากับเพลาบริเวณด้านบนสุดของหุ่นยนต์ ใช้คัปปลิ้ง (Rigid/Flexible Shaft Coupling) ยึดเพื่อให้สามารถอ่านค่าตำแหน่งการหมุนของเพลาได้อย่างแม่นยำ
+    \item \textbf{การติดตั้งชุดมือจับ (Gripper):} นำชุดมือจับประกอบเข้ากับปลายแขนของหุ่นยนต์ ยึดด้วยน็อต 3 ตัว และขันล็อกให้แน่นหนาด้วยน็อตกันคลาย (Lock Nut)
+\end{enumerate}
+
+% -----------------------------------------------------------------------
+% รูปที่ 9: ภาพรวมของหุ่นที่เพิ่ม past 3D print ที่มุม ในมุม Isometric
+% ชื่อไฟล์แนะนำ: fig_final_assembly_3d_corners.png หรือ .jpg
+% เนื้อหา: ภาพหุ่นยนต์ที่ประกอบเสร็จสมบูรณ์ มีชิ้นส่วน 3D Print สีแดงที่มุมฐาน
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_cad_assembly}
+    \caption{ภาพประกอบรวมขั้นสุดท้ายของหุ่นยนต์ พร้อมชิ้นส่วน 3D Print สำหรับจัดระเบียบสายไฟ}
+    \label{fig:final_assembly_3d_corners}
+\end{figure}
+
+\subsection{ปัญหาที่พบระหว่างการประกอบและการแก้ไข}
 \label{subsec:assembly_issues}
 
 \begin{itemize}
-  \item \textbf{รู Proximity Sensor ขนาดไม่ตรง:}
-        รูออกแบบ $\varnothing$8\,mm แต่ Sensor จริง $\varnothing$12\,mm
-        แก้ไขโดยเจาะขยายรูเพิ่มใน Lab
-
-  \item \textbf{รู Driver Pulley และ Arm เบี้ยว:}
-        ชิ้นส่วนที่ส่งผลิตภายนอกมีรูไม่ตรงแนวศูนย์
-        เนื่องจาก Setup งานไม่ตรงกับแบบ
-        แก้ไขโดยนำกลับไปปรับแต่งเพิ่มเติม
-
-  \item \textbf{แผ่นรอง Pulley ไม่ได้ปาดผิว:}
-        ผู้ผลิตไม่ได้ปาดผิวและร่อง Aluminium Profile
-        ตามแบบที่กำหนด ดำเนินการแก้ไขเองใน Lab
+  \item \textbf{รู Proximity Sensor ขนาดไม่ตรง:} รูออกแบบไว้ $\varnothing$8\,mm แต่ Sensor จริงมีขนาด $\varnothing$12\,mm แก้ไขปัญหาเฉพาะหน้าโดยการเจาะขยายรูเพิ่มในห้องปฏิบัติการ
+  \item \textbf{รู Driver Pulley และ Arm เบี้ยว:} ชิ้นส่วนที่ส่งผลิตภายนอกมีรูไม่ตรงแนวศูนย์กลาง เนื่องจากผู้รับเหมา Setup งานไม่ตรงกับแบบ Drawing แก้ไขโดยนำชิ้นงานกลับไปปรับแต่งเพิ่มเติมด้วยตนเอง
+  \item \textbf{แผ่นรอง Pulley ไม่ได้ปาดผิว:} ผู้ผลิตไม่ได้ปาดผิวและร่องของ Aluminium Profile ตามแบบที่กำหนด ดำเนินการแก้ไขเองในห้องปฏิบัติการเพื่อให้ประกอบชิ้นส่วนเข้ากันได้พอดี
 \end{itemize}
-
-% -----------------------------------------------------------------------
-% รูปที่: CAD Assembly
-% ชื่อไฟล์แนะนำ: fig_cad_assembly.png
-% -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.85\textwidth]{fig_cad_assembly}
-%     \caption{CAD Assembly ของระบบเชิงกลแสดงชิ้นส่วนหลักทั้งหมด}
-%     \label{fig:cad_assembly}
-% \end{figure}
 
 % ============================================================================
 \section{การประกอบตู้ควบคุมและการเดินสายไฟ}
 \label{sec:elec_assembly}
 % ============================================================================
 
-\subsection{Bill of Materials ของตู้ควบคุม}
+\subsection{รายการอุปกรณ์หลัก (Bill of Materials)}
 \label{subsec:bom}
+
+การออกแบบตู้ควบคุม (Control Cabinet) มุ่งเน้นไปที่การแยกส่วนระหว่างวงจรควบคุมกำลัง (High Power Side) และวงจรลอจิก (Logic Side) เพื่อป้องกันสัญญาณรบกวน (Noise) และความเสียหายที่อาจเกิดขึ้นกับไมโครคอนโทรลเลอร์ รายการอุปกรณ์หลักที่ใช้ในการประกอบแสดงใน\cref{tab:bom}
 
 \begin{table}[H]
   \centering
@@ -195,7 +275,7 @@ Encoder AMT-103       & 2048 PPR & 1 \\
     \toprule
     Reference & อุปกรณ์ & จำนวน & หมายเหตุ \\
     \midrule
-    U1A  & STM32G474RE Nucleo Board  & 1 & Main Controller \\
+    U1A  & STM32G474RE Nucleo Board   & 1 & Main Controller \\
     U2   & ESP32-DEVKIT-V1            & 1 & Joystick Receiver \\
     --   & Cytron MD10C Motor Driver  & 1 & 24V/10A \\
     CB1  & Circuit Breaker 10A        & 1 & AC Input \\
@@ -207,318 +287,441 @@ Encoder AMT-103       & 2048 PPR & 1 \\
     --   & Optocoupler Module 8-ch    & 1 & Signal Isolation \\
     --   & Relay Module 4-ch          & 1 & Output Control \\
     --   & Emergency Stop Button      & 1 & NC Contact \\
-    --   & Pilot Lamp Blue (Power)    & 1 & Power Status \\
-    --   & Pilot Lamp Red (Emergency) & 1 & Fault Status \\
-    --   & Pilot Lamp Green (Ready)   & 1 & Ready Status \\
+    --   & Pilot Lamp (Blue/Red/Green)& 3 & Power/Fault/Ready \\
     --   & Reset Button               & 1 & NC Contact \\
     --   & Mode Selector Switch       & 1 & Manual/Auto \\
-    --   & Fuse (Motor Circuit)       & 1 & Short Circuit \\
+    --   & Fuse (Motor Circuit)       & 1 & Short Circuit Protection \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsection{แนวทางการเดินสายไฟ}
+\subsection{สถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณ (Power \& Signal Architecture)}
+\label{subsec:power_arch}
+
+ระบบไฟฟ้าภายในตู้ถูกออกแบบให้มีการแยกวงจรอย่างชัดเจน (Galvanic Isolation) ทั้งในระดับของแหล่งจ่ายไฟและระดับของสัญญาณสื่อสาร ดังแสดงในแผนภาพ\cref{fig:block_diagram_wiring}
+
+% \begin{figure}[H]
+% \centering
+% \begin{tikzpicture}[
+%     block/.style={draw, rectangle, minimum height=1cm, minimum width=2.5cm, align=center, font=\small},
+%     node distance=1.5cm and 1cm,
+%     >=Stealth
+% ]
+%     % Power Inputs
+%     \node[block] (ac) {220VAC Mains};
+%     \node[block, right=of ac] (cb1) {CB1 (10A)};
+    
+%     % PSUs
+%     \node[block, right=of cb1, yshift=1cm] (psu24) {PSU 24V};
+%     \node[block, right=of cb1, yshift=-1cm] (psu5) {PSU 5V};
+    
+%     % Breakers & Safety
+%     \node[block, right=of psu24] (cb2) {CB2 (5A)};
+%     \node[block, right=of cb2] (contactor) {Contactor\\(E-Stop)};
+%     \node[block, right=of psu5] (cb3) {CB3 (3A)};
+    
+%     % Controllers & Drivers
+%     \node[block, right=of cb3] (stm32) {STM32\\Nucleo};
+%     \node[block, right=of contactor] (md10c) {MD10C\\Driver};
+%     \node[block, right=of stm32] (opto) {Optocoupler};
+%     \node[block, right=of md10c] (motor) {DC Motor};
+
+%     % Power Routing
+%     \draw[->, thick] (ac) -- (cb1);
+%     \draw[->, thick] (cb1) |- (psu24);
+%     \draw[->, thick] (cb1) |- (psu5);
+    
+%     \draw[->, thick, red] (psu24) -- (cb2);
+%     \draw[->, thick, red] (cb2) -- (contactor);
+%     \draw[->, thick, red] (contactor) -- (md10c) node[midway, above, font=\scriptsize] {24V Power};
+%     \draw[->, thick, red] (md10c) -- (motor);
+
+%     \draw[->, thick, blue] (psu5) -- (cb3);
+%     \draw[->, thick, blue] (cb3) -- (stm32) node[midway, above, font=\scriptsize] {5V Logic};
+    
+%     % Signal Routing
+%     \draw[->, dashed] (stm32) -- (opto) node[midway, above, font=\scriptsize] {PWM/DIR};
+%     \draw[->, dashed] (opto) -- (md10c) node[midway, right, font=\scriptsize] {Isolated};
+    
+%     % E-Stop line
+%     \draw[->, dotted, thick] (stm32.north) |- (contactor.south) node[pos=0.7, right, font=\scriptsize] {Interlock Signal};
+
+% \end{tikzpicture}
+% \caption{Block Diagram แสดงสถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณภายในตู้ควบคุม}
+% \label{fig:block_diagram_wiring}
+% \end{figure}
+
+\subsection{สถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณ (Power \& Signal Architecture)}
+\label{subsec:power_arch}
+
+ระบบไฟฟ้าภายในตู้ถูกออกแบบให้มีการแยกวงจรอย่างชัดเจน (Galvanic Isolation) ทั้งในระดับของแหล่งจ่ายไฟและระดับของสัญญาณสื่อสาร ดังแสดงในแผนภาพ\cref{fig:power_architecture}
+
+% -----------------------------------------------------------------------
+% รูปที่ N: Block Diagram แสดงสถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณภายในตู้ควบคุม
+% ชื่อไฟล์แนะนำ: fig_power_architecture.png หรือ .pdf
+% เนื้อหา: แผนภาพแสดงสถาปัตยกรรมการจ่ายไฟ การแยกกราวด์ และ E-Stop Interlock (สร้างจาก Mermaid)
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig_power_architecture}
+    \caption{Block Diagram แสดงสถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณภายในตู้ควบคุม}
+    \label{fig:power_architecture}
+\end{figure}
+
+หลักการทำงานที่สำคัญของสถาปัตยกรรมนี้ประกอบด้วย:
+\begin{enumerate}
+    \item \textbf{วงจรความปลอดภัยทางฮาร์ดแวร์ (Hardware Interlock):} ปุ่ม Emergency Stop ทำงานร่วมกับ Magnetic Contactor แบบ N.C. (Normally Closed) เมื่อเกิดเหตุฉุกเฉิน ไฟ 24V ที่จ่ายไปยัง MD10C จะถูกตัดวงจรทางกายภาพทันที โดยที่บอร์ด STM32 (5V) ยังคงทำงานได้เพื่อส่งสัญญาณแจ้งเตือน Fault ไปยังระบบเครือข่าย
+    \item \textbf{การแยกกราวด์ (Ground Isolation):} สัญญาณ PWM และ Direction จาก STM32 จะต้องผ่าน Optocoupler Module แบบ 8-channel ก่อนเข้าสู่ MD10C เพื่อแยก Logic Ground ออกจาก Power Ground ป้องกันปัญหา Ground Loop และลดผลกระทบจาก Back EMF ที่เกิดจากการเบรกของมอเตอร์
+\end{enumerate}
+
+หลักการทำงานที่สำคัญของสถาปัตยกรรมนี้ประกอบด้วย:
+\begin{enumerate}
+    \item \textbf{วงจรความปลอดภัยทางฮาร์ดแวร์ (Hardware Interlock):} ปุ่ม Emergency Stop ทำงานร่วมกับ Magnetic Contactor แบบ N.C. (Normally Closed) เมื่อเกิดเหตุฉุกเฉิน ไฟ 24V ที่จ่ายไปยัง MD10C จะถูกตัดวงจรทางกายภาพทันที โดยที่บอร์ด STM32 (5V) ยังคงทำงานได้เพื่อส่งสัญญาณแจ้งเตือน Fault ไปยังระบบเครือข่าย
+    \item \textbf{การแยกกราวด์ (Ground Isolation):} สัญญาณ PWM และ Direction จาก STM32 จะต้องผ่าน Optocoupler Module แบบ 8-channel ก่อนเข้าสู่ MD10C เพื่อแยก Logic Ground ออกจาก Power Ground ป้องกันปัญหา Ground Loop และลดผลกระทบจาก Back EMF ที่เกิดจากการเบรกของมอเตอร์
+\end{enumerate}
+
+\subsection{แนวทางปฏิบัติในการเดินสายไฟ (Cable Management \& Wiring)}
 \label{subsec:cable_management}
 
-การเดินสายแบ่งออกเป็น 2 วงจรหลักที่แยก Physical กันอย่างชัดเจน
-สัญญาณดิจิทัลทุกเส้นระหว่าง High Voltage Side และ Logic Side
-ผ่าน Optocoupler Module เพื่อแยก Ground และป้องกัน Noise
+การเดินสายภายในและภายนอกตู้ควบคุมใช้มาตรฐานการเดินสายอุตสาหกรรม โดยมีข้อกำหนดดังต่อไปนี้:
 
 \begin{itemize}
-  \item \textbf{Service Loop:} บริเวณจุดหมุนของแขนกล
-        เผื่อความยาวสายเพื่อให้โค้งงอได้อิสระ
-        ป้องกันสายดึงรั้งหรือขาดเมื่อหมุนถึงมุมสูงสุด
-
-  \item \textbf{Bending Radius:} ติดตั้งชิ้นส่วน 3D Print
-        ที่มุมของหุ่นยนต์เพื่อบังคับให้สายโค้งงอในรัศมีที่เพียงพอ
-        ป้องกันการหักมุมแคบที่ทำลายสายสัญญาณภายใน
+  \item \textbf{การเลือกขนาดสายไฟ (Wire Sizing):} 
+        วงจรขับมอเตอร์ (24V Bus) ใช้สายไฟขนาด 16 AWG เพื่อรองรับกระแสสูงสุด (Peak Current) ได้ถึง 10A โดยไม่เกิด Voltage Drop ที่มีนัยสำคัญ ส่วนวงจรลอจิกและเซนเซอร์ (5V Bus) ใช้สายไฟขนาด 22-24 AWG 
+  \item \textbf{การเผื่อระยะสายบริเวณจุดหมุน (Service Loop):} 
+        บริเวณข้อต่อของแขนกล (Joints) มีการเผื่อความยาวของสายไฟ (Slack) ในรูปแบบของ U-loop เพื่อให้สายไฟสามารถโค้งงอได้อย่างอิสระ ป้องกันแรงดึงรั้ง (Tension) ที่จะทำให้ทองแดงภายในขาดล้า (Fatigue) เมื่อหุ่นยนต์เคลื่อนที่ไปจนถึงมุมสูงสุด (Maximum Reach)
+  \item \textbf{รัศมีการโค้งงอ (Bending Radius) และการนำสาย:} 
+        ติดตั้งชิ้นส่วน 3D Print บริเวณขอบและมุมของโครงสร้างหุ่นยนต์ เพื่อบังคับให้สายโค้งงอด้วยรัศมีที่มากกว่า 4 เท่าของเส้นผ่านศูนย์กลางสายไฟ ป้องกันการหักมุมแคบซึ่งจะทำลายฉนวนหุ้มสายสัญญาณภายใน
+  \item \textbf{การแยกรางสายไฟ (Trunking Separation):}
+        สายสัญญาณจาก Encoder (ที่มีความไวต่อ Noise สูง) จะถูกเดินแยกท่อหรือรางสายไฟออกจากสาย Power ของมอเตอร์อย่างเด็ดขาด เพื่อป้องกันคลื่นแม่เหล็กไฟฟ้า (EMI) เหนี่ยวนำเข้าสู่สายสัญญาณ
 \end{itemize}
 
 % -----------------------------------------------------------------------
-% รูปที่: ผลการเดินสายภายในตู้ควบคุม
-% ชื่อไฟล์แนะนำ: fig_cabinet_assembled.png
+% รูปที่ N: ผลการเดินสายภายในตู้ควบคุมไฟฟ้า
+% ชื่อไฟล์แนะนำ: fig_cabinet_assembled.png หรือ .jpg
+% เนื้อหา: ภาพถ่ายภายในตู้คอนโทรล แสดงการจัดเรียงสายไฟในรางพลาสติก 
+%          ตำแหน่งการวาง PSU, STM32, Optocoupler และ MD10C
 % -----------------------------------------------------------------------
 % \begin{figure}[H]
 %     \centering
 %     \includegraphics[width=0.78\textwidth]{fig_cabinet_assembled}
-%     \caption{ผลการเดินสายภายในตู้ควบคุมไฟฟ้า}
+%     \caption{การจัดเรียงอุปกรณ์และผลการเดินสายไฟภายในตู้ควบคุม}
 %     \label{fig:cabinet_assembled}
 % \end{figure}
 
+% -----------------------------------------------------------------------
+% รูปที่ N+1: แผนผังการต่อสายไฟ (Wiring Diagram)
+% ชื่อไฟล์แนะนำ: fig_wiring_schematic.png หรือ .jpg
+% เนื้อหา: Schematic แบบละเอียด แสดง Pin mapping จากบอร์ด STM32 ไปยังอุปกรณ์ต่างๆ
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.95\textwidth]{fig_wiring_schematic}
+%     \caption{แผนผังการต่อสายไฟ (Wiring Diagram) ของระบบควบคุม}
+%     \label{fig:wiring_schematic}
+% \end{figure}
 % ============================================================================
 \section{การพัฒนา Firmware}
 \label{sec:firmware}
 % ============================================================================
 
-\subsection{โครงสร้างโมดูลและ Task Timing}
-\label{subsec:firmware_modules}
+\subsection{ภาพรวมสถาปัตยกรรมซอฟต์แวร์ (Software Architecture)}
+\label{subsec:firmware_arch}
 
-Firmware พัฒนาบน STM32CubeIDE ใช้ HAL Library
-แบ่งเป็น 4 โมดูลหลัก ดังแสดงใน\cref{tab:firmware_modules}
+Firmware สำหรับควบคุมหุ่นยนต์พัฒนาบนไมโครคอนโทรลเลอร์ STM32G474RE (Cortex-M4, 170\,MHz) ผ่านแพลตฟอร์ม STM32CubeIDE สถาปัตยกรรมซอฟต์แวร์ถูกออกแบบในลักษณะโมดูล (Modular Design) เพื่อแยกระบบควบคุมการเคลื่อนที่ (Motion Control) ออกจากระบบสื่อสาร (Communications) และระบบความปลอดภัย (Safety Stack) ข้อมูลสถานะทั้งหมดของระบบถูกจัดเก็บในโครงสร้างตัวแปรกลาง (\texttt{g\_robot}) เพื่อให้ทุกโมดูลสามารถอ้างอิงข้อมูลชุดเดียวกันได้ (Single System View)
+
+\subsection{ภาพรวมสถาปัตยกรรมซอฟต์แวร์ (Software Architecture)}
+\label{subsec:firmware_arch}
+
+Firmware สำหรับควบคุมหุ่นยนต์พัฒนาบนไมโครคอนโทรลเลอร์ STM32G474RE ผ่านแพลตฟอร์ม STM32CubeIDE สถาปัตยกรรมซอฟต์แวร์ถูกออกแบบด้วยแนวคิด Modular Programming และ Separation of Concerns โดยแยกอัลกอริทึมทางคณิตศาสตร์และการควบคุมออกเป็นไลบรารีย่อย (C-Libraries) อย่างชัดเจน 
+
+การออกแบบลักษณะนี้ช่วยลดความพึ่งพากันของโค้ด (Loose Coupling) ทำให้สามารถทำการทดสอบระดับหน่วย (Unit Test) แยกเฉพาะโมดูลได้ง่ายขึ้น และเพิ่มความสามารถในการนำโค้ดกลับมาใช้ซ้ำ (Reusability) ข้อมูลสถานะทั้งหมดของระบบถูกจัดเก็บในโครงสร้างตัวแปรกลาง (\texttt{g\_robot}) เพื่อให้ทุกโมดูลสามารถอ้างอิงข้อมูลชุดเดียวกันได้ โครงสร้างไลบรารีและโมดูลหลักแสดงใน\cref{tab:firmware_modules}
 
 \begin{table}[H]
   \centering
-  \caption{โมดูลหลักใน STM32 Firmware}
+  \caption{โครงสร้างโมดูลและไลบรารีใน STM32 Firmware}
   \label{tab:firmware_modules}
-  \begin{tabular}{lp{6.5cm}l}
+  \small
+  \begin{tabular}{lp{6.2cm}l}
     \toprule
-    โมดูล & หน้าที่ & ไฟล์ \\
+    โมดูล / ไลบรารี & หน้าที่การทำงาน & ไฟล์อ้างอิง \\
     \midrule
-    \texttt{motor\_controller} &
-      Encoder อ่านตำแหน่ง/ความเร็ว,
-      Cascade PID (Position + Velocity),
-      S-Curve Trajectory Generator,
-      Kalman Filter (Steady-State),
-      ZVD Input Shaper (3-Impulse, Circular Buffer),
-      Joystick Command Parser,
-      Safety Monitor (Stall, E-Stop) &
-      \texttt{motor\_controller.c} \\
-    \addlinespace
-    \texttt{modbus\_bridge} &
-      Modbus Register Mapping (128 registers),
-      Command Dispatch จาก Master,
-      Status Update ไปยัง Register Frame &
-      \texttt{modbus\_bridge.c} \\
-    \addlinespace
-    \texttt{modbus\_rtu} &
-      Modbus RTU Protocol Engine,
-      CRC16 Verification,
-      Frame Parser (FC03/FC06),
-      FSM (IDLE/RECEPTION/PROCESSING/EMISSION) &
-      \texttt{modbus\_rtu.c} \\
-    \addlinespace
-    \texttt{main} &
-      Peripheral Init, Callback Registration,
-      Main Loop (Modbus Process,
-      Register Update, MATLAB Data Send) &
-      \texttt{main.c} \\
+    \textbf{Core Application} & & \\
+    \texttt{app\_main} & Application FSM, กระบวนการ Homing, พฤติกรรมภาพรวม & \texttt{app\_main.c} \\
+    \texttt{motor\_controller} & จัดการ Task Timing (1\,kHz / 100\,Hz), Safety Stack & \texttt{motor\_controller.c} \\
+    \texttt{gripper\_seq} & ลำดับการทำงานและ FSM ของชุดหัวจับ (Pick \& Place) & \texttt{gripper.c} \\
+    \midrule
+    \textbf{Math \& Control Lib} & & \\
+    \texttt{lib\_scurve} & S-Curve Trajectory Generator (จำกัดความเร็ว, ความเร่ง, Jerk) & \texttt{scurve.c} \\
+    \texttt{lib\_zvd} & ZVD Input Shaper ด้วยโครงสร้าง Circular Buffer & \texttt{zvd.c} \\
+    \texttt{lib\_kalman} & Steady-State Kalman Filter 4 สถานะ & \texttt{kalman.c} \\
+    \texttt{lib\_pid} & Cascade PID Control พร้อมอัลกอริทึม Anti-windup & \texttt{pid.c} \\
+    \midrule
+    \textbf{Comms \& I/O} & & \\
+    \texttt{modbus\_bridge} & Modbus RTU Protocol (Slave 0x15), Mapping Registers & \texttt{modbus\_bridge.c} \\
+    \texttt{canbus\_node} & FDCAN Gripper Node, Relay/Sensor Bridge & \texttt{canbus.c} \\
+    \texttt{joystick} & ถอดรหัสคำสั่งจาก ESP32 Gamepad (USART3) & \texttt{joystick.c} \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsubsection{Execution Model และ Task Timing}
-\label{subsubsec:execution_model}
+\subsection{การจัดสรรเวลาทำงาน (Execution Model และ Task Timing)}
+\label{subsec:execution_model}
 
-TIM6 ตั้งค่าที่ \textbf{1\,kHz} (Prescaler = 169, Period = 169,
-ที่ System Clock 170\,MHz ได้ Period จริง $(169+1)(169+1)/170\,\text{MHz} = 1$\,ms)
-การแบ่ง Loop สองความถี่ทำผ่าน Software Counter ภายใน ISR เดียว:
+ระบบควบคุมใช้วิธีการจัดสรรเวลาแบบ Hard Real-Time โดยใช้ตัวตั้งเวลา TIM6 เป็นตัวกำหนด Base Rate ที่ 1\,kHz วงรอบการควบคุมถูกแบ่งออกเป็น 2 ความถี่ผ่าน Software Counter ภายใน Interrupt Service Routine (ISR) เดียวกัน เพื่อหลีกเลี่ยงปัญหาการสลับบริบท (Context Switching)
 
 \begin{itemize}
-  \item \textbf{ทุก Tick (1\,kHz):}
-        \texttt{MotorCtrl\_Tick1kHz()} รัน
-        อ่าน TIM3 Encoder $\rightarrow$ Kalman Predict+Update $\rightarrow$
-        Velocity Inner PID $\rightarrow$ \texttt{Motor\_SetPWM()}
-  \item \textbf{ทุก 10th Tick (100\,Hz):}
-        \texttt{HwIo\_Poll100Hz()} debounce สัญญาณ I/O\\
-        \texttt{MotorCtrl\_Tick100Hz()} รัน
-        S-Curve Integrator $\rightarrow$ ZVD Shaper $\rightarrow$
-        Position Outer PID $\rightarrow$ Velocity Setpoint สำหรับ Inner Loop
+  \item \textbf{ทุก 1\,ms (1\,kHz - Inner Loop):} 
+        ทำงานใน \texttt{MotorCtrl\_Tick1kHz()} เริ่มจากการอ่านค่าตำแหน่ง Encoder จาก TIM3 นำไปผ่าน Kalman Filter เพื่อประมาณค่าความเร็วและความเร่ง จากนั้นคำนวณ Velocity Inner PID และ Feedforward ตรวจสอบเงื่อนไขความปลอดภัย ก่อนส่งค่า PWM อัปเดตไปยัง TIM1 
+  \item \textbf{ทุก 10\,ms (100\,Hz - Outer Loop):} 
+        ทำงานใน \texttt{MotorCtrl\_Tick100Hz()} และ \texttt{HwIo\_Poll100Hz()} รับผิดชอบการกรองสัญญาณรบกวน (Debounce) ของเซนเซอร์ ประมวลผลสมการ S-Curve Trajectory และ ZVD Input Shaper เพื่อสร้าง Setpoint สำหรับ Position Outer PID
 \end{itemize}
 
-สถาปัตยกรรมนี้ทำให้ Velocity Loop สามารถรัน 10 ครั้งต่อ 1 Position Loop cycle
-ซึ่งรับประกัน Bandwidth Separation ที่เพียงพอโดยไม่ต้องใช้ Timer แยก
+นอกจากการประมวลผลใน ISR แล้ว ในส่วนของ \textbf{Main Loop Context} จะทำงานแบบปล่อยอิสระ (Free-running) ใช้เวลาประมาณ $20\,\mu\text{s}$ ต่อรอบ ทำหน้าที่ตรวจสอบ Application FSM, จัดการข้อมูล Modbus ใน Ring Buffer, อัปเดตข้อมูล CAN Bus และส่งสัญญาณ Heartbeat
+
+\subsection{สถานะการทำงานของระบบ (Application FSM)}
+\label{subsec:application_fsm}
+
+กระบวนการทำงานหลักของหุ่นยนต์ถูกควบคุมด้วย Finite State Machine (FSM) ซึ่งแบ่งออกเป็น 5 สถานะหลัก เพื่อความปลอดภัยและป้องกันการทำงานที่ผิดพลาด ดังแสดงใน\cref{fig:application_fsm}
+
+% -----------------------------------------------------------------------
+% รูปที่: แผนภาพ Application FSM ของ Firmware
+% ชื่อไฟล์แนะนำ: fig_fsm_diagram.png หรือ .pdf
+% เนื้อหา: แผนภาพแสดง State Transition: INIT -> HOMING -> IDLE -> RUNNING -> FAULT
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{fig_fsm_diagram}
+    \caption{แผนภาพสถานะการทำงาน (Application FSM) ของระบบควบคุม}
+    \label{fig:application_fsm}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{STATE\_INIT:} สถานะเริ่มต้นเมื่อเปิดเครื่อง เพื่อเตรียมความพร้อมของ Peripheral
+    \item \textbf{STATE\_HOMING:} สถานะค้นหาจุดอ้างอิงศูนย์ ระบบจะไม่ยอมรับคำสั่งเคลื่อนที่อื่น
+    \item \textbf{STATE\_IDLE:} สถานะพร้อมทำงาน รอรับคำสั่ง Jog, Point-to-Point หรือ Auto
+    \item \textbf{STATE\_RUNNING:} สถานะกำลังเคลื่อนที่ตามคำสั่ง หรือกำลังทำ Auto Sequence
+    \item \textbf{STATE\_FAULT:} สถานะขัดข้องเมื่อเกิดข้อผิดพลาดทางฮาร์ดแวร์หรือความปลอดภัย ระบบจะตัดกำลังมอเตอร์และรอการปลดล็อก (Reset)
+\end{itemize}
+
+\subsection{กระบวนการหาจุดอ้างอิงระดับความแม่นยำสูง (Two-Stage Homing Sequence)}
+\label{subsec:homing_sequence}
+
+เพื่อขจัดปัญหาความคลาดเคลื่อนของตำแหน่งที่เกิดจากความหน่วงของเซนเซอร์ (Sensor Latency) ระบบจึงใช้วิธีการหาจุดอ้างอิงแบบ 2 ขั้นตอน (Two-Stage Industrial Homing) โดยอาศัยหลักการหาจุดกึ่งกลาง (Midpoint) ของขอบสัญญาณ (Edge) ทั้งสองด้าน
+
+% -----------------------------------------------------------------------
+% รูปที่: กราฟความเร็วและสัญญาณเซนเซอร์ระหว่างทำ Homing
+% ชื่อไฟล์แนะนำ: fig_homing_sequence.png หรือ .pdf
+% เนื้อหา: กราฟแสดงช่วง FAST_SEARCH, BACKOFF, PREC_EDGE_A, FIND_EDGE_B และ GO_CENTER
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.90\textwidth]{fig_homing_sequence}
+%     \caption{ความเร็วและสัญญาณ Proximity Sensor ในกระบวนการ Two-Stage Homing}
+%     \label{fig:homing_sequence}
+% \end{figure}
+
+กระบวนการแบ่งเป็น 8 ขั้นตอนย่อยดังนี้:
+\begin{enumerate}
+    \item \textbf{FAST\_SEARCH:} หุ่นยนต์เคลื่อนที่กวาดเพื่อค้นหาพื้นที่ของ Proximity Sensor ด้วยความเร็วสูง (Coarse Search)
+    \item \textbf{BACKOFF:} เมื่อเจอขอบสัญญาณ ระบบจะถอยหลังออกด้วยระยะเผื่อ (Clearance Margin)
+    \item \textbf{PREC\_EDGE\_A:} เคลื่อนที่เข้าหาเซนเซอร์ด้วยความเร็วต่ำสม่ำเสมอ บันทึกตำแหน่งที่สัญญาณขอบขาขึ้น (Rising Edge) ปรากฏเป็นตำแหน่ง \textit{Edge A}
+    \item \textbf{PREC\_OVERSHOOT:} เคลื่อนที่ทะลุผ่านเซนเซอร์จนสัญญาณดับลง เพื่อป้องกันการอ่านขอบสัญญาณผิดพลาดซ้ำซ้อน
+    \item \textbf{FIND\_EDGE\_B:} เคลื่อนที่ถอยหลังกลับด้วยความเร็วต่ำสม่ำเสมอ บันทึกตำแหน่งที่สัญญาณขอบขาขึ้นปรากฏเป็นตำแหน่ง \textit{Edge B}
+    \item \textbf{GO\_CENTER \& SETTLE:} คำนวณจุดกึ่งกลาง $\frac{\text{Edge A} + \text{Edge B}}{2}$ แล้วสั่งให้หุ่นยนต์เคลื่อนที่ไปยังจุดนั้น ระบบจะหน่วงเวลา 1 วินาที และกำหนดให้ตำแหน่งปัจจุบันเป็น 0 (Zero) 
+\end{enumerate}
+วิธีการนี้รับประกันได้ว่าตำแหน่งศูนย์ทางกล (Mechanical Zero) จะไม่เอนเอียงไปตามทิศทางการเคลื่อนที่หรือความเร็วในการตรวจจับ
+
+\subsection{อัลกอริทึมควบคุมการเคลื่อนที่ (Motion Control Algorithms)}
+\label{subsec:motion_control}
+
+\subsubsection{S-Curve Trajectory และ ZVD Input Shaper}
+
+ระบบสร้างโพรไฟล์การเคลื่อนที่แบบ S-Curve เพื่อจำกัดความเร็วสูงสุด (7.30\,rad/s), ความเร่งสูงสุด (27.49\,rad/s$^2$) และค่า Jerk (1400\,rad/s$^3$) อย่างเคร่งครัด จากนั้นนำ Setpoint ที่ได้ไปผ่าน ZVD Input Shaper ที่ทำงานแบบ Circular Buffer เพื่อลดการสั่นทอนที่ความถี่ธรรมชาติ $f_n = 12.13$\,Hz ตาม\cref{eq:zvd_impl}
+
+\begin{equation}
+  r_{shaped}(t) = 0.2832\,r(t) + 0.4981\,r(t - t_2) + 0.2189\,r(t - t_3)
+  \label{eq:zvd_impl}
+\end{equation}
+
+โดยกำหนดให้ระยะหน่วง $t_2 = 4$\,steps และ $t_3 = 8$\,steps (ที่ความถี่ 100\,Hz)
+
+\subsubsection{Steady-State Kalman Filter}
+
+เนื่องจากการหาอนุพันธ์ของตำแหน่งจาก Encoder สร้างสัญญาณรบกวนความถี่สูง ระบบจึงใช้ Kalman Filter 4 สถานะ $\mathbf{x} = [\theta, \omega, \alpha, j]^\top$ ทำงานทุก 1\,ms เพื่อประมาณค่าความเร็วและความเร่ง ค่า Steady-State Gain ($\mathbf{K}_\infty$) ถูกคำนวณล่วงหน้าผ่านการแก้สมการ DARE (Discrete Algebraic Riccati Equation) บน MATLAB เพื่อลดภาระการคำนวณของไมโครคอนโทรลเลอร์
+
+\begin{equation}
+    \hat{\mathbf{x}}_{k|k} = \mathbf{A}_d\,\hat{\mathbf{x}}_{k-1} + \mathbf{B}_d\,u_{k-1} + \mathbf{K}_\infty(y_k - \mathbf{C}\hat{\mathbf{x}}_{k|k-1})
+    \label{eq:kalman_update}
+\end{equation}
+
+\subsubsection{Cascade PID (Discrete Tustin)}
+
+ระบบควบคุมแบบวงรอบซ้อน (Cascade PID) ใช้สมการแบบ Tustin (Bilinear Approximation) สำหรับ Velocity Inner Loop (1\,kHz) มีการประยุกต์ใช้ Anti-windup (Back-calculation) เพื่อป้องกัน Integral Windup เมื่อ PWM เข้าสู่ขอบเขตการอิ่มตัว $\pm 50$ 
+
+\begin{equation}
+  u_{vel}[k] = K_{p,v}\,e_v[k] + \text{integ}[k] + K_{d,v}\frac{e_v[k]-e_v[k-1]}{T_v}
+  \label{eq:pid_vel}
+\end{equation}
+\begin{equation}
+  \text{integ}[k] = \text{integ}[k-1] + K_{i,v}\,e_v[k]\,T_v + K_{t,aw}(u_{sat}[k] - u_{pre}[k])\,T_v
+  \label{eq:pid_antiwindup}
+\end{equation}
+ส่วน Position Outer Loop (100\,Hz) จะคำนวณ Setpoint เชิงความเร็วเพื่อป้อนให้กับ Inner Loop ค่า Gain ที่ใช้ใน Firmware แสดงใน\cref{tab:pid_gains}
 
 \begin{table}[H]
   \centering
-  \caption{ISR และ Task Timing ของ Firmware}
-  \label{tab:isr_timing}
-  \small
-  \begin{tabular}{llll}
-    \toprule
-    Timer/Peripheral & Period & หน้าที่ & Callback \\
-    \midrule
-    TIM6  & \textbf{1\,ms (1\,kHz)} &
-      Control Loop Base Rate &
-      \texttt{Timer\_PeriodElapsedCallback} \\
-    & \quad \textit{ทุก tick} & Velocity Inner PID + Kalman & \textit{(ใน TIM6 ISR)} \\
-    & \quad \textit{ทุก 10th tick} & Position Outer PID + ZVD & \textit{(ใน TIM6 ISR)} \\
-    TIM16 & 3\,ms &
-      Modbus T3.5 Timeout &
-      \texttt{Timer\_PeriodElapsedCallback} \\
-    TIM3  & -- (QEI) &
-      Quadrature Encoder Count &
-      Polling ใน TIM6 ISR \\
-    TIM1  & $f_{PWM} \approx 19.6$\,kHz &
-      Motor PWM Output (ARR=50) &
-      -- \\
-    LPUART1 & -- (UART RX IT) &
-      Modbus RTU (230400, 8N1) &
-      \texttt{Modbus\_RxCallback} \\
-    USART3  & -- (UART RX IT) &
-      Joystick Command (115200, 8N1) &
-      \texttt{Joystick\_RxCallback} \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\subsubsection{PID Gains ที่ใช้ใน Firmware จริง}
-\label{subsubsec:pid_gains_firmware}
-
-ค่า PID Gain ที่ระบุในตารางต่อไปนี้คือค่าที่วัดจาก Hardware โดยตรง
-(\texttt{params.h}) ซึ่งต่างจากค่าที่ได้จาก Root Locus Design (บทที่~3)
-เนื่องจาก Reduced-Order Model มีความแตกต่างจาก Plant จริง
-และต้องผ่านกระบวนการ Hardware Commissioning
-
-\begin{table}[H]
-  \centering
-  \caption{PID Gains ที่ใช้ใน Firmware จริง (Hardware-Identified)}
-  \label{tab:pid_gains_hw}
+  \caption{PID Gains และ Feedforward ที่ใช้งานจริงบนระบบฮาร์ดแวร์}
+  \label{tab:pid_gains}
   \begin{tabular}{llccc}
     \toprule
-    Loop & Gain & สัญลักษณ์ & ค่า (Hardware) & หน่วย \\
+    Loop & อัตราขยาย & สัญลักษณ์ & ค่า & หน่วย \\
     \midrule
-    \multirow{3}{*}{Velocity Inner}
+    \multirow{3}{*}{Velocity (1\,kHz)}
       & Proportional & $K_{p,vel}$ & 1.58  & PWM/(rad/s) \\
       & Integral     & $K_{i,vel}$ & 0.50  & PWM/rad \\
       & Derivative   & $K_{d,vel}$ & 0.00  & -- \\
     \midrule
-    \multirow{3}{*}{Position Outer}
+    \multirow{3}{*}{Position (100\,Hz)}
       & Proportional & $K_{p,pos}$ & 3.00  & (rad/s)/rad \\
       & Integral     & $K_{i,pos}$ & 0.02  & -- \\
       & Derivative   & $K_{d,pos}$ & 0.15  & -- \\
     \midrule
     \multirow{2}{*}{Feedforward}
       & Velocity FF  & $K_{vff}$   & 3.03  & PWM/(rad/s) \\
-      & Accel FF     & $K_{aff}$   & 0.10  & PWM/(rad/s²) \\
+      & Accel FF     & $K_{aff}$   & 0.10  & PWM/(rad/s$^2$) \\
     \bottomrule
-    \multicolumn{5}{l}{\small หมายเหตุ: ค่าเหล่านี้วัดจาก Hardware โดยตรง} \\
-    \multicolumn{5}{l}{\small ห้ามเปลี่ยนโดยไม่ผ่านกระบวนการ System Identification ใหม่} \\
   \end{tabular}
 \end{table}
 
-\subsection{การทำงานร่วมกันของโมดูล}
-\label{subsec:module_interaction}
+\subsection{ระบบความปลอดภัยทางซอฟต์แวร์ (Safety Stack)}
+\label{subsec:safety_stack}
 
-การทำงานแบ่งออกเป็น 2 Context ดังนี้
+เพื่อป้องกันความเสียหายต่อกลไกและมอเตอร์ Firmware มีการตรวจจับความผิดปกติ 4 ระดับและจะบังคับให้ FSM เปลี่ยนเป็น \texttt{STATE\_FAULT} ทันที:
+\begin{itemize}
+    \item \textbf{Encoder Disconnect Guard:} หากระบบจ่าย PWM เกินระดับที่กำหนด (PWM $> 5$) ต่อเนื่องเป็นเวลา 200\,ms แต่ตำแหน่ง Encoder ไม่มีการเปลี่ยนแปลง ระบบจะพิจารณาว่าสาย Encoder ขาดหรือขั้วหลุดหลวม
+    \item \textbf{Overcurrent Fuse:} อ่านกระแสจากเซนเซอร์ WCS1800 ผ่าน ADC (PA0) หากกระแสสูงกว่า 2.0\,A ต่อเนื่อง 100\,ms จะตัดการทำงาน (จำลองการทำงานของฟิวส์หน่วงเวลา)
+    \item \textbf{Tracking Error Guard:} ตรวจสอบความแตกต่างระหว่าง Position Setpoint และตำแหน่งจริง หากคลาดเคลื่อนเกิน 10 องศา ต่อเนื่อง 50\,ms ระบบจะถือว่าเกิดการติดขัดทางกล (Mechanical Jam)
+    \item \textbf{Boundary Limits:} จำกัดพื้นที่การทำงานผ่านซอฟต์แวร์ที่ระยะ 540 องศา เพื่อป้องกันปัญหาสายเคเบิลม้วนพันกัน (Cable Over-twist)
+\end{itemize}
 
-\noindent\textbf{Interrupt Context} (Priority สูง):
-\texttt{Modbus\_RxCallback} รับ Byte ทีละตัวจาก LPUART1,
-\texttt{Joystick\_RxCallback} รับ Command จาก USART3
-และเรียก \texttt{Motor\_ProcessCommand} ทันที
-และ TIM6 เรียก \texttt{Motor\_ControlLoop} ทุก 10\,ms
+\subsection{การสื่อสารผ่านโครงข่ายและ CAN Bus Failsafe}
+\label{subsec:comms_canbus}
 
-\medskip
-\noindent\textbf{Main Loop Context} (Priority ต่ำ):
-\texttt{ModbusBridge\_UpdateRegisters} ซิงค์ตำแหน่งและความเร็วลง Register Frame,
-\texttt{ModbusBridge\_Process} รัน Protocol Engine
-และ \texttt{Motor\_SendDataToMatlab} ส่งข้อมูลออก USART3
-ทุก 20\,ms สำหรับ Live Monitoring
+ระบบรองรับการควบคุมจาก 2 แหล่ง ได้แก่ ESP32 Bluetooth Gamepad (ผ่าน USART3) สำหรับโหมด Manual และระบบ PC Backend (ผ่าน LPUART1 โปรโตคอล Modbus RTU) สำหรับโหมด Automation โดยมีการส่งสัญญาณ Heartbeat ข้ามไปมา 
 
-\subsection{การ Implement ZV Input Shaper (Circular Buffer)}
-\label{subsec:zv_impl}
-
-ZV Input Shaper ถูก Implement บน STM32 ด้วย Circular Buffer
-โดย Setpoint $r(t)$ ถูก Delay เป็นเวลา $t_2 = 0.259$\,s
-(= 26 Control Cycles ที่ 100\,Hz) แล้วรวมกับ
-
-\begin{equation}
-  r_{shaped}(t) = A_1 \cdot r(t) + A_2 \cdot r(t - t_2)
-  \label{eq:zv_impl}
-\end{equation}
-
-Buffer มีขนาด $\lceil t_2 / T_p \rceil + 1 = 27$ Elements
-ทำงานที่ Position Outer Loop (100\,Hz) ใน \texttt{Motor\_ControlLoop}
-
-\subsection{การ Implement Kalman Filter (Steady-State)}
-\label{subsec:kf_impl}
-
-Kalman Filter 4 สถานะ $\mathbf{x} = [\theta, \omega, i_a, \tau_d]^\top$
-ใช้ Steady-State Gain $\mathbf{K}_\infty$ ที่คำนวณล่วงหน้าด้วย DARE บน MATLAB
-แล้ว Hardcode ใน Firmware เพื่อลด Computational Load
-
-ทุก Control Cycle (10\,ms) ทำงาน 2 ขั้นตอน:
-
-\begin{enumerate}
-  \item \textbf{Predict:}
-        $\hat{\mathbf{x}}_{k|k-1} = \mathbf{A}_d\,\hat{\mathbf{x}}_{k-1} + \mathbf{B}_d\,u_{k-1}$
-  \item \textbf{Update:}
-        $\hat{\mathbf{x}}_{k|k} = \hat{\mathbf{x}}_{k|k-1} + \mathbf{K}_\infty(y_k - \mathbf{C}\hat{\mathbf{x}}_{k|k-1})$
-\end{enumerate}
-
-Output $\hat{\theta}$ และ $\hat{\omega}$ ใช้ใน Control Loop
-ส่วน $\hat{\tau}_d$ ใช้สำหรับ Monitoring
-
-\subsection{การ Implement Cascade PID (Discrete)}
-\label{subsec:pid_impl}
-
-PID Discretize ด้วยวิธี Tustin (Bilinear) ตาม\cref{eq:tustin}
-
-Velocity Inner Loop (1\,kHz) ใช้ PI + Anti-windup Back-calculation
-
-\begin{equation}
-  u_v[k] = K_{p,v}\,e_v[k] + \text{integ}[k] + K_{d,v}\frac{e_v[k]-e_v[k-1]}{T_v}
-  \label{eq:pid_discrete_v}
-\end{equation}
-
-\begin{equation}
-  \text{integ}[k] = \text{integ}[k-1] + K_{i,v}\,e_v[k]\,T_v
-                  + K_{t,aw}(u_{sat}[k] - u_{pre}[k])\,T_v
-  \label{eq:anti_windup_discrete}
-\end{equation}
+ชุดหัวจับ (Gripper) ควบคุมผ่านเครือข่าย \textbf{FDCAN1} ด้วยความเร็ว 500\,kbps ซึ่งทำหน้าที่เป็น I/O Node (ID 0x10) ในกรณีที่ Node ไม่ได้รับสัญญาณ Heartbeat จาก Master ภายในเวลา 2 วินาที (2000\,ms) ระบบจะมี \textbf{CAN Watchdog Failsafe} ทำหน้าที่ตัดไฟ Relay ทั้งหมดโดยอัตโนมัติ ทำให้สปริงดึงกลไกกลับสู่สภาวะปลอดภัย
 
 % ============================================================================
-\section{การบูรณาการระดับระบบ}
+\section{การบูรณาการระดับระบบ (System Integration)}
 \label{sec:integration}
 % ============================================================================
+
+\subsection{ภาพรวมสถาปัตยกรรมระบบ (System Architecture)}
+\label{subsec:system_architecture}
+
+การบูรณาการหุ่นยนต์ (System Integration) ครอบคลุมการเชื่อมต่อส่วนประกอบทางฮาร์ดแวร์ ซอฟต์แวร์ และโครงข่ายการสื่อสารเข้าด้วยกันเป็นระบบเดียว สถาปัตยกรรมแบบ Cyber-Physical System ของหุ่นยนต์แสดงใน\cref{fig:system_architecture} ซึ่งแบ่งออกเป็น 4 ส่วนหลัก ได้แก่ 
+
+\begin{enumerate}
+    \item \textbf{Base System (PC Master):} ทำหน้าที่เป็นศูนย์กลางการสั่งการระดับสูงผ่าน Python Backend และ Web Dashboard
+    \item \textbf{Main Controller:} ไมโครคอนโทรลเลอร์ STM32G474RE ทำหน้าที่ประมวลผลอัลกอริทึมควบคุมการเคลื่อนที่ (Motion Control) และ Application FSM
+    \item \textbf{Actuators \& Sensors:} มอเตอร์ขับเคลื่อน, ชุดหัวจับ, เอ็นโค้ดเดอร์ และเซนเซอร์วัดกระแส
+    \item \textbf{Subsystems:} เครือข่าย CAN Bus สำหรับควบคุมชุดหัวจับ และระบบ ESP32 สำหรับรับคำสั่งจากจอยสติ๊กไร้สาย
+\end{enumerate}
+
+% -----------------------------------------------------------------------
+% รูปที่ N: แผนภาพภาพรวมสถาปัตยกรรมระบบ (System Architecture)
+% ชื่อไฟล์แนะนำ: fig_system_architecture.png หรือ .pdf
+% เนื้อหา: แผนภาพ Mermaid System Architecture (Base System, STM32, ESP32, CAN Node)
+% -----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{fig_cyber_architecture.png}
+    \caption{สถาปัตยกรรมระบบ (Cyber-Physical System Architecture) ของหุ่นยนต์}
+    \label{fig:system_architecture}
+\end{figure}
+
+\subsection{การจัดการข้อมูลร่วม (Shared Data Architecture)}
+\label{subsec:shared_data}
+
+Firmware ถูกออกแบบให้มีการแลกเปลี่ยนข้อมูลผ่านโครงสร้างตัวแปรส่วนกลาง \texttt{g\_robot} (\texttt{RobotState\_t}) ซึ่งทำหน้าที่เป็น Single Source of Truth ดังแสดงใน\cref{fig:firmware_flow} 
+
+กลยุทธ์การจัดการข้อมูลแบ่งออกเป็นสองระดับ:
+\begin{enumerate}
+    \item \textbf{Interrupt Context (High Priority):} โมดูล \texttt{motor\_controller} และ \texttt{lib\_kalman} จะทำหน้าที่อ่านและเขียนข้อมูลสถานะการเคลื่อนที่ (เช่น \texttt{position\_counts}, \texttt{velocity\_rps}) ลงใน \texttt{g\_robot} โดยตรงด้วยความถี่ 1\,kHz เพื่อให้แน่ใจว่าลูปควบคุมทำงานด้วย Time-step ที่คงที่
+    \item \textbf{Main Loop Context (Low Priority):} โมดูลสื่อสาร (\texttt{modbus\_bridge}, \texttt{canbus\_node}, \texttt{joystick}) จะทำการอ่านข้อมูลล่าสุดจาก \texttt{g\_robot} เพื่อส่ง Telemetry ไปยัง PC หรือรับคำสั่งใหม่เข้ามา ซึ่งช่วยลดความหน่วง (Latency) ของการประมวลผลคำสั่งสื่อสารที่อาจขัดจังหวะลูปการควบคุมหลักได้
+\end{enumerate}
+
+\subsection{การเชื่อมต่อ Base System และ Modbus RTU}
+\label{subsec:modbus_integration}
+
+ระบบสื่อสารระหว่างหุ่นยนต์และ Base System ใช้โปรโตคอล Modbus RTU ผ่านพอร์ต LPUART1 (230400 bps, 8N1) โดย STM32 ทำหน้าที่เป็น Slave Address 0x15 (21)
+
+การสื่อสารฝั่ง Base System ถูกพัฒนาด้วย Python โดยมี \texttt{serial\_bridge.py} ทำหน้าที่เป็น Multiplexer เพื่อแยกข้อมูล Telemetry (เช่น ตำแหน่ง, ความเร็ว, ค่ากระแส) ส่งต่อไปยัง Web Dashboard ผ่าน WebSocket และแยกคำสั่ง Modbus ส่งผ่าน Virtual COM Port ไปยังระบบควบคุมระดับสูง การทำงานร่วมกันแบบนี้ช่วยแก้ปัญหาคอขวดของการสื่อสารผ่าน Serial Port เดียว
 
 \subsection{การเชื่อมต่อ Motor, Encoder และ Motor Driver}
 \label{subsec:motor_integration}
 
-Encoder AMT-103 (2048 PPR $\times$ 4 = 8192 counts/rev)
-ต่อเข้า STM32 TIM3 ผ่านโหมด Quadrature Encoder Interface (QEI)
-บน Pin PB4 (CH A) และ PB5 (CH B)
-
-Motor Driver Cytron MD10C รับสัญญาณ PWM จาก TIM8 CH2 (PA8)
-และสัญญาณ DIR จาก PA9 ผ่าน Optocoupler เพื่อแยก Ground
+การประมวลผลสัญญาณฮาร์ดแวร์หลักเชื่อมต่อโดยตรงกับ Peripheral ของ STM32:
+\begin{itemize}
+    \item \textbf{Encoder AMT-103:} เชื่อมต่อผ่าน TIM3 ในโหมด Quadrature Encoder Interface (QEI) บนขา PB4 และ PB5 ให้ความละเอียด 8192 counts/rev
+    \item \textbf{Cytron MD10C Driver:} รับสัญญาณ PWM จาก TIM1 (PA8) ด้วยความถี่ Switching ที่ 19.6\,kHz เพื่อหลีกเลี่ยงความถี่เสียงที่มนุษย์ได้ยิน (Audible Noise) และสัญญาณทิศทาง (DIR) ถูกส่งผ่าน Optocoupler Module เพื่อป้องกัน Ground Loop
+    \item \textbf{Current Sensor (WCS1800):} เชื่อมต่อเข้ากับ ADC1 (PA0) ผ่านวงจร DMA Averaging (EMA Filter) เพื่ออ่านกระแสป้อนกลับเข้าสู่ Safety Stack
+\end{itemize}
 
 \subsection{การเชื่อมต่อ Joystick ผ่าน ESP32}
 \label{subsec:joystick_integration}
 
-ESP32-DEVKIT-V1 รับสัญญาณ Bluetooth จาก Joystick
-แล้วส่ง Command Character ผ่าน USART3 (115200 bps, 8N1)
-ไปยัง STM32 ที่ Pin PC10 (TX) และ PC11 (RX)
+ระบบรองรับการควบคุมแบบ Manual ผ่านจอยสติ๊ก Bluetooth โดยใช้ ESP32-DEVKIT-V1 เป็นตัวรับสัญญาณและถอดรหัส จากนั้นส่งคำสั่งในรูปแบบ ASCII Character ผ่าน USART3 (115200 bps, 8N1) ไปยัง STM32 
+
+การสลับโหมดควบคุมระหว่าง Base System และ Joystick ทำได้ผ่านสวิตช์ฮาร์ดแวร์ โดยเมื่ออยู่ในโหมด Base System คำสั่งจาก Joystick จะถูกตัดออกทั้งหมด (Blocked) ยกเว้นปุ่ม \texttt{P/X} (Emergency Stop) และปุ่มสลับโหมด เพื่อให้มั่นใจได้ว่าระบบสามารถหยุดฉุกเฉินได้จากจอยสติ๊กไร้สายตลอดเวลา
+\subsection{การเชื่อมต่ออุปกรณ์ขับเคลื่อนและเซนเซอร์ (Motor, Encoder \& Driver)}
+\label{subsec:motor_integration}
+
+การเชื่อมต่อในส่วนการขับเคลื่อนให้ความสำคัญกับความละเอียดในการวัดตำแหน่งและการป้องกันสัญญาณรบกวนทางไฟฟ้า ดังนี้:
+\begin{itemize}
+    \item \textbf{Encoder Interface:} ชุดเซนเซอร์ AMT-103 (ความละเอียด 2048 PPR) ถูกเชื่อมต่อผ่านโหมด Quadrature Encoder Interface (QEI) บน TIM3 ของ STM32 (ขา PB4 และ PB5) โดยใช้การอ่านแบบ $\times 4$ ทำให้ได้ความละเอียดสูงถึง 8192 counts ต่อรอบการหมุน
+    \item \textbf{Motor Control:} มอเตอร์ขับเคลื่อนผ่าน Cytron MD10C ซึ่งรับสัญญาณ PWM จาก TIM1 CH1 (PA8) ที่ความถี่ 19.6\,kHz (ARR=50) เพื่อหลีกเลี่ยงสัญญาณรบกวนในย่านที่หูมนุษย์ได้ยิน ทั้งนี้สัญญาณควบคุมทิศทาง (DIR) ถูกส่งผ่าน PA9 โดยผ่าน Optocoupler Module เพื่อแยกกราวด์ (Galvanic Isolation) ระหว่างวงจรควบคุมและวงจรขับกำลังอย่างสมบูรณ์
+\end{itemize}
+
+\subsection{การเชื่อมต่อระบบควบคุมไร้สาย (Joystick Integration)}
+\label{subsec:joystick_integration}
+
+ESP32-DEVKIT-V1 ทำหน้าที่เป็นตัวรับสัญญาณ Bluetooth จากจอยสติ๊กและแปลงข้อมูลเป็น Command Character ส่งต่อให้ STM32 ผ่าน USART3 (115200 bps, 8N1) ที่ขา PC10 (TX) และ PC11 (RX) เพื่อใช้ในการควบคุมระยะไกล
 
 \begin{table}[H]
   \centering
-  \caption{การ Map Command Character กับคำสั่งระบบ}
+  \caption{ตารางการ Map Command Character สำหรับ Joystick}
   \label{tab:joystick_map_fw}
+  \small
   \begin{tabular}{llll}
     \toprule
-    Character & คำสั่ง & โหมดที่ใช้ได้ & หมายเหตุ \\
+    Char & คำสั่ง & โหมดที่ใช้ได้ & หมายเหตุ \\
     \midrule
-    \texttt{L} & หมุนซ้าย (Step/Jog)  & Manual & Coarse/Fine \\
-    \texttt{R} & หมุนขวา (Step/Jog)   & Manual & Coarse/Fine \\
-    \texttt{O} & Release / Stop Jog   & Manual & -- \\
-    \texttt{A} & Home (Hold 3\,s)     & ทุกโหมด & Hold $<$3\,s = Reset Encoder \\
-    \texttt{P} & E-Stop / Reset       & ทุกโหมด & Toggle E-Stop \\
-    \texttt{M} & สลับ Coarse/Fine     & Manual & Toggle Jog Mode \\
-    \texttt{U} & Gripper Up           & Manual & -- \\
-    \texttt{D} & Gripper Down         & Manual & -- \\
-    \texttt{F} & Gripper Toggle       & Manual & Open/Close \\
-    \texttt{S} & Gripper Pick         & Manual & -- \\
-    \texttt{G} & Gripper Place        & Manual & -- \\
-    \texttt{J} & Hold Position        & Manual & Lock ตำแหน่งปัจจุบัน \\
+    \texttt{L/R} & Jog ซ้าย/ขวา & Manual & Coarse/Fine ปรับได้ \\
+    \texttt{O}   & Release / Stop & Manual & หยุดการเคลื่อนที่ \\
+    \texttt{A}   & Home & ทุกโหมด & Hold 3\,s = Home, <3\,s = Reset Encoder \\
+    \texttt{P}   & E-Stop / Reset & ทุกโหมด & Toggle E-Stop ทางซอฟต์แวร์ \\
+    \texttt{M}   & สลับโหมด & Manual & Toggle Coarse/Fine \\
+    \texttt{U/D} & Gripper Up/Down & Manual & ควบคุมแนวตั้ง \\
+    \texttt{F/S/G}& Gripper Op/Pick/Pl & Manual & Open/Close/Pick/Place \\
+    \texttt{J}   & Hold Position & Manual & ล็อกตำแหน่งปัจจุบัน \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-การสลับโหมดระหว่าง Joystick และ Base System ทำผ่าน B-Button Hold 1\,s
-ซึ่งตั้งค่า \texttt{control\_system\_mode}
-เมื่ออยู่ใน \texttt{CONTROL\_MODE\_BASE\_SYSTEM}
-คำสั่งจาก Joystick ทุกตัวถูก Block ยกเว้น
-\texttt{P} (E-Stop), \texttt{A} (Home) และ \texttt{M} (Mode Toggle)
+\textbf{ความปลอดภัยในการสลับโหมด:} การสลับระหว่างโหมด Joystick และ Base System ทำผ่านการกดปุ่ม B ค้างไว้ 1 วินาที เพื่อตั้งค่าตัวแปร \texttt{control\_system\_mode} หากระบบอยู่ในสถานะ \texttt{CONTROL\_MODE\_BASE\_SYSTEM} คำสั่งจากจอยสติ๊กทุกตัวจะถูกบล็อก ยกเว้นปุ่ม \texttt{P} (E-Stop), \texttt{A} (Home) และ \texttt{M} (Mode Toggle) เพื่อรับประกันว่าผู้ควบคุมสามารถหยุดระบบฉุกเฉินได้จากทุกโหมดการทำงาน
 
-\subsection{การเชื่อมต่อ Modbus RTU และ Base System}
+\subsection{การสื่อสารด้วยโปรโตคอล Modbus RTU}
 \label{subsec:modbus_integration}
 
-ระบบสื่อสารกับ Base System ผ่าน Modbus RTU
-บน LPUART1 (19200 bps, 8E1, RS-485, Slave Address~21)
+ระบบสื่อสารกับ Base System ผ่านโปรโตคอล Modbus RTU บน LPUART1 (230400 bps, 8E1, RS-485) โดยกำหนดให้ STM32 เป็น Slave Address 21 (0x15) 
 
-Base System ใช้ Python asyncio WebSocket Backend
-(แทน \texttt{main.exe} เดิม เนื่องจากปัญหา Abnormal Heartbeat ใน Demo~1)
-โดย Backend รับ WebSocket Command จาก Frontend
-แล้วแปลงเป็น Modbus RTU Frame ส่งผ่าน Serial Port
+\textbf{สถาปัตยกรรม Backend:} Base System เปลี่ยนมาใช้ Python \texttt{asyncio} ร่วมกับ WebSocket Backend แทน \texttt{main.exe} เดิม เพื่อแก้ปัญหาภาวะ Abnormal Heartbeat ที่เคยพบในเวอร์ชันทดสอบที่ 1 โดยตัว Backend จะรับคำสั่งจาก Frontend ผ่าน WebSocket แล้วทำการแปลง (Translate) เป็น Modbus RTU Frame ส่งผ่าน Serial Port ไปยังระบบหุ่นยนต์
 
-Modbus Register Map แบ่งเป็น 128 Registers ประกอบด้วย
-Status Registers (ตำแหน่ง, ความเร็ว, สถานะ FSM)
-และ Command Registers (Target Position, Mode, Gripper Command)
+\textbf{Modbus Register Map:} ประกอบด้วยพื้นที่หน่วยความจำ 128 Registers แบ่งกลุ่มการใช้งานดังนี้:
+\begin{itemize}
+    \item \textbf{Status Registers:} สำหรับอ่านค่าตำแหน่ง (Position), ความเร็ว (Velocity) และสถานะของเครื่องจักร (FSM State) แบบ Real-time
+    \item \textbf{Command Registers:} สำหรับรับค่าเป้าหมาย (Target Position), การเลือกโหมด (Mode) และคำสั่งการทำงานของชุดหัวจับ (Gripper Command)
+\end{itemize}
+การออกแบบเช่นนี้ช่วยให้การสื่อสารระหว่างคอมพิวเตอร์แม่ข่ายและตัวควบคุมระดับต่ำ (Embedded) มีความน่าเชื่อถือสูง แม้ในสภาวะที่มีการรับส่งข้อมูลจำนวนมาก

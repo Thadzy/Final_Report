@@ -59,6 +59,19 @@
 \contentsline {figure}{\numberline {3.40}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ลักษณะจำเพาะของ S-Curve Motion Profile สำหรับ 1 การเคลื่อนที่ (Worst-case 360°) แสดงความสัมพันธ์ของ (ก)~Position (ข)~Velocity (ค)~Acceleration และ (ง)~Jerk โดยแบ่งการทำงานออกเป็น 7 เฟส (P1-P7) ซึ่งแสดงให้เห็นถึงความต่อเนื่องของความเร่ง และการจำกัดอัตราการกระชาก (Jerk-limited) อย่างชัดเจน}}{87}{figure.caption.178}%
 \contentsline {figure}{\numberline {3.41}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Motion Profile ของ Scenario 1 (Worst-case $0° \leftrightarrow 360°$) แสดง (ก)~Position (ข)~Velocity (ค)~Acceleration และ (ง)~Rod Swing Angle เปรียบเทียบ Unshaped (สีแดง), ZVD-Shaped (สีน้ำเงิน) และ Rigid Rod (สีเขียว) เส้นประแนวตั้งแสดงจุด Gripper Event Cycle Time = 30.41\,s $\leq $ 35\,s \textbf {(PASS)}}}{90}{figure.caption.185}%
 \contentsline {figure}{\numberline {3.42}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Motion Profile ของ Scenario 2 (Random Moderate) แสดง (ก)~Position (ข)~Velocity (ค)~Acceleration และ (ง)~Rod Swing Angle เปรียบเทียบ Unshaped, ZVD-Shaped และ Rigid Rod Cycle Time = 26.50\,s $\leq $ 35\,s \textbf {(PASS)}}}{91}{figure.caption.186}%
+\contentsline {figure}{\numberline {3.43}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สถาปัตยกรรม Protocol Multiplexing ที่จัดการข้อมูล Modbus RTU ร่วมกับ ASCII Command บนพอร์ต LPUART1}}{95}{figure.caption.193}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุม Isometric}}{97}{figure.caption.195}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพรวมชิ้นส่วนของหุ่นยนต์ (Exploded View) มุมมองด้านข้าง (Side View)}}{98}{figure.caption.196}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพรวมของส่วนฐานหลังการประกอบ มุม Isometric}}{99}{figure.caption.199}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพแตกชิ้นส่วน (Exploded View) ของส่วนฐาน}}{100}{figure.caption.200}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพรวมของส่วนแขนกลและข้อต่อหลังการประกอบ มุม Isometric}}{102}{figure.caption.203}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพแตกชิ้นส่วน (Exploded View) ของส่วนแขนกลและข้อต่อ}}{103}{figure.caption.204}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพรวมของชุดเอ็นโค้ดเดอร์ มุม Isometric}}{104}{figure.caption.207}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพแตกชิ้นส่วน (Exploded View) ของชุดเอ็นโค้ดเดอร์}}{105}{figure.caption.208}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces \xpg@aux {}{thai}\ignorespaces ภาพประกอบรวมขั้นสุดท้ายของหุ่นยนต์ พร้อมชิ้นส่วน 3D Print สำหรับจัดระเบียบสายไฟ}}{106}{figure.caption.209}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces \xpg@aux {}{thai}\ignorespaces Block Diagram แสดงสถาปัตยกรรมการจ่ายไฟและการแยกสัญญาณภายในตู้ควบคุม}}{108}{figure.caption.211}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces \xpg@aux {}{thai}\ignorespaces แผนภาพสถานะการทำงาน (Application FSM) ของระบบควบคุม}}{111}{figure.caption.213}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces \xpg@aux {}{thai}\ignorespaces สถาปัตยกรรมระบบ (Cyber-Physical System Architecture) ของหุ่นยนต์}}{115}{figure.caption.218}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

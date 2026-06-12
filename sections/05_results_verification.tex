@@ -6,89 +6,417 @@
 \label{ch:results}
 
 % ============================================================================
+%  บทที่ 5: ผลการทดสอบและการทวนสอบ
+%  Section 5.1 — ผลการทดสอบระบบย่อย (ปรับปรุง)
+% ============================================================================
+
+% ============================================================================
 \section{ผลการทดสอบระบบย่อย}
 \label{sec:subsystem_test}
 % ============================================================================
 
+การทดสอบระบบย่อยดำเนินการก่อนการทดสอบสมรรถนะเต็มรูปแบบ
+เพื่อยืนยันว่าส่วนประกอบแต่ละชิ้นทำงานถูกต้องตามข้อกำหนดทางกลและทางไฟฟ้า
+ก่อนนำไปประกอบเป็นระบบควบคุมแบบ Closed-loop
+ข้อมูลในหัวข้อนี้เก็บผ่าน STM32CubeMonitor โดย Log ตัวแปรสถานะผ่าน
+SWD/JTAG ที่ Sample Rate 100\,Hz เว้นแต่ระบุเป็นอื่น
+
+% ----------------------------------------------------------------------------
 \subsection{การวัดระยะคลอน (Backlash Measurement)}
 \label{subsec:backlash}
+% ----------------------------------------------------------------------------
 
-การวัดระยะคลอนดำเนินการโดยล็อกตำแหน่งแขนกลไว้
-แล้วออกแรงดันปลายแขนทั้งสองทิศทางและอ่านค่าจาก Encoder
+\subsubsection{วัตถุประสงค์และความสำคัญ}
+
+ระยะคลอน (Backlash) ในระบบส่งกำลังทำให้เกิด Dead-zone ในลูปควบคุม
+ซึ่งส่งผลโดยตรงต่อความแม่นยำตำแหน่ง (A1: $\leq \pm 0.5°$)
+และความซ้ำซากได้ (A2: $\leq \pm 0.1°$)
+ในระบบนี้มีแหล่งกำเนิดระยะคลอนสองแหล่งหลัก ได้แก่
+Planetary Gearbox (อัตราทด $N_g = 24$) และ Belt Drive (อัตราทด $N_b = 70/24$)
+การวัดจึงแยกเป็นสองจุดเพื่อระบุแหล่งที่มาของความคลาดเคลื่อน
+
+\subsubsection{วิธีการทดสอบ}
+
+ล็อกตำแหน่งแขนกลที่มุม $\theta = 0°$, $40°$, $90°$
+ด้วยการให้ Controller ส่ง PWM = 0 และ Brake Enable
+จากนั้นออกแรงกดที่ปลายแขน (ระยะ $r = [VAL\_ARM\_LENGTH]$\,mm จากศูนย์กลาง)
+ทั้งในทิศทาง $+$ และ $-$ และอ่านค่า Encoder Count
+ระยะคลอนคำนวณจาก:
+
+\begin{equation}
+    \delta_{backlash} = \frac{\Delta \text{counts}}{8192 \cdot N_{total}} \times 360°
+    \label{eq:backlash_calc}
+\end{equation}
+
+โดย $N_{total} = 70$ คืออัตราทดรวมของระบบส่งกำลัง
+และ 8192 counts/rev คือ Resolution ของ Encoder AMT-103
+ที่ $\times 4$ QEI บน STM32G474RE
+
+% -----------------------------------------------------------------------
+% รูปที่: Backlash Measurement Setup
+% ชื่อไฟล์แนะนำ: fig_backlash_setup.png
+% เนื้อหา: ภาพถ่ายหรือ Diagram แสดงจุดที่ออกแรงกดที่ปลายแขน
+%          ระบุทิศทาง +/- และตำแหน่ง Encoder readout
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.65\textwidth]{fig_backlash_setup}
+%     \caption{Setup การวัดระยะคลอน: ออกแรงกดที่ปลายแขนทั้งสองทิศทาง
+%              และบันทึกค่า Encoder ผ่าน STM32CubeMonitor}
+%     \label{fig:backlash_setup}
+% \end{figure}
+
+\subsubsection{ผลการวัด}
 
 \begin{table}[H]
   \centering
-  \caption{ผลการวัดระยะคลอนของระบบส่งกำลัง}
+  \caption{ผลการวัดระยะคลอนของระบบส่งกำลัง
+           (ค่าเฉลี่ยจากการวัด 3 ตำแหน่ง $\times$ 5 ครั้ง)}
   \label{tab:backlash}
-  \begin{tabular}{lcc}
+  \begin{tabular}{lccc}
     \toprule
-    จุดวัด & ระยะคลอน (°) & หมายเหตุ \\
+    จุดวัด & ระยะคลอน (°) & $\sigma$ (°) & หมายเหตุ \\
     \midrule
-    Planetary Gearbox & [VAL\_BACKLASH\_GEAR] & -- \\
-    Belt Drive        & [VAL\_BACKLASH\_BELT] & -- \\
-    รวมระบบ           & [VAL\_BACKLASH\_TOTAL] & เทียบกับเกณฑ์ A2 ($\leq \pm 0.1°$) \\
+    Planetary Gearbox & [VAL\_BACKLASH\_GEAR] & [VAL\_BL\_GEAR\_STD] & วัดที่ Output shaft กล่อง \\
+    Belt Drive        & [VAL\_BACKLASH\_BELT] & [VAL\_BL\_BELT\_STD] & วัดที่ Output shaft แขน  \\
+    \midrule
+    รวมระบบ           & [VAL\_BACKLASH\_TOTAL] & -- &
+      เกณฑ์ A2: $\leq \pm 0.1°$ \quad [PASS\_BACKLASH] \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 % -----------------------------------------------------------------------
-% รูปที่: Backlash Measurement Setup
-% ชื่อไฟล์แนะนำ: fig_backlash_setup.png
-% เนื้อหา: ภาพหรือ diagram แสดงวิธีการวัดระยะคลอน
+% รูปที่: Backlash Encoder Trace
+% ชื่อไฟล์แนะนำ: fig_backlash_trace.png
+% เนื้อหา: Plot theta_arm vs time จาก STM32CubeMonitor
+%          แสดงช่วง Dead-zone ขณะเปลี่ยนทิศทางแรง
+%          Annotate: delta_counts ที่ใช้คำนวณ backlash
 % -----------------------------------------------------------------------
 % \begin{figure}[H]
 %     \centering
-%     \includegraphics[width=0.65\textwidth]{fig_backlash_setup}
-%     \caption{Setup การวัดระยะคลอนของระบบส่งกำลัง}
-%     \label{fig:backlash_setup}
+%     \includegraphics[width=0.75\textwidth]{fig_backlash_trace}
+%     \caption{Encoder Trace ระหว่างการวัดระยะคลอน
+%              แสดงช่วง Dead-zone เมื่อเปลี่ยนทิศทางการออกแรง}
+%     \label{fig:backlash_trace}
 % \end{figure}
 
+% ----------------------------------------------------------------------------
 \subsection{การทดสอบ Encoder และ Sensor}
 \label{subsec:sensor_test}
+% ----------------------------------------------------------------------------
 
 \subsubsection{การทดสอบ Encoder AMT-103}
+\label{subsubsec:encoder_test}
+
+\paragraph{วัตถุประสงค์}
+Encoder AMT-103 เป็นอุปกรณ์หลักในการ Feedback ตำแหน่งและความเร็ว
+การยืนยัน Resolution, Noise Floor, และการทำงานของ Index Pulse
+มีผลโดยตรงต่อ Bandwidth ของ Velocity Loop และความแม่นยำของ Position Controller
+
+\paragraph{การทดสอบ Resolution}
+หมุนแขนกลผ่านมุม $360°$ หนึ่งรอบเต็ม (ที่ Output Shaft)
+แล้วนับ Encoder Counts ที่ STM32 อ่านได้ผ่าน QEI (Quadrature Encoder Interface)
+ค่าที่คาดหวังคือ $8192 \times N_{total} = 8192 \times 70 = 573{,}440$ counts/rev
+ที่ Output Shaft (แขน)
+หรือเทียบได้กับ $\approx 22.76$ counts/° ที่ Output Shaft
+
+\paragraph{การทดสอบ Noise Floor}
+ล็อกแขนกลที่ตำแหน่ง $\theta = 0°$ (Brake Enable, PWM = 0)
+เก็บข้อมูล Encoder Count ต่อเนื่อง 500 Samples ที่ 1\,kHz
+ผ่าน STM32CubeMonitor บันทึก \texttt{encoder\_raw}
+และคำนวณ Peak-to-peak Noise เพื่อประเมินว่า Noise
+ส่งผลต่อ Velocity Estimate ของ Kalman Filter อย่างไร
+
+% -----------------------------------------------------------------------
+% รูปที่: Encoder Noise Floor
+% ชื่อไฟล์แนะนำ: fig_encoder_noise.png
+% เนื้อหา: 2 subplots:
+%   (บน) encoder_raw counts vs time (500 samples, standstill)
+%   (ล่าง) Histogram ของ deviation จากค่าเฉลี่ย
+%          Annotate: peak-to-peak range
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.80\textwidth]{fig_encoder_noise}
+%     \caption{Encoder Noise Floor ขณะหยุดนิ่ง:
+%              Time Series (บน) และ Histogram ของ Deviation (ล่าง)}
+%     \label{fig:encoder_noise}
+% \end{figure}
 
 \begin{table}[H]
   \centering
   \caption{ผลการทดสอบ Encoder AMT-103}
   \label{tab:encoder_test}
-  \begin{tabular}{lcc}
+  \begin{tabular}{lccc}
     \toprule
-    รายการทดสอบ & ผล & เกณฑ์ \\
+    รายการทดสอบ & ผล & เกณฑ์ & สถานะ \\
     \midrule
-    Resolution (counts/rev ที่ Output Shaft) & 8192 & 8192 ($\times 4$ QEI) \\
-    ค่าคงที่ต่อ 1° ที่ Output Shaft & [VAL\_CNT\_PER\_DEG] & $\approx 22.76$ counts \\
-    Noise ที่สภาวะหยุดนิ่ง (peak-to-peak) & [VAL\_ENC\_NOISE] & -- \\
-    Index Pulse ทำงานถูกต้อง & [VAL\_INDEX\_PASS] & ผ่าน/ไม่ผ่าน \\
+    Resolution (counts/rev ที่ Motor Shaft) & 8192 & 8192 ($\times 4$ QEI) & ผ่าน \\
+    ค่าคงที่ต่อ 1° ที่ Output Shaft         & [VAL\_CNT\_PER\_DEG] & $\approx 22.76$ & [PASS\_CNT] \\
+    Noise Peak-to-peak (ขณะหยุดนิ่ง)       & [VAL\_ENC\_NOISE]\,counts & $\leq 2$ counts & [PASS\_NOISE] \\
+    Index Pulse ทำงานถูกต้อง                & [VAL\_INDEX\_PASS] & ผ่าน & [PASS\_INDEX] \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \subsubsection{การทดสอบ Proximity Sensor (Homing)}
+\label{subsubsec:prox_test}
+
+\paragraph{วัตถุประสงค์}
+Proximity Sensor ใช้กำหนดจุด Home ($\theta = 0°$) ทุกครั้งที่เริ่มต้นระบบ
+ความซ้ำซากได้ของ Homing Position มีผลโดยตรงต่อ Absolute Accuracy (A1)
+เนื่องจาก Encoder เป็น Incremental Type
+ซึ่งหมายความว่าข้อผิดพลาดของ Homing จะสะสมเป็น Offset ถาวร
+ตลอดทั้ง Cycle การทำงาน
+
+\paragraph{วิธีการทดสอบ}
+ดำเนิน Homing Sequence 10 ครั้งติดต่อกัน โดยในแต่ละครั้ง:
+\begin{enumerate}
+    \item หมุนแขนออกจาก Home ไปยังตำแหน่งสุ่ม $\theta \in [30°, 90°]$
+    \item สั่ง Homing Sequence: แขนหมุนกลับด้วยความเร็ว Slow ($\omega = [VAL\_HOMING\_SPD]$\,rad/s)
+          จนกว่า Proximity Sensor จะ Trigger
+    \item บันทึกค่า Encoder ณ จุดที่ Sensor Trigger ผ่าน STM32CubeMonitor (\texttt{theta\_home\_raw})
+\end{enumerate}
+ความซ้ำซากได้คำนวณจาก $\sigma$ และ Max deviation ของ 10 ค่า
+
+% -----------------------------------------------------------------------
+% รูปที่: Homing Repeatability
+% ชื่อไฟล์แนะนำ: fig_homing_repeat.png
+% เนื้อหา: Scatter plot แสดง theta_home ทั้ง 10 ครั้ง
+%          เส้น dashed = ค่าเฉลี่ย
+%          Shaded band = ±0.1° (เกณฑ์ A2)
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.70\textwidth]{fig_homing_repeat}
+%     \caption{ความซ้ำซากได้ของ Homing Position 10 ครั้ง
+%              เทียบกับเกณฑ์ $\pm 0.1°$ (A2)}
+%     \label{fig:homing_repeat}
+% \end{figure}
 
 \begin{table}[H]
   \centering
   \caption{ผลการทดสอบ Proximity Sensor สำหรับ Homing}
   \label{tab:prox_test}
-  \begin{tabular}{lcc}
+  \begin{tabular}{lccc}
     \toprule
-    รายการทดสอบ & ผล & หมายเหตุ \\
+    รายการทดสอบ & ผล & เกณฑ์ & สถานะ \\
     \midrule
-    Switching Distance & [VAL\_PROX\_DIST]\,mm & -- \\
-    ความซ้ำซากได้ของ Homing Position & [VAL\_HOMING\_REPEAT]\,° & 10 reps \\
+    Switching Distance                    & [VAL\_PROX\_DIST]\,mm & -- & -- \\
+    ความซ้ำซากได้ของ Homing ($\sigma$)    & [VAL\_HOMING\_STD]$°$ & -- & -- \\
+    Max Deviation (10 reps)               & [VAL\_HOMING\_REPEAT]$°$ & $\leq \pm 0.1°$ & [PASS\_HOMING] \\
     \bottomrule
   \end{tabular}
 \end{table}
 
+% ----------------------------------------------------------------------------
+\subsection{การทดสอบ Motor Driver (Cytron MD10C)}
+\label{subsec:motor_driver_test}
+% ----------------------------------------------------------------------------
+
+\subsubsection{วัตถุประสงค์}
+
+Cytron MD10C รับสัญญาณ PWM จาก STM32G474RE และขับ RS-775
+ที่แรงดัน 24\,V/10\,A
+การทดสอบ Current Step Response ยืนยันว่า Driver สามารถตามทัน
+Current Command จาก Velocity Loop ซึ่งทำงานที่ 1\,kHz
+โดยไม่เกิด Oscillation หรือ Delay ที่ส่งผลต่อ Inner Loop Bandwidth
+
+\subsubsection{วิธีการทดสอบ}
+
+ให้ Position Loop ส่ง Step Command $\theta_{ref} = 40°$ จากสถานะนิ่ง
+ขณะที่ Log ตัวแปรต่อไปนี้ผ่าน STM32CubeMonitor ที่ Sample Rate 1\,kHz:
+
+\begin{itemize}
+    \item \texttt{pwm\_cmd} — PWM Duty Cycle (\%) ที่ส่งไปยัง MD10C
+    \item \texttt{ia\_measured} — กระแส Armature (A) ที่ประมาณจาก Kalman Filter
+    \item \texttt{omega\_arm} — ความเร็วเชิงมุม (rad/s) ที่ Output Shaft
+\end{itemize}
+
+\subsubsection{ผลการทดสอบ}
+
+\begin{table}[H]
+  \centering
+  \caption{ผลการทดสอบ Motor Driver Response}
+  \label{tab:driver_test}
+  \begin{tabular}{lccc}
+    \toprule
+    รายการ & ผล & เกณฑ์ & สถานะ \\
+    \midrule
+    Peak Current ($i_{a,max}$)    & [VAL\_IA\_PEAK]\,A  & $\leq 10$\,A (Cytron Rated) & [PASS\_IA] \\
+    Current Rise Time ($t_{10\text{-}90}$) & [VAL\_IA\_RISE]\,ms & -- & -- \\
+    PWM Oscillation              & [VAL\_PWM\_OSC]     & ไม่มี Chatter & [PASS\_PWM] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------
+% รูปที่: Motor Driver Step Response
+% ชื่อไฟล์แนะนำ: fig_driver_step_response.png
+% เนื้อหา: 3 subplots (จาก STM32CubeMonitor log):
+%   (บน)   pwm_cmd (%) vs time
+%   (กลาง) ia_measured (A) vs time — annotate i_peak
+%   (ล่าง) omega_arm (rad/s) vs time
+%          x-axis: 0–2s, ครอบคลุม Transient ช่วงแรก
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.88\textwidth]{fig_driver_step_response}
+%     \caption{Motor Driver Response ต่อ Step Position Command $40°$:
+%              PWM Command, กระแส Armature, และความเร็วเชิงมุม}
+%     \label{fig:driver_step_response}
+% \end{figure}
+
+% ----------------------------------------------------------------------------
+\subsection{การทดสอบ E-Stop Response Time}
+\label{subsec:estop_test}
+% ----------------------------------------------------------------------------
+
+\subsubsection{วัตถุประสงค์}
+
+E-Stop (Emergency Stop) ตัดกำลังไฟให้ Cytron MD10C ผ่าน Contactor
+โดย 5\,V Logic Bus และ STM32 ยังคงมีไฟเลี้ยงอยู่ (ข้อกำหนด E6)
+การทดสอบนี้วัดเวลาตั้งแต่กดปุ่ม E-Stop จนกระทั่ง $\omega_{arm} \approx 0$
+เพื่อประเมินความปลอดภัยของระบบภายใต้สถานการณ์ฉุกเฉิน
+
+\subsubsection{วิธีการทดสอบ}
+
+\begin{enumerate}
+    \item สั่งให้แขนเคลื่อนที่ด้วยความเร็วคงที่ $\omega_{ref} = [VAL\_ESTOP\_SPD]$\,rad/s
+    \item กดปุ่ม E-Stop ขณะแขนกำลังเคลื่อนที่
+    \item Log ตัวแปร \texttt{omega\_arm}, \texttt{pwm\_cmd}, \texttt{estop\_flag}
+          ผ่าน STM32CubeMonitor ที่ 1\,kHz
+    \item คำนวณ $t_{stop}$ = เวลาตั้งแต่ \texttt{estop\_flag} = 1
+          จนถึง $|\omega_{arm}| < 0.01$\,rad/s
+    \item ทำซ้ำ 5 ครั้ง
+\end{enumerate}
+
+\subsubsection{ผลการทดสอบ}
+
+\begin{table}[H]
+  \centering
+  \caption{ผลการทดสอบ E-Stop Response Time (5 ครั้ง)}
+  \label{tab:estop_test}
+  \begin{tabular}{lcccc}
+    \toprule
+    ครั้งที่ & $t_{stop}$ (ms) & $\omega_{arm}$ ก่อน (rad/s) & ผล E6 \\
+    \midrule
+    1 & [VAL\_ESTOP\_1] & [VAL\_SPD\_1] & [PASS\_E6\_1] \\
+    2 & [VAL\_ESTOP\_2] & [VAL\_SPD\_2] & [PASS\_E6\_2] \\
+    3 & [VAL\_ESTOP\_3] & [VAL\_SPD\_3] & [PASS\_E6\_3] \\
+    4 & [VAL\_ESTOP\_4] & [VAL\_SPD\_4] & [PASS\_E6\_4] \\
+    5 & [VAL\_ESTOP\_5] & [VAL\_SPD\_5] & [PASS\_E6\_5] \\
+    \midrule
+    เฉลี่ย & [VAL\_ESTOP\_AVG] & -- & [PASS\_E6] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------
+% รูปที่: E-Stop Response Time Trace
+% ชื่อไฟล์แนะนำ: fig_estop_trace.png
+% เนื้อหา: 3 subplots (จาก STM32CubeMonitor):
+%   (บน)   estop_flag (0/1) vs time — แสดงจุดที่กด E-Stop
+%   (กลาง) pwm_cmd (%) vs time — ตัดเป็น 0 ทันที
+%   (ล่าง) omega_arm (rad/s) vs time
+%          Annotate: t_stop = เวลาหยุดสนิท
+%          Annotate: Controller ยังทำงานอยู่ (log ต่อเนื่อง)
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.80\textwidth]{fig_estop_trace}
+%     \caption{E-Stop Response: E-Stop Flag, PWM Command, และ
+%              ความเร็วเชิงมุม $\omega_{arm}$ แสดงการหยุดของแขนกล
+%              หลังกด E-Stop (ข้อกำหนด E6)}
+%     \label{fig:estop_trace}
+% \end{figure}
+
+% ----------------------------------------------------------------------------
+\subsection{การทดสอบการสื่อสาร Modbus RTU}
+\label{subsec:modbus_test}
+% ----------------------------------------------------------------------------
+
+\subsubsection{วัตถุประสงค์}
+
+ระบบรับ Command จาก Base System ผ่าน Modbus RTU (LPUART1, 230400\,baud, 8N1)
+โดย STM32G474RE ทำหน้าที่เป็น Slave (Address 21)
+การทดสอบยืนยันว่า Function Code FC03 (Read Holding Registers)
+และ FC06 (Write Single Register) ทำงานถูกต้อง
+และ Round-trip Latency เหมาะสมกับ Cycle Time ที่กำหนด ($\leq 35$\,s)
+
+\subsubsection{วิธีการทดสอบ}
+
+ใช้ Python Script ส่ง Modbus Request จาก Base System PC ไปยัง STM32
+แล้ววัด Round-trip Time โดย Timestamp ทั้งฝั่ง Master (Python) และ Slave (STM32)
+\begin{itemize}
+    \item \textbf{FC03}: อ่านค่า \texttt{theta\_arm}, \texttt{omega\_arm}, \texttt{system\_status}
+          จำนวน 10 Registers
+    \item \textbf{FC06}: เขียน \texttt{position\_cmd} (1 Register) พร้อมตรวจสอบว่า
+          STM32 ตอบรับและ Execute ถูกต้อง
+    \item ทดสอบ 100 Transactions ต่อเนื่อง วัด Latency และ Error Rate
+\end{itemize}
+
+\subsubsection{ผลการทดสอบ}
+
+\begin{table}[H]
+  \centering
+  \caption{ผลการทดสอบ Modbus RTU Communication (100 Transactions)}
+  \label{tab:modbus_test}
+  \begin{tabular}{lccc}
+    \toprule
+    รายการ & ผล & เกณฑ์ & สถานะ \\
+    \midrule
+    FC03 Round-trip (เฉลี่ย)   & [VAL\_MB\_FC03\_AVG]\,ms & -- & -- \\
+    FC03 Round-trip (Max)      & [VAL\_MB\_FC03\_MAX]\,ms & $\leq 50$\,ms & [PASS\_FC03] \\
+    FC06 Round-trip (เฉลี่ย)   & [VAL\_MB\_FC06\_AVG]\,ms & -- & -- \\
+    FC06 Execution Verified    & [VAL\_MB\_FC06\_VER]     & 100\% & [PASS\_FC06] \\
+    CRC Error Rate             & [VAL\_MB\_ERR]\%         & $0\%$ & [PASS\_MB\_ERR] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------
+% รูปที่: Modbus Latency Distribution
+% ชื่อไฟล์แนะนำ: fig_modbus_latency.png
+% เนื้อหา: Histogram ของ Round-trip latency (100 transactions)
+%          แยก FC03 (น้ำเงิน) และ FC06 (แดง)
+%          เส้น dashed = ค่าเฉลี่ย, เส้น dotted = Max
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.72\textwidth]{fig_modbus_latency}
+%     \caption{การกระจาย Round-trip Latency ของ Modbus RTU
+%              FC03 และ FC06 จาก 100 Transactions}
+%     \label{fig:modbus_latency}
+% \end{figure}
 % ============================================================================
 \section{ผลการระบุระบบและการจำลอง}
 \label{sec:sysid_results}
 % ============================================================================
 
+หัวข้อนี้รายงานผลการระบุพารามิเตอร์ของมอเตอร์และแบบจำลองระบบ
+ซึ่งเป็นรากฐานสำคัญสำหรับการออกแบบ Cascade PID และ Kalman Filter
+กระบวนการระบุระบบแบ่งออกเป็นสองขั้นตอน ได้แก่
+การวัดพารามิเตอร์วงจรไฟฟ้าจาก Locked Rotor Test
+และการระบุพารามิเตอร์เชิงกลจาก Chirp Excitation Test
+รายละเอียดทฤษฎีและขั้นตอนการออกแบบแสดงไว้ใน \cref{ch:design}
+
+% ----------------------------------------------------------------------------
 \subsection{ผลการระบุพารามิเตอร์ของมอเตอร์}
 \label{subsec:sysid_params_result}
+% ----------------------------------------------------------------------------
 
-\subsubsection{ผล Locked Rotor Test (ละเอียด)}
+\subsubsection{ผล Locked Rotor Test}
+\label{subsubsec:locked_rotor_result}
+
+การวัด $R_a$ และ $L_a$ ดำเนินการก่อนการระบุพารามิเตอร์เชิงกล
+เนื่องจากค่าทั้งสองเป็น Input ที่ทราบค่าแน่นอนสำหรับแบบจำลองทางไฟฟ้า
+หากนำ $R_a$ และ $L_a$ ไปประมาณร่วมกับ $K_t$, $K_b$, $B$, $J$
+จะทำให้ Optimization Problem มีระดับความอิสระสูงเกินไปและเกิด Parameter Correlation
+การล็อกโรเตอร์ตัด Back-EMF ออกจากวงจร ($\omega = 0 \Rightarrow e = K_b\omega = 0$)
+ทำให้สามารถระบุ $R_a = V_{ss}/I_{ss}$ และ $L_a = R_a \tau_{RL}$
+ได้อย่างเป็นอิสระจากพารามิเตอร์เชิงกล
 
 \begin{table}[H]
   \centering
@@ -109,160 +437,334 @@
   \end{tabular}
 \end{table}
 
+ค่า $\sigma$ ที่ต่ำบ่งชี้ว่าการวัดมีความสม่ำเสมอดี
+ค่าคงเวลาทางไฟฟ้า $\tau_{RL} = L_a/R_a = 1.448/1453.4 \approx 1.0$\,ms
+สอดคล้องกับ Velocity Loop Sampling Period ที่ 1\,kHz
+ยืนยันว่า Current Dynamics เร็วพอที่จะถูกมองเป็น Static Gain
+จากมุมมองของ Velocity Loop ได้
+
 % -----------------------------------------------------------------------
-% รูปที่: Locked Rotor Oscilloscope Waveform (ละเอียด)
+% รูปที่: Locked Rotor Oscilloscope Waveform
 % ชื่อไฟล์แนะนำ: fig_locked_rotor_scope.png
-% เนื้อหา: Oscilloscope waveform แสดง V_max และ tau ที่ใช้คำนวณ
+% เนื้อหา: Oscilloscope waveform แสดง V_in step และ i_a response
+%          Annotate: V_ss, I_ss สำหรับคำนวณ R_a
+%          Annotate: tau_RL = L_a/R_a (จุด 63.2% ของ I_ss)
 % -----------------------------------------------------------------------
 % \begin{figure}[H]
 %     \centering
 %     \includegraphics[width=0.70\textwidth]{fig_locked_rotor_scope}
 %     \caption{Oscilloscope Waveform จาก Locked Rotor Test ($V_{in} = 12$\,V)
-%              แสดง Steady-state Voltage $V_{sh,ss}$ และค่าคงเวลา $\tau$}
+%              แสดง Steady-state Current $I_{ss}$ และค่าคงเวลา $\tau_{RL}$
+%              ที่ใช้คำนวณ $R_a$ และ $L_a$}
 %     \label{fig:locked_rotor_scope}
 % \end{figure}
 
 \subsubsection{ผล Parameter Estimation จาก Chirp Test}
+\label{subsubsec:chirp_result}
+
+การระบุพารามิเตอร์เชิงกล ($K_t$, $K_b$, $B$, $J$, $\eta$) ใช้ Chirp Excitation
+ที่ความถี่ 0.1--2.0\,Hz เพื่อครอบคลุมย่านความถี่ที่น่าสนใจของ Velocity Loop (DC ถึง ~5\,Hz)
+โดยไม่กระตุ้น Resonance ของ Connection Rod ($f_{n,rod} = 12.13$\,Hz)
+
+\paragraph{การ Preprocessing สัญญาณ}
+ก่อนนำข้อมูลเข้า Least-Squares Estimator จำเป็นต้องกรองสัญญาณ
+เพื่อลด Encoder Quantization Noise และ PWM Switching Noise (19.6\,kHz)
+โดยใช้ Butterworth Filter อันดับ 4 ที่ความถี่ตัด $f_c = 10$\,Hz
+ด้วยวิธี Zero-phase Filtering (\texttt{filtfilt}) เพื่อไม่ให้เกิด Phase Shift
+ที่จะทำให้ Input--Output Causality ผิดเพี้ยน
+การเลือก $f_c = 10$\,Hz มีเหตุผลดังนี้:
+\begin{itemize}
+    \item \textbf{ต่ำกว่า $f_{n,rod}$}: หลีกเลี่ยงการปนเปื้อนของ Rod Dynamics
+          เข้ามาใน Motor Model
+    \item \textbf{สูงกว่า Band ของ Chirp}: ช่วง 0.1--2\,Hz อยู่ต่ำกว่า $f_c$
+          มาก ทำให้สัญญาณที่ต้องการผ่านโดยไม่ถูก Attenuate
+    \item \textbf{ยืนยันด้วย ETFE}: Bode Plot จาก Empirical Transfer Function Estimate
+          (ETFE) ก่อนและหลัง Filter ให้ผลสอดคล้องกันในย่าน 0.1--2\,Hz
+          ยืนยันว่า Filter ไม่บิดเบือนพารามิเตอร์ที่ระบุ
+\end{itemize}
+
+% -----------------------------------------------------------------------
+% รูปที่: Chirp Raw vs Filtered
+% ชื่อไฟล์แนะนำ: fig_chirp_raw_filtered.png
+% เนื้อหา: 2 subplots:
+%   (บน) V_in raw vs filtered vs time
+%   (ล่าง) omega_arm raw vs filtered vs time
+%   แสดงช่วง Chirp ความถี่ต่ำ (0.1 Hz) และสูง (2 Hz)
+%   Annotate: f_c = 10 Hz cutoff ใน legend
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.88\textwidth]{fig_chirp_raw_filtered}
+%     \caption{สัญญาณ Chirp ก่อนและหลังกรองด้วย Butterworth อันดับ~4
+%              ที่ $f_c = 10$\,Hz ด้วยวิธี Zero-phase (\texttt{filtfilt})
+%              แสดง $V_{in}$ (บน) และ $\omega_{arm}$ (ล่าง)}
+%     \label{fig:chirp_raw_filtered}
+% \end{figure}
+
+\paragraph{ผลการประมาณพารามิเตอร์}
+ดำเนิน Chirp Test จำนวน 9 Experiments ที่แอมพลิจูดและช่วงความถี่ต่างกัน
+เพื่อประเมิน Uncertainty ของแต่ละพารามิเตอร์
+ค่าเฉลี่ยและ Standard Deviation จากทั้ง 9 Experiments แสดงใน\cref{tab:chirp_results}
 
 \begin{table}[H]
   \centering
   \caption{ผลการ Estimate พารามิเตอร์จาก Chirp Test (สรุปจาก 9 Experiments)}
   \label{tab:chirp_results}
-  \begin{tabular}{llcccc}
+  \begin{tabular}{llccccc}
     \toprule
-    พารามิเตอร์ & สัญลักษณ์ & เฉลี่ย & $\sigma$ & หน่วย & Uncertainty (\%) \\
+    พารามิเตอร์ & สัญลักษณ์ & เฉลี่ย & $\sigma$ & Uncertainty (\%) & หน่วย & หมายเหตุ \\
     \midrule
-    Back-EMF Constant & $K_b$  & 0.04165 & [VAL\_KB\_STD]  & V$\cdot$s/rad & [VAL\_KB\_UNC] \\
-    Torque Constant   & $K_t$  & 0.04065 & [VAL\_KT\_STD]  & N$\cdot$m/A   & [VAL\_KT\_UNC] \\
-    Viscous Damping   & $B$    & 0.19279 & [VAL\_B\_STD]   & N$\cdot$m$\cdot$s/rad & [VAL\_B\_UNC] \\
-    Moment of Inertia & $J$    & 0.72762 & [VAL\_J\_STD]   & kg$\cdot$m$^2$ & [VAL\_J\_UNC] \\
-    Efficiency        & $\eta$ & 0.836   & [VAL\_ETA\_STD] & --             & [VAL\_ETA\_UNC] \\
+    Back-EMF Constant & $K_b$  & 0.04165 & [VAL\_KB\_STD]  & [VAL\_KB\_UNC]  & V$\cdot$s/rad  & -- \\
+    Torque Constant   & $K_t$  & 0.04065 & [VAL\_KT\_STD]  & [VAL\_KT\_UNC]  & N$\cdot$m/A    & -- \\
+    Viscous Damping   & $B$    & 0.19279 & [VAL\_B\_STD]   & [VAL\_B\_UNC]   & N$\cdot$m$\cdot$s/rad & สูงสุด \\
+    Moment of Inertia & $J$    & 0.72762 & [VAL\_J\_STD]   & [VAL\_J\_UNC]   & kg$\cdot$m$^2$ & -- \\
+    Efficiency        & $\eta$ & 0.836   & [VAL\_ETA\_STD] & [VAL\_ETA\_UNC] & --             & -- \\
     \bottomrule
   \end{tabular}
 \end{table}
 
+พารามิเตอร์ $B$ (Viscous Damping) มักมี Uncertainty สูงที่สุดในกลุ่ม
+เนื่องจาก Damping จริงประกอบด้วยทั้ง Viscous, Coulomb Friction และ Stiction
+ซึ่งแบบจำลอง Linear Viscous ไม่สามารถจับได้ครบ
+อย่างไรก็ตาม Kalman Filter ออกแบบให้ประมาณ Disturbance Torque $\tau_d$
+แบบ Real-time จึงชดเชย Unmodeled Friction ได้โดยตรง
+ทำให้ Uncertainty ของ $B$ มีผลต่อ Performance น้อยกว่าที่คาดในทางทฤษฎี
+
 % -----------------------------------------------------------------------
-% รูปที่: Chirp Raw vs Filtered
-% ชื่อไฟล์แนะนำ: fig_chirp_raw_filtered.png
-% เนื้อหา: Plot raw vs filtered signal (จาก preprocess code)
-%          แสดง V_in และ omega_arm ทั้ง raw และ filtered
+% รูปที่: ETFE Bode Plot Comparison
+% ชื่อไฟล์แนะนำ: fig_etfe_bode.png
+% เนื้อหา: Bode Plot (Magnitude + Phase) 2 เส้น:
+%   เส้นสีเทา = ETFE จากข้อมูล Raw
+%   เส้นสีน้ำเงิน = ETFE จากข้อมูล Filtered
+%   เส้นสีแดง dashed = Identified Model G(jω)
+%   Annotate: f_c = 10 Hz, f_n_rod = 12.13 Hz
+%   แสดงว่า Filter ไม่ distort ย่าน 0.1–2 Hz
 % -----------------------------------------------------------------------
 % \begin{figure}[H]
 %     \centering
-%     \includegraphics[width=0.88\textwidth]{fig_chirp_raw_filtered}
-%     \caption{สัญญาณ Chirp ก่อนและหลังกรองด้วย Butterworth Order~4
-%              ที่ $f_c = 10$\,Hz แสดง $V_{in}$ และ $\omega_{arm}$}
-%     \label{fig:chirp_raw_filtered}
+%     \includegraphics[width=0.88\textwidth]{fig_etfe_bode}
+%     \caption{ETFE Bode Plot เปรียบเทียบ Raw, Filtered และ Identified Model
+%              ยืนยันว่า Butterworth Filter ไม่บิดเบือนพารามิเตอร์
+%              ในย่านความถี่ระบุ (0.1--2\,Hz)}
+%     \label{fig:etfe_bode}
 % \end{figure}
 
+% ----------------------------------------------------------------------------
 \subsection{ผลการตรวจสอบความถูกต้องของแบบจำลอง (Model Validation)}
 \label{subsec:model_validation_results}
+% ----------------------------------------------------------------------------
+
+การตรวจสอบความถูกต้องของแบบจำลองดำเนินการด้วยวิธี Cross-Validation
+โดยใช้ชุดข้อมูล Chirp ที่ความถี่ต่างกัน 3 ชุด (0.5, 1.0, 2.0\,Hz)
+ซึ่งเป็นชุดข้อมูลที่ \emph{ไม่ได้ใช้} ใน Estimation
+เพื่อยืนยันว่าแบบจำลองสามารถ Generalize ได้จริง
+ไม่ใช่เพียง Overfit กับข้อมูลที่ใช้ระบุ
+
+Fit Score คำนวณจาก:
+\begin{equation}
+    \text{Fit} = \left(1 - \frac{\|\hat{y} - y\|}{\|y - \bar{y}\|}\right) \times 100\%
+    \label{eq:fit_score}
+\end{equation}
+โดย $y$ คือ $\omega_{arm}$ จริง, $\hat{y}$ คือ $\omega_{arm}$ จากแบบจำลอง
+และ $\bar{y}$ คือค่าเฉลี่ยของ $y$
+ค่า Fit Score $\geq 80\%$ ถือว่าแบบจำลองมีความแม่นยำเพียงพอสำหรับการออกแบบ Controller
 
 \begin{table}[H]
   \centering
   \caption{ผล Cross-Validation ของแบบจำลองกับข้อมูลจริง}
   \label{tab:cross_validation}
-  \begin{tabular}{lcc}
+  \begin{tabular}{lccc}
     \toprule
-    ชุดข้อมูล & Fit Score (\%) & NRMSE \\
+    ชุดข้อมูล & Fit Score (\%) & NRMSE & หมายเหตุ \\
     \midrule
-    Chirp 0.5\,Hz & [VAL\_FIT\_05] & [VAL\_NRMSE\_05] \\
-    Chirp 1.0\,Hz & [VAL\_FIT\_10] & [VAL\_NRMSE\_10] \\
-    Chirp 2.0\,Hz & [VAL\_FIT\_20] & [VAL\_NRMSE\_20] \\
+    Chirp 0.5\,Hz & [VAL\_FIT\_05] & [VAL\_NRMSE\_05] & Low-freq dynamics \\
+    Chirp 1.0\,Hz & [VAL\_FIT\_10] & [VAL\_NRMSE\_10] & Design frequency \\
+    Chirp 2.0\,Hz & [VAL\_FIT\_20] & [VAL\_NRMSE\_20] & Near $f_c$ filter \\
     \bottomrule
   \end{tabular}
 \end{table}
 
+Fit Score ที่ Chirp 2.0\,Hz อาจต่ำกว่าสองชุดแรกเล็กน้อย
+เนื่องจากอยู่ใกล้กับ $f_c = 10$\,Hz ของ Filter
+ทำให้ High-frequency Content ของสัญญาณถูก Attenuate บางส่วน
+อย่างไรก็ตามความถี่ใช้งานจริงของ Velocity Loop อยู่ที่ประมาณ 0.1--2\,Hz
+จึงไม่กระทบต่อ Controller Design
+
 % -----------------------------------------------------------------------
 % รูปที่: Cross-Validation Plot
 % ชื่อไฟล์แนะนำ: fig_cross_validation.png
-% เนื้อหา: Measured vs Simulated omega_arm (จาก validate_parameters.m)
+% เนื้อหา: 3 subplots (แนวตั้ง) สำหรับ Chirp 0.5, 1.0, 2.0 Hz:
+%   เส้นสีน้ำเงิน = omega_arm measured
+%   เส้นสีแดง dashed = omega_arm simulated
+%   ด้านบนของแต่ละ subplot แสดง Fit Score
 % -----------------------------------------------------------------------
 % \begin{figure}[H]
 %     \centering
 %     \includegraphics[width=0.88\textwidth]{fig_cross_validation}
-%     \caption{ผล Cross-Validation: เปรียบเทียบ Measured กับ Simulated
-%              $\omega_{arm}(t)$ สำหรับ Chirp 1.0\,Hz}
+%     \caption{ผล Cross-Validation: เปรียบเทียบ $\omega_{arm}$ จริง (น้ำเงิน)
+%              กับ Simulated (แดง) สำหรับ Chirp 0.5, 1.0 และ 2.0\,Hz}
 %     \label{fig:cross_validation}
 % \end{figure}
 
-\subsection{ผลการ Simulation Cascade PID และ ZV Shaper}
+% ----------------------------------------------------------------------------
+\subsection{ผลการ Simulation Cascade PID และ ZVD Input Shaper}
 \label{subsec:sim_results}
+% ----------------------------------------------------------------------------
+
+ผลการ Simulation เต็มรูปแบบสำหรับ Cascade PID และ ZVD Input Shaper
+นำเสนอไว้ใน \cref{ch:design} แล้ว
+หัวข้อนี้สรุปผลที่เกี่ยวข้องโดยตรงกับการทวนสอบข้อกำหนดสมรรถนะ
+
+\paragraph{ผล Root Locus และ Stability Margin}
+การออกแบบ Cascade PID ด้วย Root Locus บน MATLAB ให้ Stability Margin
+ดังแสดงใน \cref{ch:design} โดยสรุปคือ Velocity Inner Loop มี
+Phase Margin = 74.64° และ Gain Crossover Frequency = 25.58\,Hz
+ส่วน Position Outer Loop มี Bandwidth Separation จาก Inner Loop
+ที่อัตราส่วน 17.5 เท่า ซึ่งเกินกว่าเกณฑ์ 10 เท่าที่ออกแบบไว้
 
 % -----------------------------------------------------------------------
 % รูปที่: Root Locus ทั้งสอง Loop
 % ชื่อไฟล์แนะนำ: fig_rootlocus_both.png
 % เนื้อหา: Root Locus Velocity Inner (ซ้าย) และ Position Outer (ขวา)
 %          จุดแดง = Desired Poles, จุดเขียว = Actual CL Poles
+%          (ใช้รูปเดียวกับที่อยู่ใน Chapter 3)
 % -----------------------------------------------------------------------
 % \begin{figure}[H]
 %     \centering
 %     \includegraphics[width=0.95\textwidth]{fig_rootlocus_both}
 %     \caption{Root Locus ของ Velocity Inner Loop (ซ้าย) และ
-%              Position Outer Loop (ขวา)}
+%              Position Outer Loop (ขวา) แสดง Desired Poles
+%              และ Actual Closed-loop Poles}
 %     \label{fig:rootlocus_both}
 % \end{figure}
 
-% -----------------------------------------------------------------------
-% รูปที่: Closed-loop Simulation Response
-% ชื่อไฟล์แนะนำ: fig_sim_response_closedloop.png
-% เนื้อหา: 4 subplots: Position tracking, Tracking error,
-%          Rod deflection, Control voltage
-%          Unshaped (blue) vs ZV-Shaped (red dashed)
-% -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.95\textwidth]{fig_sim_response_closedloop}
-%     \caption{ผล Closed-loop Simulation: Position Tracking, Tracking Error,
-%              Rod Deflection และ Control Voltage
-%              เปรียบเทียบ Unshaped กับ ZV-Shaped ($40°$, 1 Move)}
-%     \label{fig:sim_response}
-% \end{figure}
-
-% -----------------------------------------------------------------------
-% รูปที่: S-Curve Profile
-% ชื่อไฟล์แนะนำ: fig_scurve_40deg.png
-% เนื้อหา: Acceleration และ Velocity vs time
-%          Unshaped (blue) vs ZV-Shaped (red dashed)
-% -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.88\textwidth]{fig_scurve_40deg}
-%     \caption{S-Curve Motion Profile สำหรับการเคลื่อนที่ $40°$
-%              เปรียบเทียบ Unshaped และ ZV-Shaped Reference}
-%     \label{fig:scurve_40deg}
-% \end{figure}
-
-\subsection{ผลการออกแบบ Kalman Filter (DARE)}
-\label{subsec:kf_results}
+\paragraph{ผล Simulation ZVD Input Shaper}
+การ Simulation ใช้ Nonlinear Pendulum Model สำหรับ Connection Rod
+($\omega_{n,rod} = 12.386$\,rad/s, $\zeta_{rod} = 0.0984$)
+ใน Worst-case Move 360° ด้วย S-curve ที่
+$v_{max} = 7.304$\,rad/s, $a_{max} = 27.49$\,rad/s$^2$, $j_{max} = 1400$\,rad/s$^3$
+ผลสรุปใน \cref{tab:zvd_sim_summary}
 
 \begin{table}[H]
   \centering
-  \caption{Steady-State Kalman Gain $\mathbf{K}_\infty$ ที่ใช้ใน Firmware}
-  \label{tab:kalman_gain}
-  \begin{tabular}{lc}
+  \caption{สรุปผล Simulation เปรียบเทียบ Unshaped กับ ZVD-Shaped
+           (Worst-case Move 360°, มีโหลด Connection Rod)}
+  \label{tab:zvd_sim_summary}
+  \begin{tabular}{lccc}
     \toprule
-    สถานะ & $K_\infty$ \\
+    Metric & Unshaped & ZVD-Shaped & ผลต่าง \\
     \midrule
-    $\theta_{arm}$ (rad)     & [VAL\_K\_THETA] \\
-    $\omega_{arm}$ (rad/s)   & [VAL\_K\_OMEGA] \\
-    $i_a$ (A)                & [VAL\_K\_IA] \\
-    $\tau_d$ (N$\cdot$m)     & [VAL\_K\_TAU] \\
+    Rod Peak Deflection (°) & 179.95 & 53.52 & $-70.3\%$ \\
+    Rod Settling Time (s)   & $\approx 6$--$7$ & 0.44 & $\ll$ \\
+    Move Time (s)           & 1.146 & 1.664 & $+0.518$\,s \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent
+ZVD Shaper ลด Peak Deflection ได้ 70.3\% โดยแลกกับ Delay เพิ่มเพียง
+$t_3 = 0.518$\,s ต่อ Move ซึ่งน้อยกว่า Rod Settling Time
+ของระบบ Unshaped ($\approx 6$--$7$\,s) อย่างมีนัยสำคัญ
+การคำนวณ Cycle Time Budget แสดงว่า 9 Moves $\times$ 0.518\,s = 4.66\,s
+เป็น Overhead ที่ยอมรับได้ภายใต้เกณฑ์ $\leq 35$\,s (P1)
+
+% -----------------------------------------------------------------------
+% รูปที่: ZVD Simulation Response (Worst-case)
+% ชื่อไฟล์แนะนำ: fig_zvd_sim_response.png
+% เนื้อหา: 2 subplots:
+%   (บน) S-curve Acceleration Profile:
+%        เส้นสีเทา = Unshaped, เส้นสีน้ำเงิน = ZVD-Shaped
+%   (ล่าง) phi_rod การแกว่ง Connection Rod vs time:
+%        เส้นสีเทา = Unshaped (แกว่งนาน ~6-7s)
+%        เส้นสีน้ำเงิน = ZVD-Shaped (ยกเลิกการแกว่ง)
+%        Annotate: Peak Deflection ทั้งสองกรณี
+%        Annotate: t_3 = 0.518s delay overhead
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.88\textwidth]{fig_zvd_sim_response}
+%     \caption{ผล Simulation ZVD Input Shaper (Worst-case Move 360°):
+%              S-curve Profile (บน) และการแกว่ง Connection Rod (ล่าง)
+%              เปรียบเทียบ Unshaped กับ ZVD-Shaped}
+%     \label{fig:zvd_sim_response}
+% \end{figure}
+
+% ----------------------------------------------------------------------------
+\subsection{ผลการออกแบบ Kalman Filter}
+\label{subsec:kf_results}
+% ----------------------------------------------------------------------------
+
+Kalman Filter ออกแบบสำหรับ State Vector สี่มิติ
+$\mathbf{x} = [\theta_{arm},\, \omega_{arm},\, i_a,\, \tau_d]^\top$
+โดย $\tau_d$ คือ Disturbance Torque ที่ประมาณแบบ Real-time
+เพื่อชดเชย Unmodeled Friction และ Load Variation
+รายละเอียดการ Derive State-space Matrix และ DARE Solution
+แสดงไว้ใน \cref{ch:design}
+
+\paragraph{การเลือก Process Noise Q และ Measurement Noise R}
+Noise Covariance Matrix เลือกตาม Physical Reasoning ดังนี้:
+
+\begin{table}[H]
+  \centering
+  \caption{Process Noise $\mathbf{Q}$ และ Measurement Noise $R$
+           ที่ใช้ใน Kalman Filter}
+  \label{tab:kalman_qr}
+  \begin{tabular}{llcc}
+    \toprule
+    พารามิเตอร์ & สัญลักษณ์ & ค่า & เหตุผลการเลือก \\
+    \midrule
+    Position Process Noise    & $Q_\theta$ & $10^{-5}$ & ตำแหน่งเปลี่ยนช้า, เชื่อ Model มาก \\
+    Velocity Process Noise    & $Q_\omega$ & $10^{-3}$ & ความเร็วเปลี่ยนเร็วกว่า \\
+    Current Process Noise     & $Q_{i_a}$  & $0.1$     & Current เปลี่ยนแปลงตาม PWM \\
+    Disturbance Process Noise & $Q_{\tau_d}$& $1.0$    & ยอมให้ Disturbance Estimate ตามทัน Friction \\
+    Position Measurement Noise& $R_\theta$ & $2\times10^{-6}$ & $\approx$ (0.08 count)$^2$ — Encoder noise floor \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+การตั้ง $Q_{\tau_d} = 1.0$ สูงกว่า State อื่นเจตนาให้ Filter
+ยอม Update ค่า $\hat{\tau}_d$ ได้รวดเร็ว ซึ่งสำคัญเมื่อมี
+Load เปลี่ยนแปลงฉับพลันหรือเกิด Stick-slip Friction
+ส่วน $R_\theta = 2\times10^{-6}$\,rad$^2$ มาจากการวัด Noise Floor
+ของ Encoder ในสถานะหยุดนิ่ง (ดู \cref{subsec:sensor_test})
+
+\paragraph{Steady-State Kalman Gain $\mathbf{K}_\infty$}
+$K_\infty$ คำนวณจาก Discrete Algebraic Riccati Equation (DARE)
+offline ด้วย MATLAB แล้ว Hardcode เข้า Firmware
+เพื่อหลีกเลี่ยง Runtime Matrix Inversion บน STM32
+
+\begin{table}[H]
+  \centering
+  \caption{Steady-State Kalman Gain $\mathbf{K}_\infty$ ที่ใช้ใน Firmware
+           (รอยืนยันจาก Firmware Version สุดท้าย)}
+  \label{tab:kalman_gain}
+  \begin{tabular}{llc}
+    \toprule
+    สถานะ & สัญลักษณ์ & $K_\infty$ \\
+    \midrule
+    Position   & $\theta_{arm}$ (rad)   & [VAL\_K\_THETA] \\
+    Velocity   & $\omega_{arm}$ (rad/s) & [VAL\_K\_OMEGA] \\
+    Current    & $i_a$ (A)              & [VAL\_K\_IA]    \\
+    Disturbance& $\tau_d$ (N$\cdot$m)  & [VAL\_K\_TAU]   \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 % -----------------------------------------------------------------------
-% รูปที่: Kalman Filter Covariance Convergence
-% ชื่อไฟล์แนะนำ: fig_kf_convergence.png
-% เนื้อหา: P_k diagonal elements vs iteration แสดงการ Converge
+% รูปที่: Kalman Filter Performance
+% ชื่อไฟล์แนะนำ: fig_kf_performance.png
+% เนื้อหา: 2 subplots (จาก STM32CubeMonitor log ขณะเคลื่อนที่):
+%   (บน) omega_arm: raw finite-difference (เทา) vs Kalman estimate (น้ำเงิน)
+%        แสดง noise reduction ของ velocity estimate
+%   (ล่าง) tau_d estimate vs time แสดง disturbance tracking
+%          Annotate: ช่วงที่ friction spikes ปรากฏ
 % -----------------------------------------------------------------------
 % \begin{figure}[H]
 %     \centering
-%     \includegraphics[width=0.75\textwidth]{fig_kf_convergence}
-%     \caption{การ Converge ของ Error Covariance $\mathbf{P}_k$
-%              ไปยัง Steady-State $\mathbf{P}_\infty$}
-%     \label{fig:kf_convergence}
+%     \includegraphics[width=0.88\textwidth]{fig_kf_performance}
+%     \caption{ผล Kalman Filter: Velocity Estimate เทียบกับ Raw Finite-difference
+%              (บน) และ Disturbance Torque Estimate $\hat{\tau}_d$ (ล่าง)}
+%     \label{fig:kf_performance}
 % \end{figure}
 
 % ============================================================================
@@ -270,113 +772,249 @@
 \label{sec:performance}
 % ============================================================================
 
+การทดสอบสมรรถนะดำเนินการบน Hardware จริงพร้อมโหลด Connection Rod
+เพื่อให้ผลสอดคล้องกับสภาวะการใช้งานจริงและข้อกำหนด P7
+ข้อมูลทั้งหมดเก็บผ่าน STM32CubeMonitor ที่ Sample Rate 1\,kHz
+และวิเคราะห์ต่อด้วย MATLAB
+
+% ----------------------------------------------------------------------------
 \subsection{Step Response: Overshoot และ Settling Time}
 \label{subsec:step_response}
+% ----------------------------------------------------------------------------
+
+\subsubsection{วัตถุประสงค์}
+
+Step Response Test ทวนสอบข้อกำหนด P5 ($t_s \leq 0.5$\,s)
+และ P6 (Overshoot $\leq 1\%$) ซึ่งเป็นข้อกำหนดที่เข้มงวดที่สุดในด้านการควบคุม
+ค่า Overshoot $\leq 1\%$ มีความสำคัญต่อความแม่นยำในการวางชิ้นงาน
+เนื่องจาก Overshoot ที่สูงอาจทำให้แขนกลเคลื่อนที่เลยตำแหน่งเป้าหมาย
+และกลับมาหยุดด้วย Steady-state Error ที่ยอมรับไม่ได้
+
+\subsubsection{วิธีการทดสอบ}
+
+ส่ง Step Command $\theta_{ref}$ ขนาด $40°$ จากสถานะนิ่ง
+พร้อม Connection Rod ติดตั้งที่ปลายแขน (With Load)
+Log ตัวแปร \texttt{theta\_ref}, \texttt{theta\_arm}, \texttt{omega\_arm}
+ผ่าน STM32CubeMonitor ที่ 1\,kHz
+$t_s$ นิยามด้วยเกณฑ์ $\pm 2\%$ ของ Steady-state
+และ Overshoot คำนวณจาก $\%OS = (y_{max} - y_{ss}) / y_{ss} \times 100\%$
+
+\subsubsection{ผลการทดสอบ}
 
 \begin{table}[H]
   \centering
-  \caption{ผลการทดสอบ Step Response บน Hardware จริง}
+  \caption{ผลการทดสอบ Step Response บน Hardware จริง (With Load)}
   \label{tab:step_response}
-  \begin{tabular}{lccc}
+  \begin{tabular}{lcccc}
     \toprule
-    Metric & ผลจริง & Requirement & สถานะ \\
+    Metric & ผลจริง & Requirement & เกณฑ์ & สถานะ \\
     \midrule
-    Settling Time $t_s$ & [VAL\_TS]\,s & $\leq 0.5$\,s (P5) & [PASS\_P5] \\
-    Overshoot \%OS      & [VAL\_OS]\%  & $\leq 1\%$ (P6)    & [PASS\_P6] \\
-    Steady-state Error  & [VAL\_SSE]$°$ & -- & -- \\
+    Settling Time $t_s$  & [VAL\_TS]\,s  & P5 & $\leq 0.5$\,s & [PASS\_P5] \\
+    Overshoot \%OS       & [VAL\_OS]\%   & P6 & $\leq 1\%$    & [PASS\_P6] \\
+    Steady-state Error   & [VAL\_SSE]$°$ & -- & --            & -- \\
     \bottomrule
   \end{tabular}
 \end{table}
+
+Settling Time ที่วัดได้สะท้อนผลของ ZVD Input Shaper
+ที่ยกเลิกการแกว่งของ Rod ภายใน $t_3 = 0.518$\,s หลังจาก Move เสร็จ
+หากไม่มี ZVD Shaper Rod จะแกว่งนาน $\approx 6$--$7$\,s
+ทำให้ไม่สามารถผ่านเกณฑ์ P5 ได้
 
 % -----------------------------------------------------------------------
 % รูปที่: Step Response Hardware
 % ชื่อไฟล์แนะนำ: fig_step_response_hw.png
-% เนื้อหา: theta_ref vs theta_actual vs time
-%          Annotate: t_s, %OS
-%          สร้างจาก Live Data ผ่าน MATLAB
+% เนื้อหา: 3 subplots (จาก STM32CubeMonitor):
+%   (บน)   theta_ref (dashed) vs theta_arm (solid) vs time
+%          Annotate: t_s (เส้น dashed แนวตั้ง), %OS (ลูกศร)
+%          Shaded band: ±2% settling window
+%   (กลาง) tracking error = theta_ref - theta_arm vs time
+%   (ล่าง) omega_arm vs time แสดง velocity profile
 % -----------------------------------------------------------------------
 % \begin{figure}[H]
 %     \centering
 %     \includegraphics[width=0.88\textwidth]{fig_step_response_hw}
-%     \caption{ผล Step Response บน Hardware จริง
-%              แสดง Settling Time และ Overshoot
+%     \caption{Step Response บน Hardware (With Load, $\theta_{ref} = 40°$):
+%              Position Tracking (บน), Tracking Error (กลาง),
+%              และ Velocity Profile (ล่าง)
 %              เทียบกับข้อกำหนด P5 และ P6}
 %     \label{fig:step_response_hw}
 % \end{figure}
 
+% ----------------------------------------------------------------------------
 \subsection{ความแม่นยำตำแหน่ง (Position Accuracy)}
 \label{subsec:accuracy}
+% ----------------------------------------------------------------------------
+
+\subsubsection{วัตถุประสงค์}
+
+Accuracy Test ทวนสอบข้อกำหนด A1 (Max Error $\leq \pm 0.5°$)
+ที่ทุกตำแหน่ง Workstation ทั้ง 4 จุด (0°, 40°, 80°, 120°)
+ความแม่นยำสัมบูรณ์ (Absolute Accuracy) ขึ้นอยู่กับ
+ความถูกต้องของ Homing Position, Backlash ของระบบส่งกำลัง
+และ Steady-state Error ของ Position Controller
+
+\subsubsection{วิธีการทดสอบ}
+
+สั่ง Position Command ไปยังแต่ละตำแหน่งเป้าหมาย 10 ครั้ง
+บันทึก \texttt{theta\_arm} ณ จุดที่ IsAtTarget = true
+แล้วคำนวณค่าเฉลี่ยและ Error เทียบกับค่าเป้าหมาย
+ทดสอบทั้งแบบ Approach จากทิศทางเดียว (Unidirectional)
+เพื่อตัดผลของ Backlash ออก
+และแบบ Bidirectional เพื่อประเมิน Backlash Effect จริง
+
+\subsubsection{ผลการทดสอบ}
 
 \begin{table}[H]
   \centering
-  \caption{ผลการทดสอบความแม่นยำตำแหน่ง (A1)}
+  \caption{ผลการทดสอบความแม่นยำตำแหน่ง (A1) --- ค่าเฉลี่ยจาก 10 ครั้ง}
   \label{tab:accuracy}
-  \begin{tabular}{lccc}
+  \begin{tabular}{lcccc}
     \toprule
-    ตำแหน่งเป้าหมาย (°) & ค่าจริงเฉลี่ย (°) & Error (°) & ผล \\
+    ตำแหน่งเป้าหมาย (°) & ค่าจริงเฉลี่ย (°) & Error (°) & $\sigma$ (°) & ผล \\
     \midrule
-    0   & [VAL\_POS\_0]   & [VAL\_ERR\_0]   & [PASS\_0] \\
-    40  & [VAL\_POS\_40]  & [VAL\_ERR\_40]  & [PASS\_40] \\
-    80  & [VAL\_POS\_80]  & [VAL\_ERR\_80]  & [PASS\_80] \\
-    120 & [VAL\_POS\_120] & [VAL\_ERR\_120] & [PASS\_120] \\
+    0   & [VAL\_POS\_0]   & [VAL\_ERR\_0]   & [VAL\_STD\_0]   & [PASS\_0] \\
+    40  & [VAL\_POS\_40]  & [VAL\_ERR\_40]  & [VAL\_STD\_40]  & [PASS\_40] \\
+    80  & [VAL\_POS\_80]  & [VAL\_ERR\_80]  & [VAL\_STD\_80]  & [PASS\_80] \\
+    120 & [VAL\_POS\_120] & [VAL\_ERR\_120] & [VAL\_STD\_120] & [PASS\_120] \\
     \midrule
-    Max Error & -- & [VAL\_MAX\_ERR] & เกณฑ์ A1: $\leq \pm 0.5°$ \\
+    Max Error & -- & [VAL\_MAX\_ERR] & -- & เกณฑ์ A1: $\leq \pm 0.5°$ \\
     \bottomrule
   \end{tabular}
 \end{table}
 
+% -----------------------------------------------------------------------
+% รูปที่: Position Accuracy Error Bar
+% ชื่อไฟล์แนะนำ: fig_accuracy_errorbar.png
+% เนื้อหา: Error bar plot แสดง mean error ± σ ที่ทุกตำแหน่ง
+%          เส้น dashed แนวนอน = ±0.5° (เกณฑ์ A1)
+%          แยกสี Unidirectional (น้ำเงิน) vs Bidirectional (แดง)
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.75\textwidth]{fig_accuracy_errorbar}
+%     \caption{ความแม่นยำตำแหน่ง (A1) ที่ทุก Workstation:
+%              Mean Error $\pm\sigma$ เทียบกับเกณฑ์ $\pm 0.5°$}
+%     \label{fig:accuracy_errorbar}
+% \end{figure}
+
+% ----------------------------------------------------------------------------
 \subsection{ความซ้ำซากได้ (Repeatability)}
 \label{subsec:repeatability}
+% ----------------------------------------------------------------------------
+
+\subsubsection{วัตถุประสงค์}
+
+Repeatability Test ทวนสอบข้อกำหนด A2 (Max Deviation $\leq \pm 0.1°$)
+ซึ่งเข้มงวดกว่า A1 ถึง 5 เท่า
+Repeatability สะท้อนความสม่ำเสมอของระบบโดยรวม
+รวมถึง Encoder Noise, Backlash, Friction Variation
+และ Homing Repeatability ที่สะสมเป็น Offset
+
+\subsubsection{วิธีการทดสอบ}
+
+ดำเนิน Full Sequence 100 รอบ: 0° → 40° → 80° → 120° → 0°
+บันทึก \texttt{theta\_arm} ณ จุด IsAtTarget = true ทุกตำแหน่ง
+ทดสอบต่อเนื่องโดยไม่ Re-home ระหว่างรอบ
+เพื่อให้ Homing Error สะสมได้เต็มที่ตามสภาวะจริง
+Max Deviation คำนวณจาก $\max |x_i - \bar{x}|$ ของ 100 ค่า
+
+\subsubsection{ผลการทดสอบ}
 
 \begin{table}[H]
   \centering
   \caption{ผลการทดสอบความซ้ำซากได้ 100 รอบ (A2)}
   \label{tab:repeatability}
-  \begin{tabular}{lccc}
+  \begin{tabular}{lcccc}
     \toprule
-    ตำแหน่ง (°) & Mean Error (°) & Max Deviation (°) & ผล \\
+    ตำแหน่ง (°) & Mean Error (°) & $\sigma$ (°) & Max Deviation (°) & ผล \\
     \midrule
-    40  & [VAL\_REP\_MEAN\_40]  & [VAL\_REP\_MAX\_40]  & [PASS\_REP\_40] \\
-    80  & [VAL\_REP\_MEAN\_80]  & [VAL\_REP\_MAX\_80]  & [PASS\_REP\_80] \\
-    120 & [VAL\_REP\_MEAN\_120] & [VAL\_REP\_MAX\_120] & [PASS\_REP\_120] \\
+    40  & [VAL\_REP\_MEAN\_40]  & [VAL\_REP\_STD\_40]  & [VAL\_REP\_MAX\_40]  & [PASS\_REP\_40] \\
+    80  & [VAL\_REP\_MEAN\_80]  & [VAL\_REP\_STD\_80]  & [VAL\_REP\_MAX\_80]  & [PASS\_REP\_80] \\
+    120 & [VAL\_REP\_MEAN\_120] & [VAL\_REP\_STD\_120] & [VAL\_REP\_MAX\_120] & [PASS\_REP\_120] \\
     \midrule
-    Worst Case & -- & [VAL\_REP\_WORST] &
-      เกณฑ์ A2: $\leq \pm 0.1°$ \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\subsection{Cycle Time}
-\label{subsec:cycle_time}
-
-\begin{table}[H]
-  \centering
-  \caption{ผลการทดสอบ Cycle Time (P1)}
-  \label{tab:cycle_time}
-  \begin{tabular}{lccc}
-    \toprule
-    รอบที่ & Cycle Time (s) & Gripper Overhead (s) & หมายเหตุ \\
-    \midrule
-    1 & [VAL\_CT\_1] & [VAL\_GT\_1] & -- \\
-    2 & [VAL\_CT\_2] & [VAL\_GT\_2] & -- \\
-    3 & [VAL\_CT\_3] & [VAL\_GT\_3] & -- \\
-    \midrule
-    เฉลี่ย & [VAL\_CT\_AVG] & -- & เกณฑ์ P1: $\leq 35$\,s \\
+    Worst Case & -- & -- & [VAL\_REP\_WORST] & เกณฑ์ A2: $\leq \pm 0.1°$ \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 % -----------------------------------------------------------------------
-% รูปที่: Cycle Timeline
+% รูปที่: Repeatability Run Chart
+% ชื่อไฟล์แนะนำ: fig_repeatability_runchart.png
+% เนื้อหา: 3 subplots (แนวตั้ง) สำหรับ 40°, 80°, 120°:
+%   Scatter: theta_arm ทุก 100 รอบ vs รอบที่
+%   เส้น dashed = ค่าเฉลี่ย
+%   Shaded band = ±0.1° (เกณฑ์ A2)
+% -----------------------------------------------------------------------
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.88\textwidth]{fig_repeatability_runchart}
+%     \caption{Run Chart ความซ้ำซากได้ 100 รอบที่ตำแหน่ง 40°, 80°, 120°
+%              เทียบกับเกณฑ์ $\pm 0.1°$ (A2)}
+%     \label{fig:repeatability_runchart}
+% \end{figure}
+
+% ----------------------------------------------------------------------------
+\subsection{Cycle Time}
+\label{subsec:cycle_time}
+% ----------------------------------------------------------------------------
+
+\subsubsection{วัตถุประสงค์}
+
+Cycle Time Test ทวนสอบข้อกำหนด P1 ($\leq 35$\,s สำหรับ 4 ชิ้นงาน)
+และ P2 (Pick/Place Time) โดย Cycle เต็มรูปแบบประกอบด้วย 9 Moves ดังนี้:
+Home → WS1 → WS2 → WS3 → WS4 → WS3 → WS2 → WS1 → Home
+พร้อม Gripper Operation (Pick + Place) ที่แต่ละ Workstation
+
+\subsubsection{การแบ่ง Cycle Time Budget}
+
+เวลาต่อ Cycle แบ่งออกเป็นสามส่วนหลัก:
+\begin{enumerate}
+    \item \textbf{Move Time}: เวลา S-curve ต่อ Move
+          $= t_{scurve} + t_{zvd,delay}$
+          โดย $t_{zvd,delay} = t_3 = 0.518$\,s ต่อ Move
+    \item \textbf{Gripper Time}: เวลา Pick + Place ต่อ Workstation
+          (ข้อกำหนด P2)
+    \item \textbf{Settling Window}: เวลาที่รอ IsAtTarget = true
+          หลังจาก ZVD Delay ครบ
+\end{enumerate}
+
+\subsubsection{ผลการทดสอบ}
+
+\begin{table}[H]
+  \centering
+  \caption{ผลการทดสอบ Cycle Time (P1) --- 3 รอบต่อเนื่อง}
+  \label{tab:cycle_time}
+  \begin{tabular}{lcccc}
+    \toprule
+    รอบที่ & Cycle Time (s) & Move Time (s) & Gripper Overhead (s) & หมายเหตุ \\
+    \midrule
+    1 & [VAL\_CT\_1] & [VAL\_MT\_1] & [VAL\_GT\_1] & -- \\
+    2 & [VAL\_CT\_2] & [VAL\_MT\_2] & [VAL\_GT\_2] & -- \\
+    3 & [VAL\_CT\_3] & [VAL\_MT\_3] & [VAL\_GT\_3] & -- \\
+    \midrule
+    เฉลี่ย & [VAL\_CT\_AVG] & [VAL\_MT\_AVG] & [VAL\_GT\_AVG] & เกณฑ์ P1: $\leq 35$\,s \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------
+% รูปที่: Cycle Timeline (Gantt)
 % ชื่อไฟล์แนะนำ: fig_cycle_timeline.png
-% เนื้อหา: Gantt-style timeline แสดง Move 1–9 + Gripper time
-%          Annotate: total cycle time
+% เนื้อหา: Gantt-style horizontal bar chart:
+%   แกน Y: Move 1–9 + Gripper Op 1–4
+%   แกน X: เวลา (s) ตั้งแต่ t=0
+%   แต่ละ Move: แสดง Move Time + ZVD Delay แยกสี
+%   Gripper: แสดง Pick + Place แยกสี
+%   เส้น dashed แนวตั้ง = Total Cycle Time
+%   Annotate: ผลรวม และเกณฑ์ 35 s
 % -----------------------------------------------------------------------
 % \begin{figure}[H]
 %     \centering
 %     \includegraphics[width=0.95\textwidth]{fig_cycle_timeline}
-%     \caption{Timeline ของ Cycle เต็มรูปแบบ (4 ชิ้น + Homing)
-%              แสดงเวลาในแต่ละ Move และ Gripper Operation}
+%     \caption{Cycle Timeline เต็มรูปแบบ (4 ชิ้นงาน, 9 Moves):
+%              Move Time, ZVD Delay และ Gripper Operation
+%              เทียบกับเกณฑ์ P1 ($\leq 35$\,s)}
 %     \label{fig:cycle_timeline}
 % \end{figure}
 
@@ -385,8 +1023,25 @@
 \label{sec:vnv}
 % ============================================================================
 
+หัวข้อนี้สรุปผลการทวนสอบข้อกำหนดทั้ง 32 ข้อ
+ครอบคลุม 5 หมวด ได้แก่ Mechanical (M1--M10),
+Performance (P1--P7), Accuracy (A1--A5),
+Electrical (E1--E9) และ Joystick (J1)
+วิธีการทวนสอบแต่ละข้อจัดอยู่ในหนึ่งในสี่ประเภท ได้แก่
+(1) \textbf{การตรวจสอบ} (Inspection) — ตรวจสอบด้วยสายตาหรือเครื่องมือวัด,
+(2) \textbf{การวิเคราะห์} (Analysis) — คำนวณหรือ Simulate จากแบบจำลอง,
+(3) \textbf{การสาธิต} (Demonstration) — แสดงการทำงานต่อหน้าผู้ตรวจสอบ, และ
+(4) \textbf{การทดสอบ} (Test) — วัดค่าเชิงปริมาณเทียบกับเกณฑ์ที่กำหนด
+
+ข้อกำหนดหมวด Mechanical (M1--M10) ทวนสอบด้วยการตรวจสอบและ FEA
+ซึ่งดำเนินการในขั้นตอนการออกแบบและสร้าง (บทที่ 3--4)
+ข้อกำหนดหมวด Performance และ Accuracy ทวนสอบด้วยการทดสอบบน Hardware
+ตามที่รายงานใน \cref{sec:subsystem_test} และ \cref{sec:performance}
+ข้อกำหนดหมวด Electrical ทวนสอบด้วยการตรวจสอบวงจรและการทดสอบ End-to-End
+สถานะ \textbf{รอผล} หมายถึงข้อกำหนดที่ต้องการข้อมูลเชิงปริมาณจาก Hardware
+และอยู่ระหว่างการเก็บข้อมูล
+
 \cref{tab:vnv_matrix} สรุปผลการทวนสอบข้อกำหนดทั้ง 32 ข้อ
-โดยระบุวิธีการทวนสอบ หลักฐาน และสถานะสุดท้าย
 
 \begin{longtable}{cllll}
   \caption{Requirements Traceability Matrix (32 ข้อ)}
@@ -432,7 +1087,7 @@
   E3  & Electrical & ตรวจสอบการต่อสาย             & ท่อลม 4 เส้น, GX 1 เส้น, Motor 1 เส้น & [E3\_STATUS] \\
   E4  & Electrical & ตรวจสอบตู้ควบคุม             & Label, Schematic, การจัดสาย & [E4\_STATUS] \\
   E5  & Electrical & ตรวจสอบ Pilot Lamp           & Power/Emergency ติดถูกต้อง & [E5\_STATUS] \\
-  E6  & Electrical & ทดสอบ E-Stop                 & ตัด Motor แต่ Controller มีไฟ & [E6\_STATUS] \\
+  E6  & Electrical & ทดสอบ E-Stop                 & $t_{stop}$ = [VAL\_ESTOP\_AVG]\,ms & [E6\_STATUS] \\
   E7  & Electrical & ตรวจสอบวงจร + ทดสอบ          & CB, Fuse, Optocoupler ทำงาน & [E7\_STATUS] \\
   E8  & Electrical & ทดสอบสลับโหมด               & Manual $\leftrightarrow$ Auto & [E8\_STATUS] \\
   E9  & Electrical & ทดสอบ Feedback Gripper       & Reed Switch 4 สัญญาณ & [E9\_STATUS] \\
@@ -441,5 +1096,17 @@
   \bottomrule
 \end{longtable}
 
-\noindent\textbf{หมายเหตุ:} สถานะ \textbf{ผ่าน} หมายความว่าทวนสอบแล้วและพบว่าเป็นไปตามข้อกำหนด
+\noindent\textbf{หมายเหตุ:}
+สถานะ \textbf{ผ่าน} หมายความว่าทวนสอบแล้วและพบว่าเป็นไปตามข้อกำหนด
 สถานะ \textbf{รอผล} หมายความว่าอยู่ระหว่างการเก็บข้อมูลเชิงปริมาณบน Hardware จริง
+สถานะ \textbf{ไม่ผ่าน} หมายความว่าผลการทดสอบไม่เป็นไปตามข้อกำหนดและต้องแก้ไข
+
+\paragraph{สรุปสถานะการทวนสอบ}
+จากข้อกำหนดทั้ง 32 ข้อ
+ข้อกำหนดหมวด Mechanical (M1--M10) ทั้ง 10 ข้อผ่านการทวนสอบด้วย FEA
+และการตรวจสอบจริงในขั้นตอนการสร้าง
+ข้อกำหนดหมวด Electrical (E1--E9) และ Joystick (J1) ส่วนใหญ่ทวนสอบด้วย
+การตรวจสอบ Firmware และการทดสอบ End-to-End
+ข้อกำหนดที่อยู่ระหว่างรอผลการทดสอบเชิงปริมาณได้แก่
+P1--P7 (Performance), A1--A2 (Accuracy เชิงตัวเลข)
+ซึ่งต้องการข้อมูลจากการทดสอบบน Hardware ที่สมบูรณ์
