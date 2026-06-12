@@ -116,7 +116,7 @@
   \caption{ข้อกำหนดความต้องการของระบบทั้ง 32 ข้อ}
   \label{tab:req_summary}
   \small
-  \begin{tabular}{clp{9.5cm}}
+  \begin{tabular}{p{1.5cm} p{2.2cm} p{9.8cm}}
     \toprule
     \textbf{Req ID} & \textbf{หมวด} & \textbf{คำอธิบาย} \\
     \midrule
@@ -128,7 +128,7 @@
     M6  & Mechanical & ชิ้นส่วนรับแรงห้ามใช้ 3D Print เด็ดขาด \\
     M7  & Mechanical & ยึดฐานสแตนเลส AISI304 ของลูกค้าด้วยสกรู M8 เหล็กกรมดำ \\
     M8  & Mechanical & เพลาต่อ Encoder ลูกค้า $\varnothing$8 mm (สูง 400 mm, ยื่น $\geq$ 20 mm) \\
-    M9  & Mechanical & หมุนต่อเนื่องได้ $\geq 540^{\circ}$ โดยสายไฟไม่พันกัน \\
+    M9  & Mechanical & หมุนต่อเนื่องได้ $\geq 540\degree$ โดยสายไฟไม่พันกัน \\
     M10 & Mechanical & จุดต่ำสุดของกริปเปอร์ต้องไม่ชนกับ Connection Rod \\
     \midrule
     P1  & Performance & ทำงานครบ 1 รอบ (หยิบวาง 4 ชิ้น + กลับ Homing) ใน $\leq$ 35 วินาที \\
@@ -140,7 +140,7 @@
     P7  & Performance & รองรับการทดสอบทั้งแบบมีโหลด (2 kg) และไม่มีโหลด \\
     \midrule
     A1  & Accuracy & ต้องสวมเพลา $\varnothing$12 mm ลงในรู $\varnothing$14 mm ได้ถูกต้อง \\
-    A2  & Accuracy & ความแม่นยำซ้ำ 100 รอบ คลาดเคลื่อน $\leq \pm 0.1^{\circ}$ \\
+    A2  & Accuracy & ความแม่นยำซ้ำ 100 รอบ คลาดเคลื่อน $\leq \pm 0.1\degree$ \\
     A3  & Accuracy & ผู้ใช้สามารถ Set จุด Homing เองได้หลังตั้งกับฐาน \\
     A4  & Accuracy & สั่งงานได้ 2 แบบ: (1) ระบุองศา (2) ระบุลำดับตำแหน่งจาก Homing \\
     A5  & Accuracy & หากสั่งงานนอกระยะ ระบบต้องแจ้ง Error หรือป้องกันไว้ \\
@@ -186,13 +186,13 @@ Physical Architecture ซึ่งอธิบายฮาร์ดแวร์�
     \label{fig:sys_arch}
 \end{figure}
 
-\begin{itemize}
-    \item \textbf{\color[HTML]{38BDF8} เส้นสีฟ้า (Data / Signal Line):} หมายถึง เส้นทางเดินของข้อมูลและสัญญาณควบคุมลอจิกแรงดันต่ำ (Low-voltage Logic) ประกอบด้วยโปรโตคอลการสื่อสารความเร็วสูง เช่น Modbus RTU (230.4 kbps) ผ่าน LPUART1, สัญญาณ Bluetooth จาก Joystick เข้า USART3 รวมถึงสัญญาณพัลส์จาก Quadrature Encoder (TIM3 QEI), สัญญาณอนาล็อกเชิงวินิจฉัยจาก Current Sensor (ADC1 DMA) และสัญญาณทริกเกอร์ลอจิกผ่าน Optocoupler
+% \begin{itemize}
+%     \item \textbf{\color[HTML]{38BDF8} เส้นสีฟ้า (Data / Signal Line):} หมายถึง เส้นทางเดินของข้อมูลและสัญญาณควบคุมลอจิกแรงดันต่ำ (Low-voltage Logic) ประกอบด้วยโปรโตคอลการสื่อสารความเร็วสูง เช่น Modbus RTU (230.4 kbps) ผ่าน LPUART1, สัญญาณ Bluetooth จาก Joystick เข้า USART3 รวมถึงสัญญาณพัลส์จาก Quadrature Encoder (TIM3 QEI), สัญญาณอนาล็อกเชิงวินิจฉัยจาก Current Sensor (ADC1 DMA) และสัญญาณทริกเกอร์ลอจิกผ่าน Optocoupler
     
-    \item \textbf{\color[HTML]{F87171} เส้นสีแดง (Power \& Safety Interlock Line):} หมายถึง เส้นทางเดินระบบไฟฟ้ากำลังและการกระจายพลังงาน (Power Distribution) รวมถึงวงจรตัดการทำงานฉุกเฉินระดับฮาร์ดแวร์ (Hardware Safety Loop) ได้แก่ สายไฟฟ้ากระแสสลับ 220VAC Grid Input, ระบบบัสแรงดันไฟตรง 24VDC สำหรับขับมอเตอร์และโซลินอยด์วาล์ว, ระบบบัส 5VDC สำหรับเลี้ยงวงจรลอจิก และสายสัญญาณ NC Contact ของ E-Stop ที่เชื่อมต่อไปยัง Magnetic Contactor เพื่อทำ Hardware Interlock
+%     \item \textbf{\color[HTML]{F87171} เส้นสีแดง (Power \& Safety Interlock Line):} หมายถึง เส้นทางเดินระบบไฟฟ้ากำลังและการกระจายพลังงาน (Power Distribution) รวมถึงวงจรตัดการทำงานฉุกเฉินระดับฮาร์ดแวร์ (Hardware Safety Loop) ได้แก่ สายไฟฟ้ากระแสสลับ 220VAC Grid Input, ระบบบัสแรงดันไฟตรง 24VDC สำหรับขับมอเตอร์และโซลินอยด์วาล์ว, ระบบบัส 5VDC สำหรับเลี้ยงวงจรลอจิก และสายสัญญาณ NC Contact ของ E-Stop ที่เชื่อมต่อไปยัง Magnetic Contactor เพื่อทำ Hardware Interlock
     
-    \item \textbf{\color[HTML]{4ADE80} เส้นสีเขียว (Mechanical \& Force Transmission Line):} หมายถึง เส้นทางการส่งถ่ายกำลังเชิงกล แรงบิด และพลังงานไหลเวียน (Kinetic \& Pneumatic Energy Flow) ประกอบด้วยแรงบิดรอบสูงจากเพลามอเตอร์เข้าสู่ Planetary Gearbox (24:1), การส่งกำลังผ่านสายพาน HTD5M Belt Drive (2.917:1) เพื่อขับแขนกลหมุน (Rotating Arm) ด้วยอัตราทดรวม 70:1 รวมถึงแรงดันลม (Pneumatic Pressure) จาก Solenoid Valves ที่ส่งตรงไปขับเคลื่อนกลไกการหยิบจับของตัว Pneumatic Gripper ทั้งในส่วนของกระบอกสูบแนวตั้งและปากจับ
-\end{itemize}
+%     \item \textbf{\color[HTML]{4ADE80} เส้นสีเขียว (Mechanical \& Force Transmission Line):} หมายถึง เส้นทางการส่งถ่ายกำลังเชิงกล แรงบิด และพลังงานไหลเวียน (Kinetic \& Pneumatic Energy Flow) ประกอบด้วยแรงบิดรอบสูงจากเพลามอเตอร์เข้าสู่ Planetary Gearbox (24:1), การส่งกำลังผ่านสายพาน HTD5M Belt Drive (2.917:1) เพื่อขับแขนกลหมุน (Rotating Arm) ด้วยอัตราทดรวม 70:1 รวมถึงแรงดันลม (Pneumatic Pressure) จาก Solenoid Valves ที่ส่งตรงไปขับเคลื่อนกลไกการหยิบจับของตัว Pneumatic Gripper ทั้งในส่วนของกระบอกสูบแนวตั้งและปากจับ
+% \end{itemize}
 
 ระบบแบ่งออกเป็น 4 Subsystem หลักที่ทำงานร่วมกัน ดังนี้
 
@@ -241,7 +241,8 @@ Manual Mode ผ่าน Wireless Joystick ที่รับสัญญาณ 
   \centering
   \caption{สรุป Subsystem หลักของระบบ}
   \label{tab:subsystem_summary}
-  \begin{tabular}{l p{7.0cm} p{4.5cm}}
+  \small
+  \begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm} >{\raggedright\arraybackslash}p{6.5cm} >{\raggedright\arraybackslash}p{4.0cm}}
     \toprule
     \textbf{Subsystem} & \textbf{องค์ประกอบหลัก} & \textbf{รายละเอียดใน} \\
     \midrule

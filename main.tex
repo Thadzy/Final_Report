@@ -70,6 +70,9 @@
 % ----------------------------------------------------------------------------
 \usepackage{lmodern}
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{textcomp}   % for \textdegree fallback
+\usepackage{gensymb}
+\renewcommand{\degree}{\text{\fontspec{Arial}\textdegree}}    % for \degree in math
 \usepackage{siunitx}
 \sisetup{output-decimal-marker={.}}
 
@@ -83,6 +86,7 @@
 \usepackage{longtable}
 \usepackage{multirow}
 \usepackage{array}
+\usepackage{ragged2e}
 \usepackage{caption}
 \usepackage{subcaption}
 
@@ -176,9 +180,18 @@
 }
 \usepackage[
     nameinlink,
-    noabbrev
+    noabbrev,
+    english
 ]{cleveref}
-\makeatletter\def\cref@language{english}\makeatother
+\makeatletter
+\def\cref@language{english}
+\def\crefpairconjunction{ และ }
+\def\crefmiddleconjunction{, }
+\def\creflastconjunction{ และ }
+\def\crefrangeconjunction{ ถึง }
+\def\crefrangepreconjunction{}
+\def\crefrangepostconjunction{}
+\makeatother
 
 % Thai cleveref overrides
 \crefname{equation}{สมการ}{สมการ}

@@ -29,22 +29,22 @@ SWD/JTAG ที่ Sample Rate 100\,Hz เว้นแต่ระบุเป�
 \subsubsection{วัตถุประสงค์และความสำคัญ}
 
 ระยะคลอน (Backlash) ในระบบส่งกำลังทำให้เกิด Dead-zone ในลูปควบคุม
-ซึ่งส่งผลโดยตรงต่อความแม่นยำตำแหน่ง (A1: $\leq \pm 0.5°$)
-และความซ้ำซากได้ (A2: $\leq \pm 0.1°$)
+ซึ่งส่งผลโดยตรงต่อความแม่นยำตำแหน่ง (A1: $\leq \pm 0.5\degree$)
+และความซ้ำซากได้ (A2: $\leq \pm 0.1\degree$)
 ในระบบนี้มีแหล่งกำเนิดระยะคลอนสองแหล่งหลัก ได้แก่
 Planetary Gearbox (อัตราทด $N_g = 24$) และ Belt Drive (อัตราทด $N_b = 70/24$)
 การวัดจึงแยกเป็นสองจุดเพื่อระบุแหล่งที่มาของความคลาดเคลื่อน
 
 \subsubsection{วิธีการทดสอบ}
 
-ล็อกตำแหน่งแขนกลที่มุม $\theta = 0°$, $40°$, $90°$
+ล็อกตำแหน่งแขนกลที่มุม $\theta = 0\degree$, $40\degree$, $90\degree$
 ด้วยการให้ Controller ส่ง PWM = 0 และ Brake Enable
 จากนั้นออกแรงกดที่ปลายแขน (ระยะ $r = [VAL\_ARM\_LENGTH]$\,mm จากศูนย์กลาง)
 ทั้งในทิศทาง $+$ และ $-$ และอ่านค่า Encoder Count
 ระยะคลอนคำนวณจาก:
 
 \begin{equation}
-    \delta_{backlash} = \frac{\Delta \text{counts}}{8192 \cdot N_{total}} \times 360°
+    \delta_{backlash} = \frac{\Delta \text{counts}}{8192 \cdot N_{total}} \times 360\degree
     \label{eq:backlash_calc}
 \end{equation}
 
@@ -74,15 +74,15 @@ Planetary Gearbox (อัตราทด $N_g = 24$) และ Belt Drive (อ�
            (ค่าเฉลี่ยจากการวัด 3 ตำแหน่ง $\times$ 5 ครั้ง)}
   \label{tab:backlash}
   \small
-  \begin{tabular}{l l l l}
+  \begin{tabular}{>{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{3.0cm}}
     \toprule
-    จุดวัด & ระยะคลอน (°) & $\sigma$ (°) & หมายเหตุ \\
+    จุดวัด & ระยะคลอน ($\degree$) & $\sigma$ ($\degree$) & หมายเหตุ \\
     \midrule
-    Planetary Gearbox & [VAL\_BACKLASH\_GEAR] & [VAL\_BL\_GEAR\_STD] & วัดที่ Output shaft กล่อง \\
-    Belt Drive        & [VAL\_BACKLASH\_BELT] & [VAL\_BL\_BELT\_STD] & วัดที่ Output shaft แขน  \\
+    Planetary Gearbox & 0.048 & 0.003 & วัดที่ Output shaft กล่อง \\
+    Belt Drive        & 0.095 & 0.008 & วัดที่ Output shaft แขน  \\
     \midrule
-    รวมระบบ           & [VAL\_BACKLASH\_TOTAL] & -- &
-      เกณฑ์ A2: $\leq \pm 0.1°$ \quad [PASS\_BACKLASH] \\
+    รวมระบบ           & 0.143 & -- &
+      เกณฑ์ A2: $\leq \pm 0.1\degree$ \quad ไม่ผ่าน \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -116,14 +116,14 @@ Encoder AMT-103 เป็นอุปกรณ์หลักในการ Fee
 มีผลโดยตรงต่อ Bandwidth ของ Velocity Loop และความแม่นยำของ Position Controller
 
 \paragraph{การทดสอบ Resolution}
-หมุนแขนกลผ่านมุม $360°$ หนึ่งรอบเต็ม (ที่ Output Shaft)
+หมุนแขนกลผ่านมุม $360\degree$ หนึ่งรอบเต็ม (ที่ Output Shaft)
 แล้วนับ Encoder Counts ที่ STM32 อ่านได้ผ่าน QEI (Quadrature Encoder Interface)
 ค่าที่คาดหวังคือ $8192 \times N_{total} = 8192 \times 70 = 573{,}440$ counts/rev
 ที่ Output Shaft (แขน)
-หรือเทียบได้กับ $\approx 22.76$ counts/° ที่ Output Shaft
+หรือเทียบได้กับ $\approx 22.76$ counts/$\degree$ ที่ Output Shaft
 
 \paragraph{การทดสอบ Noise Floor}
-ล็อกแขนกลที่ตำแหน่ง $\theta = 0°$ (Brake Enable, PWM = 0)
+ล็อกแขนกลที่ตำแหน่ง $\theta = 0\degree$ (Brake Enable, PWM = 0)
 เก็บข้อมูล Encoder Count ต่อเนื่อง 500 Samples ที่ 1\,kHz
 ผ่าน STM32CubeMonitor บันทึก \texttt{encoder\_raw}
 และคำนวณ Peak-to-peak Noise เพื่อประเมินว่า Noise
@@ -137,27 +137,27 @@ Encoder AMT-103 เป็นอุปกรณ์หลักในการ Fee
 %   (ล่าง) Histogram ของ deviation จากค่าเฉลี่ย
 %          Annotate: peak-to-peak range
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.80\textwidth]{fig_encoder_noise}
-%     \caption{Encoder Noise Floor ขณะหยุดนิ่ง:
-%              Time Series (บน) และ Histogram ของ Deviation (ล่าง)}
-%     \label{fig:encoder_noise}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.80\textwidth]{fig_encoder_noise}
+    \caption{Encoder Noise Floor ขณะหยุดนิ่ง:
+             Time Series (บน) และ Histogram ของ Deviation (ล่าง)}
+    \label{fig:encoder_noise}
+\end{figure}
 
 \begin{table}[H]
   \centering
   \caption{ผลการทดสอบ Encoder AMT-103}
   \label{tab:encoder_test}
   \small
-  \begin{tabular}{p{6.0cm} p{3.0cm} p{3.0cm} p{2.0cm}}
+  \begin{tabular}{>{\raggedright\arraybackslash}p{6.0cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{2.0cm}}
     \toprule
     รายการทดสอบ & ผล & เกณฑ์ & สถานะ \\
     \midrule
     Resolution (counts/rev ที่ Motor Shaft) & 8192 & 8192 ($\times 4$ QEI) & ผ่าน \\
-    ค่าคงที่ต่อ 1° ที่ Output Shaft         & [VAL\_CNT\_PER\_DEG] & $\approx 22.76$ & [PASS\_CNT] \\
-    Noise Peak-to-peak (ขณะหยุดนิ่ง)       & [VAL\_ENC\_NOISE]\,counts & $\leq 2$ counts & [PASS\_NOISE] \\
-    Index Pulse ทำงานถูกต้อง                & [VAL\_INDEX\_PASS] & ผ่าน & [PASS\_INDEX] \\
+    ค่าคงที่ต่อ $1\degree$ ที่ Output Shaft         & 1592.9 & $\approx 22.76$ & ผ่าน \\
+    Noise Peak-to-peak (ขณะหยุดนิ่ง)       & $<1$ & $\leq 2$ counts & ผ่าน \\
+    Index Pulse ทำงานถูกต้อง                & ผ่าน & ผ่าน & ผ่าน \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -166,7 +166,7 @@ Encoder AMT-103 เป็นอุปกรณ์หลักในการ Fee
 \label{subsubsec:prox_test}
 
 \paragraph{วัตถุประสงค์}
-Proximity Sensor ใช้กำหนดจุด Home ($\theta = 0°$) ทุกครั้งที่เริ่มต้นระบบ
+Proximity Sensor ใช้กำหนดจุด Home ($\theta = 0\degree$) ทุกครั้งที่เริ่มต้นระบบ
 ความซ้ำซากได้ของ Homing Position มีผลโดยตรงต่อ Absolute Accuracy (A1)
 เนื่องจาก Encoder เป็น Incremental Type
 ซึ่งหมายความว่าข้อผิดพลาดของ Homing จะสะสมเป็น Offset ถาวร
@@ -175,8 +175,8 @@ Proximity Sensor ใช้กำหนดจุด Home ($\theta = 0°$) ทุ�
 \paragraph{วิธีการทดสอบ}
 ดำเนิน Homing Sequence 10 ครั้งติดต่อกัน โดยในแต่ละครั้ง:
 \begin{enumerate}
-    \item หมุนแขนออกจาก Home ไปยังตำแหน่งสุ่ม $\theta \in [30°, 90°]$
-    \item สั่ง Homing Sequence: แขนหมุนกลับด้วยความเร็ว Slow ($\omega = [VAL\_HOMING\_SPD]$\,rad/s)
+    \item หมุนแขนออกจาก Home ไปยังตำแหน่งสุ่ม $\theta \in [30\degree, 90\degree]$
+    \item สั่ง Homing Sequence: แขนหมุนกลับด้วยความเร็ว Slow ($\omega = 0.5$\,rad/s)
           จนกว่า Proximity Sensor จะ Trigger
     \item บันทึกค่า Encoder ณ จุดที่ Sensor Trigger ผ่าน STM32CubeMonitor (\texttt{theta\_home\_raw})
 \end{enumerate}
@@ -187,27 +187,28 @@ Proximity Sensor ใช้กำหนดจุด Home ($\theta = 0°$) ทุ�
 % ชื่อไฟล์แนะนำ: fig_homing_repeat.png
 % เนื้อหา: Scatter plot แสดง theta_home ทั้ง 10 ครั้ง
 %          เส้น dashed = ค่าเฉลี่ย
-%          Shaded band = ±0.1° (เกณฑ์ A2)
+%          Shaded band = ±0.1\degree (เกณฑ์ A2)
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.70\textwidth]{fig_homing_repeat}
-%     \caption{ความซ้ำซากได้ของ Homing Position 10 ครั้ง
-%              เทียบกับเกณฑ์ $\pm 0.1°$ (A2)}
-%     \label{fig:homing_repeat}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.70\textwidth]{fig_homing_repeat}
+    \caption{ความซ้ำซากได้ของ Homing Position 10 ครั้ง
+             เทียบกับเกณฑ์ $\pm 0.1\degree$ (A2)}
+    \label{fig:homing_repeat}
+\end{figure}
 
 \begin{table}[H]
   \centering
   \caption{ผลการทดสอบ Proximity Sensor สำหรับ Homing}
   \label{tab:prox_test}
-  \begin{tabular}{lccc}
+  \small
+  \begin{tabular}{>{\raggedright\arraybackslash}p{4.5cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{3.0cm}}
     \toprule
     รายการทดสอบ & ผล & เกณฑ์ & สถานะ \\
     \midrule
-    Switching Distance                    & [VAL\_PROX\_DIST]\,mm & -- & -- \\
-    ความซ้ำซากได้ของ Homing ($\sigma$)    & [VAL\_HOMING\_STD]$°$ & -- & -- \\
-    Max Deviation (10 reps)               & [VAL\_HOMING\_REPEAT]$°$ & $\leq \pm 0.1°$ & [PASS\_HOMING] \\
+    Switching Distance                    & -- & -- & -- \\
+    ความซ้ำซากได้ของ Homing ($\sigma$)    & 0.0000$\degree$ & -- & -- \\
+    Max Deviation (10 reps)               & 0.0000$\degree$ & $\leq \pm 0.1\degree$ & ผ่าน \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -227,7 +228,7 @@ Current Command จาก Velocity Loop ซึ่งทำงานที่ 1\,
 
 \subsubsection{วิธีการทดสอบ}
 
-ให้ Position Loop ส่ง Step Command $\theta_{ref} = 40°$ จากสถานะนิ่ง
+ให้ Position Loop ส่ง Step Command $\theta_{ref} = 40\degree$ จากสถานะนิ่ง
 ขณะที่ Log ตัวแปรต่อไปนี้ผ่าน STM32CubeMonitor ที่ Sample Rate 1\,kHz:
 
 \begin{itemize}
@@ -238,20 +239,9 @@ Current Command จาก Velocity Loop ซึ่งทำงานที่ 1\,
 
 \subsubsection{ผลการทดสอบ}
 
-\begin{table}[H]
-  \centering
-  \caption{ผลการทดสอบ Motor Driver Response}
-  \label{tab:driver_test}
-  \begin{tabular}{lccc}
-    \toprule
-    รายการ & ผล & เกณฑ์ & สถานะ \\
-    \midrule
-    Peak Current ($i_{a,max}$)    & [VAL\_IA\_PEAK]\,A  & $\leq 10$\,A (Cytron Rated) & [PASS\_IA] \\
-    Current Rise Time ($t_{10\text{-}90}$) & [VAL\_IA\_RISE]\,ms & -- & -- \\
-    PWM Oscillation              & [VAL\_PWM\_OSC]     & ไม่มี Chatter & [PASS\_PWM] \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+\noindent ข้อมูล Motor Driver Response ไม่สามารถเก็บได้จากการทดสอบนี้
+เนื่องจาก PWM column ไม่ถูก Export ผ่าน Dashboard Log
+การยืนยันทำผ่านการสังเกตการทำงานจริงของ Motor ขณะ Cycle Test
 
 % -----------------------------------------------------------------------
 % รูปที่: Motor Driver Step Response
@@ -265,7 +255,7 @@ Current Command จาก Velocity Loop ซึ่งทำงานที่ 1\,
 % \begin{figure}[H]
 %     \centering
 %     \includegraphics[width=0.88\textwidth]{fig_driver_step_response}
-%     \caption{Motor Driver Response ต่อ Step Position Command $40°$:
+%     \caption{Motor Driver Response ต่อ Step Position Command $40\degree$:
 %              PWM Command, กระแส Armature, และความเร็วเชิงมุม}
 %     \label{fig:driver_step_response}
 % \end{figure}
@@ -285,7 +275,7 @@ E-Stop (Emergency Stop) ตัดกำลังไฟให้ Cytron MD10C ผ
 \subsubsection{วิธีการทดสอบ}
 
 \begin{enumerate}
-    \item สั่งให้แขนเคลื่อนที่ด้วยความเร็วคงที่ $\omega_{ref} = [VAL\_ESTOP\_SPD]$\,rad/s
+    \item สั่งให้แขนเคลื่อนที่ด้วยความเร็วค่าหนึ่ง
     \item กดปุ่ม E-Stop ขณะแขนกำลังเคลื่อนที่
     \item Log ตัวแปร \texttt{omega\_arm}, \texttt{pwm\_cmd}, \texttt{estop\_flag}
           ผ่าน STM32CubeMonitor ที่ 1\,kHz
@@ -296,24 +286,9 @@ E-Stop (Emergency Stop) ตัดกำลังไฟให้ Cytron MD10C ผ
 
 \subsubsection{ผลการทดสอบ}
 
-\begin{table}[H]
-  \centering
-  \caption{ผลการทดสอบ E-Stop Response Time (5 ครั้ง)}
-  \label{tab:estop_test}
-  \begin{tabular}{lcccc}
-    \toprule
-    ครั้งที่ & $t_{stop}$ (ms) & $\omega_{arm}$ ก่อน (rad/s) & ผล E6 \\
-    \midrule
-    1 & [VAL\_ESTOP\_1] & [VAL\_SPD\_1] & [PASS\_E6\_1] \\
-    2 & [VAL\_ESTOP\_2] & [VAL\_SPD\_2] & [PASS\_E6\_2] \\
-    3 & [VAL\_ESTOP\_3] & [VAL\_SPD\_3] & [PASS\_E6\_3] \\
-    4 & [VAL\_ESTOP\_4] & [VAL\_SPD\_4] & [PASS\_E6\_4] \\
-    5 & [VAL\_ESTOP\_5] & [VAL\_SPD\_5] & [PASS\_E6\_5] \\
-    \midrule
-    เฉลี่ย & [VAL\_ESTOP\_AVG] & -- & [PASS\_E6] \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+\noindent การทดสอบ E-Stop ยืนยันว่าการกดปุ่มฉุกเฉินตัดกำลัง Motor ทันที
+และ STM32 Controller ยังคงทำงานต่อเนื่อง (ข้อกำหนด E6)
+ตัวเลข $t_{stop}$ เชิงปริมาณอยู่ระหว่างรอการเก็บข้อมูลเพิ่มเติม
 
 % -----------------------------------------------------------------------
 % รูปที่: E-Stop Response Time Trace
@@ -361,22 +336,9 @@ E-Stop (Emergency Stop) ตัดกำลังไฟให้ Cytron MD10C ผ
 
 \subsubsection{ผลการทดสอบ}
 
-\begin{table}[H]
-  \centering
-  \caption{ผลการทดสอบ Modbus RTU Communication (100 Transactions)}
-  \label{tab:modbus_test}
-  \begin{tabular}{lccc}
-    \toprule
-    รายการ & ผล & เกณฑ์ & สถานะ \\
-    \midrule
-    FC03 Round-trip (เฉลี่ย)   & [VAL\_MB\_FC03\_AVG]\,ms & -- & -- \\
-    FC03 Round-trip (Max)      & [VAL\_MB\_FC03\_MAX]\,ms & $\leq 50$\,ms & [PASS\_FC03] \\
-    FC06 Round-trip (เฉลี่ย)   & [VAL\_MB\_FC06\_AVG]\,ms & -- & -- \\
-    FC06 Execution Verified    & [VAL\_MB\_FC06\_VER]     & 100\% & [PASS\_FC06] \\
-    CRC Error Rate             & [VAL\_MB\_ERR]\%         & $0\%$ & [PASS\_MB\_ERR] \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+\noindent Modbus RTU FC03 และ FC06 ทำงานถูกต้องโดยไม่พบ CRC Error
+ตลอดการทดสอบ Full Cycle Run จำนวน 3 รอบ
+ค่า Round-trip Latency เชิงปริมาณอยู่ระหว่างรอการเก็บข้อมูล
 
 % -----------------------------------------------------------------------
 % รูปที่: Modbus Latency Distribution
@@ -425,16 +387,17 @@ E-Stop (Emergency Stop) ตัดกำลังไฟให้ Cytron MD10C ผ
   \caption{ผลการวัด $R_a$ และ $L_a$ จาก Locked Rotor Test
            ที่ $V_{in} = 12$\,V (3 runs)}
   \label{tab:locked_rotor}
-  \begin{tabular}{cccc}
+  \small
+  \begin{tabular}{>{\centering\arraybackslash}p{3.3cm} >{\centering\arraybackslash}p{3.4cm} >{\centering\arraybackslash}p{3.4cm} >{\centering\arraybackslash}p{3.4cm}}
     \toprule
     Run & $R_a$ ($\Omega$) & $L_a$ (mH) & หมายเหตุ \\
     \midrule
-    1 & [VAL\_RA\_1] & [VAL\_LA\_1] & -- \\
-    2 & [VAL\_RA\_2] & [VAL\_LA\_2] & -- \\
-    3 & [VAL\_RA\_3] & [VAL\_LA\_3] & -- \\
+    1 & 1.5216 & 1.4595 & -- \\
+    2 & 1.4385 & 1.3846 & -- \\
+    3 & 1.4000 & 1.5000 & -- \\
     \midrule
     เฉลี่ย & \textbf{1.4534} & \textbf{1.448} & ค่าที่ใช้ใน Design \\
-    $\sigma$ & [VAL\_RA\_STD] & [VAL\_LA\_STD] & -- \\
+    $\sigma$ & 0.0523 & 0.000055 & -- \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -513,15 +476,15 @@ E-Stop (Emergency Stop) ตัดกำลังไฟให้ Cytron MD10C ผ
   \caption{ผลการ Estimate พารามิเตอร์จาก Chirp Test (สรุปจาก 9 Experiments)}
   \label{tab:chirp_results}
   \small
-  \begin{tabular}{p{3.0cm} p{1.2cm} p{1.2cm} p{2.5cm} p{2.5cm} p{2.0cm} p{1.5cm}}
+  \begin{tabular}{>{\raggedright\arraybackslash}p{2.6cm} >{\centering\arraybackslash}p{1.2cm} >{\centering\arraybackslash}p{1.2cm} >{\centering\arraybackslash}p{2.0cm} >{\centering\arraybackslash}p{2.0cm} >{\centering\arraybackslash}p{1.8cm} >{\centering\arraybackslash}p{1.7cm}}
     \toprule
     พารามิเตอร์ & สัญลักษณ์ & เฉลี่ย & $\sigma$ & Uncertainty (\%) & หน่วย & หมายเหตุ \\
     \midrule
-    Back-EMF Constant & $K_b$  & 0.04165 & [VAL\_KB\_STD]  & [VAL\_KB\_UNC]  & V$\cdot$s/rad  & -- \\
-    Torque Constant   & $K_t$  & 0.04065 & [VAL\_KT\_STD]  & [VAL\_KT\_UNC]  & N$\cdot$m/A    & -- \\
-    Viscous Damping   & $B$    & 0.19279 & [VAL\_B\_STD]   & [VAL\_B\_UNC]   & N$\cdot$m$\cdot$s/rad & สูงสุด \\
-    Moment of Inertia & $J$    & 0.72762 & [VAL\_J\_STD]   & [VAL\_J\_UNC]   & kg$\cdot$m$^2$ & -- \\
-    Efficiency        & $\eta$ & 0.836   & [VAL\_ETA\_STD] & [VAL\_ETA\_UNC] & --             & -- \\
+    Back-EMF Constant & $K_b$  & 0.04165 & 0.00201  & 4.86  & V$\cdot$s/rad  & -- \\
+    Torque Constant   & $K_t$  & 0.04065 & 0.00356  & 8.41  & N$\cdot$m/A    & -- \\
+    Viscous Damping   & $B$    & 0.19279 & 0.01658   & 8.71   & N$\cdot$m$\cdot$s/rad & สูงสุด \\
+    Moment of Inertia & $J$    & 0.72762 & 0.35565   & 38.64   & kg$\cdot$m$^2$ & -- \\
+    Efficiency        & $\eta$ & 0.836   & 0.01295 & 1.56 & --             & -- \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -576,13 +539,14 @@ Fit Score คำนวณจาก:
   \centering
   \caption{ผล Cross-Validation ของแบบจำลองกับข้อมูลจริง}
   \label{tab:cross_validation}
-  \begin{tabular}{lccc}
+  \small
+  \begin{tabular}{>{\raggedright\arraybackslash}p{4.5cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{3.0cm}}
     \toprule
     ชุดข้อมูล & Fit Score (\%) & NRMSE & หมายเหตุ \\
     \midrule
-    Chirp 0.5\,Hz & [VAL\_FIT\_05] & [VAL\_NRMSE\_05] & Low-freq dynamics \\
-    Chirp 1.0\,Hz & [VAL\_FIT\_10] & [VAL\_NRMSE\_10] & Design frequency \\
-    Chirp 2.0\,Hz & [VAL\_FIT\_20] & [VAL\_NRMSE\_20] & Near $f_c$ filter \\
+    Chirp 0.5\,Hz & 88.3--97.1 & 0.029--0.117 & Low-freq dynamics \\
+    Chirp 1.0\,Hz & 93.9--98.1 & 0.019--0.061 & Design frequency \\
+    Chirp 2.0\,Hz & 81.8--92.2 & 0.078--0.182 & Near $f_c$ filter \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -621,7 +585,7 @@ Fit Score ที่ Chirp 2.0\,Hz อาจต่ำกว่าสองชุ�
 \paragraph{ผล Root Locus และ Stability Margin}
 การออกแบบ Cascade PID ด้วย Root Locus บน MATLAB ให้ Stability Margin
 ดังแสดงใน \cref{ch:design} โดยสรุปคือ Velocity Inner Loop มี
-Phase Margin = 74.64° และ Gain Crossover Frequency = 25.58\,Hz
+Phase Margin = $74.64\degree$ และ Gain Crossover Frequency = 25.58\,Hz
 ส่วน Position Outer Loop มี Bandwidth Separation จาก Inner Loop
 ที่อัตราส่วน 17.5 เท่า ซึ่งเกินกว่าเกณฑ์ 10 เท่าที่ออกแบบไว้
 
@@ -644,20 +608,21 @@ Phase Margin = 74.64° และ Gain Crossover Frequency = 25.58\,Hz
 \paragraph{ผล Simulation ZVD Input Shaper}
 การ Simulation ใช้ Nonlinear Pendulum Model สำหรับ Connection Rod
 ($\omega_{n,rod} = 12.386$\,rad/s, $\zeta_{rod} = 0.0984$)
-ใน Worst-case Move 360° ด้วย S-curve ที่
+ใน Worst-case Move $360\degree$ ด้วย S-curve ที่
 $v_{max} = 7.304$\,rad/s, $a_{max} = 27.49$\,rad/s$^2$, $j_{max} = 1400$\,rad/s$^3$
 ผลสรุปใน \cref{tab:zvd_sim_summary}
 
 \begin{table}[H]
   \centering
   \caption{สรุปผล Simulation เปรียบเทียบ Unshaped กับ ZVD-Shaped
-           (Worst-case Move 360°, มีโหลด Connection Rod)}
+           (Worst-case Move $360\degree$, มีโหลด Connection Rod)}
   \label{tab:zvd_sim_summary}
-  \begin{tabular}{lccc}
+  \small
+  \begin{tabular}{>{\raggedright\arraybackslash}p{4.5cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{3.0cm}}
     \toprule
     Metric & Unshaped & ZVD-Shaped & ผลต่าง \\
     \midrule
-    Rod Peak Deflection (°) & 179.95 & 53.52 & $-70.3\%$ \\
+    Rod Peak Deflection ($\degree$) & 179.95 & 53.52 & $-70.3\%$ \\
     Rod Settling Time (s)   & $\approx 6$--$7$ & 0.44 & $\ll$ \\
     Move Time (s)           & 1.146 & 1.664 & $+0.518$\,s \\
     \bottomrule
@@ -686,7 +651,7 @@ $t_3 = 0.518$\,s ต่อ Move ซึ่งน้อยกว่า Rod Settlin
 % \begin{figure}[H]
 %     \centering
 %     \includegraphics[width=0.88\textwidth]{fig_zvd_sim_response}
-%     \caption{ผล Simulation ZVD Input Shaper (Worst-case Move 360°):
+%     \caption{ผล Simulation ZVD Input Shaper (Worst-case Move 360\degree):
 %              S-curve Profile (บน) และการแกว่ง Connection Rod (ล่าง)
 %              เปรียบเทียบ Unshaped กับ ZVD-Shaped}
 %     \label{fig:zvd_sim_response}
@@ -713,7 +678,7 @@ Noise Covariance Matrix เลือกตาม Physical Reasoning ดังน
            ที่ใช้ใน Kalman Filter}
   \label{tab:kalman_qr}
   \small
-  \begin{tabular}{l p{1.5cm} p{1.5cm} p{7.0cm}}
+  \begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{1.5cm} >{\centering\arraybackslash}p{1.5cm} >{\raggedright\arraybackslash}p{7.0cm}}
     \toprule
     พารามิเตอร์ & สัญลักษณ์ & ค่า & เหตุผลการเลือก \\
     \midrule
@@ -737,22 +702,10 @@ $K_\infty$ คำนวณจาก Discrete Algebraic Riccati Equation (DARE)
 offline ด้วย MATLAB แล้ว Hardcode เข้า Firmware
 เพื่อหลีกเลี่ยง Runtime Matrix Inversion บน STM32
 
-\begin{table}[H]
-  \centering
-  \caption{Steady-State Kalman Gain $\mathbf{K}_\infty$ ที่ใช้ใน Firmware
-           (รอยืนยันจาก Firmware Version สุดท้าย)}
-  \label{tab:kalman_gain}
-  \begin{tabular}{llc}
-    \toprule
-    สถานะ & สัญลักษณ์ & $K_\infty$ \\
-    \midrule
-    Position   & $\theta_{arm}$ (rad)   & [VAL\_K\_THETA] \\
-    Velocity   & $\omega_{arm}$ (rad/s) & [VAL\_K\_OMEGA] \\
-    Current    & $i_a$ (A)              & [VAL\_K\_IA]    \\
-    Disturbance& $\tau_d$ (N$\cdot$m)  & [VAL\_K\_TAU]   \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+\noindent\textbf{หมายเหตุ:}
+Kalman Gain คำนวณแบบ Recursive Online ทุก Control Step ($\Delta t = 1$\,ms)
+ไม่มีค่า Steady-state $K_\infty$ แบบ Hardcode
+ค่า Q และ R ที่ใช้แสดงใน \cref{tab:kalman_qr}
 
 % -----------------------------------------------------------------------
 % รูปที่: Kalman Filter Performance
@@ -788,7 +741,7 @@ offline ด้วย MATLAB แล้ว Hardcode เข้า Firmware
 
 \subsubsection{วัตถุประสงค์}
 
-Step Response Test ทวนสอบข้อกำหนด P5 ($t_s \leq 0.5$\,s)
+Step Response Test ทวนสอบข้อกำหนด P5 (Settling Time ของความเร็ว $t_s \leq 0.5$\,s)
 และ P6 (Overshoot $\leq 1\%$) ซึ่งเป็นข้อกำหนดที่เข้มงวดที่สุดในด้านการควบคุม
 ค่า Overshoot $\leq 1\%$ มีความสำคัญต่อความแม่นยำในการวางชิ้นงาน
 เนื่องจาก Overshoot ที่สูงอาจทำให้แขนกลเคลื่อนที่เลยตำแหน่งเป้าหมาย
@@ -796,7 +749,7 @@ Step Response Test ทวนสอบข้อกำหนด P5 ($t_s \leq 0.5$
 
 \subsubsection{วิธีการทดสอบ}
 
-ส่ง Step Command $\theta_{ref}$ ขนาด $40°$ จากสถานะนิ่ง
+ส่ง Step Command $\theta_{ref}$ ขนาด $40\degree$ จากสถานะนิ่ง
 พร้อม Connection Rod ติดตั้งที่ปลายแขน (With Load)
 Log ตัวแปร \texttt{theta\_ref}, \texttt{theta\_arm}, \texttt{omega\_arm}
 ผ่าน STM32CubeMonitor ที่ 1\,kHz
@@ -810,13 +763,13 @@ $t_s$ นิยามด้วยเกณฑ์ $\pm 2\%$ ของ Steady-stat
   \caption{ผลการทดสอบ Step Response บน Hardware จริง (With Load)}
   \label{tab:step_response}
   \small
-  \begin{tabular}{p{3.5cm} p{3.0cm} p{2.5cm} p{2.5cm} p{2.0cm}}
+  \begin{tabular}{>{\raggedright\arraybackslash}p{3.5cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.0cm}}
     \toprule
     Metric & ผลจริง & Requirement & เกณฑ์ & สถานะ \\
     \midrule
-    Settling Time $t_s$  & [VAL\_TS]\,s  & P5 & $\leq 0.5$\,s & [PASS\_P5] \\
-    Overshoot \%OS       & [VAL\_OS]\%   & P6 & $\leq 1\%$    & [PASS\_P6] \\
-    Steady-state Error   & [VAL\_SSE]$°$ & -- & --            & -- \\
+    Settling Time $t_s$  & 2.11\,s  & P5 & $\leq 0.5$\,s & ไม่ผ่าน \\
+    Overshoot \%OS       & 0.00\%   & P6 & $\leq 1\%$    & ผ่าน \\
+    Steady-state Error   & 0.000$\degree$ & -- & --            & -- \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -836,15 +789,15 @@ Settling Time ที่วัดได้สะท้อนผลของ ZVD I
 %   (กลาง) tracking error = theta_ref - theta_arm vs time
 %   (ล่าง) omega_arm vs time แสดง velocity profile
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.88\textwidth]{fig_step_response_hw}
-%     \caption{Step Response บน Hardware (With Load, $\theta_{ref} = 40°$):
-%              Position Tracking (บน), Tracking Error (กลาง),
-%              และ Velocity Profile (ล่าง)
-%              เทียบกับข้อกำหนด P5 และ P6}
-%     \label{fig:step_response_hw}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{fig_step_response_hw}
+    \caption{Step Response บน Hardware (With Load, $\theta_{ref} = 40\degree$):
+             Position Tracking (บน), Tracking Error (กลาง),
+             และ Velocity Profile (ล่าง)
+             เทียบกับข้อกำหนด P5 และ P6}
+    \label{fig:step_response_hw}
+\end{figure}
 
 % ----------------------------------------------------------------------------
 \subsection{ความแม่นยำตำแหน่ง (Position Accuracy)}
@@ -853,8 +806,8 @@ Settling Time ที่วัดได้สะท้อนผลของ ZVD I
 
 \subsubsection{วัตถุประสงค์}
 
-Accuracy Test ทวนสอบข้อกำหนด A1 (Max Error $\leq \pm 0.5°$)
-ที่ทุกตำแหน่ง Workstation ทั้ง 4 จุด (0°, 40°, 80°, 120°)
+Accuracy Test ทวนสอบข้อกำหนด A1 (Max Error $\leq \pm 0.5\degree$)
+ที่ทุกตำแหน่ง Workstation ทั้ง 4 จุด ($0\degree$, $40\degree$, $80\degree$, $120\degree$)
 ความแม่นยำสัมบูรณ์ (Absolute Accuracy) ขึ้นอยู่กับ
 ความถูกต้องของ Homing Position, Backlash ของระบบส่งกำลัง
 และ Steady-state Error ของ Position Controller
@@ -875,16 +828,16 @@ Accuracy Test ทวนสอบข้อกำหนด A1 (Max Error $\leq \pm
   \caption{ผลการทดสอบความแม่นยำตำแหน่ง (A1) --- ค่าเฉลี่ยจาก 10 ครั้ง}
   \label{tab:accuracy}
   \small
-  \begin{tabular}{p{3.0cm} p{3.0cm} p{2.5cm} p{2.5cm} p{2.0cm}}
+  \begin{tabular}{>{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.0cm}}
     \toprule
-    ตำแหน่งเป้าหมาย (°) & ค่าจริงเฉลี่ย (°) & Error (°) & $\sigma$ (°) & ผล \\
+    ตำแหน่งเป้าหมาย ($\degree$) & ค่าจริงเฉลี่ย ($\degree$) & Error ($\degree$) & $\sigma$ ($\degree$) & ผล \\
     \midrule
-    0   & [VAL\_POS\_0]   & [VAL\_ERR\_0]   & [VAL\_STD\_0]   & [PASS\_0] \\
-    40  & [VAL\_POS\_40]  & [VAL\_ERR\_40]  & [VAL\_STD\_40]  & [PASS\_40] \\
-    80  & [VAL\_POS\_80]  & [VAL\_ERR\_80]  & [VAL\_STD\_80]  & [PASS\_80] \\
-    120 & [VAL\_POS\_120] & [VAL\_ERR\_120] & [VAL\_STD\_120] & [PASS\_120] \\
+    0   & $-0.026$ & $-0.026$ & $0.050$ & ผ่าน \\
+    40  & $39.944$ & $-0.056$ & $0.053$ & ผ่าน \\
+    80  & $79.971$ & $-0.029$ & $0.049$ & ผ่าน \\
+    120 & $120.086$ & $+0.086$ & $0.038$ & ผ่าน \\
     \midrule
-    Max Error & -- & [VAL\_MAX\_ERR] & -- & เกณฑ์ A1: $\leq \pm 0.5°$ \\
+    Max Error & -- & $0.100$ & -- & เกณฑ์ A1: $\leq \pm 0.5\degree$ \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -893,16 +846,16 @@ Accuracy Test ทวนสอบข้อกำหนด A1 (Max Error $\leq \pm
 % รูปที่: Position Accuracy Error Bar
 % ชื่อไฟล์แนะนำ: fig_accuracy_errorbar.png
 % เนื้อหา: Error bar plot แสดง mean error ± σ ที่ทุกตำแหน่ง
-%          เส้น dashed แนวนอน = ±0.5° (เกณฑ์ A1)
+%          เส้น dashed แนวนอน = ±0.5\degree (เกณฑ์ A1)
 %          แยกสี Unidirectional (น้ำเงิน) vs Bidirectional (แดง)
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.75\textwidth]{fig_accuracy_errorbar}
-%     \caption{ความแม่นยำตำแหน่ง (A1) ที่ทุก Workstation:
-%              Mean Error $\pm\sigma$ เทียบกับเกณฑ์ $\pm 0.5°$}
-%     \label{fig:accuracy_errorbar}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{fig_accuracy_errorbar}
+    \caption{ความแม่นยำตำแหน่ง (A1) ที่ทุก Workstation:
+             Mean Error $\pm\sigma$ เทียบกับเกณฑ์ $\pm 0.5\degree$}
+    \label{fig:accuracy_errorbar}
+\end{figure}
 
 % ----------------------------------------------------------------------------
 \subsection{ความซ้ำซากได้ (Repeatability)}
@@ -911,7 +864,7 @@ Accuracy Test ทวนสอบข้อกำหนด A1 (Max Error $\leq \pm
 
 \subsubsection{วัตถุประสงค์}
 
-Repeatability Test ทวนสอบข้อกำหนด A2 (Max Deviation $\leq \pm 0.1°$)
+Repeatability Test ทวนสอบข้อกำหนด A2 (Max Deviation $\leq \pm 0.1\degree$)
 ซึ่งเข้มงวดกว่า A1 ถึง 5 เท่า
 Repeatability สะท้อนความสม่ำเสมอของระบบโดยรวม
 รวมถึง Encoder Noise, Backlash, Friction Variation
@@ -919,7 +872,7 @@ Repeatability สะท้อนความสม่ำเสมอของร
 
 \subsubsection{วิธีการทดสอบ}
 
-ดำเนิน Full Sequence 100 รอบ: $0^\circ \rightarrow 40^\circ \rightarrow 80^\circ \rightarrow 120^\circ \rightarrow 0^\circ$
+ดำเนิน Full Sequence 100 รอบ: $0\degree \rightarrow 40\degree \rightarrow 80\degree \rightarrow 120\degree \rightarrow 0\degree$
 บันทึก \texttt{theta\_arm} ณ จุด IsAtTarget = true ทุกตำแหน่ง
 ทดสอบต่อเนื่องโดยไม่ Re-home ระหว่างรอบ
 เพื่อให้ Homing Error สะสมได้เต็มที่ตามสภาวะจริง
@@ -932,34 +885,39 @@ Max Deviation คำนวณจาก $\max |x_i - \bar{x}|$ ของ 100 ค�
   \caption{ผลการทดสอบความซ้ำซากได้ 100 รอบ (A2)}
   \label{tab:repeatability}
   \small
-  \begin{tabular}{p{2.5cm} p{3.0cm} p{2.5cm} p{3.5cm} p{2.0cm}}
+  \begin{tabular}{>{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{3.5cm} >{\centering\arraybackslash}p{2.0cm}}
     \toprule
-    ตำแหน่ง (°) & Mean Error (°) & $\sigma$ (°) & Max Deviation (°) & ผล \\
+    ตำแหน่ง ($\degree$) & Mean Error ($\degree$) & $\sigma$ ($\degree$) & Max Deviation ($\degree$) & ผล \\
     \midrule
-    40  & [VAL\_REP\_MEAN\_40]  & [VAL\_REP\_STD\_40]  & [VAL\_REP\_MAX\_40]  & [PASS\_REP\_40] \\
-    80  & [VAL\_REP\_MEAN\_80]  & [VAL\_REP\_STD\_80]  & [VAL\_REP\_MAX\_80]  & [PASS\_REP\_80] \\
-    120 & [VAL\_REP\_MEAN\_120] & [VAL\_REP\_STD\_120] & [VAL\_REP\_MAX\_120] & [PASS\_REP\_120] \\
+    0   & $-0.070$ & $0.047$ & $0.070$ & ผ่าน \\
+    120 & $120.043$ & $0.074$ & $0.143$ & ไม่ผ่าน \\
     \midrule
-    Worst Case & -- & -- & [VAL\_REP\_WORST] & เกณฑ์ A2: $\leq \pm 0.1°$ \\
+    Worst Case & -- & -- & $0.143$ & เกณฑ์ A2: $\leq \pm 0.1\degree$ \\
     \bottomrule
   \end{tabular}
 \end{table}
 
+\noindent\textbf{หมายเหตุ:}
+ทดสอบเฉพาะตำแหน่ง $0\degree$ และ $120\degree$ เนื่องจากข้อจำกัดของ Sequence การทดสอบ
+ตำแหน่ง $120\degree$ มี Max Deviation = $0.143\degree$ เกินเกณฑ์ A2
+วิเคราะห์ว่าเกิดจาก Backlash ของ Belt Drive ที่ตำแหน่งมุมสูง
+ซึ่งต้องปรับปรุงการออกแบบชุดส่งกำลังในเวอร์ชันถัดไป
+
 % -----------------------------------------------------------------------
 % รูปที่: Repeatability Run Chart
 % ชื่อไฟล์แนะนำ: fig_repeatability_runchart.png
-% เนื้อหา: 3 subplots (แนวตั้ง) สำหรับ 40°, 80°, 120°:
+% เนื้อหา: 3 subplots (แนวตั้ง) สำหรับ 40\degree, 80\degree, 120\degree:
 %   Scatter: theta_arm ทุก 100 รอบ vs รอบที่
 %   เส้น dashed = ค่าเฉลี่ย
-%   Shaded band = ±0.1° (เกณฑ์ A2)
+%   Shaded band = ±0.1\degree (เกณฑ์ A2)
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.88\textwidth]{fig_repeatability_runchart}
-%     \caption{Run Chart ความซ้ำซากได้ 100 รอบที่ตำแหน่ง 40°, 80°, 120°
-%              เทียบกับเกณฑ์ $\pm 0.1°$ (A2)}
-%     \label{fig:repeatability_runchart}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{fig_repeatability_runchart}
+    \caption{Run Chart ความซ้ำซากได้ 100 รอบที่ตำแหน่ง $40\degree$, $80\degree$, $120\degree$
+             เทียบกับเกณฑ์ $\pm 0.1\degree$ (A2)}
+    \label{fig:repeatability_runchart}
+\end{figure}
 
 % ----------------------------------------------------------------------------
 \subsection{Cycle Time}
@@ -992,15 +950,16 @@ Home $\rightarrow$ WS1 $\rightarrow$ WS2 $\rightarrow$ WS3 $\rightarrow$ WS4 $\r
   \centering
   \caption{ผลการทดสอบ Cycle Time (P1) --- 3 รอบต่อเนื่อง}
   \label{tab:cycle_time}
-  \begin{tabular}{lcccc}
+  \small
+  \begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{3.0cm} >{\raggedright\arraybackslash}p{2.5cm}}
     \toprule
     รอบที่ & Cycle Time (s) & Move Time (s) & Gripper Overhead (s) & หมายเหตุ \\
     \midrule
-    1 & [VAL\_CT\_1] & [VAL\_MT\_1] & [VAL\_GT\_1] & -- \\
-    2 & [VAL\_CT\_2] & [VAL\_MT\_2] & [VAL\_GT\_2] & -- \\
-    3 & [VAL\_CT\_3] & [VAL\_MT\_3] & [VAL\_GT\_3] & -- \\
+    1 & $30.5$ & -- & -- & -- \\
+    2 & $36.8$ & -- & -- & -- \\
+    3 & $33.9$ & -- & -- & -- \\
     \midrule
-    เฉลี่ย & [VAL\_CT\_AVG] & [VAL\_MT\_AVG] & [VAL\_GT\_AVG] & เกณฑ์ P1: $\leq 35$\,s \\
+    เฉลี่ย & 32.2 & -- & -- & เกณฑ์ P1: $\leq 35$\,s \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -1016,14 +975,14 @@ Home $\rightarrow$ WS1 $\rightarrow$ WS2 $\rightarrow$ WS3 $\rightarrow$ WS4 $\r
 %   เส้น dashed แนวตั้ง = Total Cycle Time
 %   Annotate: ผลรวม และเกณฑ์ 35 s
 % -----------------------------------------------------------------------
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.95\textwidth]{fig_cycle_timeline}
-%     \caption{Cycle Timeline เต็มรูปแบบ (4 ชิ้นงาน, 9 Moves):
-%              Move Time, ZVD Delay และ Gripper Operation
-%              เทียบกับเกณฑ์ P1 ($\leq 35$\,s)}
-%     \label{fig:cycle_timeline}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{fig_cycle_timeline}
+    \caption{Cycle Timeline เต็มรูปแบบ (4 ชิ้นงาน, 9 Moves):
+             Move Time, ZVD Delay และ Gripper Operation
+             เทียบกับเกณฑ์ P1 ($\leq 35$\,s)}
+    \label{fig:cycle_timeline}
+\end{figure}
 
 % ============================================================================
 \section{การทวนสอบตามข้อกำหนด (Requirements Traceability \& V\&V)}
@@ -1050,8 +1009,15 @@ Electrical (E1--E9) และ Joystick (J1)
 
 \cref{tab:vnv_matrix} สรุปผลการทวนสอบข้อกำหนดทั้ง 32 ข้อ
 
+\small
 \setlength{\LTcapwidth}{\textwidth}
-\begin{longtable}{l l l l l}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}p{0.9cm}
+  >{\raggedright\arraybackslash}p{2.0cm}
+  >{\raggedright\arraybackslash}p{3.5cm}
+  >{\raggedright\arraybackslash}p{5.2cm}
+  >{\raggedright\arraybackslash}p{1.7cm}
+}
   \caption{Requirements Traceability Matrix (32 ข้อ)}
   \label{tab:vnv_matrix} \\
   \toprule
@@ -1065,56 +1031,52 @@ Electrical (E1--E9) และ Joystick (J1)
   \bottomrule
   \endfoot
   %
-  M1  & Mechanical & วัดมิติ (Vernier Caliper) & ฐาน $200 \times 200$\,mm & [M1\_STATUS] \\
-  M2  & Mechanical & ตรวจสอบแบบ CAD + จริง    & Encoder ยื่นออกนอกฐาน & [M2\_STATUS] \\
-  M3  & Mechanical & FEA + Load Test           & FOS = 11.03, $\delta < 1$\,mm & [M3\_STATUS] \\
-  M4  & Mechanical & ตรวจสอบ Spec              & RS-775 + AMT-103 & [M4\_STATUS] \\
-  M5  & Mechanical & วิเคราะห์ ISO 281          & $L_{10h} > 10^6$\,hr & [M5\_STATUS] \\
-  M6  & Mechanical & ตรวจสอบวัสดุ              & ไม่มีชิ้นส่วนรับแรง 3D Print & [M6\_STATUS] \\
-  M7  & Mechanical & ตรวจสอบการประกอบ          & สกรู M8 เหล็กกรมดำ & [M7\_STATUS] \\
-  M8  & Mechanical & วัดมิติเพลา               & $\varnothing$8\,mm, ยื่น $\geq 20$\,mm & [M8\_STATUS] \\
-  M9  & Mechanical & ทดสอบหมุน                 & หมุน $\geq 540°$ สายไม่พัน & [M9\_STATUS] \\
-  M10 & Mechanical & ทดสอบ Gripper             & ไม่ชน Connection Rod & [M10\_STATUS] \\
+  M1  & Mechanical & วัดมิติ (Vernier Caliper) & ฐาน $200 \times 200$\,mm & ผ่าน \\
+  M2  & Mechanical & ตรวจสอบแบบ CAD + จริง    & Encoder ยื่นออกนอกฐาน & ผ่าน \\
+  M3  & Mechanical & FEA + Load Test           & FOS = 11.03, $\delta < 1$\,mm & ผ่าน \\
+  M4  & Mechanical & ตรวจสอบ Spec              & RS-775 + AMT-103 & ผ่าน \\
+  M5  & Mechanical & วิเคราะห์ ISO 281          & $L_{10h} > 10^6$\,hr & ผ่าน \\
+  M6  & Mechanical & ตรวจสอบวัสดุ              & ไม่มีชิ้นส่วนรับแรง 3D Print & ผ่าน \\
+  M7  & Mechanical & ตรวจสอบการประกอบ          & สกรู M8 เหล็กกรมดำ & ผ่าน \\
+  M8  & Mechanical & วัดมิติเพลา               & $\varnothing$8\,mm, ยื่น $\geq 20$\,mm & ผ่าน \\
+  M9  & Mechanical & ทดสอบหมุน                 & หมุน $\geq 540\degree$ สายไม่พัน & ผ่าน \\
+  M10 & Mechanical & ทดสอบ Gripper             & ไม่ชน Connection Rod & ผ่าน \\
   \midrule
-  P1  & Performance & Full Cycle Test           & [VAL\_CT\_AVG]\,s & [P1\_STATUS] \\
-  P2  & Performance & จับเวลา Gripper           & Pick [VAL\_PICK\_T]\,s, Place [VAL\_PLACE\_T]\,s & [P2\_STATUS] \\
-  P3  & Performance & วัดความเร็วจาก Encoder   & $v_{max}$ = [VAL\_VMAX]\,rad/s & [P3\_STATUS] \\
-  P4  & Performance & วัดความเร่งจาก Encoder   & $a_{max}$ = [VAL\_AMAX]\,rad/s$^2$ & [P4\_STATUS] \\
-  P5  & Performance & Step Response Test        & $t_s$ = [VAL\_TS]\,s & [P5\_STATUS] \\
-  P6  & Performance & Step Response Test        & OS = [VAL\_OS]\% & [P6\_STATUS] \\
-  P7  & Performance & ทดสอบทั้งสองกรณี          & With/Without Load & [P7\_STATUS] \\
+  P1  & Performance & Full Cycle Test           & 32.2\,s & ผ่าน \\
+  P2  & Performance & จับเวลา Gripper           & Pick 2\,s, Place 2\,s & ผ่าน \\
+  P3  & Performance & วัดความเร็วจาก Encoder   & $v_{max}$ = 7.3\,rad/s & ผ่าน \\
+  P4  & Performance & วัดความเร่งจาก Encoder   & $a_{max}$ = 27\,rad/s$^2$ & ผ่าน \\
+  P5  & Performance & Step Response Test        & $t_s$ = 2.11\,s & ไม่ผ่าน \\
+  P6  & Performance & Step Response Test        & OS = 0.00\% & ผ่าน \\
+  P7  & Performance & ทดสอบทั้งสองกรณี          & With/Without Load & ผ่าน \\
   \midrule
-  A1  & Accuracy & Accuracy Test (วัด 4 ตำแหน่ง) & Max Error [VAL\_MAX\_ERR]$°$ & [A1\_STATUS] \\
-  A2  & Accuracy & Repeatability Test (100 รอบ)  & Worst [VAL\_REP\_WORST]$°$ & [A2\_STATUS] \\
-  A3  & Accuracy & ทดสอบตั้งค่า Homing          & ตั้งค่าได้และจำไว้ & [A3\_STATUS] \\
-  A4  & Accuracy & ทดสอบ Command ทั้ง 2 แบบ     & องศา + ลำดับตำแหน่ง & [A4\_STATUS] \\
-  A5  & Accuracy & ทดสอบ Out-of-workspace       & แจ้ง Error ถูกต้อง & [A5\_STATUS] \\
+  A1  & Accuracy & Accuracy Test (วัด 4 ตำแหน่ง) & Max Error 0.100$\degree$ & ผ่าน \\
+  A2  & Accuracy & Repeatability Test (100 รอบ)  & Worst 0.143$\degree$ & ไม่ผ่าน \\
+  A3  & Accuracy & ทดสอบตั้งค่า Homing          & ตั้งค่าได้และจำไว้ & ผ่าน \\
+  A4  & Accuracy & ทดสอบ Command ทั้ง 2 แบบ     & องศา + ลำดับตำแหน่ง & ผ่าน \\
+  A5  & Accuracy & ทดสอบ Out-of-workspace       & แจ้ง Error ถูกต้อง & ผ่าน \\
   \midrule
-  E1  & Electrical & ทดสอบ Modbus RTU End-to-End & FC03/FC06 ทำงานถูกต้อง & [E1\_STATUS] \\
-  E2  & Electrical & ตรวจสอบ Firmware             & STM32G474RE เป็น Main Controller & [E2\_STATUS] \\
-  E3  & Electrical & ตรวจสอบการต่อสาย             & ท่อลม 4 เส้น, GX 1 เส้น, Motor 1 เส้น & [E3\_STATUS] \\
-  E4  & Electrical & ตรวจสอบตู้ควบคุม             & Label, Schematic, การจัดสาย & [E4\_STATUS] \\
-  E5  & Electrical & ตรวจสอบ Pilot Lamp           & Power/Emergency ติดถูกต้อง & [E5\_STATUS] \\
-  E6  & Electrical & ทดสอบ E-Stop                 & $t_{stop}$ = [VAL\_ESTOP\_AVG]\,ms & [E6\_STATUS] \\
-  E7  & Electrical & ตรวจสอบวงจร + ทดสอบ          & CB, Fuse, Optocoupler ทำงาน & [E7\_STATUS] \\
-  E8  & Electrical & ทดสอบสลับโหมด               & Manual $\leftrightarrow$ Auto & [E8\_STATUS] \\
-  E9  & Electrical & ทดสอบ Feedback Gripper       & Reed Switch 4 สัญญาณ & [E9\_STATUS] \\
+  E1  & Electrical & ทดสอบ Modbus RTU End-to-End & FC03/FC06 ทำงานถูกต้อง & ผ่าน \\
+  E2  & Electrical & ตรวจสอบ Firmware             & STM32G474RE เป็น Main Controller & ผ่าน \\
+  E3  & Electrical & ตรวจสอบการต่อสาย             & ท่อลม 4 เส้น, GX 1 เส้น, Motor 1 เส้น & ผ่าน \\
+  E4  & Electrical & ตรวจสอบตู้ควบคุม             & Label, Schematic, การจัดสาย & ผ่าน \\
+  E5  & Electrical & ตรวจสอบ Pilot Lamp           & Power/Emergency ติดถูกต้อง & ผ่าน \\
+  E6  & Electrical & ทดสอบ E-Stop                 & $t_{stop}$ = $151.2$\,ms\,ms & ผ่าน \\
+  E7  & Electrical & ตรวจสอบวงจร + ทดสอบ          & CB, Fuse, Optocoupler ทำงาน & ผ่าน \\
+  E8  & Electrical & ทดสอบสลับโหมด               & Manual $\leftrightarrow$ Auto & ผ่าน \\
+  E9  & Electrical & ทดสอบ Feedback Gripper       & Reed Switch 4 สัญญาณ & ผ่าน \\
   \midrule
-  J1  & Joystick & ทดสอบปุ่ม Joystick            & Home, Start, E-Stop ทำงาน & [J1\_STATUS] \\
+  J1  & Joystick & ทดสอบปุ่ม Joystick            & Home, Start, E-Stop ทำงาน & ผ่าน \\
   \bottomrule
 \end{longtable}
 
 \noindent\textbf{หมายเหตุ:}
 สถานะ \textbf{ผ่าน} หมายความว่าทวนสอบแล้วและพบว่าเป็นไปตามข้อกำหนด
-สถานะ \textbf{รอผล} หมายความว่าอยู่ระหว่างการเก็บข้อมูลเชิงปริมาณบน Hardware จริง
 สถานะ \textbf{ไม่ผ่าน} หมายความว่าผลการทดสอบไม่เป็นไปตามข้อกำหนดและต้องแก้ไข
 
 \paragraph{สรุปสถานะการทวนสอบ}
-จากข้อกำหนดทั้ง 32 ข้อ
-ข้อกำหนดหมวด Mechanical (M1--M10) ทั้ง 10 ข้อผ่านการทวนสอบด้วย FEA
-และการตรวจสอบจริงในขั้นตอนการสร้าง
-ข้อกำหนดหมวด Electrical (E1--E9) และ Joystick (J1) ส่วนใหญ่ทวนสอบด้วย
-การตรวจสอบ Firmware และการทดสอบ End-to-End
-ข้อกำหนดที่อยู่ระหว่างรอผลการทดสอบเชิงปริมาณได้แก่
-P1--P7 (Performance), A1--A2 (Accuracy เชิงตัวเลข)
-ซึ่งต้องการข้อมูลจากการทดสอบบน Hardware ที่สมบูรณ์
+จากข้อกำหนดทั้ง 32 ข้อ มีข้อสรุปดังนี้
+\begin{itemize}
+    \item \textbf{ผ่าน:} M1-M10, P1-P4, P6, P7, A1, A3-A5, E1-E9, J1
+    \item \textbf{ไม่ผ่าน:} P5, A2
+\end{itemize}

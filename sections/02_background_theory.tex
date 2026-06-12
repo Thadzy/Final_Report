@@ -300,7 +300,7 @@ Kalman Filter เป็นตัวประมาณค่าสถานะ (S
 
 การกำหนดเมทริกซ์ความแปรปรวนเกี่ยวพัน (Covariance Matrices) มีผลโดยตรงต่อความแม่นยำของตัวกรอง:
 \begin{itemize}
-    \item \textbf{Measurement Noise ($R$):} สามารถประเมินได้จากความละเอียด (Resolution) ของเซนเซอร์ เช่น หากใช้อุปกรณ์เข้ารหัสสัมบูรณ์ (Absolute Encoder) ขนาด 12-bit จะมีตำแหน่งแยกย่อย 4096 ค่าต่อรอบ (ความละเอียด $\Delta \approx 0.088^\circ$) ความแปรปรวนของ Quantization Noise นี้สามารถจำลองด้วย Uniform Distribution ซึ่งมีค่าความแปรปรวน $R = \Delta^2 / 12$
+    \item \textbf{Measurement Noise ($R$):} สามารถประเมินได้จากความละเอียด (Resolution) ของเซนเซอร์ เช่น หากใช้อุปกรณ์เข้ารหัสสัมบูรณ์ (Absolute Encoder) ขนาด 12-bit จะมีตำแหน่งแยกย่อย 4096 ค่าต่อรอบ (ความละเอียด $\Delta \approx 0.088\degree$) ความแปรปรวนของ Quantization Noise นี้สามารถจำลองด้วย Uniform Distribution ซึ่งมีค่าความแปรปรวน $R = \Delta^2 / 12$
     \item \textbf{Process Noise ($\mathbf{Q}$):} เป็นเมทริกซ์ที่ปรับจูนเพื่อสร้างสมดุลระหว่างความเชื่อมั่นในแบบจำลองทางคณิตศาสตร์กับความเชื่อมั่นในเซนเซอร์ โดยสมาชิกที่ตรงกับสถานะ $\tau_d$ จะเป็นตัวกำหนดความไว (Bandwidth) ในการประมาณค่าแรงบิดรบกวน
 \end{itemize}
 
@@ -707,7 +707,7 @@ Phase Response คือ
 \begin{equation}
     \angle H(j2\pi \cdot 1)
     = -4\arctan\!\left(\frac{1}{10}\right)
-    \approx -22.9°
+    \approx -22.9\degree
     \label{eq:butter_phase_example}
 \end{equation}
 
@@ -860,7 +860,7 @@ Filter เดิมยกกำลังสอง
 \subsection{การจัดการสายไฟและลดสัญญาณรบกวน (Wiring \& EMI Mitigation)}
 การออกแบบการจัดวางสายไฟอ้างอิงตามมาตรฐานความปลอดภัยของเครื่องจักร IEC 60204-1 โดยยึดรางอุปกรณ์มาตรฐาน (DIN 35mm) และมีหลักการจัดการคลื่นแม่เหล็กไฟฟ้าแทรกสอด (Electromagnetic Interference: EMI) ดังนี้
 \begin{itemize}
-    \item \textbf{Cable Segregation:} สายไฟฟ้ากำลัง (Power Cables) และสายสัญญาณ (Signal Cables) จะต้องถูกแยกเดินในรางเก็บสาย (Wire Duct) ที่ต่างกัน โดยมีระยะห่างอย่างน้อย 50 มิลลิเมตร หากมีความจำเป็นต้องเดินสายพาดผ่านกัน จะต้องจัดวางให้ตัดกันแบบตั้งฉาก ($90^\circ$) เพื่อลดค่าความเหนี่ยวนำร่วม (Mutual Inductance) ให้เหลือน้อยที่สุด
+    \item \textbf{Cable Segregation:} สายไฟฟ้ากำลัง (Power Cables) และสายสัญญาณ (Signal Cables) จะต้องถูกแยกเดินในรางเก็บสาย (Wire Duct) ที่ต่างกัน โดยมีระยะห่างอย่างน้อย 50 มิลลิเมตร หากมีความจำเป็นต้องเดินสายพาดผ่านกัน จะต้องจัดวางให้ตัดกันแบบตั้งฉาก ($90\degree$) เพื่อลดค่าความเหนี่ยวนำร่วม (Mutual Inductance) ให้เหลือน้อยที่สุด
     \item \textbf{Shielding \& Grounding:} สายสัญญาณแอนะล็อกและสายสื่อสาร (เช่น CAN Bus) ต้องใช้สายคู่ตีเกลียวมีชิลด์ (Shielded Twisted Pair) และจุดต่อสายดิน (Grounding) ของระบบควบคุมทั้งหมดต้องเชื่อมต่อรวมกันแบบจุดเดียว (Star Grounding) เพื่อป้องกันการเกิดลูปของสายดิน (Ground Loop) ที่จะสร้างความต่างศักย์รบกวนสัญญาณเซนเซอร์
 \end{itemize}
 
@@ -1017,7 +1017,7 @@ Modbus RTU ทำงานในชั้น Application Layer บนโคร�
  
 Incremental Encoder วัดการเปลี่ยนแปลงตำแหน่งเชิงมุมโดยนับพัลส์
 จาก Quadrature Signal สองช่อง (Channel A และ Channel B)
-ที่มีเฟสต่างกัน 90° ทำให้สามารถระบุทิศทางการหมุนได้
+ที่มีเฟสต่างกัน $90\degree$ ทำให้สามารถระบุทิศทางการหมุนได้
  
 % -----------------------------------------------------------------------
 % รูปที่ X: Encoder AMT-103 และ Quadrature Signal
@@ -1046,7 +1046,7 @@ Incremental Encoder วัดการเปลี่ยนแปลงตำแ
 ค่าตำแหน่งเชิงมุมแปลงจาก Encoder Count ได้จาก
  
 \begin{equation}
-    \theta\;(\text{deg}) = \frac{N_{count}}{8192} \times 360°
+    \theta\;(\text{deg}) = \frac{N_{count}}{8192} \times 360\degree
     \label{eq:encoder_to_deg}
 \end{equation}
  

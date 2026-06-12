@@ -1,0 +1,25 @@
+\documentclass[12pt, a4paper]{report}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{thai}
+\setotherlanguage{english}
+
+\newfontfamily\thaifont{TH Sarabun New}[Scale=1.35, Script=Thai]
+\setmainfont{TH Sarabun New}[Scale=1.35, Script=Thai]
+
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{textcomp}
+\usepackage{gensymb}
+
+\renewcommand{\degree}{\text{\fontspec{Arial}\textdegree}}
+
+\begin{document}
+
+Test normal: $0.1\degree$
+
+Test superscript: $0.1^{\degree}$
+
+Test text mode: 0.1\degree
+
+\end{document}
